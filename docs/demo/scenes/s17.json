@@ -1,0 +1,293 @@
+{
+  "id": "s17",
+  "day": 0,
+  "start": "11:55:00",
+  "duration_s": 87.5,
+  "caller": "(727) ***-0117",
+  "caller_full": "(727) 555-0117",
+  "language": "en",
+  "greeted_as": "",
+  "disposition": "phone-booked",
+  "turns": 8,
+  "first_line": "Hi, um, so my daughter finished her braces last year, and she — well, she kind of stepped on her retainer. So I guess we need to come in about that?",
+  "scenario": "retainer_existing_teen",
+  "events": [
+    {
+      "at": 0,
+      "kind": "call.started",
+      "turn": 0,
+      "data": {
+        "caller": "(727) ***-0117"
+      }
+    },
+    {
+      "at": 1.2,
+      "kind": "greeting",
+      "turn": 0,
+      "data": {
+        "name": ""
+      }
+    },
+    {
+      "at": 5.6,
+      "kind": "turn.caller",
+      "turn": 1,
+      "data": {
+        "text": "Hi, um, so my daughter finished her braces last year, and she — well, she kind of stepped on her retainer. So I guess we need to come in about that?"
+      }
+    },
+    {
+      "at": 5.6,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "Oh no — let's get her in so the team can take a look!"
+      }
+    },
+    {
+      "at": 5.6,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "What's your daughter's name?"
+      }
+    },
+    {
+      "at": 19.0,
+      "kind": "turn.caller",
+      "turn": 2,
+      "data": {
+        "text": "Sophie Kemper."
+      }
+    },
+    {
+      "at": 19.0,
+      "kind": "turn.bot",
+      "turn": 2,
+      "data": {
+        "text": "So that's Sophie Kemper — and what's her date of birth?"
+      }
+    },
+    {
+      "at": 29.8,
+      "kind": "turn.caller",
+      "turn": 3,
+      "data": {
+        "text": "October thirtieth, 2009."
+      }
+    },
+    {
+      "at": 29.8,
+      "kind": "tool",
+      "turn": 3,
+      "data": {
+        "name": "lookup",
+        "ok": true,
+        "ms": 566,
+        "verified": true
+      }
+    },
+    {
+      "at": 29.8,
+      "kind": "turn.bot",
+      "turn": 3,
+      "data": {
+        "text": "Thanks — I found Sophie."
+      }
+    },
+    {
+      "at": 29.8,
+      "kind": "turn.bot",
+      "turn": 3,
+      "data": {
+        "text": "Is the number you're calling from, ending in zero, one, one, seven, the best one to reach you?"
+      }
+    },
+    {
+      "at": 41.5,
+      "kind": "turn.caller",
+      "turn": 4,
+      "data": {
+        "text": "Yes, that's me, I'm her mom."
+      }
+    },
+    {
+      "at": 41.5,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "What days work best for Sophie — mornings or afternoons — or should I just grab the soonest opening?"
+      }
+    },
+    {
+      "at": 51.4,
+      "kind": "turn.caller",
+      "turn": 5,
+      "data": {
+        "text": "After school would be best, so like four-ish? She gets out at three-thirty."
+      }
+    },
+    {
+      "at": 51.4,
+      "kind": "tool",
+      "turn": 5,
+      "data": {
+        "name": "context",
+        "ok": true,
+        "ms": 702,
+        "open_slots": 2
+      }
+    },
+    {
+      "at": 51.4,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "Let me check the schedule to see what times are available."
+      }
+    },
+    {
+      "at": 51.4,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "I have Thursday the twenty-third at four in the afternoon — want me to grab it?"
+      }
+    },
+    {
+      "at": 64.0,
+      "kind": "turn.caller",
+      "turn": 6,
+      "data": {
+        "text": "Thursday at four, yeah, that works."
+      }
+    },
+    {
+      "at": 64.0,
+      "kind": "tool",
+      "turn": 6,
+      "data": {
+        "name": "book",
+        "ok": true,
+        "ms": 389,
+        "slot": "Thu 4:00 PM",
+        "patient": "Sophie Kemper",
+        "already_booked": false
+      }
+    },
+    {
+      "at": 64.0,
+      "kind": "booking",
+      "turn": 6,
+      "data": {
+        "name": "Sophie Kemper",
+        "slot": "Thu 4:00 PM",
+        "reason": "retainer - stepped on it, needs to be checked or replaced",
+        "insurance": ""
+      }
+    },
+    {
+      "at": 64.0,
+      "kind": "turn.bot",
+      "turn": 6,
+      "data": {
+        "text": "Let me get that set up for you."
+      }
+    },
+    {
+      "at": 64.0,
+      "kind": "turn.bot",
+      "turn": 6,
+      "data": {
+        "text": "Perfect — Sophie is booked for Thursday the twenty-third at four in the afternoon."
+      }
+    },
+    {
+      "at": 64.0,
+      "kind": "turn.bot",
+      "turn": 6,
+      "data": {
+        "text": "Want me to text you a confirmation at that number?"
+      }
+    },
+    {
+      "at": 72.2,
+      "kind": "turn.caller",
+      "turn": 7,
+      "data": {
+        "text": "Yes, please."
+      }
+    },
+    {
+      "at": 72.2,
+      "kind": "turn.bot",
+      "turn": 7,
+      "data": {
+        "text": "Is there anything else I can help you with?"
+      }
+    },
+    {
+      "at": 81.3,
+      "kind": "turn.caller",
+      "turn": 8,
+      "data": {
+        "text": "No, that's it. Thanks so much!"
+      }
+    },
+    {
+      "at": 81.3,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "Perfect!"
+      }
+    },
+    {
+      "at": 81.3,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "The front desk will confirm with you."
+      }
+    },
+    {
+      "at": 81.3,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "Take care!"
+      }
+    },
+    {
+      "at": 86.9,
+      "kind": "sms.out",
+      "turn": 8,
+      "data": {
+        "caller": "(727) ***-0117",
+        "kind": "confirmation",
+        "chars": 36
+      }
+    },
+    {
+      "at": 87.2,
+      "kind": "sms.in",
+      "turn": 8,
+      "data": {
+        "caller": "(727) ***-0117",
+        "kind": "yes",
+        "chars": 3
+      }
+    },
+    {
+      "at": 87.5,
+      "kind": "call.ended",
+      "turn": 8,
+      "data": {
+        "duration_s": 87.5,
+        "disposition": "phone-booked",
+        "bookings": 1,
+        "notes": 0
+      }
+    }
+  ]
+}

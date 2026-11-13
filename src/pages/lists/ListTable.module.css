@@ -1,0 +1,267 @@
+/* DESIGN 6.7, 6.9, 6.10: ruled tables edge to edge inside the card. Header row 32 (12/16
+   500 secondary), body rows --row-height (14/20), 1px --glass-rule rules, cell padding
+   0 16 with the first and last cells 20. Column widths include their padding. */
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.table th,
+.table td {
+  box-sizing: border-box;
+  padding: 0 var(--space-16);
+  border-top: 1px solid var(--glass-rule);
+  text-align: left;
+  vertical-align: middle;
+}
+
+.table th:first-child,
+.table td:first-child {
+  padding-left: var(--space-20);
+}
+
+.table th:last-child,
+.table td:last-child {
+  padding-right: var(--space-20);
+}
+
+.table thead th {
+  height: var(--header-row-height);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  color: var(--secondary-text-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.table tbody td {
+  height: var(--row-height);
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--primary-text-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Numeric columns: right-aligned and tabular (DESIGN 3). */
+.num {
+  text-align: right !important;
+  font-variant-numeric: tabular-nums;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+.secondary {
+  color: var(--secondary-text-color) !important;
+}
+
+.name {
+  font-weight: 600;
+}
+
+/* ---------------------------------------------------------------- Callbacks: wrapping rows */
+
+.wrapTable tbody td {
+  height: 48px;
+  padding-top: var(--space-12);
+  padding-bottom: var(--space-12);
+  vertical-align: top;
+}
+
+.wrapTable tbody td.reasonCell {
+  white-space: normal;
+  overflow: visible;
+}
+
+.reason {
+  max-width: 35em;
+  overflow-wrap: anywhere;
+}
+
+.booked {
+  max-width: 35em;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--secondary-text-color);
+}
+
+.chipCell {
+  display: block;
+  height: 20px;
+}
+
+/* Day group header: 32 high, 12/16 secondary, on the grey canvas tone so a day reads as a
+   section without a second card. */
+.table tbody th.group {
+  height: var(--header-row-height);
+  padding-top: 0;
+  padding-bottom: 0;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+  color: var(--secondary-text-color);
+  background: var(--allgrey-background-color);
+  text-align: left;
+  vertical-align: middle;
+}
+
+/* ---------------------------------------------------------------- P5 count title */
+
+/* Inside the card header's h2 (16/24 600): the sentence itself is 14/20 500. */
+.countTitle {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: var(--primary-text-color);
+}
+
+/* ---------------------------------------------------------------- P10 identity cell */
+
+.identity {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+
+.idPrimary {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  color: var(--primary-text-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.idSecondary {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--secondary-text-color);
+  white-space: nowrap;
+}
+
+/* ---------------------------------------------------------------- P8 whole-row link */
+
+/* The row's keyboard link is the first cell's span; the row shows its focus (inset ring) and
+   the hover tone, like every clickable row. Hover tone in 70ms (M12: 50-100). */
+.openRow {
+  transition-duration: var(--motion-productive-short);
+}
+
+.rowCellLink {
+  cursor: pointer;
+}
+
+.rowCellLink:focus,
+.rowCellLink:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+.openRow:has(.rowCellLink:focus-visible) {
+  background: var(--primary-background-hover-color);
+  box-shadow: var(--focus-ring-inset);
+}
+
+/* Not scoped to .table: the Calls page's table (Calls.module.css) uses it too. (0,1,2) beats the
+   tables' "th, td" padding rules; the last-child rule keeps its 20 on the right. */
+tr > td.chevCell {
+  padding-left: 0;
+  padding-right: var(--space-20);
+  text-align: right;
+  overflow: visible;
+}
+
+.chev {
+  display: inline-block;
+  vertical-align: middle;
+  color: var(--icon-color);
+  visibility: hidden;
+}
+
+.openRow:hover .chev,
+.openRow:has(:focus-visible) .chev {
+  visibility: visible;
+}
+
+/* Callbacks: the secondary heading inside a day ("Noted on booked calls", "FYI"): 12/16 500
+   secondary on white, so it reads as a sub-section of the grey day header above. */
+.table tbody th.subGroup {
+  height: var(--header-row-height);
+  padding-top: 0;
+  padding-bottom: 0;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  color: var(--secondary-text-color);
+  text-align: left;
+  vertical-align: middle;
+}
+
+/* Rows under it are for the record: their reasons step back to secondary text. */
+.notedRow .reason {
+  color: var(--secondary-text-color);
+}
+
+.skLineSmall {
+  display: flex;
+  align-items: center;
+  height: 16px;
+}
+
+/* ---------------------------------------------------------------- links, footer, states */
+
+.link {
+  color: var(--primary-color);
+  text-decoration: none;
+  border-radius: var(--border-radius-small);
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  height: var(--row-height);
+  box-sizing: border-box;
+  padding: 0 var(--space-16);
+  border-top: 1px solid var(--glass-rule);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.ruled {
+  border-top: 1px solid var(--glass-rule);
+}
+
+/* P20: the empty state sits under the header row (EmptyState pads its own sides and bottom). */
+.emptyWrap {
+  padding-top: var(--space-16);
+  border-top: 1px solid var(--glass-rule);
+}
+
+.skeletonCell {
+  display: flex;
+  align-items: center;
+}
+
+.skeletonRight {
+  justify-content: flex-end;
+}
+
+/* Callbacks skeleton: each 14px bar centred in a 20px line box, as the text it replaces. */
+.skLine {
+  display: flex;
+  align-items: center;
+  height: 20px;
+}

@@ -1,0 +1,381 @@
+{
+  "id": "s24",
+  "day": 0,
+  "start": "14:21:00",
+  "duration_s": 141.4,
+  "caller": "(941) ***-0124",
+  "caller_full": "(941) 555-0124",
+  "language": "en",
+  "greeted_as": "",
+  "disposition": "phone-booked",
+  "turns": 12,
+  "first_line": "Hi there, quick question before I, uh, before I book anything — are you guys in network with Aetna?",
+  "scenario": "insurance_then_book",
+  "events": [
+    {
+      "at": 0,
+      "kind": "call.started",
+      "turn": 0,
+      "data": {
+        "caller": "(941) ***-0124"
+      }
+    },
+    {
+      "at": 1.2,
+      "kind": "greeting",
+      "turn": 0,
+      "data": {
+        "name": ""
+      }
+    },
+    {
+      "at": 9.2,
+      "kind": "turn.caller",
+      "turn": 1,
+      "data": {
+        "text": "Hi there, quick question before I, uh, before I book anything — are you guys in network with Aetna?"
+      }
+    },
+    {
+      "at": 9.2,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "Yep, we do take Aetna!"
+      }
+    },
+    {
+      "at": 9.2,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "Is there anything else I can help you with?"
+      }
+    },
+    {
+      "at": 22.8,
+      "kind": "turn.caller",
+      "turn": 2,
+      "data": {
+        "text": "Okay, good. Then yeah, I'd like to come in. I'm an adult — is that, like, something you guys do?"
+      }
+    },
+    {
+      "at": 22.8,
+      "kind": "turn.bot",
+      "turn": 2,
+      "data": {
+        "text": "Absolutely — we see adults all the time!"
+      }
+    },
+    {
+      "at": 22.8,
+      "kind": "turn.bot",
+      "turn": 2,
+      "data": {
+        "text": "Let's get you in!"
+      }
+    },
+    {
+      "at": 22.8,
+      "kind": "turn.bot",
+      "turn": 2,
+      "data": {
+        "text": "What's your name?"
+      }
+    },
+    {
+      "at": 32.8,
+      "kind": "turn.caller",
+      "turn": 3,
+      "data": {
+        "text": "Kevin Oduya. O, D, U, Y, A."
+      }
+    },
+    {
+      "at": 32.8,
+      "kind": "turn.bot",
+      "turn": 3,
+      "data": {
+        "text": "So that's Kevin Oduya — and what's your date of birth?"
+      }
+    },
+    {
+      "at": 41,
+      "kind": "turn.caller",
+      "turn": 4,
+      "data": {
+        "text": "Twelve, two, eighty-seven. December second."
+      }
+    },
+    {
+      "at": 41,
+      "kind": "tool",
+      "turn": 4,
+      "data": {
+        "name": "lookup",
+        "ok": true,
+        "ms": 533,
+        "verified": false
+      }
+    },
+    {
+      "at": 41,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "I don't see Kevin in our system yet — is this your first visit with us?"
+      }
+    },
+    {
+      "at": 50.1,
+      "kind": "turn.caller",
+      "turn": 5,
+      "data": {
+        "text": "Yeah, first time."
+      }
+    },
+    {
+      "at": 50.1,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "Nice, welcome to Harborline!"
+      }
+    },
+    {
+      "at": 50.1,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "Is the number you're calling from, ending in zero, one, two, four, the best one to reach you?"
+      }
+    },
+    {
+      "at": 61,
+      "kind": "turn.caller",
+      "turn": 6,
+      "data": {
+        "text": "That's the one."
+      }
+    },
+    {
+      "at": 61,
+      "kind": "turn.bot",
+      "turn": 6,
+      "data": {
+        "text": "What days work best for you — mornings or afternoons — or should I just grab the soonest opening?"
+      }
+    },
+    {
+      "at": 73.1,
+      "kind": "turn.caller",
+      "turn": 7,
+      "data": {
+        "text": "Late afternoon would be ideal. I get off at four."
+      }
+    },
+    {
+      "at": 73.1,
+      "kind": "tool",
+      "turn": 7,
+      "data": {
+        "name": "context",
+        "ok": true,
+        "ms": 648,
+        "open_slots": 3
+      }
+    },
+    {
+      "at": 73.1,
+      "kind": "turn.bot",
+      "turn": 7,
+      "data": {
+        "text": "Let me check the schedule to see what times are available."
+      }
+    },
+    {
+      "at": 73.1,
+      "kind": "turn.bot",
+      "turn": 7,
+      "data": {
+        "text": "I have Wednesday the twenty-second at four twenty in the afternoon — want me to grab it?"
+      }
+    },
+    {
+      "at": 87,
+      "kind": "turn.caller",
+      "turn": 8,
+      "data": {
+        "text": "Four-twenty tomorrow. Yeah, I can make that."
+      }
+    },
+    {
+      "at": 87,
+      "kind": "tool",
+      "turn": 8,
+      "data": {
+        "name": "book",
+        "ok": true,
+        "ms": 366,
+        "slot": "Wed 4:20 PM",
+        "patient": "Kevin Oduya",
+        "already_booked": false
+      }
+    },
+    {
+      "at": 87,
+      "kind": "booking",
+      "turn": 8,
+      "data": {
+        "name": "Kevin Oduya",
+        "slot": "Wed 4:20 PM",
+        "reason": "consultation",
+        "insurance": "Aetna"
+      }
+    },
+    {
+      "at": 87,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "Let me get that set up for you."
+      }
+    },
+    {
+      "at": 87,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "Perfect — you're booked for Wednesday the twenty-second at four twenty in the afternoon."
+      }
+    },
+    {
+      "at": 87,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "And let me make sure I have the name right: Kevin, spelled K, E, V, I, N — then O, D, U, Y, A — is that right?"
+      }
+    },
+    {
+      "at": 106.3,
+      "kind": "turn.caller",
+      "turn": 9,
+      "data": {
+        "text": "Yep, that's it."
+      }
+    },
+    {
+      "at": 106.3,
+      "kind": "turn.bot",
+      "turn": 9,
+      "data": {
+        "text": "Would you like a text confirmation sent to that number?"
+      }
+    },
+    {
+      "at": 113.6,
+      "kind": "turn.caller",
+      "turn": 10,
+      "data": {
+        "text": "Sure, go ahead."
+      }
+    },
+    {
+      "at": 113.6,
+      "kind": "turn.bot",
+      "turn": 10,
+      "data": {
+        "text": "Is there anything else I can help you with?"
+      }
+    },
+    {
+      "at": 122.4,
+      "kind": "turn.caller",
+      "turn": 11,
+      "data": {
+        "text": "Uh, how much does it usually run? Like, ballpark?"
+      }
+    },
+    {
+      "at": 122.4,
+      "kind": "turn.bot",
+      "turn": 11,
+      "data": {
+        "text": "The doctor goes over all of that with you at the consultation, so you'll get real answers for your own case."
+      }
+    },
+    {
+      "at": 122.4,
+      "kind": "turn.bot",
+      "turn": 11,
+      "data": {
+        "text": "Anything else I can do for you?"
+      }
+    },
+    {
+      "at": 135.4,
+      "kind": "turn.caller",
+      "turn": 12,
+      "data": {
+        "text": "Nope, that's it. Thanks!"
+      }
+    },
+    {
+      "at": 135.4,
+      "kind": "turn.bot",
+      "turn": 12,
+      "data": {
+        "text": "Perfect!"
+      }
+    },
+    {
+      "at": 135.4,
+      "kind": "turn.bot",
+      "turn": 12,
+      "data": {
+        "text": "The front desk will confirm with you."
+      }
+    },
+    {
+      "at": 135.4,
+      "kind": "turn.bot",
+      "turn": 12,
+      "data": {
+        "text": "Take care!"
+      }
+    },
+    {
+      "at": 141.4,
+      "kind": "sms.out",
+      "turn": 12,
+      "data": {
+        "caller": "(941) ***-0124",
+        "kind": "confirmation",
+        "chars": 36
+      }
+    },
+    {
+      "at": 141.4,
+      "kind": "sms.in",
+      "turn": 12,
+      "data": {
+        "caller": "(941) ***-0124",
+        "kind": "yes",
+        "chars": 3
+      }
+    },
+    {
+      "at": 141.4,
+      "kind": "call.ended",
+      "turn": 12,
+      "data": {
+        "duration_s": 141.4,
+        "disposition": "phone-booked",
+        "bookings": 1,
+        "notes": 0
+      }
+    }
+  ]
+}

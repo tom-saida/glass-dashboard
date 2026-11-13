@@ -1,0 +1,211 @@
+{
+  "id": "s06",
+  "day": 0,
+  "start": "08:47:00",
+  "duration_s": 62.9,
+  "caller": "(904) ***-0106",
+  "caller_full": "(904) 555-0106",
+  "language": "en",
+  "greeted_as": "",
+  "disposition": "phone-no-booking",
+  "turns": 6,
+  "first_line": "Hi, um, is Dr. Reyes available? I'd really like to talk to her directly about my son's treatment plan.",
+  "scenario": "asked_for_doctor_message",
+  "events": [
+    {
+      "at": 0,
+      "kind": "call.started",
+      "turn": 0,
+      "data": {
+        "caller": "(904) ***-0106"
+      }
+    },
+    {
+      "at": 1.2,
+      "kind": "greeting",
+      "turn": 0,
+      "data": {
+        "name": ""
+      }
+    },
+    {
+      "at": 4,
+      "kind": "turn.caller",
+      "turn": 1,
+      "data": {
+        "text": "Hi, um, is Dr. Reyes available? I'd really like to talk to her directly about my son's treatment plan."
+      }
+    },
+    {
+      "at": 4,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "Dr. Reyes is with patients right now, but I can take a message and have the team get back to you."
+      }
+    },
+    {
+      "at": 4,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "What's your son's name?"
+      }
+    },
+    {
+      "at": 14.9,
+      "kind": "turn.caller",
+      "turn": 2,
+      "data": {
+        "text": "It's Eli. Eli Brennan."
+      }
+    },
+    {
+      "at": 14.9,
+      "kind": "turn.bot",
+      "turn": 2,
+      "data": {
+        "text": "So that's Eli Brennan — and what's his date of birth?"
+      }
+    },
+    {
+      "at": 22.5,
+      "kind": "turn.caller",
+      "turn": 3,
+      "data": {
+        "text": "April fourth, 2011."
+      }
+    },
+    {
+      "at": 22.5,
+      "kind": "tool",
+      "turn": 3,
+      "data": {
+        "name": "lookup",
+        "ok": true,
+        "ms": 590,
+        "verified": true
+      }
+    },
+    {
+      "at": 22.5,
+      "kind": "turn.bot",
+      "turn": 3,
+      "data": {
+        "text": "Thanks — I found Eli."
+      }
+    },
+    {
+      "at": 22.5,
+      "kind": "turn.bot",
+      "turn": 3,
+      "data": {
+        "text": "And who am I speaking with?"
+      }
+    },
+    {
+      "at": 35.6,
+      "kind": "turn.caller",
+      "turn": 4,
+      "data": {
+        "text": "This is his mom, Rachel. I just — they mentioned maybe needing an expander and I have some questions about it, and I'd rather hear it from her."
+      }
+    },
+    {
+      "at": 35.6,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "Totally understandable — those are great questions for Dr. Reyes."
+      }
+    },
+    {
+      "at": 35.6,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "Is the number you're calling from, ending in zero, one, zero, six, the best one to reach you?"
+      }
+    },
+    {
+      "at": 48,
+      "kind": "turn.caller",
+      "turn": 5,
+      "data": {
+        "text": "Yes, this is my cell. Afternoons are best."
+      }
+    },
+    {
+      "at": 48,
+      "kind": "tool",
+      "turn": 5,
+      "data": {
+        "name": "message",
+        "ok": true,
+        "ms": 688
+      }
+    },
+    {
+      "at": 48,
+      "kind": "note",
+      "turn": 5,
+      "data": {
+        "name": "Rachel Brennan",
+        "reason": "Mom wants to speak directly with Dr. Reyes about son's treatment plan - questions about a possible expander. Best reached afternoons on caller ID. [ASKED FOR A PERSON] [about patient Eli Brennan]",
+        "urgent": false,
+        "fyi": false
+      }
+    },
+    {
+      "at": 48,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "I've passed this to the team — they'll call you back, and I noted that afternoons are best."
+      }
+    },
+    {
+      "at": 48,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "Is there anything else I can help you with?"
+      }
+    },
+    {
+      "at": 59.5,
+      "kind": "turn.caller",
+      "turn": 6,
+      "data": {
+        "text": "No, that's it. Thank you."
+      }
+    },
+    {
+      "at": 59.5,
+      "kind": "turn.bot",
+      "turn": 6,
+      "data": {
+        "text": "Perfect!"
+      }
+    },
+    {
+      "at": 59.5,
+      "kind": "turn.bot",
+      "turn": 6,
+      "data": {
+        "text": "Take care!"
+      }
+    },
+    {
+      "at": 62.9,
+      "kind": "call.ended",
+      "turn": 6,
+      "data": {
+        "duration_s": 62.9,
+        "disposition": "phone-no-booking",
+        "bookings": 0,
+        "notes": 1
+      }
+    }
+  ]
+}

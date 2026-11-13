@@ -1,0 +1,787 @@
+/* Overview widgets (DESIGN 6.1-6.5, DESIGN-GLASS 4). Token variables only; sizes 12/14/16/28. */
+
+.label {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--secondary-text-color);
+}
+
+/* ---------------------------------------------------------------- 6.1 Line tile */
+
+.lineCard {
+  display: flex;
+  flex-direction: column;
+}
+
+/* The tile's content box (padding 20). On a call it is the link, so its hover background and
+   inset focus ring cover the whole card. */
+.lineInner {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: var(--space-20);
+  border-radius: inherit;
+}
+
+.lineBody {
+  margin-top: var(--space-12);
+}
+
+.lineStatus {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  min-height: 24px;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  color: var(--primary-text-color);
+}
+
+.lineSub {
+  display: flex;
+  align-items: center;
+  min-height: 16px;
+  margin-top: var(--space-4);
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--secondary-text-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lineWho {
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lineTimer {
+  flex: none;
+  margin-left: auto;
+  font-weight: 500;
+}
+
+/* P12: the second line, the last thing said (or the booking), one line, truncated. */
+.lineSaid {
+  display: block;
+  min-height: 20px;
+  margin-top: var(--space-4);
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--primary-text-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* The skeleton bar centred in the line's 20px, with no inline baseline gap under it. */
+.lineSkel {
+  display: flex;
+  align-items: center;
+  height: 20px;
+}
+
+.lineSpeaker {
+  color: var(--secondary-text-color);
+  font-weight: 500;
+}
+
+.lineOutcome {
+  font-weight: 500;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+/* A booking or a held outcome may take two lines ("Booked new-patient consult · Thu 10:00 AM" is
+   wider than the tile at 1280); the last thing said stays on one. */
+.lineSaidWrap {
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+
+/* The held outcome after a hang-up comes in once, 150ms opacity; nothing loops. */
+.lineHeld {
+  animation: lineIn 150ms var(--motion-timing-enter) both;
+}
+
+@keyframes lineIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lineHeld {
+    animation: none;
+  }
+}
+
+/* The Line dot never animates (no transition, no keyframes). */
+.dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.dotIdle {
+  background: var(--color-wolf_gray);
+}
+
+.dotLive {
+  background: var(--color-working_orange);
+}
+
+/* ---------------------------------------------------------------- 6.2 Today numbers */
+
+/* DESIGN-GLASS 4: four cards. The cell inside is the link and fills the card, so its hover tone
+   and inset focus ring cover the whole card. */
+.kpiCard {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  container-type: inline-size;
+}
+
+.kpiCell {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  /* 14 x 12 (8.11): the 36 px tile and "Appointments" fit side by side from a 151 px card. */
+  padding: 14px var(--space-12);
+  box-sizing: border-box;
+  border-radius: inherit;
+}
+
+/* The 36 px tile top-left, the label beside it. */
+.kpiHead {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  min-height: 36px;
+}
+
+.kpiTile {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-tile);
+}
+
+.tile_blue {
+  background: var(--tile-blue-bg);
+  color: var(--tile-blue);
+}
+
+.tile_purple {
+  background: var(--tile-purple-bg);
+  color: var(--tile-purple);
+}
+
+.tile_green {
+  background: var(--tile-green-bg);
+  color: var(--tile-green);
+}
+
+.tile_orange {
+  background: var(--tile-orange-bg);
+  color: var(--tile-orange);
+}
+
+.kpiLabel {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  min-width: 0;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  color: var(--secondary-text-color);
+  overflow: hidden;
+}
+
+/* A narrow card (1280 wide: 136 px): a 24 px tile and the label beside it on two lines (fix M2:
+   the label under the tile made the top row 182 tall; beside it the row is 126). "Appointments"
+   is 78 px at 12/500, so the cell's sides are 8. After the base rules: before them, the base
+   .kpiTile (same specificity, later) kept the tile at 36 inside a narrow card. At most 148 (the
+   card's content box, 150 outside): from 151 outside (1440 x 900: 153) the base cell's 12 px sides
+   leave the label 81 px beside the 36 px tile, so the full tile stays (DESIGN-GLASS 4, 8.11). */
+@container (max-width: 148px) {
+  .kpiCell {
+    padding: 10px var(--space-8);
+  }
+
+  .kpiHead {
+    gap: 6px;
+    min-height: 32px;
+  }
+
+  .kpiTile {
+    width: 24px;
+    height: 24px;
+    border-radius: 8px;
+  }
+
+  .kpiTile svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .kpiLabel {
+    min-height: 32px;
+  }
+}
+
+/* Narrower still (a 1280 window with the default 8 % margin: 106 px cards): "Appointments" (78
+   px) no longer fits beside even the 24 px tile, so the tile sits above the label. The head is
+   62 tall instead of 32; nothing clips. */
+@container (max-width: 123px) {
+  .kpiHead {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    min-height: 0;
+  }
+
+  .kpiLabel {
+    min-height: 0;
+  }
+}
+
+/* 28/700, never wraps. 32 line, 4 above (fix M2: 8 px off the top row's height, which buys back
+   the Latest calls row the slab's inset took). */
+.kpiNumber {
+  display: flex;
+  align-items: center;
+  min-height: 32px;
+  margin-top: var(--space-4);
+  /* 28 as shipped; the look's text size raises it to 34 or 40 (DESIGN-GLASS 9). */
+  font-size: var(--kpi-size, 28px);
+  line-height: 1.15;
+  font-weight: 700;
+  color: var(--primary-text-color);
+  white-space: nowrap;
+}
+
+.kpiSub,
+.kpiDelta {
+  display: flex;
+  align-items: center;
+  min-height: 16px;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--secondary-text-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.kpiSub {
+  margin-top: var(--space-4);
+}
+
+/* The comparison line: 12/600; green when today is ahead, secondary when behind (never red). */
+.kpiDelta {
+  display: block;
+  font-weight: 600;
+}
+
+.kpiUp {
+  color: var(--positive-color-hover);
+}
+
+/* In a narrow card (148 or less, the block above) the fact lines wrap to a second line instead of
+   clipping: "19 confirmed by text" is 112 px at 12/400 and the card's content is 111 at 1440 x
+   900 under the default look (DESIGN-GLASS 9.6). Two lines at most; the row grows with the
+   tallest card (the Cols stretch). After the base rules above: same specificity, so the later
+   one wins (the same ordering the tile needed). */
+@container (max-width: 148px) {
+  .kpiSub,
+  .kpiDelta {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    white-space: normal;
+    text-overflow: clip;
+  }
+}
+
+.kpiError {
+  flex: 1;
+}
+
+/* ---------------------------------------------------------------- 6.3 Calls by hour */
+
+.chartCard {
+  overflow: hidden;
+}
+
+/* P4: the card's own header, 60px: the 16/600 title where every card has it (top 16), then the
+   legend as one 12px line under it. 60 + 96 chart + 20 = the card's 176 in every state. */
+.chartHead {
+  height: 60px;
+  padding: var(--space-16) var(--space-20) 0;
+  box-sizing: border-box;
+}
+
+.chartTitle {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+  color: var(--primary-text-color);
+}
+
+/* 16 top + 24 title + 20 legend = the 60 px header. */
+.legend {
+  display: flex;
+  gap: var(--space-8);
+  height: 20px;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--secondary-text-color);
+}
+
+/* The legend as two tiny pills (DESIGN-GLASS 4, fix L3): 20 high, the neutral chip tint. */
+.legendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 20px;
+  padding: 0 var(--space-8);
+  border-radius: var(--radius-pill);
+  background: var(--chip-neutral-bg);
+  box-sizing: border-box;
+  font-weight: 500;
+}
+
+.legendSwatch {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.legendBooked {
+  background: var(--primary-color);
+}
+
+.legendOpen {
+  background: var(--bar-open);
+}
+
+.chartBody {
+  position: relative;
+  min-height: 96px;
+  margin: 0 var(--space-20) var(--space-20);
+}
+
+.chartSvg {
+  display: block;
+  overflow: visible;
+}
+
+.barBooked {
+  fill: var(--primary-color);
+}
+
+/* P4: the no-booking part is a solid tint under the booked part, never a hollow outline. */
+.barOpen {
+  fill: var(--bar-open);
+}
+
+/* Three faint horizontal gridlines behind the bars. */
+.gridline {
+  stroke: var(--glass-rule);
+  stroke-width: 1;
+}
+
+.chartText {
+  font-family: var(--font-family);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  fill: var(--secondary-text-color);
+}
+
+.chartValue {
+  font-family: var(--font-family);
+  font-size: 12px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  fill: var(--primary-text-color);
+}
+
+/* Carbon: the practice's open and close hours are the axis landmarks (DESIGN-GLASS 4: 12
+   secondary like the other labels, weight 600). */
+.chartLandmark {
+  font-family: var(--font-family);
+  font-size: 12px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  fill: var(--secondary-text-color);
+}
+
+.baseline {
+  stroke: var(--glass-rule-strong);
+  stroke-width: 1;
+}
+
+/* The Now rule: the accent at 50%. */
+.nowRule {
+  stroke: var(--primary-color);
+  stroke-opacity: 0.5;
+  stroke-width: 1;
+}
+
+.hitLayer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  height: 72px;
+}
+
+/* Vibe's Tooltip wraps its trigger; let the wrapper take the hit area's box. */
+.hitLayer > * {
+  position: absolute;
+  top: 0;
+  height: 100%;
+}
+
+.hit {
+  position: absolute;
+  top: 0;
+  height: 100%;
+}
+
+.chartError {
+  padding: 0;
+}
+
+/* ---------------------------------------------------------------- 6.4 Latest calls */
+
+.lcCard {
+  overflow: hidden;
+}
+
+.lcHead,
+.lcRow {
+  display: grid;
+  align-items: center;
+  box-sizing: border-box;
+  border-top: 1px solid var(--glass-rule);
+}
+
+.lcHead {
+  height: 32px;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  color: var(--secondary-text-color);
+}
+
+.lcRow {
+  position: relative;
+  isolation: isolate;
+  height: var(--row-height);
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--primary-text-color);
+}
+
+.lcCell {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  padding: 0 var(--space-8);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.lcCell:first-child {
+  padding-left: var(--space-20);
+}
+
+.lcCell:last-child {
+  padding-right: var(--space-20);
+}
+
+/* P10: a name at 14/500 over the masked number at 12 (or the number alone, 14). The reason cell
+   uses the same stack for its " · insurance" part. */
+.lcStack {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.lcPrimary,
+.lcReason,
+.lcSecondary {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lcPrimary {
+  font-weight: 600;
+}
+
+.lcSecondary {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--secondary-text-color);
+}
+
+/* A row that arrives while the page is open (a call coming in) slides up 4px and fades in. */
+.lcEnter {
+  animation: lcEnter 150ms var(--motion-timing-enter) both;
+}
+
+@keyframes lcEnter {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* After hang-up the row holds --primary-highlighted-color for 2 s, then fades out over 400ms.
+   Opacity on a pseudo-element behind the cells; runs once (the class is never re-added). */
+.lcJustEnded::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--primary-highlighted-color);
+  opacity: 0;
+  pointer-events: none;
+  animation: lcHold 2400ms linear both;
+}
+
+@keyframes lcHold {
+  0%,
+  83% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lcEnter {
+    animation: none;
+  }
+
+  .lcJustEnded::before {
+    animation-timing-function: steps(1, end);
+  }
+}
+
+.lcNum {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.lcEmpty {
+  padding-top: var(--space-20);
+  border-top: 1px solid var(--glass-rule);
+}
+
+/* The empty state's height: its top rule, 20 above, 3 rows, 20 below. */
+.lcSkelEmpty {
+  height: calc(var(--row-height) * 3 + 41px);
+  box-sizing: border-box;
+  border-top: 1px solid var(--glass-rule);
+}
+
+/* ---------------------------------------------------------------- 6.5 Callbacks waiting */
+
+.cbCard {
+  overflow: hidden;
+}
+
+.cbList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* a11y-03: a plain list item; the row styles sit on the link-like div inside it. */
+.cbItem {
+  display: block;
+}
+
+.cbRow {
+  display: block;
+  padding: var(--space-12) var(--space-20);
+  border-top: 1px solid var(--glass-rule);
+  container-type: inline-size;
+}
+
+.cbLine1 {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  min-height: 20px;
+  min-width: 0;
+}
+
+/* The masked number never clips: when it does not fit beside the name (a row with the Urgent
+   chip at 1280) it wraps to a second line that the one-line box hides, so the row shows the
+   name alone. Screen readers still read it. */
+.cbIdentity {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: var(--space-8);
+  row-gap: 0;
+  min-width: 0;
+  height: 20px;
+  overflow: hidden;
+}
+
+.cbName {
+  min-width: 0;
+  max-width: 100%;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  color: var(--primary-text-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cbNumber {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--secondary-text-color);
+  white-space: nowrap;
+}
+
+.cbChip {
+  flex: none;
+}
+
+.cbBooked {
+  flex: 0 1 auto;
+  min-width: 0;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--secondary-text-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cbTime {
+  flex: none;
+  margin-left: auto;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--secondary-text-color);
+}
+
+/* At 1280 the card is too narrow for identity + chip + "Booked on this call" + time on one
+   line: the note drops to its own line under them, never truncated. */
+@container (max-width: 380px) {
+  .cbLine1 {
+    flex-wrap: wrap;
+    row-gap: 0;
+  }
+
+  /* The identity gives way (the number ellipsizes) so the time stays on the first line. */
+  .cbIdentity {
+    flex: 1 1 0;
+  }
+
+  .cbTime {
+    order: 1;
+  }
+
+  .cbBooked {
+    order: 2;
+    flex-basis: 100%;
+  }
+}
+
+.cbReason {
+  margin-top: var(--space-4);
+  max-width: 35em;
+  /* F3: every row is the same 89px (two reason lines held), so the skeleton rows match it. */
+  min-height: 40px;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--primary-text-color);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+/* Two notes from one caller: one line each, so the row keeps its 89px. */
+.cbReasons {
+  margin-top: var(--space-4);
+  min-height: 40px;
+}
+
+.cbReasonLine {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--primary-text-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cbSkelReason {
+  margin-top: var(--space-4);
+}
+
+.cbSkelLine {
+  display: flex;
+  align-items: center;
+  height: 20px;
+}
+
+.cbFooter {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 var(--space-20);
+  border-top: 1px solid var(--glass-rule);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.cbEmpty {
+  padding-top: var(--space-20);
+  border-top: 1px solid var(--glass-rule);
+}
+
+/* Skeleton when stats says no one is waiting: the empty state's height (rule, 20, 3 rows, 20). */
+.cbSkelEmpty {
+  height: calc(var(--row-height) * 3 + 41px);
+  box-sizing: border-box;
+  border-top: 1px solid var(--glass-rule);
+}

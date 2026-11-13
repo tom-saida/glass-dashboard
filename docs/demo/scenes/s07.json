@@ -1,0 +1,301 @@
+{
+  "id": "s07",
+  "day": 0,
+  "start": "09:05:00",
+  "duration_s": 78.5,
+  "caller": "(813) ***-0107",
+  "caller_full": "(813) 555-0107",
+  "language": "en",
+  "greeted_as": "",
+  "disposition": "phone-booked",
+  "turns": 8,
+  "first_line": "Yeah, hi, so I kind of — I stepped on my retainer. It's cracked down the middle. I don't know if I can still wear it.",
+  "scenario": "cracked_retainer_check",
+  "events": [
+    {
+      "at": 0,
+      "kind": "call.started",
+      "turn": 0,
+      "data": {
+        "caller": "(813) ***-0107"
+      }
+    },
+    {
+      "at": 1.2,
+      "kind": "greeting",
+      "turn": 0,
+      "data": {
+        "name": ""
+      }
+    },
+    {
+      "at": 4,
+      "kind": "turn.caller",
+      "turn": 1,
+      "data": {
+        "text": "Yeah, hi, so I kind of — I stepped on my retainer. It's cracked down the middle. I don't know if I can still wear it."
+      }
+    },
+    {
+      "at": 4,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "Oh no — let's get that looked at."
+      }
+    },
+    {
+      "at": 4,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "What's your name?"
+      }
+    },
+    {
+      "at": 11.5,
+      "kind": "turn.caller",
+      "turn": 2,
+      "data": {
+        "text": "Sam Whitlock."
+      }
+    },
+    {
+      "at": 11.5,
+      "kind": "turn.bot",
+      "turn": 2,
+      "data": {
+        "text": "So that's Sam Whitlock — and what's your date of birth?"
+      }
+    },
+    {
+      "at": 19.1,
+      "kind": "turn.caller",
+      "turn": 3,
+      "data": {
+        "text": "January fifteenth, 2008."
+      }
+    },
+    {
+      "at": 19.1,
+      "kind": "tool",
+      "turn": 3,
+      "data": {
+        "name": "lookup",
+        "ok": true,
+        "ms": 547,
+        "verified": true
+      }
+    },
+    {
+      "at": 19.1,
+      "kind": "turn.bot",
+      "turn": 3,
+      "data": {
+        "text": "Thanks, Sam — I found you."
+      }
+    },
+    {
+      "at": 19.1,
+      "kind": "turn.bot",
+      "turn": 3,
+      "data": {
+        "text": "Let me get you in for a retainer check so the team can see it."
+      }
+    },
+    {
+      "at": 30.4,
+      "kind": "turn.caller",
+      "turn": 4,
+      "data": {
+        "text": "Okay, cool. Should I keep wearing it until then, or...?"
+      }
+    },
+    {
+      "at": 30.4,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "That's a great question for the team — bring the retainer with you, and they'll go over it at the visit."
+      }
+    },
+    {
+      "at": 30.4,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "What days work best for you — mornings or afternoons?"
+      }
+    },
+    {
+      "at": 43.3,
+      "kind": "turn.caller",
+      "turn": 5,
+      "data": {
+        "text": "Morning's fine. Tomorrow if you have it."
+      }
+    },
+    {
+      "at": 43.3,
+      "kind": "tool",
+      "turn": 5,
+      "data": {
+        "name": "context",
+        "ok": true,
+        "ms": 522,
+        "open_slots": 2
+      }
+    },
+    {
+      "at": 43.3,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "Let me check the schedule to see what times are available."
+      }
+    },
+    {
+      "at": 43.3,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "I have tomorrow, Wednesday the twenty-second, at ten in the morning — want me to grab it?"
+      }
+    },
+    {
+      "at": 54.6,
+      "kind": "turn.caller",
+      "turn": 6,
+      "data": {
+        "text": "Yeah, ten works."
+      }
+    },
+    {
+      "at": 54.6,
+      "kind": "tool",
+      "turn": 6,
+      "data": {
+        "name": "book",
+        "ok": true,
+        "ms": 391,
+        "slot": "Wed 10:00 AM",
+        "patient": "Sam Whitlock",
+        "already_booked": false
+      }
+    },
+    {
+      "at": 54.6,
+      "kind": "booking",
+      "turn": 6,
+      "data": {
+        "name": "Sam Whitlock",
+        "slot": "Wed 10:00 AM",
+        "reason": "cracked retainer - retainer check",
+        "insurance": ""
+      }
+    },
+    {
+      "at": 54.6,
+      "kind": "turn.bot",
+      "turn": 6,
+      "data": {
+        "text": "Let me get that set up for you."
+      }
+    },
+    {
+      "at": 54.6,
+      "kind": "turn.bot",
+      "turn": 6,
+      "data": {
+        "text": "Perfect — you're booked for Wednesday the twenty-second at ten in the morning."
+      }
+    },
+    {
+      "at": 54.6,
+      "kind": "turn.bot",
+      "turn": 6,
+      "data": {
+        "text": "Want me to text you a confirmation at the number ending in zero, one, zero, seven?"
+      }
+    },
+    {
+      "at": 67.5,
+      "kind": "turn.caller",
+      "turn": 7,
+      "data": {
+        "text": "Sure."
+      }
+    },
+    {
+      "at": 67.5,
+      "kind": "turn.bot",
+      "turn": 7,
+      "data": {
+        "text": "Done!"
+      }
+    },
+    {
+      "at": 67.5,
+      "kind": "turn.bot",
+      "turn": 7,
+      "data": {
+        "text": "Is there anything else I can help you with?"
+      }
+    },
+    {
+      "at": 75.1,
+      "kind": "turn.caller",
+      "turn": 8,
+      "data": {
+        "text": "Nah, that's it. Thanks."
+      }
+    },
+    {
+      "at": 75.1,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "Perfect!"
+      }
+    },
+    {
+      "at": 75.1,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "The front desk will confirm with you. Take care!"
+      }
+    },
+    {
+      "at": 77.5,
+      "kind": "sms.out",
+      "turn": 8,
+      "data": {
+        "caller": "(813) ***-0107",
+        "kind": "confirmation",
+        "chars": 36
+      }
+    },
+    {
+      "at": 78,
+      "kind": "sms.in",
+      "turn": 8,
+      "data": {
+        "caller": "(813) ***-0107",
+        "kind": "yes",
+        "chars": 3
+      }
+    },
+    {
+      "at": 78.5,
+      "kind": "call.ended",
+      "turn": 8,
+      "data": {
+        "duration_s": 78.5,
+        "disposition": "phone-booked",
+        "bookings": 1,
+        "notes": 0
+      }
+    }
+  ]
+}

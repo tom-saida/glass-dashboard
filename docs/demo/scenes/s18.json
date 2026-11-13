@@ -1,0 +1,168 @@
+{
+  "id": "s18",
+  "day": 0,
+  "start": "12:10:00",
+  "duration_s": 50.8,
+  "caller": "(352) ***-0118",
+  "caller_full": "(352) 555-0118",
+  "language": "en",
+  "greeted_as": "",
+  "disposition": "phone-no-booking",
+  "turns": 4,
+  "first_line": "Hi, sorry, I know it's probably your lunch hour, but — um, I got a statement in the mail and I think we got charged twice for something? Can I talk to someone in billing?",
+  "scenario": "billing_statement_callback",
+  "events": [
+    {
+      "at": 0,
+      "kind": "call.started",
+      "turn": 0,
+      "data": {
+        "caller": "(352) ***-0118"
+      }
+    },
+    {
+      "at": 1.2,
+      "kind": "greeting",
+      "turn": 0,
+      "data": {
+        "name": ""
+      }
+    },
+    {
+      "at": 5.6,
+      "kind": "turn.caller",
+      "turn": 1,
+      "data": {
+        "text": "Hi, sorry, I know it's probably your lunch hour, but — um, I got a statement in the mail and I think we got charged twice for something? Can I talk to someone in billing?"
+      }
+    },
+    {
+      "at": 5.6,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "I'm sorry about that — let's get it to the right person."
+      }
+    },
+    {
+      "at": 5.6,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "I can't pull up billing from here, but I can pass this to our billing coordinator so they can call you back."
+      }
+    },
+    {
+      "at": 5.6,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "What's your name?"
+      }
+    },
+    {
+      "at": 21.4,
+      "kind": "turn.caller",
+      "turn": 2,
+      "data": {
+        "text": "Rachel Dunmore. It's on my son's account, Caleb."
+      }
+    },
+    {
+      "at": 21.4,
+      "kind": "turn.bot",
+      "turn": 2,
+      "data": {
+        "text": "So that's Rachel Dunmore — is the number you're calling from, ending in zero, one, one, eight, the best one to reach you?"
+      }
+    },
+    {
+      "at": 32.8,
+      "kind": "turn.caller",
+      "turn": 3,
+      "data": {
+        "text": "Yeah, that's my cell. Anytime this afternoon is fine."
+      }
+    },
+    {
+      "at": 32.8,
+      "kind": "tool",
+      "turn": 3,
+      "data": {
+        "name": "message",
+        "ok": true,
+        "ms": 694
+      }
+    },
+    {
+      "at": 32.8,
+      "kind": "note",
+      "turn": 3,
+      "data": {
+        "name": "Rachel Dunmore",
+        "reason": "Billing: caller thinks a charge on her statement for son Caleb's account was billed twice - wants the billing coordinator to call her back this afternoon. [ASKED FOR A PERSON]",
+        "urgent": false,
+        "fyi": false
+      }
+    },
+    {
+      "at": 32.8,
+      "kind": "turn.bot",
+      "turn": 3,
+      "data": {
+        "text": "Let me get that written down for you."
+      }
+    },
+    {
+      "at": 32.8,
+      "kind": "turn.bot",
+      "turn": 3,
+      "data": {
+        "text": "I've passed this to the team — the billing coordinator will call you back this afternoon."
+      }
+    },
+    {
+      "at": 32.8,
+      "kind": "turn.bot",
+      "turn": 3,
+      "data": {
+        "text": "Is there anything else I can help you with?"
+      }
+    },
+    {
+      "at": 45.4,
+      "kind": "turn.caller",
+      "turn": 4,
+      "data": {
+        "text": "No, that's it. Thank you."
+      }
+    },
+    {
+      "at": 45.4,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "Perfect!"
+      }
+    },
+    {
+      "at": 45.4,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "Take care!"
+      }
+    },
+    {
+      "at": 50.8,
+      "kind": "call.ended",
+      "turn": 4,
+      "data": {
+        "duration_s": 50.8,
+        "disposition": "phone-no-booking",
+        "bookings": 0,
+        "notes": 1
+      }
+    }
+  ]
+}

@@ -1,0 +1,226 @@
+/* DESIGN 6.8 + plan P11: the drawer as a document. Header (padding 24, bottom rule); then one
+   scroller holding the Outcome block and the transcript. Transcript rows are a grid: speaker
+   64 · m:ss 36 · text; Katie's rows carry a 2px --glass-rule-strong rule on the left (every
+   row reserves those 2px, so the columns line up). No bubbles, no shadows. */
+
+.root {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.header {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-24);
+  border-bottom: 1px solid var(--glass-rule);
+}
+
+/* Clear of the close button (top/right 16, 32 square). */
+.line1 {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  min-width: 0;
+  min-height: 28px;
+  padding-right: var(--space-32);
+}
+
+.caller {
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.line2 {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--secondary-text-color);
+  min-height: 20px;
+}
+
+.scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* a11y-08: the drawer body is a keyboard-scrollable region (WebKit does not focus scrollers on
+   its own). The ring is the inset one: the scroller sits flush against the drawer's edges. */
+.scroll:focus {
+  outline: none;
+}
+
+.scroll:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring-inset);
+}
+
+/* ---------------------------------------------------------------- Outcome block */
+
+.outcome {
+  padding: var(--space-20) var(--space-24) var(--space-16);
+  border-bottom: 1px solid var(--glass-rule);
+}
+
+.outcomeTitle {
+  margin: 0 0 var(--space-8);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  color: var(--secondary-text-color);
+}
+
+.outcomeList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* One action per line: a 16px icon and 14/20 text. A button when it can scroll to its row. */
+.outcomeLine {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-8);
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: var(--space-4) var(--space-8);
+  margin-left: calc(var(--space-8) * -1);
+  border: 0;
+  border-radius: var(--border-radius-small);
+  background: none;
+  font: inherit;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--primary-text-color);
+  text-align: left;
+}
+
+button.outcomeLine {
+  cursor: pointer;
+  transition: background-color var(--motion-productive-short) var(--motion-timing-transition);
+}
+
+button.outcomeLine:hover {
+  background: var(--primary-background-hover-color);
+}
+
+button.outcomeLine:focus {
+  outline: none;
+}
+
+button.outcomeLine:focus-visible {
+  box-shadow: var(--focus-ring);
+}
+
+.outcomeLine .icon {
+  margin-top: 2px;
+}
+
+.outcomeText {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* ---------------------------------------------------------------- transcript */
+
+.transcript {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+  padding: var(--space-20) var(--space-24) var(--space-24);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 64px 36px minmax(0, 1fr);
+  column-gap: var(--space-12);
+  align-items: start;
+  padding-left: var(--space-8);
+  border-left: 2px solid transparent;
+  border-radius: 0;
+}
+
+.row:focus {
+  outline: none;
+}
+
+/* An Outcome line was followed here: the row holds the selected tint until focus leaves it
+   (static: no fade, no pulse). */
+.row[data-followed] {
+  background: var(--primary-highlighted-color);
+}
+
+.katieRow {
+  border-left-color: var(--glass-rule-strong);
+}
+
+.speaker {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  min-height: 20px;
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: 500;
+  color: var(--secondary-text-color);
+  white-space: nowrap;
+}
+
+.at {
+  font-size: 12px;
+  line-height: 20px;
+  color: var(--secondary-text-color);
+  text-align: right;
+}
+
+.text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--primary-text-color);
+  overflow-wrap: anywhere;
+}
+
+.avatar {
+  flex: none;
+  display: block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+}
+
+/* Event rows: 12/16 secondary, the icon in the speaker column. */
+.eventRow .speaker,
+.eventRow .at {
+  min-height: 16px;
+  line-height: 16px;
+}
+
+.eventRow .text {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--secondary-text-color);
+}
+
+.icon {
+  flex: none;
+  display: block;
+  color: var(--icon-color);
+}
+
+.state {
+  max-width: 35em;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--secondary-text-color);
+}

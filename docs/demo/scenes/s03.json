@@ -1,0 +1,365 @@
+{
+  "id": "s03",
+  "day": 0,
+  "start": "08:02:00",
+  "duration_s": 115.5,
+  "caller": "(813) ***-0103",
+  "caller_full": "(813) 555-0103",
+  "language": "es",
+  "greeted_as": "",
+  "disposition": "phone-booked",
+  "turns": 11,
+  "first_line": "Hola, buenos días, eh... quería hacer una cita para mi hija, para una consulta. Tiene catorce años.",
+  "scenario": "es_new_patient_consult_teen",
+  "events": [
+    {
+      "at": 0,
+      "kind": "call.started",
+      "turn": 0,
+      "data": {
+        "caller": "(813) ***-0103"
+      }
+    },
+    {
+      "at": 1.2,
+      "kind": "greeting",
+      "turn": 0,
+      "data": {
+        "name": ""
+      }
+    },
+    {
+      "at": 4,
+      "kind": "turn.caller",
+      "turn": 1,
+      "data": {
+        "text": "Hola, buenos días, eh... quería hacer una cita para mi hija, para una consulta. Tiene catorce años."
+      }
+    },
+    {
+      "at": 4,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "¡Buenos días! Con gusto la ayudo."
+      }
+    },
+    {
+      "at": 4,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "Una consulta para su hija — ¡vamos a darle una cita!"
+      }
+    },
+    {
+      "at": 4,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "¿Cómo se llama su hija?"
+      }
+    },
+    {
+      "at": 14.4,
+      "kind": "turn.caller",
+      "turn": 2,
+      "data": {
+        "text": "Se llama Camila. Camila Ortega."
+      }
+    },
+    {
+      "at": 14.4,
+      "kind": "turn.bot",
+      "turn": 2,
+      "data": {
+        "text": "Entonces es Camila Ortega — ¿y cuál es su fecha de nacimiento?"
+      }
+    },
+    {
+      "at": 22.9,
+      "kind": "turn.caller",
+      "turn": 3,
+      "data": {
+        "text": "El tres de mayo del 2012."
+      }
+    },
+    {
+      "at": 22.9,
+      "kind": "tool",
+      "turn": 3,
+      "data": {
+        "name": "lookup",
+        "ok": true,
+        "ms": 633,
+        "verified": false
+      }
+    },
+    {
+      "at": 22.9,
+      "kind": "turn.bot",
+      "turn": 3,
+      "data": {
+        "text": "No veo a Camila en nuestro sistema todavía — ¿es su primera visita con nosotros?"
+      }
+    },
+    {
+      "at": 32.9,
+      "kind": "turn.caller",
+      "turn": 4,
+      "data": {
+        "text": "Sí, es la primera vez. Nunca ha ido al ortodoncista."
+      }
+    },
+    {
+      "at": 32.9,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "¡Bienvenida a Harborline!"
+      }
+    },
+    {
+      "at": 32.9,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "¿Qué la trae — hay algo específico que quiera que revisen, o es una consulta general?"
+      }
+    },
+    {
+      "at": 45.8,
+      "kind": "turn.caller",
+      "turn": 5,
+      "data": {
+        "text": "Pues, tiene los dientes de arriba un poco salidos, y a ella le da pena sonreír en las fotos."
+      }
+    },
+    {
+      "at": 45.8,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "Entiendo — el doctor lo va a revisar todo en la consulta."
+      }
+    },
+    {
+      "at": 45.8,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "¿Tiene seguro dental para Camila — quién es el proveedor?"
+      }
+    },
+    {
+      "at": 58.7,
+      "kind": "turn.caller",
+      "turn": 6,
+      "data": {
+        "text": "Ay, no estoy segura cuál es. Mi esposo tiene la tarjeta. ¿Podemos hacer la cita primero?"
+      }
+    },
+    {
+      "at": 58.7,
+      "kind": "turn.bot",
+      "turn": 6,
+      "data": {
+        "text": "¡Claro que sí, lo pueden ver en la cita!"
+      }
+    },
+    {
+      "at": 58.7,
+      "kind": "turn.bot",
+      "turn": 6,
+      "data": {
+        "text": "¿El número del que llama, que termina en cero, uno, cero, tres, es el mejor para comunicarnos con usted?"
+      }
+    },
+    {
+      "at": 70.5,
+      "kind": "turn.caller",
+      "turn": 7,
+      "data": {
+        "text": "Sí, ese es mi celular."
+      }
+    },
+    {
+      "at": 70.5,
+      "kind": "turn.bot",
+      "turn": 7,
+      "data": {
+        "text": "¿Qué le funciona mejor a Camila — mañanas o tardes?"
+      }
+    },
+    {
+      "at": 79.4,
+      "kind": "turn.caller",
+      "turn": 8,
+      "data": {
+        "text": "En la tarde, después de la escuela, si se puede."
+      }
+    },
+    {
+      "at": 79.4,
+      "kind": "tool",
+      "turn": 8,
+      "data": {
+        "name": "context",
+        "ok": true,
+        "ms": 581,
+        "open_slots": 3
+      }
+    },
+    {
+      "at": 79.4,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "Déjeme revisar el horario para ver qué hay disponible."
+      }
+    },
+    {
+      "at": 79.4,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "Tengo el miércoles veintidós a las dos y cuarenta de la tarde — ¿se la aparto?"
+      }
+    },
+    {
+      "at": 90.5,
+      "kind": "turn.caller",
+      "turn": 9,
+      "data": {
+        "text": "Sí, el miércoles está bien."
+      }
+    },
+    {
+      "at": 90.5,
+      "kind": "tool",
+      "turn": 9,
+      "data": {
+        "name": "book",
+        "ok": true,
+        "ms": 398,
+        "slot": "Wed 2:40 PM",
+        "patient": "Camila Ortega",
+        "already_booked": false
+      }
+    },
+    {
+      "at": 90.5,
+      "kind": "booking",
+      "turn": 9,
+      "data": {
+        "name": "Camila Ortega",
+        "slot": "Wed 2:40 PM",
+        "reason": "consulta - dientes de arriba salidos",
+        "insurance": "not provided"
+      }
+    },
+    {
+      "at": 90.5,
+      "kind": "turn.bot",
+      "turn": 9,
+      "data": {
+        "text": "Déjeme apartarla."
+      }
+    },
+    {
+      "at": 90.5,
+      "kind": "turn.bot",
+      "turn": 9,
+      "data": {
+        "text": "Perfecto — Camila tiene cita el miércoles veintidós a las dos y cuarenta de la tarde."
+      }
+    },
+    {
+      "at": 90.5,
+      "kind": "turn.bot",
+      "turn": 9,
+      "data": {
+        "text": "¿Le mando un mensaje de texto de confirmación al número que termina en cero, uno, cero, tres?"
+      }
+    },
+    {
+      "at": 103.4,
+      "kind": "turn.caller",
+      "turn": 10,
+      "data": {
+        "text": "Sí, por favor."
+      }
+    },
+    {
+      "at": 103.4,
+      "kind": "turn.bot",
+      "turn": 10,
+      "data": {
+        "text": "Listo, ya se lo envío."
+      }
+    },
+    {
+      "at": 103.4,
+      "kind": "turn.bot",
+      "turn": 10,
+      "data": {
+        "text": "¿Hay algo más en que la pueda ayudar?"
+      }
+    },
+    {
+      "at": 112.1,
+      "kind": "turn.caller",
+      "turn": 11,
+      "data": {
+        "text": "No, eso es todo. Muchas gracias."
+      }
+    },
+    {
+      "at": 112.1,
+      "kind": "turn.bot",
+      "turn": 11,
+      "data": {
+        "text": "¡Perfecto!"
+      }
+    },
+    {
+      "at": 112.1,
+      "kind": "turn.bot",
+      "turn": 11,
+      "data": {
+        "text": "La recepción se va a comunicar con usted para confirmar. ¡Que le vaya bien!"
+      }
+    },
+    {
+      "at": 114.5,
+      "kind": "sms.out",
+      "turn": 11,
+      "data": {
+        "caller": "(813) ***-0103",
+        "kind": "confirmation",
+        "chars": 38
+      }
+    },
+    {
+      "at": 115,
+      "kind": "sms.in",
+      "turn": 11,
+      "data": {
+        "caller": "(813) ***-0103",
+        "kind": "yes",
+        "chars": 2
+      }
+    },
+    {
+      "at": 115.5,
+      "kind": "call.ended",
+      "turn": 11,
+      "data": {
+        "duration_s": 115.5,
+        "disposition": "phone-booked",
+        "bookings": 1,
+        "notes": 0
+      }
+    }
+  ]
+}

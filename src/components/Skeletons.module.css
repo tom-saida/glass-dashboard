@@ -1,0 +1,37 @@
+/* Vibe's Skeleton paints --ui-background-color: on glass it is a faint ink tint instead. */
+.bar,
+.rows {
+  --ui-background-color: var(--skeleton-bg);
+}
+
+.bar {
+  display: block;
+  flex: none;
+}
+
+.rows {
+  display: block;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  border-top: 1px solid var(--glass-rule);
+}
+
+.cell {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  padding: 0 var(--space-16);
+  box-sizing: border-box;
+}
+
+.cell:first-child {
+  padding-left: var(--space-20);
+}
+
+.cell:last-child {
+  padding-right: var(--space-20);
+}

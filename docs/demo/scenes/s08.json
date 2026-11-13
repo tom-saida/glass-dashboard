@@ -1,0 +1,235 @@
+{
+  "id": "s08",
+  "day": 0,
+  "start": "09:22:00",
+  "duration_s": 66.9,
+  "caller": "(656) ***-0108",
+  "caller_full": "(656) 555-0108",
+  "language": "en",
+  "greeted_as": "",
+  "disposition": "phone-no-booking",
+  "turns": 7,
+  "first_line": "Hi, yeah, my daughter had her consult last week and, uh, I'm trying to figure out the money side. Do you guys do payment plans?",
+  "scenario": "payment_plan_billing_note",
+  "events": [
+    {
+      "at": 0,
+      "kind": "call.started",
+      "turn": 0,
+      "data": {
+        "caller": "(656) ***-0108"
+      }
+    },
+    {
+      "at": 1.2,
+      "kind": "greeting",
+      "turn": 0,
+      "data": {
+        "name": ""
+      }
+    },
+    {
+      "at": 4,
+      "kind": "turn.caller",
+      "turn": 1,
+      "data": {
+        "text": "Hi, yeah, my daughter had her consult last week and, uh, I'm trying to figure out the money side. Do you guys do payment plans?"
+      }
+    },
+    {
+      "at": 4,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "Great question!"
+      }
+    },
+    {
+      "at": 4,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "Our billing coordinator handles payment plans — I can have them call you back with the details."
+      }
+    },
+    {
+      "at": 16.6,
+      "kind": "turn.caller",
+      "turn": 2,
+      "data": {
+        "text": "Okay. And is there a down payment? Like do I need to put something down before she starts?"
+      }
+    },
+    {
+      "at": 16.6,
+      "kind": "turn.bot",
+      "turn": 2,
+      "data": {
+        "text": "I don't want to give you the wrong number — the billing coordinator will walk you through all of that, including any down payment."
+      }
+    },
+    {
+      "at": 16.6,
+      "kind": "turn.bot",
+      "turn": 2,
+      "data": {
+        "text": "What's your daughter's name?"
+      }
+    },
+    {
+      "at": 27.7,
+      "kind": "turn.caller",
+      "turn": 3,
+      "data": {
+        "text": "Lily Novak."
+      }
+    },
+    {
+      "at": 27.7,
+      "kind": "turn.bot",
+      "turn": 3,
+      "data": {
+        "text": "So that's Lily Novak — and what's her date of birth?"
+      }
+    },
+    {
+      "at": 35.5,
+      "kind": "turn.caller",
+      "turn": 4,
+      "data": {
+        "text": "Uh, August twelfth, 2012."
+      }
+    },
+    {
+      "at": 35.5,
+      "kind": "tool",
+      "turn": 4,
+      "data": {
+        "name": "lookup",
+        "ok": true,
+        "ms": 566,
+        "verified": true
+      }
+    },
+    {
+      "at": 35.5,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "Thanks — I found Lily."
+      }
+    },
+    {
+      "at": 35.5,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "And what's your name?"
+      }
+    },
+    {
+      "at": 43.5,
+      "kind": "turn.caller",
+      "turn": 5,
+      "data": {
+        "text": "Oh — Greg. Greg Novak, her dad."
+      }
+    },
+    {
+      "at": 43.5,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "Got it."
+      }
+    },
+    {
+      "at": 43.5,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "Is the number you're calling from, ending in zero, one, zero, eight, the best one to reach you?"
+      }
+    },
+    {
+      "at": 53.1,
+      "kind": "turn.caller",
+      "turn": 6,
+      "data": {
+        "text": "Yeah, that's fine."
+      }
+    },
+    {
+      "at": 53.1,
+      "kind": "tool",
+      "turn": 6,
+      "data": {
+        "name": "message",
+        "ok": true,
+        "ms": 702
+      }
+    },
+    {
+      "at": 53.1,
+      "kind": "note",
+      "turn": 6,
+      "data": {
+        "name": "Greg Novak",
+        "reason": "Dad asking about payment plan options and whether a down payment is required before treatment starts. Please have the billing coordinator call back. [about patient Lily Novak]",
+        "urgent": false,
+        "fyi": false
+      }
+    },
+    {
+      "at": 53.1,
+      "kind": "turn.bot",
+      "turn": 6,
+      "data": {
+        "text": "I've passed this to the team — the billing coordinator will call you back."
+      }
+    },
+    {
+      "at": 53.1,
+      "kind": "turn.bot",
+      "turn": 6,
+      "data": {
+        "text": "Is there anything else I can help you with?"
+      }
+    },
+    {
+      "at": 63.5,
+      "kind": "turn.caller",
+      "turn": 7,
+      "data": {
+        "text": "No, that's it. Thanks."
+      }
+    },
+    {
+      "at": 63.5,
+      "kind": "turn.bot",
+      "turn": 7,
+      "data": {
+        "text": "Perfect!"
+      }
+    },
+    {
+      "at": 63.5,
+      "kind": "turn.bot",
+      "turn": 7,
+      "data": {
+        "text": "Take care!"
+      }
+    },
+    {
+      "at": 66.9,
+      "kind": "call.ended",
+      "turn": 7,
+      "data": {
+        "duration_s": 66.9,
+        "disposition": "phone-no-booking",
+        "bookings": 0,
+        "notes": 1
+      }
+    }
+  ]
+}

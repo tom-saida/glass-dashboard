@@ -1,0 +1,106 @@
+/* Mini stage for the motion playground. Every colour, radius and space is a Vibe token. */
+.stage {
+  position: relative;
+  height: 400px;
+  margin-top: var(--space-24);
+  /* clip sideways (she enters from the right), but let a hop's apex rise above the stage */
+  overflow-x: clip;
+  overflow-y: visible;
+  background: var(--allgrey-background-color);
+  border: 1px solid var(--layout-border-color);
+  border-radius: var(--border-radius-medium);
+  cursor: default;
+}
+
+.card {
+  position: absolute;
+  box-sizing: border-box;
+  height: 96px;
+  padding: var(--space-16) var(--space-20);
+  background: var(--primary-background-color);
+  border: 1px solid var(--ui-border-color);
+  border-radius: var(--border-radius-medium);
+  font: inherit;
+  color: var(--primary-text-color);
+  text-align: left;
+  cursor: pointer;
+}
+
+.card:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.cardA {
+  top: 120px;
+  left: var(--space-24);
+  width: 30%;
+}
+
+.cardB {
+  top: 120px;
+  left: calc(30% + 2 * var(--space-24));
+  right: var(--space-24);
+}
+
+.cardC {
+  top: 240px;
+  left: var(--space-24);
+  right: 160px;
+  height: 72px;
+}
+
+.cardTitle {
+  display: block;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+}
+
+.cardText {
+  display: block;
+  margin-top: var(--space-4);
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--secondary-text-color);
+  font-variant-numeric: tabular-nums;
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  will-change: transform;
+}
+
+.bubble {
+  position: absolute;
+  box-sizing: border-box;
+  width: max-content;
+  /* a ceiling: fitBubble (src/katie/stage/fitBubble.ts) sets the width, as on the dashboard */
+  max-width: min(640px, calc(100% - 32px));
+  padding: var(--space-8) var(--space-12);
+  background: var(--primary-background-color);
+  border: 1px solid var(--ui-border-color);
+  border-radius: var(--border-radius-medium);
+  box-shadow: var(--box-shadow-small);
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--primary-text-color);
+  visibility: hidden;
+  opacity: 0;
+}
+
+.caption {
+  margin: var(--space-8) 0 0;
+  max-width: 72ch;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--secondary-text-color);
+}

@@ -1,0 +1,38 @@
+# The live demo site: the static demo build (made-up practice day, no backend, no login).
+# Build locally with `npm run build:demo` (writes the app to dist-demo/dash/) and deploy with
+#   netlify deploy --prod --dir dist-demo --site <your site id>
+# Never point this at the box build (dist/), which expects /api/dash on the same origin.
+
+[build]
+  publish = "dist-demo"
+  command = "npm run build:demo"
+
+# The app lives under /dash/ (same base as on the box). Send the root there and let the
+# client router handle every /dash/* route.
+[[redirects]]
+  from = "/"
+  to = "/dash/"
+  status = 302
+
+[[redirects]]
+  from = "/dash/*"
+  to = "/dash/index.html"
+  status = 200
+
+# A private sales tool: keep it out of search engines and keep index.html fresh so a
+# closer always gets the latest build; hashed assets can cache for a year.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Referrer-Policy = "no-referrer"
+
+[[headers]]
+  for = "/dash/index.html"
+  [headers.values]
+    Cache-Control = "no-cache"
+
+[[headers]]
+  for = "/dash/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

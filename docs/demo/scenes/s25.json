@@ -1,0 +1,321 @@
+{
+  "id": "s25",
+  "day": 0,
+  "start": "14:39:00",
+  "duration_s": 139.3,
+  "caller": "(352) ***-0125",
+  "caller_full": "(352) 555-0125",
+  "language": "en",
+  "greeted_as": "",
+  "disposition": "phone-booked",
+  "turns": 11,
+  "first_line": "Hello? Oh, hi dear. Yes, I'm calling about my granddaughter — her mother asked me to set something up. Her teeth are coming in all crowded.",
+  "scenario": "grandmother_books_granddaughter",
+  "events": [
+    {
+      "at": 0,
+      "kind": "call.started",
+      "turn": 0,
+      "data": {
+        "caller": "(352) ***-0125"
+      }
+    },
+    {
+      "at": 1.2,
+      "kind": "greeting",
+      "turn": 0,
+      "data": {
+        "name": ""
+      }
+    },
+    {
+      "at": 10.8,
+      "kind": "turn.caller",
+      "turn": 1,
+      "data": {
+        "text": "Hello? Oh, hi dear. Yes, I'm calling about my granddaughter — her mother asked me to set something up. Her teeth are coming in all crowded."
+      }
+    },
+    {
+      "at": 10.8,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "A first visit for your granddaughter — let's get her set up!"
+      }
+    },
+    {
+      "at": 10.8,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "What's her name?"
+      }
+    },
+    {
+      "at": 20.5,
+      "kind": "turn.caller",
+      "turn": 2,
+      "data": {
+        "text": "Her name is Amara. Amara Okafor."
+      }
+    },
+    {
+      "at": 20.5,
+      "kind": "turn.bot",
+      "turn": 2,
+      "data": {
+        "text": "So that's Amara Okafor — and what's her date of birth?"
+      }
+    },
+    {
+      "at": 31.7,
+      "kind": "turn.caller",
+      "turn": 3,
+      "data": {
+        "text": "Oh, goodness. She was born in 2017, in May... May the twentieth? Yes, May twentieth."
+      }
+    },
+    {
+      "at": 31.7,
+      "kind": "turn.bot",
+      "turn": 3,
+      "data": {
+        "text": "So that's May twentieth, twenty seventeen — is that right?"
+      }
+    },
+    {
+      "at": 39,
+      "kind": "turn.caller",
+      "turn": 4,
+      "data": {
+        "text": "Yes, that's right."
+      }
+    },
+    {
+      "at": 39,
+      "kind": "tool",
+      "turn": 4,
+      "data": {
+        "name": "lookup",
+        "ok": true,
+        "ms": 610,
+        "verified": false
+      }
+    },
+    {
+      "at": 39,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "I don't see Amara in our system yet — is this her first visit with us?"
+      }
+    },
+    {
+      "at": 50.2,
+      "kind": "turn.caller",
+      "turn": 5,
+      "data": {
+        "text": "Yes, first time. Nobody's looked at her for braces yet."
+      }
+    },
+    {
+      "at": 50.2,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "And do you have dental insurance for Amara — who's the provider?"
+      }
+    },
+    {
+      "at": 62.3,
+      "kind": "turn.caller",
+      "turn": 6,
+      "data": {
+        "text": "Oh, her mother has all that. I don't have the card with me. Is that all right?"
+      }
+    },
+    {
+      "at": 62.3,
+      "kind": "turn.bot",
+      "turn": 6,
+      "data": {
+        "text": "Totally fine, that can be sorted out at the visit!"
+      }
+    },
+    {
+      "at": 62.3,
+      "kind": "turn.bot",
+      "turn": 6,
+      "data": {
+        "text": "Is the number you're calling from, ending in zero, one, two, five, the best one to reach you?"
+      }
+    },
+    {
+      "at": 75.6,
+      "kind": "turn.caller",
+      "turn": 7,
+      "data": {
+        "text": "Yes, that's my house phone."
+      }
+    },
+    {
+      "at": 75.6,
+      "kind": "turn.bot",
+      "turn": 7,
+      "data": {
+        "text": "What days work best for Amara — mornings or afternoons — or should I just grab the soonest opening?"
+      }
+    },
+    {
+      "at": 90.1,
+      "kind": "turn.caller",
+      "turn": 8,
+      "data": {
+        "text": "Well, I have her on Fridays. Early is good, before her mother has to go in to work."
+      }
+    },
+    {
+      "at": 90.1,
+      "kind": "tool",
+      "turn": 8,
+      "data": {
+        "name": "context",
+        "ok": true,
+        "ms": 587,
+        "open_slots": 2
+      }
+    },
+    {
+      "at": 90.1,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "Let me check the schedule to see what times are available."
+      }
+    },
+    {
+      "at": 90.1,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "I have Friday the twenty-fourth at eight forty in the morning — want me to grab it?"
+      }
+    },
+    {
+      "at": 103.7,
+      "kind": "turn.caller",
+      "turn": 9,
+      "data": {
+        "text": "Friday at eight-forty. Yes, that's lovely."
+      }
+    },
+    {
+      "at": 103.7,
+      "kind": "tool",
+      "turn": 9,
+      "data": {
+        "name": "book",
+        "ok": true,
+        "ms": 412,
+        "slot": "Fri 8:40 AM",
+        "patient": "Amara Okafor",
+        "already_booked": false
+      }
+    },
+    {
+      "at": 103.7,
+      "kind": "booking",
+      "turn": 9,
+      "data": {
+        "name": "Amara Okafor",
+        "slot": "Fri 8:40 AM",
+        "reason": "crowding, teeth coming in crowded",
+        "insurance": "not provided"
+      }
+    },
+    {
+      "at": 103.7,
+      "kind": "turn.bot",
+      "turn": 9,
+      "data": {
+        "text": "Let me get that set up for you."
+      }
+    },
+    {
+      "at": 103.7,
+      "kind": "turn.bot",
+      "turn": 9,
+      "data": {
+        "text": "Perfect — Amara is booked for Friday the twenty-fourth at eight forty in the morning."
+      }
+    },
+    {
+      "at": 103.7,
+      "kind": "turn.bot",
+      "turn": 9,
+      "data": {
+        "text": "And let me make sure I have the name right: Amara, spelled A, M, A, R, A — then O, K, A, F, O, R — is that right?"
+      }
+    },
+    {
+      "at": 125.1,
+      "kind": "turn.caller",
+      "turn": 10,
+      "data": {
+        "text": "That's it exactly. You're very good at this."
+      }
+    },
+    {
+      "at": 125.1,
+      "kind": "turn.bot",
+      "turn": 10,
+      "data": {
+        "text": "Is there anything else I can help you with?"
+      }
+    },
+    {
+      "at": 133.3,
+      "kind": "turn.caller",
+      "turn": 11,
+      "data": {
+        "text": "No, no, that's everything. Thank you, sweetheart."
+      }
+    },
+    {
+      "at": 133.3,
+      "kind": "turn.bot",
+      "turn": 11,
+      "data": {
+        "text": "Perfect!"
+      }
+    },
+    {
+      "at": 133.3,
+      "kind": "turn.bot",
+      "turn": 11,
+      "data": {
+        "text": "The front desk will confirm with you."
+      }
+    },
+    {
+      "at": 133.3,
+      "kind": "turn.bot",
+      "turn": 11,
+      "data": {
+        "text": "Take care!"
+      }
+    },
+    {
+      "at": 139.3,
+      "kind": "call.ended",
+      "turn": 11,
+      "data": {
+        "duration_s": 139.3,
+        "disposition": "phone-booked",
+        "bookings": 1,
+        "notes": 0
+      }
+    }
+  ]
+}

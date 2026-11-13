@@ -1,0 +1,333 @@
+{
+  "id": "s04",
+  "day": 0,
+  "start": "08:15:00",
+  "duration_s": 102.5,
+  "caller": "(941) ***-0104",
+  "caller_full": "(941) 555-0104",
+  "language": "en",
+  "greeted_as": "",
+  "disposition": "phone-booked",
+  "turns": 10,
+  "first_line": "Hey, quick question — do you guys take Delta Dental?",
+  "scenario": "insurance_then_book_aligner_adult",
+  "events": [
+    {
+      "at": 0,
+      "kind": "call.started",
+      "turn": 0,
+      "data": {
+        "caller": "(941) ***-0104"
+      }
+    },
+    {
+      "at": 1.2,
+      "kind": "greeting",
+      "turn": 0,
+      "data": {
+        "name": ""
+      }
+    },
+    {
+      "at": 4,
+      "kind": "turn.caller",
+      "turn": 1,
+      "data": {
+        "text": "Hey, quick question — do you guys take Delta Dental?"
+      }
+    },
+    {
+      "at": 4,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "Yep, we do take Delta Dental!"
+      }
+    },
+    {
+      "at": 4,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "Is there anything else I can help you with?"
+      }
+    },
+    {
+      "at": 17.1,
+      "kind": "turn.caller",
+      "turn": 2,
+      "data": {
+        "text": "Okay, good. So, um, I've been thinking about doing clear aligners. Like for me, I'm an adult. Can I get a consult for that?"
+      }
+    },
+    {
+      "at": 17.1,
+      "kind": "turn.bot",
+      "turn": 2,
+      "data": {
+        "text": "Absolutely — let's get you in!"
+      }
+    },
+    {
+      "at": 17.1,
+      "kind": "turn.bot",
+      "turn": 2,
+      "data": {
+        "text": "What's your name?"
+      }
+    },
+    {
+      "at": 24.6,
+      "kind": "turn.caller",
+      "turn": 3,
+      "data": {
+        "text": "Jordan Whitaker."
+      }
+    },
+    {
+      "at": 24.6,
+      "kind": "turn.bot",
+      "turn": 3,
+      "data": {
+        "text": "So that's Jordan Whitaker — and what's your date of birth?"
+      }
+    },
+    {
+      "at": 32.2,
+      "kind": "turn.caller",
+      "turn": 4,
+      "data": {
+        "text": "November twentieth, 1991."
+      }
+    },
+    {
+      "at": 32.2,
+      "kind": "tool",
+      "turn": 4,
+      "data": {
+        "name": "lookup",
+        "ok": true,
+        "ms": 552,
+        "verified": false
+      }
+    },
+    {
+      "at": 32.2,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "I don't see Jordan in our system yet — is this your first visit with us?"
+      }
+    },
+    {
+      "at": 44.2,
+      "kind": "turn.caller",
+      "turn": 5,
+      "data": {
+        "text": "Yeah, first time. I had braces as a kid somewhere else, but my teeth kind of shifted back."
+      }
+    },
+    {
+      "at": 44.2,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "That happens a lot — the doctor will go over all your options at the consult."
+      }
+    },
+    {
+      "at": 44.2,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "Is the number you're calling from, ending in zero, one, zero, four, the best one to reach you?"
+      }
+    },
+    {
+      "at": 56.8,
+      "kind": "turn.caller",
+      "turn": 6,
+      "data": {
+        "text": "Yep, that's me."
+      }
+    },
+    {
+      "at": 56.8,
+      "kind": "turn.bot",
+      "turn": 6,
+      "data": {
+        "text": "What days work best for you — mornings or afternoons — or should I just grab the soonest opening?"
+      }
+    },
+    {
+      "at": 68.1,
+      "kind": "turn.caller",
+      "turn": 7,
+      "data": {
+        "text": "Early is better. Like before work, if you have anything really early."
+      }
+    },
+    {
+      "at": 68.1,
+      "kind": "tool",
+      "turn": 7,
+      "data": {
+        "name": "context",
+        "ok": true,
+        "ms": 618,
+        "open_slots": 2
+      }
+    },
+    {
+      "at": 68.1,
+      "kind": "turn.bot",
+      "turn": 7,
+      "data": {
+        "text": "Let me check the schedule to see what times are available."
+      }
+    },
+    {
+      "at": 68.1,
+      "kind": "turn.bot",
+      "turn": 7,
+      "data": {
+        "text": "I have Friday the twenty-fourth at eight twenty in the morning — want me to grab it?"
+      }
+    },
+    {
+      "at": 79.6,
+      "kind": "turn.caller",
+      "turn": 8,
+      "data": {
+        "text": "Eight twenty Friday, perfect."
+      }
+    },
+    {
+      "at": 79.6,
+      "kind": "tool",
+      "turn": 8,
+      "data": {
+        "name": "book",
+        "ok": true,
+        "ms": 379,
+        "slot": "Fri 8:20 AM",
+        "patient": "Jordan Whitaker",
+        "already_booked": false
+      }
+    },
+    {
+      "at": 79.6,
+      "kind": "booking",
+      "turn": 8,
+      "data": {
+        "name": "Jordan Whitaker",
+        "slot": "Fri 8:20 AM",
+        "reason": "adult clear aligner consultation - teeth shifted after childhood braces",
+        "insurance": "Delta Dental"
+      }
+    },
+    {
+      "at": 79.6,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "Let me get that set up for you."
+      }
+    },
+    {
+      "at": 79.6,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "Perfect — you're booked for Friday the twenty-fourth at eight twenty in the morning."
+      }
+    },
+    {
+      "at": 79.6,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "Want me to text you a confirmation at that number?"
+      }
+    },
+    {
+      "at": 91.6,
+      "kind": "turn.caller",
+      "turn": 9,
+      "data": {
+        "text": "Yeah, sure."
+      }
+    },
+    {
+      "at": 91.6,
+      "kind": "turn.bot",
+      "turn": 9,
+      "data": {
+        "text": "Done!"
+      }
+    },
+    {
+      "at": 91.6,
+      "kind": "turn.bot",
+      "turn": 9,
+      "data": {
+        "text": "Anything else I can do for you?"
+      }
+    },
+    {
+      "at": 99.1,
+      "kind": "turn.caller",
+      "turn": 10,
+      "data": {
+        "text": "Nope, that's it. Thanks!"
+      }
+    },
+    {
+      "at": 99.1,
+      "kind": "turn.bot",
+      "turn": 10,
+      "data": {
+        "text": "Perfect!"
+      }
+    },
+    {
+      "at": 99.1,
+      "kind": "turn.bot",
+      "turn": 10,
+      "data": {
+        "text": "The front desk will confirm with you. Take care!"
+      }
+    },
+    {
+      "at": 101.5,
+      "kind": "sms.out",
+      "turn": 10,
+      "data": {
+        "caller": "(941) ***-0104",
+        "kind": "confirmation",
+        "chars": 36
+      }
+    },
+    {
+      "at": 102,
+      "kind": "sms.in",
+      "turn": 10,
+      "data": {
+        "caller": "(941) ***-0104",
+        "kind": "yes",
+        "chars": 3
+      }
+    },
+    {
+      "at": 102.5,
+      "kind": "call.ended",
+      "turn": 10,
+      "data": {
+        "duration_s": 102.5,
+        "disposition": "phone-booked",
+        "bookings": 1,
+        "notes": 0
+      }
+    }
+  ]
+}

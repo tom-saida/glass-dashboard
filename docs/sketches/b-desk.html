@@ -1,0 +1,280 @@
+<!doctype html>
+<!-- Decision (2026-10-12, docs/DESIGN.md s.1): CHOSEN as the base. Bottom row changed to 7+5 columns, Overview callbacks capped at 5, Line tile filler facts dropped, chips made solid, Katie 96px. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sketch B - Desk</title>
+<link rel="stylesheet" href="../../node_modules/@vibe/core/dist/tokens/tokens.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* Sketch B "Desk": proportions follow what the 8 AM desk acts on. */
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    font-family: var(--font-family);
+    font-size: 14px; line-height: 20px;
+    color: var(--primary-text-color);
+    background: var(--allgrey-background-color);
+    -webkit-font-smoothing: antialiased;
+  }
+  .app { display: grid; grid-template-columns: 240px 1fr; min-height: 100vh; }
+
+  /* rail */
+  .rail { background: var(--primary-background-color); border-right: 1px solid var(--layout-border-color);
+          padding: var(--space-16) var(--space-12); position: sticky; top: 0; height: 100vh; }
+  .wordmark { font-size: 20px; line-height: 24px; font-weight: 600; padding: 0 var(--space-12);
+              height: 24px; margin: var(--space-4) 0 var(--space-24); }
+  .nav a { display: flex; align-items: center; justify-content: space-between; height: 36px;
+           padding: 0 var(--space-12); border-radius: var(--border-radius-small);
+           color: var(--primary-text-color); text-decoration: none; margin-bottom: var(--space-2); }
+  .nav a:hover { background: var(--primary-background-hover-color); }
+  .nav a.on { background: var(--primary-selected-color); font-weight: 500; }
+  .nav .count { font-size: 12px; color: var(--secondary-text-color); font-variant-numeric: tabular-nums; }
+  .rail .practice { position: absolute; left: var(--space-24); right: var(--space-24); bottom: var(--space-16);
+                    font-size: 12px; line-height: 16px; color: var(--secondary-text-color); }
+
+  /* top bar */
+  .top { height: 56px; display: flex; align-items: center; justify-content: space-between;
+         padding: 0 var(--space-32); background: var(--primary-background-color);
+         border-bottom: 1px solid var(--layout-border-color); position: sticky; top: 0; z-index: 2; }
+  .top h1 { font-size: 20px; line-height: 24px; font-weight: 600; margin: 0; }
+  .range { display: flex; border: 1px solid var(--ui-border-color); border-radius: var(--border-radius-small); overflow: hidden; }
+  .range button { font: inherit; font-size: 14px; border: 0; background: var(--primary-background-color);
+                  color: var(--primary-text-color); padding: 0 var(--space-12); height: 32px; cursor: pointer; }
+  .range button + button { border-left: 1px solid var(--ui-border-color); }
+  .range button.on { background: var(--primary-selected-color); }
+  .date { color: var(--secondary-text-color); margin-right: var(--space-12); font-size: 13px; }
+  .topright { display: flex; align-items: center; }
+
+  /* content: 32px between sections, all section gaps >= 24 so Katie fits above any card */
+  main { padding: var(--space-32); display: flex; flex-direction: column; gap: var(--space-32); }
+  .card { background: var(--primary-background-color); border: 1px solid var(--layout-border-color);
+          border-radius: var(--border-radius-medium); }
+  .card-h { display: flex; align-items: baseline; justify-content: space-between;
+            padding: var(--space-16) var(--space-20) 0; }
+  .card-h h2 { font-size: 16px; line-height: 22px; font-weight: 600; margin: 0; }
+  .card-h .aside { font-size: 13px; color: var(--secondary-text-color); }
+  .card-h a { font-size: 13px; color: var(--primary-color); text-decoration: none; }
+
+  /* row 1: Line wider, numbers in one shared card */
+  .row1 { display: grid; grid-template-columns: 5fr 7fr; gap: var(--space-24); }
+  .line { padding: var(--space-20); display: flex; flex-direction: column; justify-content: space-between; min-height: 148px; }
+  .line .state { display: flex; align-items: center; gap: var(--space-8); font-size: 20px; line-height: 24px; font-weight: 600; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--positive-color); flex: none; }
+  .line .meta { color: var(--secondary-text-color); margin-top: var(--space-4); }
+  .line .facts { display: flex; gap: var(--space-24); font-size: 13px; color: var(--secondary-text-color); margin-top: var(--space-16); white-space: nowrap; }
+  .line .facts b { display: block; font-weight: 500; font-size: 14px; color: var(--primary-text-color); font-variant-numeric: tabular-nums; }
+
+  .kpis { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .kpi { padding: var(--space-20) var(--space-16) var(--space-20) var(--space-20); white-space: nowrap; min-width: 0; }
+  .kpi + .kpi { border-left: 1px solid var(--layout-border-color); }
+  .kpi .label { font-size: 13px; color: var(--secondary-text-color); }
+  .kpi .num { font-size: 32px; line-height: 40px; font-weight: 600; font-variant-numeric: tabular-nums;
+              margin: var(--space-8) 0 var(--space-4); }
+  .kpi .sub { font-size: 13px; color: var(--secondary-text-color); font-variant-numeric: tabular-nums; }
+  .kpi .sub .neg { color: var(--negative-color); font-weight: 500; }
+
+  /* row 2: calls by hour, short */
+  .hours svg { display: block; width: 100%; height: 112px; }
+  .hours .legend { display: flex; gap: var(--space-16); font-size: 12px; color: var(--secondary-text-color); align-items: center; }
+  .sw { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: var(--space-4); vertical-align: -1px; }
+  .sw.f { background: var(--primary-color); }
+  .sw.o { border: 1.5px solid var(--primary-color); }
+
+  /* row 3: latest calls 1:1 callbacks */
+  .row3 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-24); align-items: start; }
+  table { width: 100%; border-collapse: collapse; margin-top: var(--space-8); table-layout: fixed; }
+  th { text-align: left; font-weight: 400; font-size: 12px; color: var(--secondary-text-color);
+       padding: var(--space-8) var(--space-8); border-bottom: 1px solid var(--layout-border-color); }
+  td { padding: 0 var(--space-8); height: 44px; border-bottom: 1px solid var(--layout-border-color);
+       white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  tr:last-child td { border-bottom: 0; }
+  th:first-child, td:first-child { padding-left: var(--space-20); }
+  th:last-child, td:last-child { padding-right: var(--space-20); }
+  .num-c { text-align: right; font-variant-numeric: tabular-nums; }
+  .t { font-variant-numeric: tabular-nums; color: var(--secondary-text-color); }
+  .fl { color: var(--secondary-text-color); }
+  tbody tr { cursor: pointer; }
+  tbody tr:hover td { background: var(--primary-background-hover-color); }
+
+  .chip { display: inline-block; font-size: 12px; line-height: 20px; padding: 0 var(--space-8);
+          border-radius: var(--border-radius-small); font-weight: 500; }
+  .chip.booked { background: var(--positive-color-selected); color: var(--positive-color-hover); }
+  .chip.none   { background: var(--ui-background-color); color: var(--primary-text-color); }
+  .chip.urgent { background: var(--negative-color-selected); color: var(--negative-color-hover); }
+  .chip.cb     { background: var(--primary-selected-color); color: var(--primary-color); }
+
+  .cbl { list-style: none; margin: var(--space-8) 0 0; padding: 0; }
+  .cbl li { padding: var(--space-12) var(--space-20); border-top: 1px solid var(--layout-border-color);
+            display: grid; grid-template-columns: 1fr auto; column-gap: var(--space-16); row-gap: var(--space-4); cursor: pointer; }
+  .cbl li:hover { background: var(--primary-background-hover-color); }
+  .cbl .who { font-weight: 500; display: flex; gap: var(--space-8); align-items: center; }
+  .cbl .who .ph { font-weight: 400; color: var(--secondary-text-color); font-variant-numeric: tabular-nums; }
+  .cbl .when { font-size: 13px; color: var(--secondary-text-color); font-variant-numeric: tabular-nums; text-align: right; }
+  .cbl .why { grid-column: 1 / -1; color: var(--primary-text-color); max-width: 72ch;
+              display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+  /* Katie stand-ins: 128px total, upper body (the PNG) ~50px, legs sketched as an outline */
+  .katie { position: fixed; width: 52px; height: 128px; pointer-events: none; z-index: 10; }
+  .katie img { display: block; width: 52px; height: 54px; object-fit: contain; object-position: bottom; }
+  .katie .legs { width: 30px; height: 74px; margin: 0 auto; border: 1px dashed var(--ui-border-color);
+                 border-top: 0; border-radius: 0 0 var(--border-radius-small) var(--border-radius-small);
+                 background: var(--primary-selected-color); }
+  .katie.home { right: var(--space-32); bottom: 0; }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="rail">
+    <div class="wordmark">Katie</div>
+    <nav class="nav">
+      <a class="on" href="#">Overview</a>
+      <a href="#">Calls <span class="count">8</span></a>
+      <a href="#">Bookings <span class="count">7</span></a>
+      <a href="#">Callbacks <span class="count">7</span></a>
+      <a href="#">Texts</a>
+      <a href="#">Settings</a>
+    </nav>
+    <div class="practice">Harborline Orthodontics<br>Demo practice</div>
+  </aside>
+
+  <div>
+    <header class="top">
+      <h1>Overview</h1>
+      <div class="topright">
+        <span class="date">Mon, Oct 12</span>
+        <div class="range"><button class="on">Today</button><button>7 days</button><button>30 days</button></div>
+      </div>
+    </header>
+
+    <main>
+      <section class="row1">
+        <div class="card line" id="line">
+          <div>
+            <div class="card-h" style="padding:0"><h2>Line</h2></div>
+            <div class="state" style="margin-top:var(--space-12)"><span class="dot"></span>Open, no one on the line</div>
+            <div class="meta">Last call ended at 5:36 PM, 29 minutes ago</div>
+          </div>
+          <div class="facts">
+            <div><b>8</b>answered</div>
+            <div><b>2:03</b>average call</div>
+            <div><b>English</b>all calls</div>
+          </div>
+        </div>
+
+        <div class="card kpis" id="kpis">
+          <div class="kpi"><div class="label">Calls</div><div class="num">8</div><div class="sub">since 2:40 PM</div></div>
+          <div class="kpi"><div class="label">Booked</div><div class="num">6</div><div class="sub">7 appointments</div></div>
+          <div class="kpi"><div class="label">Callbacks</div><div class="num">7</div><div class="sub"><span class="neg">3 urgent</span> waiting</div></div>
+          <div class="kpi"><div class="label">Texts sent</div><div class="num">6</div><div class="sub">4 replies in</div></div>
+        </div>
+      </section>
+
+      <section class="card hours" id="hours">
+        <div class="card-h">
+          <h2>Calls by hour</h2>
+          <div class="legend"><span><span class="sw f"></span>Booked</span><span><span class="sw o"></span>Not booked</span></div>
+        </div>
+        <div style="padding: var(--space-8) var(--space-20) var(--space-12)">
+          <svg id="chart" aria-label="Calls by hour today"></svg>
+        </div>
+      </section>
+
+      <section class="row3">
+        <div class="card" id="calls">
+          <div class="card-h"><h2>Latest calls</h2><a href="#">All calls</a></div>
+          <table>
+            <colgroup><col style="width:84px"><col style="width:124px"><col><col style="width:96px"><col style="width:72px"></colgroup>
+            <thead><tr><th>Time</th><th>Caller</th><th>First line</th><th>Outcome</th><th class="num-c">Length</th></tr></thead>
+            <tbody id="callrows"></tbody>
+          </table>
+        </div>
+        <div class="card" id="callbacks">
+          <div class="card-h"><h2>Callbacks waiting</h2><span class="aside">Urgent first</span></div>
+          <ul class="cbl" id="cbrows"></ul>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<!-- Katie stand-ins (cutout = upper body; dashed block = where the drawn legs will go) -->
+<div class="katie home" aria-hidden="true"><img src="../../brief/assets/katie/katie-cutout.png" alt=""><div class="legs"></div></div>
+<div class="katie" id="katie2" aria-hidden="true"><img src="../../brief/assets/katie/katie-cutout.png" alt=""><div class="legs"></div></div>
+
+<script>
+const TZ = 'America/New_York';
+const fmt = ts => new Date(ts * 1000).toLocaleTimeString('en-US', { timeZone: TZ, hour: 'numeric', minute: '2-digit' });
+const dur = s => { s = Math.round(s); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
+const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+// calls.json (summary omitted on purpose: test junk, never shown)
+const calls = [
+  { started_at: 1791840925.139, duration_s: 54.5, caller: '(656) ***-0150', disposition: 'phone-no-booking', first_line: "Hi, um, my daughter has a bracket that came off this morning and I'm looking to get her in as soon as possible." },
+  { started_at: 1791839604.139, duration_s: 142.4, caller: '(813) ***-0173', disposition: 'phone-booked', first_line: 'Um yeah, do you take Edna?' },
+  { started_at: 1791838190.139, duration_s: 134.6, caller: '(727) ***-0131', disposition: 'phone-booked', first_line: "Hi, yes, I'd like to schedule a first appointment for my granddaughter Luna." },
+  { started_at: 1791836144.139, duration_s: 162.8, caller: '(813) ***-0199', disposition: 'phone-booked', first_line: "So my dentist had mentioned I should get my teeth looked at, but actually I'm calling for my friend Matteo. He needs a consult." },
+  { started_at: 1791835114.139, duration_s: 107.8, caller: '(656) ***-0127', disposition: 'phone-booked', first_line: "Yeah. Hi, I'd like to schedule a first consultation appointment, please." },
+  { started_at: 1791833652.139, duration_s: 130.4, caller: '(813) ***-0162', disposition: 'phone-booked', first_line: "Hi, um, my daughter Marcus has a bracket that came off this morning and we'd like to get her in as soon as possible." },
+  { started_at: 1791831692.139, duration_s: 146.9, caller: '(727) ***-0188', disposition: 'phone-no-booking', first_line: "My daughter's bracket came off. How much does an emergency visit cost?" },
+  { started_at: 1791830409.139, duration_s: 104.5, caller: '(813) ***-0144', disposition: 'phone-booked', first_line: "Hi, yeah I'd like to schedule a the first appointment, like a consultation, please." },
+];
+const chip = d => ({ 'phone-booked': '<span class="chip booked">Booked</span>', 'phone-no-booking': '<span class="chip none">No booking</span>',
+                     'live': '<span class="chip cb">Live</span>', 'unknown-crash': '<span class="chip none">Dropped</span>' }[d]);
+document.getElementById('callrows').innerHTML = calls.map(c =>
+  `<tr><td class="t">${fmt(c.started_at)}</td><td>${c.caller}</td><td class="fl" title="${esc(c.first_line)}">${esc(c.first_line)}</td><td>${chip(c.disposition)}</td><td class="num-c t">${dur(c.duration_s)}</td></tr>`).join('');
+
+// notes.json, cleaned for the desk: strip [system annotations] and the URGENT: prefix (urgent is the chip)
+const notes = [
+  { ts: 1791840971.340, caller: '(656) ***-0150', name: 'unknown (name to follow if given)', urgent: false, reason: 'Existing patient Marcus Webb, DOB on file: reschedule of existing appointment — no open slots in the next 7 days, call back with times [has existing appt Wed 3:20 PM] [about patient Marcus Webb]' },
+  { ts: 1791840948.871, caller: '(656) ***-0150', name: 'unknown (booking to follow on this call)', urgent: true, reason: "URGENT: Daughter's bracket came off this morning, needs to be seen as soon as possible. [NOT an emergency - caller is booking the soonest visit on this call; note is informational]" },
+  { ts: 1791839727.289, caller: '(813) ***-0173', name: 'Max Delgado', urgent: false, reason: "NAME CORRECTION on a booking made this call (Mon 3:20 PM): booked as 'Max De Lagado', now 'Max Delgado'. Please update the chart." },
+  { ts: 1791833674.224, caller: '(813) ***-0162', name: 'unknown (booking to follow on this call)', urgent: true, reason: "URGENT: Daughter's bracket came off this morning and they need to be seen as soon as possible. [NOT an emergency - caller is booking the soonest visit on this call; note is informational]" },
+  { ts: 1791831833.374, caller: '(727) ***-0188', name: 'unknown (name to follow if given)', urgent: false, reason: "Verified caller (Danny Whitlock's father) wants to reschedule Tommy's Tuesday October 13th at 4:00 PM appointment to Monday October 12th at 3:20 PM for a bracket repair visit. System was unable to complete the reschedule — please call back the number on file ending in 1006 to confirm. [PRE-FILED before name — caller reachable on caller ID]" },
+  { ts: 1791831720.096, caller: '(727) ***-0188', name: 'unknown (booking to follow on this call)', urgent: true, reason: "URGENT: Daughter's bracket came off. [NOT an emergency - caller is booking the soonest visit on this call; note is informational]" },
+  { ts: 1791830504.641, caller: '(813) ***-0144', name: 'Eli Morgan', urgent: false, reason: 'Caller wants to speak directly with Dr. Reyes. [ASKED FOR A PERSON]' },
+];
+const clean = r => r.replace(/\s*\[[^\]]*\]/g, '').replace(/^URGENT:\s*/i, '').trim();
+const sorted = [...notes].sort((a, b) => (b.urgent - a.urgent) || (b.ts - a.ts));
+document.getElementById('cbrows').innerHTML = sorted.map(n => {
+  const named = !/^unknown/i.test(n.name);
+  const who = named ? `${esc(n.name)} <span class="ph">${n.caller}</span>` : `<span>${n.caller}</span>`;
+  return `<li><div class="who">${who}${n.urgent ? '<span class="chip urgent">Urgent</span>' : ''}</div><div class="when">${fmt(n.ts)}</div><div class="why">${esc(clean(n.reason))}</div></li>`;
+}).join('');
+
+// stats.json by_hour -> SVG bars: booked part filled, the rest outlined
+const byHour = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,3,2,2,0,0,0,0,0,0].map((c, h) => ({ hour: h, calls: c, booked: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,2,1,0,0,0,0,0,0][h] }));
+(function chart() {
+  const svgEl = document.getElementById('chart'); const W = svgEl.clientWidth; svgEl.setAttribute('viewBox', `0 0 ${W} 112`);
+  const H = 112, axis = 18, top = 16, plotH = H - axis - top, slot = W / 24, bw = slot * 0.56, max = 3;
+  const per = plotH / max, css = n => `var(${n})`;
+  let s = '';
+  for (let v = 1; v <= max; v++) { const y = top + plotH - v * per;
+    s += `<line x1="0" x2="${W}" y1="${y}" y2="${y}" stroke="${css('--layout-border-color')}" stroke-dasharray="2 4"/>`; }
+  s += `<line x1="0" x2="${W}" y1="${top + plotH}" y2="${top + plotH}" stroke="${css('--ui-border-color')}"/>`;
+  byHour.forEach(d => {
+    const x = d.hour * slot + (slot - bw) / 2, base = top + plotH;
+    if (d.calls) {
+      const nb = d.calls - d.booked;
+      if (d.booked) s += `<rect x="${x}" y="${base - d.booked * per}" width="${bw}" height="${d.booked * per}" rx="2" fill="${css('--primary-color')}"/>`;
+      if (nb) s += `<rect x="${x + 0.75}" y="${base - d.calls * per + 0.75}" width="${bw - 1.5}" height="${nb * per - 2.5}" rx="2" fill="none" stroke="${css('--primary-color')}" stroke-width="1.5"/>`;
+      s += `<text x="${x + bw / 2}" y="${base - d.calls * per - 4}" text-anchor="middle" font-size="12" fill="${css('--primary-text-color')}">${d.calls}</text>`;
+    }
+    if (d.hour % 3 === 0) { const h12 = d.hour % 12 || 12, ap = d.hour < 12 ? 'a' : 'p';
+      s += `<text x="${d.hour * slot + slot / 2}" y="${H - 2}" text-anchor="middle" font-size="12" fill="${css('--secondary-text-color')}">${h12}${ap}</text>`; }
+  });
+  document.getElementById('chart').innerHTML = s;
+})();
+
+// second Katie: feet on the top edge of the Calls-by-hour card, at its right end
+function place() {
+  const r = document.getElementById('hours').getBoundingClientRect(), k = document.getElementById('katie2');
+  k.style.left = (r.right - 52 - 24) + 'px';
+  k.style.top = (r.top - 128) + 'px';
+}
+place(); addEventListener('resize', place); addEventListener('scroll', place);
+</script>
+</body>
+</html>

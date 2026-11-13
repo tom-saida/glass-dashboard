@@ -1,0 +1,117 @@
+{
+  "about": "Katie rig geometry. Units are source pixels of brief/assets/katie (652x673). The rig is one SVG, viewBox 0 0 652 1544, y down, raster layers placed at native size at the positions in src/katie/assets/manifest.ts, feet on y = 1544. 'sL' / 'sR' are SCREEN left / right: sL is Katie's own right side. Measured values come from the cutout's stored bytes; values marked proposed are design decisions, not measurements.",
+  "viewBox": [0, 0, 652, 1544],
+  "ground": 1544,
+  "head": { "crown": 22, "chin": 326, "H": 304, "heads": 5.0 },
+  "stroke": {
+    "ink": "#1b1b1e",
+    "silhouette": 4.5,
+    "interior": 3,
+    "fineSeam": 2,
+    "linecap": "round",
+    "linejoin": "round"
+  },
+  "palette": {
+    "outline": "#1b1b1e",
+    "scrubLit": "#668bc1",
+    "scrubShade": "#46699d",
+    "scrubHighlight": "#8db3dc",
+    "scrubSeamLine": "#1b1b1e",
+    "skinLit": "#fbaf85",
+    "skinShade": "#d78064",
+    "skinBlush": "#f39b7b",
+    "skinThroughLens": "#f5c8b3",
+    "hairLit": "#e1b068",
+    "hairHighlight": "#f9cf83",
+    "hairShade": "#b27c43",
+    "hairDeepShade": "#906b43",
+    "brow": "#5f311f",
+    "glassesFrame": "#2d2b2b",
+    "glassesFrameHighlight": "#4f4e51",
+    "eyeWhite": "#fefefd",
+    "upperLash": "#4e4f54",
+    "iris": "#b28d6f",
+    "pupil": "#5b5c5f",
+    "lipUpper": "#ea6b5e",
+    "lipLower": "#ec7060",
+    "lipHighlight": "#fba287",
+    "teeth": "#fdfdfd",
+    "proposedShoeUpper": "#fdfdfd",
+    "proposedShoeShade": "#d9dee6",
+    "proposedShoeSole": "#eef0f4"
+  },
+  "landmarks": {
+    "hairTop": [376, 8],
+    "crown": [311, 22],
+    "hairline": [322, 99],
+    "chin": [322, 326],
+    "eyeCenter": { "sL": [267, 200], "sR": [360, 199] },
+    "eyeBox": { "sL": [232, 180, 292, 213], "sR": [335, 180, 396, 213] },
+    "lensGlass": { "sL": [231, 173, 295, 229], "sR": [335, 174, 405, 229] },
+    "lensRingOuter": { "sL": [222, 168, 300, 234], "sR": [330, 168, 412, 234] },
+    "bridge": [295, 181, 330, 190],
+    "brow": { "sL": [231, 155, 292, 170], "sR": [332, 155, 396, 169] },
+    "noseTip": [312, 240],
+    "mouth": [270, 256, 355, 290],
+    "ear": { "sL": [201, 182, 228, 245], "sR": [405, 180, 431, 244] },
+    "earCenter": { "sL": [214, 213], "sR": [418, 212] },
+    "neck": { "y": 335, "outlineX": [276, 369], "skinX": [281, 365], "centerX": 322.5, "baseY": 345 },
+    "headTorsoSeam": { "neckCutY": 352, "neckCutX": [262, 388], "elsewhere": "top edge of the scrub shoulder outline" },
+    "collarOuterV": [[243, 362], [288, 506], [408, 362]],
+    "collarInnerV": [[266, 355], [290, 462], [368, 352]],
+    "shoulderPoint": { "sL": [156, 389], "sR": [498, 388] },
+    "armpitY": 600,
+    "armpit": { "sL": [171, 600], "sR": [452, 603] },
+    "sleeveHemFold": { "sL": [[98, 546], [168, 583]], "sR": [[553, 546], [463, 585]] },
+    "sleeveHemEdge": { "sL": [[88, 558], [171, 600]], "sR": [[567, 558], [452, 603]] },
+    "pocket": [330, 509, 432, 619],
+    "pocketFlapY": 530,
+    "torsoEdgeAtArmpit": { "y": 600, "sL": 171, "sR": 450 },
+    "torsoEdgeAtRasterBottom": { "y": 670, "sL": 182, "sR": 437 },
+    "rasterBottom": 670
+  },
+  "joints": {
+    "neck": [322, 352],
+    "shoulder": { "sL": [170, 440], "sR": [482, 440] },
+    "elbow": { "sL": [143, 655], "sR": [506, 655] },
+    "wrist": { "sL": [150, 845], "sR": [500, 845] },
+    "hipLineY": 800,
+    "hip": { "sL": [250, 800], "sR": [370, 800] },
+    "knee": { "sL": [250, 1150], "sR": [370, 1150] },
+    "ankle": { "sL": [250, 1478], "sR": [370, 1478] }
+  },
+  "limbs": {
+    "upperArm": { "length": 216, "widthAtSleeveHem": { "sL": 58, "sR": 66 }, "widthAtElbow": { "sL": 52, "sR": 58 } },
+    "forearm": { "length": 190, "widthAtElbow": { "sL": 52, "sR": 56 }, "widthAtWrist": { "sL": 40, "sR": 44 } },
+    "hand": { "length": 110, "width": { "sL": 46, "sR": 50 } },
+    "sleeve": { "lengthShoulderPointToHemCentre": 194, "hemOpening": { "sL": 93, "sR": 118 }, "hemBand": 18 },
+    "lowerTop": { "proposed": true, "from": 640, "hemY": 772, "hemCentreY": 776, "hemBand": 18, "sides": { "sL": [[182, 670], [178, 772]], "sR": [[437, 670], [442, 772]] } },
+    "pelvis": { "proposed": true, "top": 740, "crotchY": 842, "width": 262 },
+    "thigh": { "length": 350, "widthAtHip": 124, "widthAtKnee": 100 },
+    "shin": { "length": 328, "widthAtKnee": 96, "widthAtHem": 92, "pantsHemY": 1470 },
+    "shoe": { "ankleToGround": 66, "profileLength": 156, "heelBehindAnkle": 40, "toeAheadOfAnkle": 116, "height": 72, "sole": 16, "frontWidth": 92 }
+  },
+  "traces": {
+    "torsoSide": {
+      "sL": [[154,390],[158,400],[158,410],[158,420],[159,430],[160,440],[161,450],[163,460],[165,470],[166,480],[168,490],[166,500],[163,510],[162,520],[160,530],[160,540],[160,550],[161,560],[163,570],[165,580],[169,590],[171,600],[175,610],[177,620],[177,630],[180,640],[181,650],[181,660],[182,670]],
+      "sR": [[501,390],[486,400],[481,410],[475,420],[470,430],[467,440],[465,450],[461,460],[457,470],[455,480],[454,490],[452,500],[451,510],[451,520],[450,530],[450,540],[451,550],[452,560],[454,570],[454,580],[452,590],[450,600],[448,610],[445,620],[443,630],[441,640],[439,650],[437,660],[437,670]]
+    },
+    "sleeve": {
+      "sL": {
+        "outline": [[156,389],[147,400],[137,420],[130,440],[124,460],[117,480],[110,500],[102,520],[94,540],[89,552],[88,558],[96,567],[100,570],[110,576],[120,584],[130,588],[140,592],[150,596],[160,599],[171,600],[169,590],[165,580],[163,570],[161,560],[160,540],[162,520],[166,500],[168,490],[166,480],[163,460],[160,440],[158,420],[158,400]],
+        "hemFold": [[98,546],[110,554],[120,561],[130,567],[140,572],[150,576],[160,580],[168,583]]
+      },
+      "sR": {
+        "outline": [[498,388],[509,400],[518,420],[525,440],[532,460],[538,480],[545,500],[553,520],[561,540],[566,552],[567,558],[562,566],[550,573],[540,578],[530,583],[520,588],[510,592],[500,596],[490,599],[480,601],[470,603],[452,603],[452,590],[454,580],[454,570],[452,560],[450,540],[451,520],[452,500],[455,480],[461,460],[467,440],[475,420],[486,400]],
+        "hemFold": [[553,546],[540,555],[530,561],[520,566],[510,571],[500,575],[490,579],[480,581],[470,584],[463,585]]
+      }
+    }
+  },
+  "poses": {
+    "note": "Degrees, SVG sense (positive = clockwise on screen), each relative to its parent. Facing right; scaleX(-1) on the whole rig for left.",
+    "rest": {},
+    "walkContact": { "hip.sL": -25, "knee.sL": 0, "hip.sR": 25, "knee.sR": 20, "shoulder.sL": 15, "shoulder.sR": -15, "elbow.sL": -10, "elbow.sR": -10 },
+    "listen": { "shoulder.sR": -120, "elbow.sR": -128 },
+    "rest.blinkLid": "fill the eyeBox with skinThroughLens, lash line ink 4 px along the lower third"
+  }
+}

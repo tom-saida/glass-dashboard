@@ -1,0 +1,361 @@
+/* The sign-in screens (docs/sketches/signin-2026-11-04/mock.html is the look): the room behind,
+   one glass pane in the middle, Katie's head, a 28 px title, white fields, a blue pill button.
+   Every colour, radius and shadow is a token from styles/glass.css, so the screens follow the
+   stored look (Daylight, Frost, Dusk, Original) like the rest of the app. */
+
+.stage {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+  padding: var(--space-24) var(--space-16);
+  box-sizing: border-box;
+}
+
+.pane {
+  position: relative;
+  width: 440px;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 40px 40px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: auto;
+  border-radius: var(--radius-slab);
+  background: var(--glass-slab);
+  /* inline on the element too: WebKit does not resolve var() inside backdrop-filter */
+  border: 1px solid var(--glass-edge);
+  box-shadow:
+    var(--glass-shadow-card),
+    var(--glass-highlight),
+    inset 18px 18px 40px -20px rgba(255, 255, 255, 0.9);
+}
+
+.avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.avatar img {
+  display: block;
+  width: 60px;
+  height: 60px;
+}
+
+.title {
+  margin: 16px 0 4px;
+  font-size: 28px;
+  line-height: 34px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--primary-text-color);
+}
+
+.sub {
+  margin: 0 0 24px;
+  font-size: 15px;
+  line-height: 22px;
+  color: var(--secondary-text-color);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  margin: 0;
+}
+
+.field {
+  text-align: left;
+  margin-bottom: 14px;
+}
+
+.label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 600;
+  color: var(--secondary-text-color);
+}
+
+.input {
+  display: block;
+  width: 100%;
+  height: 44px;
+  box-sizing: border-box;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--glass-strong);
+  box-shadow: inset 0 0 0 1px var(--glass-rule-strong);
+  font: inherit;
+  font-size: 15px;
+  color: var(--primary-text-color);
+}
+
+.input::placeholder {
+  color: var(--secondary-text-color);
+  opacity: 0.8;
+}
+
+.input:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.button {
+  appearance: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 46px;
+  margin: 8px 0 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--primary-color);
+  color: #fff;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: var(--nav-pill-shadow);
+}
+
+.button:hover:not(:disabled) {
+  background: var(--primary-hover-color);
+}
+
+.button:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring), var(--nav-pill-shadow);
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.link {
+  appearance: none;
+  margin: 16px 0 0;
+  padding: 0 var(--space-4);
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: var(--primary-color);
+  cursor: pointer;
+  border-radius: var(--border-radius-small);
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.link:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.error {
+  margin: 0 0 12px;
+  text-align: left;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: var(--negative-color);
+}
+
+.notice {
+  margin: 0 0 14px;
+  text-align: left;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--primary-text-color);
+}
+
+.foot {
+  margin: 24px 0 0;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--secondary-text-color);
+}
+
+.body {
+  margin: 0 0 14px;
+  text-align: left;
+  font-size: 14px;
+  line-height: 21px;
+  color: var(--primary-text-color);
+}
+
+.hint {
+  margin: -6px 0 14px;
+  text-align: left;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--secondary-text-color);
+}
+
+/* six boxes */
+.code {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 4px 0 18px;
+}
+
+.digit {
+  width: 48px;
+  height: 56px;
+  box-sizing: border-box;
+  padding: 0;
+  border: 0;
+  border-radius: 12px;
+  background: var(--glass-strong);
+  box-shadow: inset 0 0 0 1px var(--glass-rule-strong);
+  font: inherit;
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+  color: var(--primary-text-color);
+  font-variant-numeric: tabular-nums;
+}
+
+.digit:focus {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--primary-color);
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 12px;
+  text-align: left;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--primary-text-color);
+  cursor: pointer;
+}
+
+.check input {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--primary-color);
+  flex: none;
+}
+
+/* the choose-a-code buttons */
+.choices {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 4px;
+}
+
+.choice {
+  appearance: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 16px;
+  border: 0;
+  border-radius: 14px;
+  background: var(--glass-strong);
+  box-shadow: inset 0 0 0 1px var(--glass-rule-strong);
+  font: inherit;
+  text-align: left;
+  color: var(--primary-text-color);
+  cursor: pointer;
+}
+
+.choice:hover:not(:disabled) {
+  box-shadow: inset 0 0 0 2px var(--primary-color);
+}
+
+.choice:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.choiceTitle {
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: 600;
+}
+
+.choiceText {
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--secondary-text-color);
+}
+
+/* QR + secret */
+.qr {
+  display: block;
+  width: 176px;
+  height: 176px;
+  margin: 0 auto 12px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: inset 0 0 0 1px var(--glass-rule-strong);
+}
+
+.secretRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-8);
+  margin: 0 0 16px;
+}
+
+.secret {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 13px;
+  line-height: 18px;
+  letter-spacing: 0.06em;
+  color: var(--primary-text-color);
+  user-select: all;
+  word-break: break-all;
+}
+
+.small {
+  appearance: none;
+  height: 28px;
+  padding: 0 var(--space-12);
+  border: 1px solid var(--glass-edge);
+  border-radius: var(--radius-pill);
+  background: var(--glass-card);
+  box-shadow: var(--glass-highlight);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary-text-color);
+  cursor: pointer;
+}
+
+.small:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}

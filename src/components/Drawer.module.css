@@ -1,0 +1,85 @@
+/* DESIGN 6.8 + DESIGN-GLASS 3.6: 560 wide, no backdrop, slides 250ms in / 200ms out. It floats
+   inside the slab: 12 px from the slab's top, right and bottom edges, radius 20, strong glass.
+   Hidden = its own width plus the inset and its shadow past the right edge. */
+.drawer {
+  --drawer-hidden: translateX(calc(100% + var(--float-inset) + 72px));
+  /* hover fills on the near-white surface (the close button, the Outcome lines) */
+  --primary-background-hover-color: var(--glass-hover-on-strong);
+  position: fixed;
+  top: var(--float-inset-y);
+  right: var(--float-inset);
+  bottom: var(--float-inset-y);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  width: var(--drawer-width);
+  max-width: calc(100vw - 2 * var(--float-inset));
+  box-sizing: border-box;
+  overflow: hidden;
+  background: var(--glass-strong);
+  -webkit-backdrop-filter: blur(28px);
+  backdrop-filter: blur(28px);
+  border: 1px solid var(--glass-edge);
+  border-radius: 20px;
+  box-shadow: var(--glass-shadow-float), var(--glass-highlight);
+  transform: var(--drawer-hidden);
+  will-change: transform;
+}
+
+.drawer:focus {
+  outline: none;
+}
+
+.enter {
+  transform: var(--drawer-hidden);
+}
+
+.open {
+  transform: translateX(0);
+  transition: transform var(--motion-expressive-short) var(--motion-timing-enter);
+}
+
+.exit {
+  transform: var(--drawer-hidden);
+  transition: transform 200ms var(--motion-timing-exit);
+}
+
+.close {
+  position: absolute;
+  top: var(--space-16);
+  right: var(--space-16);
+  z-index: 1;
+}
+
+/* Line 1 of the drawer header: caller 20/28 600 (DESIGN 6.8). */
+.heading {
+  display: inline-block;
+  max-width: calc(100% - var(--space-48));
+  margin: 0;
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 600;
+  color: var(--primary-text-color);
+}
+
+/* The heading is a programmatic focus target (focus moves here on open so a screen reader reads the
+   caller), not a control: no ring, even when the browser treats the move as :focus-visible. A ring
+   around the patient's name showed on every drawer open on a screen share (fix D4, 2026-10-21). */
+.heading:focus,
+.heading:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drawer,
+  .enter,
+  .open,
+  .exit {
+    transition: none;
+  }
+  .enter,
+  .exit {
+    transform: translateX(0);
+  }
+}

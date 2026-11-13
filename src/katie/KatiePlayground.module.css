@@ -1,0 +1,169 @@
+/* Rig playground. Every colour, radius and space is a Vibe token. */
+.page {
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: var(--space-24) var(--space-32);
+  background: var(--allgrey-background-color);
+  color: var(--primary-text-color);
+  font-family: var(--font-family);
+}
+
+.header {
+  margin-bottom: var(--space-16);
+}
+
+.title {
+  margin: 0 0 var(--space-4);
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 600;
+}
+
+.note {
+  margin: 0;
+  max-width: 72ch;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--secondary-text-color);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: var(--space-24);
+  align-items: start;
+}
+
+.stage {
+  min-width: 0;
+}
+
+.figures {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-48);
+  padding: var(--space-24) var(--space-32) 0;
+  border-bottom: 1px solid var(--ui-border-color);
+}
+
+.figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.big {
+  position: relative;
+  /* room for arms that reach past the viewBox (a raised or extended arm, the walk) */
+  padding: 0 calc(3 * var(--space-64));
+}
+
+.small {
+  padding: 0 var(--space-48);
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: calc(3 * var(--space-64));
+  opacity: 0.5;
+  transform-origin: 0 0;
+  pointer-events: none;
+}
+
+.caption {
+  margin: var(--space-8) 0;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--secondary-text-color);
+}
+
+.poseText {
+  display: block;
+  margin-top: var(--space-12);
+  max-width: 72ch;
+  font-family: var(--font-family);
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--secondary-text-color);
+  font-variant-numeric: tabular-nums;
+}
+
+.panel {
+  max-height: calc(100vh - 96px);
+  overflow-y: auto;
+  box-sizing: border-box;
+  padding: var(--space-8) var(--space-20) var(--space-20);
+  background: var(--primary-background-color);
+  border: 1px solid var(--ui-border-color);
+  border-radius: var(--border-radius-medium);
+}
+
+.section {
+  padding: var(--space-12) 0;
+  border-bottom: 1px solid var(--layout-border-color);
+}
+
+.section:last-child {
+  border-bottom: 0;
+}
+
+.sectionTitle {
+  margin: 0 0 var(--space-8);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8);
+}
+
+.states {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8);
+  min-height: var(--space-32);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-12);
+  min-height: var(--space-40);
+}
+
+.rowLabel {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.slider {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr) 56px;
+  align-items: center;
+  gap: var(--space-12);
+  min-height: var(--space-32);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.slider input {
+  width: 100%;
+  margin: 0;
+  accent-color: var(--primary-color);
+}
+
+.sliderLabel {
+  color: var(--primary-text-color);
+}
+
+.readout {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  color: var(--secondary-text-color);
+}

@@ -1,0 +1,307 @@
+<!doctype html>
+<!-- Decision (2026-10-12, docs/DESIGN.md s.1): NOT chosen. A pastiche of a monday board; 4-col callbacks truncate every reason. Grafted: 40px ruled rows and 32px header rows, plus the text clean-up rules. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sketch A - Board</title>
+<link rel="stylesheet" href="../../node_modules/@vibe/core/dist/tokens/tokens.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&display=swap">
+<style>
+  /* Sketch A "Board": monday's board idiom taken literally. Tokens only for color/radius/shadow/space. */
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    font-family: var(--font-family);
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--primary-text-color);
+    background: var(--allgrey-background-color);
+    -webkit-font-smoothing: antialiased;
+  }
+  .app { display: grid; grid-template-columns: 240px 1fr; min-height: 100vh; }
+
+  /* rail */
+  .rail {
+    background: var(--primary-background-color);
+    border-right: 1px solid var(--layout-border-color);
+    padding: var(--space-16) var(--space-12);
+    position: sticky; top: 0; height: 100vh;
+  }
+  .wordmark { font-size: 20px; line-height: 24px; font-weight: 600; padding: var(--space-4) var(--space-12) 0; }
+  .practice { font-size: 12px; line-height: 16px; color: var(--secondary-text-color); padding: 0 var(--space-12) var(--space-24); }
+  .rail nav a {
+    display: block; padding: var(--space-8) var(--space-12); margin-bottom: var(--space-2);
+    border-radius: var(--border-radius-small); color: var(--primary-text-color); text-decoration: none;
+  }
+  .rail nav a:hover { background: var(--primary-background-hover-color); }
+  .rail nav a.on { background: var(--primary-selected-color); font-weight: 500; }
+
+  /* top bar */
+  .main { min-width: 0; }
+  .topbar {
+    height: 56px; display: flex; align-items: center; justify-content: space-between;
+    padding: 0 var(--space-24); background: var(--primary-background-color);
+    border-bottom: 1px solid var(--layout-border-color);
+  }
+  .topbar h1 { margin: 0; font-size: 20px; line-height: 24px; font-weight: 600; }
+  .range { display: flex; align-items: center; gap: var(--space-12); }
+  .range .date { color: var(--secondary-text-color); font-size: 13px; }
+  .seg { display: flex; border: 1px solid var(--ui-border-color); border-radius: var(--border-radius-small); overflow: hidden; }
+  .seg button {
+    font: inherit; font-size: 13px; border: 0; background: var(--primary-background-color);
+    color: var(--primary-text-color); padding: var(--space-4) var(--space-12); cursor: pointer;
+  }
+  .seg button + button { border-left: 1px solid var(--ui-border-color); }
+  .seg button.on { background: var(--primary-selected-color); }
+
+  /* 12-col board grid. row-gap 24 = Katie's standing room above every card. */
+  .grid {
+    display: grid; grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--space-16); row-gap: var(--space-24);
+    padding: var(--space-24);
+  }
+  .card {
+    background: var(--primary-background-color);
+    border: 1px solid var(--layout-border-color);
+    border-radius: var(--border-radius-medium);
+    position: relative; min-width: 0;
+  }
+  .span-12 { grid-column: span 12; }
+  .span-8 { grid-column: span 8; }
+  .span-4 { grid-column: span 4; }
+
+  /* top row: five equal cards (breaks the 12-col rhythm on purpose: 12/5 is not whole) */
+  .kpis { grid-column: span 12; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--space-16); }
+  .kpi { padding: var(--space-12) var(--space-16) var(--space-16); }
+  .kpi .label { font-size: 13px; color: var(--secondary-text-color); }
+  .kpi .num { font-size: 28px; line-height: 36px; font-weight: 600; font-variant-numeric: tabular-nums; margin-top: var(--space-4); }
+  .kpi .sub { font-size: 12px; line-height: 16px; color: var(--secondary-text-color); margin-top: var(--space-4); }
+  .line-state { display: flex; align-items: center; gap: var(--space-8); font-size: 20px; line-height: 36px; font-weight: 600; margin-top: var(--space-4); }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--color-explosive); }
+
+  .card-head { display: flex; align-items: baseline; gap: var(--space-8); padding: var(--space-12) var(--space-16); }
+  .card-head h2 { margin: 0; font-size: 16px; line-height: 24px; font-weight: 500; }
+  .card-head .count { font-size: 13px; color: var(--secondary-text-color); }
+  .card-head .more { margin-left: auto; font-size: 13px; color: var(--primary-color); text-decoration: none; }
+
+  /* chart */
+  .chart { padding: 0 var(--space-16) var(--space-12); }
+  .legend { display: flex; gap: var(--space-16); font-size: 12px; color: var(--secondary-text-color); margin-left: auto; }
+  .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: var(--space-4); vertical-align: -1px; }
+  .legend .f { background: var(--primary-color); }
+  .legend .o { border: 1.5px solid var(--primary-color); }
+
+  /* monday board tables */
+  table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+  th {
+    height: 36px; font-size: 13px; font-weight: 400; color: var(--secondary-text-color);
+    text-align: left; padding: 0 var(--space-12);
+    border-top: 1px solid var(--layout-border-color); border-bottom: 1px solid var(--layout-border-color);
+  }
+  td {
+    height: 40px; padding: 0 var(--space-12);
+    border-bottom: 1px solid var(--layout-border-color);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  th + th, td + td { border-left: 1px solid var(--layout-border-color); }
+  tr:last-child td { border-bottom: 0; }
+  tbody tr:hover td { background: var(--primary-background-hover-color); }
+  .num-c { text-align: right; font-variant-numeric: tabular-nums; }
+  .muted { color: var(--secondary-text-color); }
+  td.status { padding: 0; }
+  /* monday status cell: the whole cell is the color */
+  .chip {
+    display: flex; align-items: center; justify-content: center; height: 39px;
+    color: var(--text-color-on-primary); font-size: 13px; font-weight: 500;
+  }
+  .chip.booked { background: var(--positive-color); }
+  .chip.nobook { background: var(--ui-background-color); color: var(--primary-text-color); }
+  .chip.urgent { background: var(--negative-color); }
+  .chip.callback { background: var(--primary-color); }
+
+  /* Katie stand-in: 128px total, PNG upper body ~50px, dashed legs = where the drawn rig goes */
+  .katie { position: fixed; right: var(--space-24); bottom: 0; width: 56px; height: 128px; pointer-events: none; z-index: 10; }
+  .katie.on-card { position: absolute; right: var(--space-16); bottom: 100%; }
+  .katie img { display: block; width: 52px; height: 54px; margin: 0 auto; object-fit: contain; }
+  .katie svg { display: block; margin: -2px auto 0; }
+  .bubble {
+    position: absolute; right: calc(100% + var(--space-8)); top: 0; width: 240px;
+    background: var(--primary-background-color); border: 1px solid var(--layout-border-color);
+    border-radius: var(--border-radius-medium); box-shadow: var(--box-shadow-small);
+    padding: var(--space-8) var(--space-12); font-size: 13px; line-height: 18px;
+  }
+  .sketch-note {
+    display: inline-block; margin: 0 var(--space-24) var(--space-24); font-size: 12px; color: var(--secondary-text-color);
+    background: var(--primary-background-color); border: 1px dashed var(--ui-border-color);
+    border-radius: var(--border-radius-small); padding: var(--space-2) var(--space-8);
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="rail">
+    <div class="wordmark">Katie</div>
+    <div class="practice">Harborline Orthodontics</div>
+    <nav>
+      <a class="on" href="#">Overview</a>
+      <a href="#">Calls</a>
+      <a href="#">Bookings</a>
+      <a href="#">Callbacks</a>
+      <a href="#">Texts</a>
+      <a href="#">Settings</a>
+    </nav>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <h1>Overview</h1>
+      <div class="range">
+        <span class="date">Mon, Oct 12</span>
+        <div class="seg"><button class="on">Today</button><button>7 days</button><button>30 days</button></div>
+      </div>
+    </header>
+
+    <div class="grid">
+      <!-- top row -->
+      <section class="kpis">
+        <div class="card kpi">
+          <div class="label">Line</div>
+          <div class="line-state"><span class="dot"></span>Idle</div>
+          <div class="sub">Last call 5:35 PM</div>
+        </div>
+        <div class="card kpi">
+          <div class="label">Calls today</div>
+          <div class="num">8</div>
+          <div class="sub">Average 2:03</div>
+        </div>
+        <div class="card kpi">
+          <div class="label">Booked</div>
+          <div class="num">6</div>
+          <div class="sub">7 appointments made</div>
+        </div>
+        <div class="card kpi">
+          <div class="label">Callbacks waiting</div>
+          <div class="num">7</div>
+          <div class="sub">3 urgent</div>
+        </div>
+        <div class="card kpi">
+          <div class="label">Texts sent</div>
+          <div class="num">6</div>
+          <div class="sub">4 replies</div>
+        </div>
+      </section>
+
+      <!-- calls by hour -->
+      <section class="card span-12">
+        <div class="card-head">
+          <h2>Calls by hour</h2>
+          <div class="legend"><span><i class="f"></i>Booked</span><span><i class="o"></i>No booking</span></div>
+        </div>
+        <div class="chart" id="chart"></div>
+
+        <div class="katie on-card" aria-hidden="true">
+          <div class="bubble">Six of today's eight calls booked. Three o'clock was the busiest hour.</div>
+          <img src="../../brief/assets/katie/katie-cutout.png" alt="">
+          <svg width="40" height="76" viewBox="0 0 40 76" fill="none" stroke="var(--secondary-text-color)" stroke-dasharray="3 2" stroke-width="1.5">
+            <rect x="6" y="1" width="28" height="22" rx="3"/>
+            <path d="M8 23 L9 64 M18 23 L17 64 M22 23 L23 64 M32 23 L31 64"/>
+            <rect x="3" y="64" width="15" height="10" rx="3"/>
+            <rect x="22" y="64" width="15" height="10" rx="3"/>
+          </svg>
+        </div>
+      </section>
+
+      <!-- latest calls -->
+      <section class="card span-8">
+        <div class="card-head"><h2>Latest calls</h2><span class="count">8 today</span><a class="more" href="#">All calls</a></div>
+        <table>
+          <colgroup><col style="width:88px"><col style="width:132px"><col><col style="width:120px"><col style="width:84px"></colgroup>
+          <thead><tr><th>Time</th><th>Caller</th><th>First line</th><th>Outcome</th><th class="num-c">Duration</th></tr></thead>
+          <tbody id="calls"></tbody>
+        </table>
+      </section>
+
+      <!-- callbacks -->
+      <section class="card span-4">
+        <div class="card-head"><h2>Callbacks waiting</h2><span class="count">7</span><a class="more" href="#">Open list</a></div>
+        <table>
+          <colgroup><col style="width:76px"><col style="width:124px"><col></colgroup>
+          <thead><tr><th>Priority</th><th>Caller</th><th>Reason</th></tr></thead>
+          <tbody id="notes"></tbody>
+        </table>
+      </section>
+    </div>
+    <div class="sketch-note">Sketch A, Board. Katie = PNG upper body + dashed placeholder legs, 128px.</div>
+  </main>
+</div>
+
+<div class="katie" aria-hidden="true">
+  <img src="../../brief/assets/katie/katie-cutout.png" alt="">
+  <svg width="40" height="76" viewBox="0 0 40 76" fill="none" stroke="var(--secondary-text-color)" stroke-dasharray="3 2" stroke-width="1.5">
+    <rect x="6" y="1" width="28" height="22" rx="3"/>
+    <path d="M8 23 L9 64 M18 23 L17 64 M22 23 L23 64 M32 23 L31 64"/>
+    <rect x="3" y="64" width="15" height="10" rx="3"/>
+    <rect x="22" y="64" width="15" height="10" rx="3"/>
+  </svg>
+</div>
+
+<script>
+// Real fixture rows (calls.json, notes.json, stats.json), rendered in America/New_York. summary never shown.
+const calls = [
+  ["5:35 PM","(656) ***-0150","Hi, um, my daughter has a bracket that came off this morning and I'm looking to get her in as soon as possible.","nobook","0:54"],
+  ["5:13 PM","(813) ***-0173","Um yeah, do you take Edna?","booked","2:22"],
+  ["4:49 PM","(727) ***-0131","Hi, yes, I'd like to schedule a first appointment for my granddaughter Luna.","booked","2:14"],
+  ["4:15 PM","(813) ***-0199","So my dentist had mentioned I should get my teeth looked at, but actually I'm calling for my friend Matteo. He needs a consult.","booked","2:42"],
+  ["3:58 PM","(656) ***-0127","Yeah. Hi, I'd like to schedule a first consultation appointment, please.","booked","1:47"],
+  ["3:34 PM","(813) ***-0162","Hi, um, my daughter Marcus has a bracket that came off this morning and we'd like to get her in as soon as possible.","booked","2:10"],
+  ["3:01 PM","(727) ***-0188","My daughter's bracket came off. How much does an emergency visit cost?","nobook","2:26"],
+  ["2:40 PM","(813) ***-0144","Hi, yeah I'd like to schedule a the first appointment, like a consultation, please.","booked","1:44"],
+];
+const label = {booked:"Booked", nobook:"No booking"};
+document.getElementById("calls").innerHTML = calls.map(c =>
+  `<tr><td class="num-c muted" style="text-align:left">${c[0]}</td><td>${c[1]}</td><td title="${c[2].replace(/"/g,'&quot;')}">${c[2]}</td>` +
+  `<td class="status"><span class="chip ${c[3]}">${label[c[3]]}</span></td><td class="num-c">${c[4]}</td></tr>`).join("");
+
+// notes: urgent first, newest first; "URGENT:" prefix and [bracketed] system annotations stripped; unknown names -> masked caller
+const notes = [
+  ["urgent","(656) ***-0150","Daughter's bracket came off this morning, needs to be seen as soon as possible."],
+  ["urgent","(813) ***-0162","Daughter's bracket came off this morning and they need to be seen as soon as possible."],
+  ["urgent","(727) ***-0188","Daughter's bracket came off."],
+  ["callback","(656) ***-0150","Existing patient Marcus Webb: reschedule of existing appointment, no open slots in the next 7 days, call back with times."],
+  ["callback","Max Delgado","Name correction on the Mon 3:20 PM booking: booked as 'Max De Lagado', now 'Max Delgado'. Please update the chart."],
+  ["callback","(727) ***-0188","Wants to move Tommy's Tue Oct 13 4:00 PM appointment to Mon Oct 12 3:20 PM; the reschedule did not complete."],
+  ["callback","Eli Morgan","Caller wants to speak directly with Dr. Reyes."],
+];
+document.getElementById("notes").innerHTML = notes.map(n =>
+  `<tr><td class="status"><span class="chip ${n[0]}">${n[0]==="urgent"?"Urgent":"Callback"}</span></td><td>${n[1]}</td><td title="${n[2].replace(/"/g,'&quot;')}">${n[2]}</td></tr>`).join("");
+
+// Calls by hour (stats.by_hour), SVG drawn by hand: booked = filled, rest of the hour's calls = outlined
+const byHour = Array.from({length:24},(_,h)=>({h,calls:0,booked:0}));
+[[14,1,1],[15,3,2],[16,2,2],[17,2,1]].forEach(([h,c,b])=>{byHour[h].calls=c;byHour[h].booked=b;});
+(function drawChart(){
+  const el = document.getElementById("chart");
+  const W = el.clientWidth - 32, H = 132, top = 8, axis = 20, left = 24;
+  const plotH = H - top - axis, maxV = 3, slot = (W - left) / 24, bw = Math.min(28, slot * 0.56);
+  const y = v => top + plotH - (v / maxV) * plotH;
+  let s = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="Calls by hour today">`;
+  for (let v = 0; v <= maxV; v++) {
+    s += `<line x1="${left}" x2="${W}" y1="${y(v)}" y2="${y(v)}" stroke="var(--layout-border-color)" stroke-width="1"/>`;
+    s += `<text x="${left - 8}" y="${y(v) + 4}" text-anchor="end" font-size="12" fill="var(--secondary-text-color)">${v}</text>`;
+  }
+  byHour.forEach(d => {
+    const x = left + d.h * slot + (slot - bw) / 2;
+    if (d.booked) s += `<rect x="${x}" y="${y(d.booked)}" width="${bw}" height="${y(0) - y(d.booked)}" rx="2" fill="var(--primary-color)"/>`;
+    const rest = d.calls - d.booked;
+    if (rest) s += `<rect x="${x + 0.75}" y="${y(d.calls) + 0.75}" width="${bw - 1.5}" height="${y(d.booked) - y(d.calls) - 2}" rx="2" fill="none" stroke="var(--primary-color)" stroke-width="1.5"/>`;
+    if (d.h % 3 === 0) {
+      const t = d.h === 0 ? "12a" : d.h < 12 ? d.h + "a" : d.h === 12 ? "12p" : (d.h - 12) + "p";
+      s += `<text x="${x + bw / 2}" y="${H - 4}" text-anchor="middle" font-size="12" fill="var(--secondary-text-color)">${t}</text>`;
+    }
+  });
+  el.innerHTML = s + "</svg>";
+})();
+</script>
+</body>
+</html>

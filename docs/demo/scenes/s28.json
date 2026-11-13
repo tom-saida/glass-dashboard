@@ -1,0 +1,334 @@
+{
+  "id": "s28",
+  "day": 0,
+  "start": "15:35:00",
+  "duration_s": 102.4,
+  "caller": "(813) ***-0128",
+  "caller_full": "(813) 555-0128",
+  "language": "en",
+  "greeted_as": "",
+  "disposition": "phone-booked",
+  "turns": 10,
+  "first_line": "Hi, um, so I'm calling about getting braces? Like, for me. I'm sixteen — is that, like, something I can do myself?",
+  "scenario": "teen_books_own_consult_parent_contact",
+  "events": [
+    {
+      "at": 0.0,
+      "kind": "call.started",
+      "turn": 0,
+      "data": {
+        "caller": "(813) ***-0128"
+      }
+    },
+    {
+      "at": 1.2,
+      "kind": "greeting",
+      "turn": 0,
+      "data": {
+        "name": ""
+      }
+    },
+    {
+      "at": 5.0,
+      "kind": "turn.caller",
+      "turn": 1,
+      "data": {
+        "text": "Hi, um, so I'm calling about getting braces? Like, for me. I'm sixteen — is that, like, something I can do myself?"
+      }
+    },
+    {
+      "at": 11.5,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "Of course — let's get you in!"
+      }
+    },
+    {
+      "at": 13.1,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "What's your name?"
+      }
+    },
+    {
+      "at": 14.5,
+      "kind": "turn.caller",
+      "turn": 2,
+      "data": {
+        "text": "Brianna Calloway."
+      }
+    },
+    {
+      "at": 15.9,
+      "kind": "turn.bot",
+      "turn": 2,
+      "data": {
+        "text": "So that's Brianna Calloway — and what's your date of birth?"
+      }
+    },
+    {
+      "at": 19.4,
+      "kind": "turn.caller",
+      "turn": 3,
+      "data": {
+        "text": "May third, two thousand ten."
+      }
+    },
+    {
+      "at": 21.4,
+      "kind": "tool",
+      "turn": 3,
+      "data": {
+        "name": "lookup",
+        "ok": true,
+        "ms": 588,
+        "verified": false
+      }
+    },
+    {
+      "at": 21.9,
+      "kind": "turn.bot",
+      "turn": 3,
+      "data": {
+        "text": "I don't see Brianna in our system yet — is this your first visit with us?"
+      }
+    },
+    {
+      "at": 26.1,
+      "kind": "turn.caller",
+      "turn": 4,
+      "data": {
+        "text": "Yeah. My dentist said my bite's kind of off, and my mom was like, just call them, so."
+      }
+    },
+    {
+      "at": 31.1,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "Glad your dentist sent you our way — the doctor will take a good look."
+      }
+    },
+    {
+      "at": 34.7,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "Is the number you're calling from, ending in zero, one, two, eight, the best one to reach you?"
+      }
+    },
+    {
+      "at": 39.9,
+      "kind": "turn.caller",
+      "turn": 5,
+      "data": {
+        "text": "Um, can you use my mom's instead? It's eight one three, five five five, zero one seven seven. She's the one who does all the, like, appointment stuff."
+      }
+    },
+    {
+      "at": 48.3,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "Sure!"
+      }
+    },
+    {
+      "at": 48.7,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "So that's eight one three, five five five, zero one seven seven — is that right?"
+      }
+    },
+    {
+      "at": 53.2,
+      "kind": "turn.caller",
+      "turn": 6,
+      "data": {
+        "text": "Yep, that's hers."
+      }
+    },
+    {
+      "at": 54.6,
+      "kind": "turn.bot",
+      "turn": 6,
+      "data": {
+        "text": "What days work best for you — mornings or afternoons — or should I just grab the soonest opening?"
+      }
+    },
+    {
+      "at": 59.9,
+      "kind": "turn.caller",
+      "turn": 7,
+      "data": {
+        "text": "Soonest is fine. I can leave school for it, I just have to tell the front office."
+      }
+    },
+    {
+      "at": 64.7,
+      "kind": "tool",
+      "turn": 7,
+      "data": {
+        "name": "context",
+        "ok": true,
+        "ms": 604,
+        "open_slots": 3
+      }
+    },
+    {
+      "at": 65.3,
+      "kind": "turn.bot",
+      "turn": 7,
+      "data": {
+        "text": "Let me check the schedule to see what times are available."
+      }
+    },
+    {
+      "at": 68.3,
+      "kind": "turn.bot",
+      "turn": 7,
+      "data": {
+        "text": "The earliest opening I have is Wednesday the twenty-second at eleven twenty in the morning — want me to grab it?"
+      }
+    },
+    {
+      "at": 74.4,
+      "kind": "turn.caller",
+      "turn": 8,
+      "data": {
+        "text": "Yeah, that works."
+      }
+    },
+    {
+      "at": 75.8,
+      "kind": "tool",
+      "turn": 8,
+      "data": {
+        "name": "book",
+        "ok": true,
+        "ms": 412,
+        "slot": "Wed 11:20 AM",
+        "patient": "Brianna Calloway",
+        "already_booked": false
+      }
+    },
+    {
+      "at": 76.2,
+      "kind": "booking",
+      "turn": 8,
+      "data": {
+        "name": "Brianna Calloway",
+        "slot": "Wed 11:20 AM",
+        "reason": "consultation - dentist says her bite is off",
+        "insurance": "not provided"
+      }
+    },
+    {
+      "at": 76.3,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "Let me get that set up for you."
+      }
+    },
+    {
+      "at": 78.0,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "Perfect — you're booked for Wednesday the twenty-second at eleven twenty in the morning."
+      }
+    },
+    {
+      "at": 82.4,
+      "kind": "tool",
+      "turn": 8,
+      "data": {
+        "name": "message",
+        "ok": true,
+        "ms": 655
+      }
+    },
+    {
+      "at": 83.1,
+      "kind": "note",
+      "turn": 8,
+      "data": {
+        "name": "Brianna Calloway",
+        "reason": "Patient is 16 and booked her own consult (Wed 11:20 AM). A parent or guardian should attend the visit. Contact number is her mom's, (813) 555-0177 - NOT the caller ID. [about patient Brianna Calloway]",
+        "urgent": false,
+        "fyi": false
+      }
+    },
+    {
+      "at": 83.2,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "Since you're under eighteen, a parent or guardian will need to come with you — I've let the team know."
+      }
+    },
+    {
+      "at": 88.8,
+      "kind": "turn.caller",
+      "turn": 9,
+      "data": {
+        "text": "Oh, okay. Yeah, my mom's gonna come anyway, she wants to hear about, like, all of it."
+      }
+    },
+    {
+      "at": 93.8,
+      "kind": "turn.bot",
+      "turn": 9,
+      "data": {
+        "text": "Perfect!"
+      }
+    },
+    {
+      "at": 94.3,
+      "kind": "turn.bot",
+      "turn": 9,
+      "data": {
+        "text": "Is there anything else I can help you with?"
+      }
+    },
+    {
+      "at": 96.9,
+      "kind": "turn.caller",
+      "turn": 10,
+      "data": {
+        "text": "No, I think that's it. Thank you!"
+      }
+    },
+    {
+      "at": 99.2,
+      "kind": "turn.bot",
+      "turn": 10,
+      "data": {
+        "text": "The front desk will confirm with your mom."
+      }
+    },
+    {
+      "at": 101.4,
+      "kind": "turn.bot",
+      "turn": 10,
+      "data": {
+        "text": "Take care!"
+      }
+    },
+    {
+      "at": 102.4,
+      "kind": "call.ended",
+      "turn": 10,
+      "data": {
+        "duration_s": 102.4,
+        "disposition": "phone-booked",
+        "bookings": 1,
+        "notes": 1
+      }
+    }
+  ]
+}

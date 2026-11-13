@@ -1,0 +1,14 @@
+{
+  "prompt_user": "Sharp, in-focus photograph of a modern office lounge at dusk: a warm floor lamp glowing amber, tall windows with soft city lights and a deep blue sky, a large monstera plant in the foreground, a navy sofa, a polished concrete floor with reflections, deep navy and warm amber tones, cinematic lighting, premium technology commercial aesthetic, no people. Surfaces are clean and unmarked, free of writing, letters, logos or signage.",
+  "prompt_sent": "Sharp, in-focus photograph of a modern office lounge at dusk: a warm floor lamp glowing amber, tall windows with soft city lights and a deep blue sky, a large monstera plant in the foreground, a navy sofa, a polished concrete floor with reflections, deep navy and warm amber tones, cinematic lighting, premium technology commercial aesthetic, no people. Surfaces are clean and unmarked, free of writing, letters, logos or signage.",
+  "preset": "raw",
+  "model": "flux_2_klein_4b_i8x.ckpt",
+  "width": 1664,
+  "height": 1024,
+  "steps": 8,
+  "seed": 41177,
+  "image_in": null,
+  "strength": null,
+  "seconds": 41.6,
+  "created": "20261102-171619"
+}

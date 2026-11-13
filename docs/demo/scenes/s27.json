@@ -1,0 +1,333 @@
+{
+  "id": "s27",
+  "day": 0,
+  "start": "15:17:00",
+  "duration_s": 114.9,
+  "caller": "(656) ***-0127",
+  "caller_full": "(656) 555-0127",
+  "language": "en",
+  "greeted_as": "",
+  "disposition": "phone-booked",
+  "turns": 10,
+  "first_line": "Hey, good afternoon. So, uh, I'm forty-two and I've never really liked my smile, and my wife finally talked me into calling. Do you guys see adults?",
+  "scenario": "adult_consult_saturday_hours",
+  "events": [
+    {
+      "at": 0,
+      "kind": "call.started",
+      "turn": 0,
+      "data": {
+        "caller": "(656) ***-0127"
+      }
+    },
+    {
+      "at": 1.2,
+      "kind": "greeting",
+      "turn": 0,
+      "data": {
+        "name": ""
+      }
+    },
+    {
+      "at": 11.1,
+      "kind": "turn.caller",
+      "turn": 1,
+      "data": {
+        "text": "Hey, good afternoon. So, uh, I'm forty-two and I've never really liked my smile, and my wife finally talked me into calling. Do you guys see adults?"
+      }
+    },
+    {
+      "at": 11.1,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "Absolutely — we see plenty of adults!"
+      }
+    },
+    {
+      "at": 11.1,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "Let's get you in!"
+      }
+    },
+    {
+      "at": 11.1,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "What's your name?"
+      }
+    },
+    {
+      "at": 20.5,
+      "kind": "turn.caller",
+      "turn": 2,
+      "data": {
+        "text": "Rob — well, Robert. Robert Halvorsen."
+      }
+    },
+    {
+      "at": 20.5,
+      "kind": "turn.bot",
+      "turn": 2,
+      "data": {
+        "text": "So that's Robert Halvorsen — and what's your date of birth?"
+      }
+    },
+    {
+      "at": 28.1,
+      "kind": "turn.caller",
+      "turn": 3,
+      "data": {
+        "text": "January twenty-ninth, 1984."
+      }
+    },
+    {
+      "at": 28.1,
+      "kind": "tool",
+      "turn": 3,
+      "data": {
+        "name": "lookup",
+        "ok": true,
+        "ms": 571,
+        "verified": false
+      }
+    },
+    {
+      "at": 28.1,
+      "kind": "turn.bot",
+      "turn": 3,
+      "data": {
+        "text": "I don't see Robert in our system yet — is this your first visit with us?"
+      }
+    },
+    {
+      "at": 39.9,
+      "kind": "turn.caller",
+      "turn": 4,
+      "data": {
+        "text": "Yeah. Hey, are you open Saturdays? That'd be way easier for me."
+      }
+    },
+    {
+      "at": 39.9,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "We're open Monday through Friday from seven thirty in the morning to five in the evening — we're closed on weekends."
+      }
+    },
+    {
+      "at": 39.9,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "Would a weekday work for you?"
+      }
+    },
+    {
+      "at": 56.2,
+      "kind": "turn.caller",
+      "turn": 5,
+      "data": {
+        "text": "Huh. Okay, yeah, I can probably sneak out mid-afternoon."
+      }
+    },
+    {
+      "at": 56.2,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "And do you have dental insurance — who's the provider?"
+      }
+    },
+    {
+      "at": 64.4,
+      "kind": "turn.caller",
+      "turn": 6,
+      "data": {
+        "text": "UnitedHealthcare, I think. Through my job."
+      }
+    },
+    {
+      "at": 64.4,
+      "kind": "turn.bot",
+      "turn": 6,
+      "data": {
+        "text": "Is the number you're calling from, ending in zero, one, two, seven, the best one to reach you?"
+      }
+    },
+    {
+      "at": 73.5,
+      "kind": "turn.caller",
+      "turn": 7,
+      "data": {
+        "text": "Yep."
+      }
+    },
+    {
+      "at": 73.5,
+      "kind": "tool",
+      "turn": 7,
+      "data": {
+        "name": "context",
+        "ok": true,
+        "ms": 603,
+        "open_slots": 3
+      }
+    },
+    {
+      "at": 73.5,
+      "kind": "turn.bot",
+      "turn": 7,
+      "data": {
+        "text": "Let me check the schedule to see what times are available."
+      }
+    },
+    {
+      "at": 73.5,
+      "kind": "turn.bot",
+      "turn": 7,
+      "data": {
+        "text": "I have Thursday the twenty-third at two forty in the afternoon — want me to grab it?"
+      }
+    },
+    {
+      "at": 88.3,
+      "kind": "turn.caller",
+      "turn": 8,
+      "data": {
+        "text": "Thursday, two-forty. Yeah, book it before I change my mind."
+      }
+    },
+    {
+      "at": 88.3,
+      "kind": "tool",
+      "turn": 8,
+      "data": {
+        "name": "book",
+        "ok": true,
+        "ms": 384,
+        "slot": "Thu 2:40 PM",
+        "patient": "Robert Halvorsen",
+        "already_booked": false
+      }
+    },
+    {
+      "at": 88.3,
+      "kind": "booking",
+      "turn": 8,
+      "data": {
+        "name": "Robert Halvorsen",
+        "slot": "Thu 2:40 PM",
+        "reason": "consultation, adult - unhappy with smile",
+        "insurance": "UnitedHealthcare"
+      }
+    },
+    {
+      "at": 88.3,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "Let me get that set up for you."
+      }
+    },
+    {
+      "at": 88.3,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "Perfect — you're booked for Thursday the twenty-third at two forty in the afternoon."
+      }
+    },
+    {
+      "at": 88.3,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "Would you like a text confirmation sent to that number?"
+      }
+    },
+    {
+      "at": 102.2,
+      "kind": "turn.caller",
+      "turn": 9,
+      "data": {
+        "text": "Yeah, send it."
+      }
+    },
+    {
+      "at": 102.2,
+      "kind": "turn.bot",
+      "turn": 9,
+      "data": {
+        "text": "Is there anything else I can help you with?"
+      }
+    },
+    {
+      "at": 108.9,
+      "kind": "turn.caller",
+      "turn": 10,
+      "data": {
+        "text": "Nope. Thanks."
+      }
+    },
+    {
+      "at": 108.9,
+      "kind": "turn.bot",
+      "turn": 10,
+      "data": {
+        "text": "Perfect!"
+      }
+    },
+    {
+      "at": 108.9,
+      "kind": "turn.bot",
+      "turn": 10,
+      "data": {
+        "text": "The front desk will confirm with you."
+      }
+    },
+    {
+      "at": 108.9,
+      "kind": "turn.bot",
+      "turn": 10,
+      "data": {
+        "text": "Take care!"
+      }
+    },
+    {
+      "at": 114.9,
+      "kind": "sms.out",
+      "turn": 10,
+      "data": {
+        "caller": "(656) ***-0127",
+        "kind": "confirmation",
+        "chars": 36
+      }
+    },
+    {
+      "at": 114.9,
+      "kind": "sms.in",
+      "turn": 10,
+      "data": {
+        "caller": "(656) ***-0127",
+        "kind": "yes",
+        "chars": 3
+      }
+    },
+    {
+      "at": 114.9,
+      "kind": "call.ended",
+      "turn": 10,
+      "data": {
+        "duration_s": 114.9,
+        "disposition": "phone-booked",
+        "bookings": 1,
+        "notes": 0
+      }
+    }
+  ]
+}

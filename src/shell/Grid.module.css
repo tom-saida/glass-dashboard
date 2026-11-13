@@ -1,0 +1,35 @@
+/* DESIGN 4: 12 columns, 24px column and row gaps. Row gap 24 is the Katie rule: nothing may
+   ever sit in a row gap, so she always has a clear edge to stand on. */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--space-24);
+  row-gap: var(--space-24);
+  align-items: start;
+}
+
+.col {
+  min-width: 0;
+}
+
+/* DESIGN-GLASS 8.7 + 9.6: a 16 px column gap when the page is narrow gives the width back to
+   the cards. Keyed off the page's own width (Shell .inner is the container), not the window's:
+   the room around the pane and the text size are settings, so a 1440 window with the default
+   8 % margin holds a page 842 wide. Below 1026 the 16 px gap keeps a KPI card at its full
+   151+ for longer than the 24 (the card's own rule at overview.module.css 6.2 takes over
+   below that). The shipped look is unchanged: 1040 at 1440 x 900 keeps 24, 896 at 1280 x 800
+   gets 16. The row gap stays 24 (the Katie rule above). */
+@container (max-width: 1025px) {
+  .grid {
+    column-gap: var(--space-16);
+  }
+}
+
+/* One column when the page itself is narrow (680 or less: the shipped look at 1040 wide, the
+   default look at about 1200), not the window: the room and the text size decide the page's width
+   (9.6). Below the 1280 minimum either way. */
+@container (max-width: 680px) {
+  .grid > .col {
+    grid-column: 1 / -1 !important;
+  }
+}

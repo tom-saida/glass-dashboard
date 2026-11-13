@@ -1,0 +1,66 @@
+/* The glass card on Settings (DESIGN-GLASS 9.6): the presets, then one row per ingredient. A
+   slider is a native range (keyboard: arrows, Home, End) with its value beside it. */
+
+.slider {
+  width: 180px;
+  margin: 0;
+  accent-color: var(--primary-color);
+  cursor: pointer;
+}
+
+.slider:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: var(--radius-pill);
+}
+
+.value {
+  display: inline-block;
+  min-width: 64px;
+  margin-left: var(--space-12);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: var(--primary-text-color);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Preset buttons: glass pills, the matching one in the selected tint (like the segmented pill). */
+.presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8);
+}
+
+.preset {
+  appearance: none;
+  height: 32px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0 var(--space-12);
+  border: 1px solid var(--glass-edge);
+  border-radius: var(--radius-pill);
+  background: var(--glass-card);
+  box-shadow: var(--glass-highlight);
+  font: inherit;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: var(--primary-text-color);
+  cursor: pointer;
+}
+
+.preset:hover {
+  background: var(--glass-strong);
+}
+
+.preset:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.preset[aria-pressed='true'] {
+  background: var(--primary-selected-color);
+  font-weight: 600;
+}

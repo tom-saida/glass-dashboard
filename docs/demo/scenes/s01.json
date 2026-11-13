@@ -1,0 +1,365 @@
+{
+  "id": "s01",
+  "day": 0,
+  "start": "06:48:00",
+  "duration_s": 119.3,
+  "caller": "(813) ***-0101",
+  "caller_full": "(813) 555-0101",
+  "language": "en",
+  "greeted_as": "",
+  "disposition": "phone-booked",
+  "turns": 11,
+  "first_line": "Hi, um, yeah — I know it's early, sorry. I wanted to set up a consult for my son? His dentist said he should see an orthodontist.",
+  "scenario": "new_patient_consult_child",
+  "events": [
+    {
+      "at": 0,
+      "kind": "call.started",
+      "turn": 0,
+      "data": {
+        "caller": "(813) ***-0101"
+      }
+    },
+    {
+      "at": 1.2,
+      "kind": "greeting",
+      "turn": 0,
+      "data": {
+        "name": ""
+      }
+    },
+    {
+      "at": 4,
+      "kind": "turn.caller",
+      "turn": 1,
+      "data": {
+        "text": "Hi, um, yeah — I know it's early, sorry. I wanted to set up a consult for my son? His dentist said he should see an orthodontist."
+      }
+    },
+    {
+      "at": 4,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "Not early at all — happy to help!"
+      }
+    },
+    {
+      "at": 4,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "A consult for your son — let's get him in!"
+      }
+    },
+    {
+      "at": 4,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "What's your son's name?"
+      }
+    },
+    {
+      "at": 14.2,
+      "kind": "turn.caller",
+      "turn": 2,
+      "data": {
+        "text": "It's Ethan. Ethan Caldwell."
+      }
+    },
+    {
+      "at": 14.2,
+      "kind": "turn.bot",
+      "turn": 2,
+      "data": {
+        "text": "So that's Ethan Caldwell — and what's his date of birth?"
+      }
+    },
+    {
+      "at": 22.2,
+      "kind": "turn.caller",
+      "turn": 3,
+      "data": {
+        "text": "February ninth, 2014. He's twelve."
+      }
+    },
+    {
+      "at": 22.2,
+      "kind": "tool",
+      "turn": 3,
+      "data": {
+        "name": "lookup",
+        "ok": true,
+        "ms": 588,
+        "verified": false
+      }
+    },
+    {
+      "at": 22.2,
+      "kind": "turn.bot",
+      "turn": 3,
+      "data": {
+        "text": "I don't see Ethan in our system yet — is this his first visit with us?"
+      }
+    },
+    {
+      "at": 32.4,
+      "kind": "turn.caller",
+      "turn": 4,
+      "data": {
+        "text": "Yeah, first time. We've never been to an orthodontist before."
+      }
+    },
+    {
+      "at": 32.4,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "Welcome to Harborline!"
+      }
+    },
+    {
+      "at": 32.4,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "What's bringing Ethan in — is there something specific you'd like checked, or just a general consultation?"
+      }
+    },
+    {
+      "at": 45.7,
+      "kind": "turn.caller",
+      "turn": 5,
+      "data": {
+        "text": "His bottom teeth are kind of overlapping, and the dentist mentioned his bite. So, just a general look, I guess."
+      }
+    },
+    {
+      "at": 45.7,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "Got it — the doctor will take a good look at all of that."
+      }
+    },
+    {
+      "at": 45.7,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "Do you have dental insurance for Ethan — who's the provider?"
+      }
+    },
+    {
+      "at": 56.8,
+      "kind": "turn.caller",
+      "turn": 6,
+      "data": {
+        "text": "Delta Dental. Through my work."
+      }
+    },
+    {
+      "at": 56.8,
+      "kind": "turn.bot",
+      "turn": 6,
+      "data": {
+        "text": "Great, we take Delta Dental!"
+      }
+    },
+    {
+      "at": 56.8,
+      "kind": "turn.bot",
+      "turn": 6,
+      "data": {
+        "text": "Is the number you're calling from, ending in zero, one, zero, one, the best one to reach you?"
+      }
+    },
+    {
+      "at": 67.2,
+      "kind": "turn.caller",
+      "turn": 7,
+      "data": {
+        "text": "Yes, that's my cell."
+      }
+    },
+    {
+      "at": 67.2,
+      "kind": "turn.bot",
+      "turn": 7,
+      "data": {
+        "text": "What works best for Ethan — mornings or afternoons — or should I just grab the soonest opening?"
+      }
+    },
+    {
+      "at": 77.6,
+      "kind": "turn.caller",
+      "turn": 8,
+      "data": {
+        "text": "Mornings are better, before school gets crazy. Whatever's soonest."
+      }
+    },
+    {
+      "at": 77.6,
+      "kind": "tool",
+      "turn": 8,
+      "data": {
+        "name": "context",
+        "ok": true,
+        "ms": 540,
+        "open_slots": 3
+      }
+    },
+    {
+      "at": 77.6,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "Let me check the schedule to see what times are available."
+      }
+    },
+    {
+      "at": 77.6,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "The soonest openings I have are Thursday the twenty-third at nine in the morning, or Friday the twenty-fourth at seven forty in the morning — which works better?"
+      }
+    },
+    {
+      "at": 92,
+      "kind": "turn.caller",
+      "turn": 9,
+      "data": {
+        "text": "Thursday at nine, let's do Thursday."
+      }
+    },
+    {
+      "at": 92,
+      "kind": "tool",
+      "turn": 9,
+      "data": {
+        "name": "book",
+        "ok": true,
+        "ms": 412,
+        "slot": "Thu 9:00 AM",
+        "patient": "Ethan Caldwell",
+        "already_booked": false
+      }
+    },
+    {
+      "at": 92,
+      "kind": "booking",
+      "turn": 9,
+      "data": {
+        "name": "Ethan Caldwell",
+        "slot": "Thu 9:00 AM",
+        "reason": "consultation - lower teeth overlapping, bite",
+        "insurance": "Delta Dental"
+      }
+    },
+    {
+      "at": 92,
+      "kind": "turn.bot",
+      "turn": 9,
+      "data": {
+        "text": "Let me get that set up for you."
+      }
+    },
+    {
+      "at": 92,
+      "kind": "turn.bot",
+      "turn": 9,
+      "data": {
+        "text": "Perfect — Ethan is booked for Thursday the twenty-third at nine in the morning."
+      }
+    },
+    {
+      "at": 92,
+      "kind": "turn.bot",
+      "turn": 9,
+      "data": {
+        "text": "Want me to text a confirmation to the number ending in zero, one, zero, one?"
+      }
+    },
+    {
+      "at": 105.7,
+      "kind": "turn.caller",
+      "turn": 10,
+      "data": {
+        "text": "Yes please, that'd be great."
+      }
+    },
+    {
+      "at": 105.7,
+      "kind": "turn.bot",
+      "turn": 10,
+      "data": {
+        "text": "Done — you'll get that text in just a moment."
+      }
+    },
+    {
+      "at": 105.7,
+      "kind": "turn.bot",
+      "turn": 10,
+      "data": {
+        "text": "Is there anything else I can help you with?"
+      }
+    },
+    {
+      "at": 115.9,
+      "kind": "turn.caller",
+      "turn": 11,
+      "data": {
+        "text": "No, that's it. Thank you so much!"
+      }
+    },
+    {
+      "at": 115.9,
+      "kind": "turn.bot",
+      "turn": 11,
+      "data": {
+        "text": "Perfect!"
+      }
+    },
+    {
+      "at": 115.9,
+      "kind": "turn.bot",
+      "turn": 11,
+      "data": {
+        "text": "The front desk will confirm with you. Take care!"
+      }
+    },
+    {
+      "at": 118.3,
+      "kind": "sms.out",
+      "turn": 11,
+      "data": {
+        "caller": "(813) ***-0101",
+        "kind": "confirmation",
+        "chars": 36
+      }
+    },
+    {
+      "at": 118.8,
+      "kind": "sms.in",
+      "turn": 11,
+      "data": {
+        "caller": "(813) ***-0101",
+        "kind": "yes",
+        "chars": 3
+      }
+    },
+    {
+      "at": 119.3,
+      "kind": "call.ended",
+      "turn": 11,
+      "data": {
+        "duration_s": 119.3,
+        "disposition": "phone-booked",
+        "bookings": 1,
+        "notes": 0
+      }
+    }
+  ]
+}

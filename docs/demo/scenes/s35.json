@@ -1,0 +1,294 @@
+{
+  "id": "s35",
+  "day": 0,
+  "start": "20:55:00",
+  "duration_s": 90.5,
+  "caller": "(727) ***-0135",
+  "caller_full": "(727) 555-0135",
+  "language": "en",
+  "greeted_as": "",
+  "disposition": "phone-booked",
+  "turns": 8,
+  "first_line": "Hi, sorry to call so late. My son's wire is poking the inside of his cheek — the back part — and he's pretty miserable. I didn't know if anybody'd be there.",
+  "scenario": "after_hours_wire_poking_urgent",
+  "events": [
+    {
+      "at": 0.0,
+      "kind": "call.started",
+      "turn": 0,
+      "data": {
+        "caller": "(727) ***-0135"
+      }
+    },
+    {
+      "at": 1.2,
+      "kind": "greeting",
+      "turn": 0,
+      "data": {
+        "name": ""
+      }
+    },
+    {
+      "at": 5.0,
+      "kind": "turn.caller",
+      "turn": 1,
+      "data": {
+        "text": "Hi, sorry to call so late. My son's wire is poking the inside of his cheek — the back part — and he's pretty miserable. I didn't know if anybody'd be there."
+      }
+    },
+    {
+      "at": 13.8,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "Oh no, I'm sorry he's uncomfortable — let me help right now."
+      }
+    },
+    {
+      "at": 16.8,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "Let me get you the closest appointment we have — unless this is an emergency right now, or you'd rather speak with the clinical team first?"
+      }
+    },
+    {
+      "at": 24.2,
+      "kind": "turn.caller",
+      "turn": 2,
+      "data": {
+        "text": "I mean, it's not bleeding or anything. He just can't really chew on that side. The soonest appointment's fine."
+      }
+    },
+    {
+      "at": 30.6,
+      "kind": "tool",
+      "turn": 2,
+      "data": {
+        "name": "message",
+        "ok": true,
+        "ms": 748
+      }
+    },
+    {
+      "at": 31.3,
+      "kind": "note",
+      "turn": 2,
+      "data": {
+        "name": "unknown (booking to follow on this call)",
+        "reason": "URGENT: Son's wire is poking the inside of his cheek at the back, uncomfortable, can't chew on that side, no bleeding. [NOT an emergency - caller is booking the soonest visit on this call; please call the parent first thing in the morning]",
+        "urgent": true,
+        "fyi": false
+      }
+    },
+    {
+      "at": 31.4,
+      "kind": "turn.bot",
+      "turn": 2,
+      "data": {
+        "text": "What's your son's name?"
+      }
+    },
+    {
+      "at": 33.1,
+      "kind": "turn.caller",
+      "turn": 3,
+      "data": {
+        "text": "Owen Brandt."
+      }
+    },
+    {
+      "at": 34.3,
+      "kind": "turn.bot",
+      "turn": 3,
+      "data": {
+        "text": "So that's Owen Brandt — and what's his date of birth?"
+      }
+    },
+    {
+      "at": 37.4,
+      "kind": "turn.caller",
+      "turn": 4,
+      "data": {
+        "text": "Uh, December second, 2011."
+      }
+    },
+    {
+      "at": 39.3,
+      "kind": "tool",
+      "turn": 4,
+      "data": {
+        "name": "lookup",
+        "ok": true,
+        "ms": 529,
+        "verified": true
+      }
+    },
+    {
+      "at": 39.9,
+      "kind": "tool",
+      "turn": 4,
+      "data": {
+        "name": "context",
+        "ok": true,
+        "ms": 667,
+        "open_slots": 1
+      }
+    },
+    {
+      "at": 40.5,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "Thanks — I found Owen."
+      }
+    },
+    {
+      "at": 41.7,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "Let me check the schedule to see what times are available."
+      }
+    },
+    {
+      "at": 44.7,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "The earliest opening I have is tomorrow, Wednesday the twenty-second, at eight twenty in the morning — want me to grab it?"
+      }
+    },
+    {
+      "at": 51.3,
+      "kind": "turn.caller",
+      "turn": 5,
+      "data": {
+        "text": "Yeah. Yes. He'll miss first period, but that's fine."
+      }
+    },
+    {
+      "at": 54.5,
+      "kind": "tool",
+      "turn": 5,
+      "data": {
+        "name": "book",
+        "ok": true,
+        "ms": 384,
+        "slot": "Wed 8:20 AM",
+        "patient": "Owen Brandt",
+        "already_booked": false
+      }
+    },
+    {
+      "at": 54.9,
+      "kind": "booking",
+      "turn": 5,
+      "data": {
+        "name": "Owen Brandt",
+        "slot": "Wed 8:20 AM",
+        "reason": "wire poking the inside of his cheek",
+        "insurance": ""
+      }
+    },
+    {
+      "at": 55.0,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "Let me get that set up for you."
+      }
+    },
+    {
+      "at": 56.7,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "Perfect — Owen is booked for Wednesday the twenty-second at eight twenty in the morning."
+      }
+    },
+    {
+      "at": 61.6,
+      "kind": "turn.caller",
+      "turn": 6,
+      "data": {
+        "text": "Okay. Is there — I mean, is there anything we can do tonight? He's really not happy."
+      }
+    },
+    {
+      "at": 66.5,
+      "kind": "turn.bot",
+      "turn": 6,
+      "data": {
+        "text": "I'm not able to give care advice over the phone, but I've flagged this as urgent, so the team sees it first thing in the morning."
+      }
+    },
+    {
+      "at": 73.0,
+      "kind": "turn.bot",
+      "turn": 6,
+      "data": {
+        "text": "If anything changes tonight, like bleeding or swelling, call back and tell me it's an emergency."
+      }
+    },
+    {
+      "at": 78.3,
+      "kind": "turn.caller",
+      "turn": 7,
+      "data": {
+        "text": "Okay. That actually helps. Thank you."
+      }
+    },
+    {
+      "at": 80.8,
+      "kind": "turn.bot",
+      "turn": 7,
+      "data": {
+        "text": "Of course — I hope Owen gets some rest tonight."
+      }
+    },
+    {
+      "at": 83.2,
+      "kind": "turn.bot",
+      "turn": 7,
+      "data": {
+        "text": "Is there anything else I can help you with?"
+      }
+    },
+    {
+      "at": 85.9,
+      "kind": "turn.caller",
+      "turn": 8,
+      "data": {
+        "text": "No, that's it. Thanks."
+      }
+    },
+    {
+      "at": 87.5,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "The front desk will confirm with you."
+      }
+    },
+    {
+      "at": 89.5,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "Take care!"
+      }
+    },
+    {
+      "at": 90.5,
+      "kind": "call.ended",
+      "turn": 8,
+      "data": {
+        "duration_s": 90.5,
+        "disposition": "phone-booked",
+        "bookings": 1,
+        "notes": 1
+      }
+    }
+  ]
+}

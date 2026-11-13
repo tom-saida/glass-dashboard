@@ -1,0 +1,350 @@
+{
+  "id": "s31",
+  "day": 0,
+  "start": "16:33:00",
+  "duration_s": 92.2,
+  "caller": "(941) ***-0131",
+  "caller_full": "(941) 555-0131",
+  "language": "en",
+  "greeted_as": "",
+  "disposition": "phone-booked",
+  "turns": 10,
+  "first_line": "Hey there. Quick question — do you guys take Humana? The dental one, I mean.",
+  "scenario": "humana_question_then_book",
+  "events": [
+    {
+      "at": 0.0,
+      "kind": "call.started",
+      "turn": 0,
+      "data": {
+        "caller": "(941) ***-0131"
+      }
+    },
+    {
+      "at": 1.2,
+      "kind": "greeting",
+      "turn": 0,
+      "data": {
+        "name": ""
+      }
+    },
+    {
+      "at": 5.0,
+      "kind": "turn.caller",
+      "turn": 1,
+      "data": {
+        "text": "Hey there. Quick question — do you guys take Humana? The dental one, I mean."
+      }
+    },
+    {
+      "at": 9.5,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "Good question!"
+      }
+    },
+    {
+      "at": 10.3,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "I'll have the team confirm your Humana coverage before the visit, so you're not guessing."
+      }
+    },
+    {
+      "at": 14.8,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "Are you looking to book an appointment?"
+      }
+    },
+    {
+      "at": 17.3,
+      "kind": "turn.caller",
+      "turn": 2,
+      "data": {
+        "text": "Yeah, for my son. He's eleven, and his dentist said he should see an orthodontist."
+      }
+    },
+    {
+      "at": 22.2,
+      "kind": "turn.bot",
+      "turn": 2,
+      "data": {
+        "text": "Let's get him in!"
+      }
+    },
+    {
+      "at": 23.1,
+      "kind": "turn.bot",
+      "turn": 2,
+      "data": {
+        "text": "What's your son's name?"
+      }
+    },
+    {
+      "at": 24.8,
+      "kind": "turn.caller",
+      "turn": 3,
+      "data": {
+        "text": "Mason. Mason Pruitt. P, R, U, I, T, T."
+      }
+    },
+    {
+      "at": 27.3,
+      "kind": "turn.bot",
+      "turn": 3,
+      "data": {
+        "text": "So that's Mason Pruitt — and what's his date of birth?"
+      }
+    },
+    {
+      "at": 30.6,
+      "kind": "turn.caller",
+      "turn": 4,
+      "data": {
+        "text": "Uh, June sixth, 2015."
+      }
+    },
+    {
+      "at": 32.2,
+      "kind": "tool",
+      "turn": 4,
+      "data": {
+        "name": "lookup",
+        "ok": true,
+        "ms": 622,
+        "verified": false
+      }
+    },
+    {
+      "at": 32.8,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "I don't see Mason in our system yet — is this his first visit with us?"
+      }
+    },
+    {
+      "at": 36.8,
+      "kind": "turn.caller",
+      "turn": 5,
+      "data": {
+        "text": "Yep, first time."
+      }
+    },
+    {
+      "at": 38.2,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "Nice, welcome to Harborline!"
+      }
+    },
+    {
+      "at": 39.7,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "Is the number you're calling from, ending in zero, one, three, one, the best one to reach you?"
+      }
+    },
+    {
+      "at": 44.9,
+      "kind": "turn.caller",
+      "turn": 6,
+      "data": {
+        "text": "Yeah, that's my cell."
+      }
+    },
+    {
+      "at": 46.5,
+      "kind": "turn.bot",
+      "turn": 6,
+      "data": {
+        "text": "What days work best for Mason — mornings or afternoons — or should I just grab the soonest opening?"
+      }
+    },
+    {
+      "at": 51.9,
+      "kind": "turn.caller",
+      "turn": 7,
+      "data": {
+        "text": "Fridays are good, actually. He gets out early on Fridays."
+      }
+    },
+    {
+      "at": 55.5,
+      "kind": "tool",
+      "turn": 7,
+      "data": {
+        "name": "context",
+        "ok": true,
+        "ms": 571,
+        "open_slots": 2
+      }
+    },
+    {
+      "at": 56.0,
+      "kind": "turn.bot",
+      "turn": 7,
+      "data": {
+        "text": "Let me check the schedule to see what times are available."
+      }
+    },
+    {
+      "at": 59.0,
+      "kind": "turn.bot",
+      "turn": 7,
+      "data": {
+        "text": "I have Friday the twenty-fourth at eleven forty in the morning — want me to grab it?"
+      }
+    },
+    {
+      "at": 63.7,
+      "kind": "turn.caller",
+      "turn": 8,
+      "data": {
+        "text": "Friday at eleven forty. Yeah, perfect."
+      }
+    },
+    {
+      "at": 66.2,
+      "kind": "tool",
+      "turn": 8,
+      "data": {
+        "name": "book",
+        "ok": true,
+        "ms": 398,
+        "slot": "Fri 11:40 AM",
+        "patient": "Mason Pruitt",
+        "already_booked": false
+      }
+    },
+    {
+      "at": 66.6,
+      "kind": "booking",
+      "turn": 8,
+      "data": {
+        "name": "Mason Pruitt",
+        "slot": "Fri 11:40 AM",
+        "reason": "consultation - referred by his dentist",
+        "insurance": "Humana"
+      }
+    },
+    {
+      "at": 66.7,
+      "kind": "tool",
+      "turn": 8,
+      "data": {
+        "name": "message",
+        "ok": true,
+        "ms": 640
+      }
+    },
+    {
+      "at": 67.4,
+      "kind": "note",
+      "turn": 8,
+      "data": {
+        "name": "Mason Pruitt",
+        "reason": "Verify Humana coverage before the visit (Fri 11:40 AM). New patient; parent asked whether Humana dental is accepted. [about patient Mason Pruitt]",
+        "urgent": false,
+        "fyi": false
+      }
+    },
+    {
+      "at": 67.5,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "Let me get that set up for you."
+      }
+    },
+    {
+      "at": 69.1,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "Perfect — Mason is booked for Friday the twenty-fourth at eleven forty in the morning."
+      }
+    },
+    {
+      "at": 73.5,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "I've also asked the team to check your Humana coverage before the visit."
+      }
+    },
+    {
+      "at": 77.6,
+      "kind": "turn.caller",
+      "turn": 9,
+      "data": {
+        "text": "Great. So will they call me about that, or—"
+      }
+    },
+    {
+      "at": 80.4,
+      "kind": "turn.bot",
+      "turn": 9,
+      "data": {
+        "text": "If anything comes up with your coverage, they'll call you before Friday."
+      }
+    },
+    {
+      "at": 84.0,
+      "kind": "turn.bot",
+      "turn": 9,
+      "data": {
+        "text": "Is there anything else I can help you with?"
+      }
+    },
+    {
+      "at": 86.7,
+      "kind": "turn.caller",
+      "turn": 10,
+      "data": {
+        "text": "No, that's it. Thanks a lot."
+      }
+    },
+    {
+      "at": 88.7,
+      "kind": "turn.bot",
+      "turn": 10,
+      "data": {
+        "text": "Perfect!"
+      }
+    },
+    {
+      "at": 89.2,
+      "kind": "turn.bot",
+      "turn": 10,
+      "data": {
+        "text": "The front desk will confirm with you."
+      }
+    },
+    {
+      "at": 91.1,
+      "kind": "turn.bot",
+      "turn": 10,
+      "data": {
+        "text": "Take care!"
+      }
+    },
+    {
+      "at": 92.2,
+      "kind": "call.ended",
+      "turn": 10,
+      "data": {
+        "duration_s": 92.2,
+        "disposition": "phone-booked",
+        "bookings": 1,
+        "notes": 1
+      }
+    }
+  ]
+}

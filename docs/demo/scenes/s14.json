@@ -1,0 +1,297 @@
+{
+  "id": "s14",
+  "day": 0,
+  "start": "11:03:00",
+  "duration_s": 81.6,
+  "caller": "(813) ***-0114",
+  "caller_full": "(813) 555-0114",
+  "language": "es",
+  "greeted_as": "",
+  "disposition": "phone-booked",
+  "turns": 7,
+  "first_line": "Hola, buenos días, eh... tengo una cita el jueves y necesito cambiarla, porque me salió algo en el trabajo.",
+  "scenario": "es_reschedule_existing",
+  "events": [
+    {
+      "at": 0,
+      "kind": "call.started",
+      "turn": 0,
+      "data": {
+        "caller": "(813) ***-0114"
+      }
+    },
+    {
+      "at": 1.2,
+      "kind": "greeting",
+      "turn": 0,
+      "data": {
+        "name": ""
+      }
+    },
+    {
+      "at": 5.6,
+      "kind": "turn.caller",
+      "turn": 1,
+      "data": {
+        "text": "Hola, buenos días, eh... tengo una cita el jueves y necesito cambiarla, porque me salió algo en el trabajo."
+      }
+    },
+    {
+      "at": 5.6,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "¡Claro, con gusto le ayudo!"
+      }
+    },
+    {
+      "at": 5.6,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "¿Me da su nombre, por favor?"
+      }
+    },
+    {
+      "at": 16.9,
+      "kind": "turn.caller",
+      "turn": 2,
+      "data": {
+        "text": "Sí, Daniela Ríos."
+      }
+    },
+    {
+      "at": 16.9,
+      "kind": "turn.bot",
+      "turn": 2,
+      "data": {
+        "text": "Entonces es Daniela Ríos — ¿y cuál es su fecha de nacimiento?"
+      }
+    },
+    {
+      "at": 29.1,
+      "kind": "turn.caller",
+      "turn": 3,
+      "data": {
+        "text": "El doce de junio del dos mil uno."
+      }
+    },
+    {
+      "at": 29.1,
+      "kind": "tool",
+      "turn": 3,
+      "data": {
+        "name": "lookup",
+        "ok": true,
+        "ms": 603,
+        "verified": true
+      }
+    },
+    {
+      "at": 29.1,
+      "kind": "turn.bot",
+      "turn": 3,
+      "data": {
+        "text": "Gracias, Daniela, ya la encontré."
+      }
+    },
+    {
+      "at": 29.1,
+      "kind": "turn.bot",
+      "turn": 3,
+      "data": {
+        "text": "Veo su cita el jueves veintitrés a las ocho y cuarenta de la mañana — ¿es esa la que quiere cambiar?"
+      }
+    },
+    {
+      "at": 42.6,
+      "kind": "turn.caller",
+      "turn": 4,
+      "data": {
+        "text": "Sí, esa. ¿Tiene algo el viernes, temprano?"
+      }
+    },
+    {
+      "at": 42.6,
+      "kind": "tool",
+      "turn": 4,
+      "data": {
+        "name": "context",
+        "ok": true,
+        "ms": 688,
+        "open_slots": 2
+      }
+    },
+    {
+      "at": 42.6,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "Déjeme revisar el horario para ver qué hay disponible."
+      }
+    },
+    {
+      "at": 42.6,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "Tengo el viernes veinticuatro a las nueve y veinte de la mañana — ¿se la reservo?"
+      }
+    },
+    {
+      "at": 55.4,
+      "kind": "turn.caller",
+      "turn": 5,
+      "data": {
+        "text": "Ay, perfecto, sí, a las nueve y veinte me queda bien."
+      }
+    },
+    {
+      "at": 55.4,
+      "kind": "tool",
+      "turn": 5,
+      "data": {
+        "name": "cancel",
+        "ok": true,
+        "ms": 418,
+        "slot": "Thu 8:40 AM"
+      }
+    },
+    {
+      "at": 55.4,
+      "kind": "cancel",
+      "turn": 5,
+      "data": {
+        "name": "Daniela Ríos",
+        "slot": "Thu 8:40 AM"
+      }
+    },
+    {
+      "at": 55.4,
+      "kind": "tool",
+      "turn": 5,
+      "data": {
+        "name": "book",
+        "ok": true,
+        "ms": 395,
+        "slot": "Fri 9:20 AM",
+        "patient": "Daniela Ríos",
+        "already_booked": false
+      }
+    },
+    {
+      "at": 55.4,
+      "kind": "booking",
+      "turn": 5,
+      "data": {
+        "name": "Daniela Ríos",
+        "slot": "Fri 9:20 AM",
+        "reason": "reschedule from Thu 8:40 AM",
+        "insurance": ""
+      }
+    },
+    {
+      "at": 55.4,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "Listo — ya cancelé la cita del jueves."
+      }
+    },
+    {
+      "at": 55.4,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "Perfecto — queda reservada para el viernes veinticuatro a las nueve y veinte de la mañana."
+      }
+    },
+    {
+      "at": 55.4,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "¿Le mando un mensaje de texto de confirmación al número del que llama, que termina en cero, uno, uno, cuatro?"
+      }
+    },
+    {
+      "at": 65.0,
+      "kind": "turn.caller",
+      "turn": 6,
+      "data": {
+        "text": "Sí, por favor, mándemelo."
+      }
+    },
+    {
+      "at": 65.0,
+      "kind": "turn.bot",
+      "turn": 6,
+      "data": {
+        "text": "¿Hay algo más en que le pueda ayudar?"
+      }
+    },
+    {
+      "at": 75.4,
+      "kind": "turn.caller",
+      "turn": 7,
+      "data": {
+        "text": "No, eso es todo. Muchas gracias, muy amable."
+      }
+    },
+    {
+      "at": 75.4,
+      "kind": "turn.bot",
+      "turn": 7,
+      "data": {
+        "text": "¡Perfecto!"
+      }
+    },
+    {
+      "at": 75.4,
+      "kind": "turn.bot",
+      "turn": 7,
+      "data": {
+        "text": "La recepción le confirmará."
+      }
+    },
+    {
+      "at": 75.4,
+      "kind": "turn.bot",
+      "turn": 7,
+      "data": {
+        "text": "¡Que le vaya bien!"
+      }
+    },
+    {
+      "at": 81.0,
+      "kind": "sms.out",
+      "turn": 7,
+      "data": {
+        "caller": "(813) ***-0114",
+        "kind": "confirmation",
+        "chars": 36
+      }
+    },
+    {
+      "at": 81.3,
+      "kind": "sms.in",
+      "turn": 7,
+      "data": {
+        "caller": "(813) ***-0114",
+        "kind": "yes",
+        "chars": 2
+      }
+    },
+    {
+      "at": 81.6,
+      "kind": "call.ended",
+      "turn": 7,
+      "data": {
+        "duration_s": 81.6,
+        "disposition": "phone-booked",
+        "bookings": 1,
+        "notes": 0
+      }
+    }
+  ]
+}

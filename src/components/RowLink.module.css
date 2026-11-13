@@ -1,0 +1,21 @@
+/* Every clickable row (DESIGN 6): a link, hover background, pointer, the inset focus ring
+   (--focus-ring-inset, global.css). */
+.rowLink {
+  cursor: pointer;
+  transition: background-color var(--motion-productive-medium) var(--motion-timing-transition);
+}
+
+.rowLink:hover {
+  background: var(--primary-background-hover-color);
+}
+
+.rowLink:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring-inset);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rowLink {
+    transition: none;
+  }
+}

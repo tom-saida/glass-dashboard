@@ -1,0 +1,341 @@
+{
+  "id": "s33",
+  "day": 0,
+  "start": "18:12:00",
+  "duration_s": 93.8,
+  "caller": "(813) ***-0133",
+  "caller_full": "(813) 555-0133",
+  "language": "en",
+  "greeted_as": "",
+  "disposition": "phone-booked",
+  "turns": 10,
+  "first_line": "Oh — hi. I figured you'd be closed by now. Um, I wanted to set up a consultation for my daughter? For braces.",
+  "scenario": "after_hours_new_patient_consult_text",
+  "events": [
+    {
+      "at": 0.0,
+      "kind": "call.started",
+      "turn": 0,
+      "data": {
+        "caller": "(813) ***-0133"
+      }
+    },
+    {
+      "at": 1.2,
+      "kind": "greeting",
+      "turn": 0,
+      "data": {
+        "name": ""
+      }
+    },
+    {
+      "at": 5.0,
+      "kind": "turn.caller",
+      "turn": 1,
+      "data": {
+        "text": "Oh — hi. I figured you'd be closed by now. Um, I wanted to set up a consultation for my daughter? For braces."
+      }
+    },
+    {
+      "at": 11.3,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "We're closed for the night, but I can still get her booked!"
+      }
+    },
+    {
+      "at": 14.3,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "What's your daughter's name?"
+      }
+    },
+    {
+      "at": 16.2,
+      "kind": "turn.caller",
+      "turn": 2,
+      "data": {
+        "text": "Isabella Hartwell."
+      }
+    },
+    {
+      "at": 17.7,
+      "kind": "turn.bot",
+      "turn": 2,
+      "data": {
+        "text": "So that's Isabella Hartwell — and what's her date of birth?"
+      }
+    },
+    {
+      "at": 21.2,
+      "kind": "turn.caller",
+      "turn": 3,
+      "data": {
+        "text": "April seventeenth, 2014."
+      }
+    },
+    {
+      "at": 23.0,
+      "kind": "tool",
+      "turn": 3,
+      "data": {
+        "name": "lookup",
+        "ok": true,
+        "ms": 612,
+        "verified": false
+      }
+    },
+    {
+      "at": 23.6,
+      "kind": "turn.bot",
+      "turn": 3,
+      "data": {
+        "text": "I don't see Isabella in our system yet — is this her first visit with us?"
+      }
+    },
+    {
+      "at": 27.7,
+      "kind": "turn.caller",
+      "turn": 4,
+      "data": {
+        "text": "First time, yeah. Her two front teeth are kind of — they're coming in crooked, and her dentist said to call you guys."
+      }
+    },
+    {
+      "at": 34.4,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "Glad her dentist sent you our way — the doctor will take a good look."
+      }
+    },
+    {
+      "at": 37.9,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "And do you have dental insurance for Isabella — who's the provider?"
+      }
+    },
+    {
+      "at": 41.8,
+      "kind": "turn.caller",
+      "turn": 5,
+      "data": {
+        "text": "Cigna. Through my husband's work."
+      }
+    },
+    {
+      "at": 44.1,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "Got it, Cigna."
+      }
+    },
+    {
+      "at": 44.9,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "Is the number you're calling from, ending in zero, one, three, three, the best one to reach you?"
+      }
+    },
+    {
+      "at": 50.2,
+      "kind": "turn.caller",
+      "turn": 6,
+      "data": {
+        "text": "Yes, that's my cell."
+      }
+    },
+    {
+      "at": 51.7,
+      "kind": "turn.bot",
+      "turn": 6,
+      "data": {
+        "text": "What days work best for Isabella — mornings or afternoons — or should I just grab the soonest opening?"
+      }
+    },
+    {
+      "at": 57.3,
+      "kind": "turn.caller",
+      "turn": 7,
+      "data": {
+        "text": "Early morning, if you have it. Before school would be ideal."
+      }
+    },
+    {
+      "at": 61.0,
+      "kind": "tool",
+      "turn": 7,
+      "data": {
+        "name": "context",
+        "ok": true,
+        "ms": 655,
+        "open_slots": 3
+      }
+    },
+    {
+      "at": 61.7,
+      "kind": "turn.bot",
+      "turn": 7,
+      "data": {
+        "text": "Let me check the schedule to see what times are available."
+      }
+    },
+    {
+      "at": 64.6,
+      "kind": "turn.bot",
+      "turn": 7,
+      "data": {
+        "text": "I have Thursday the twenty-third at eight in the morning — want me to grab it?"
+      }
+    },
+    {
+      "at": 69.0,
+      "kind": "turn.caller",
+      "turn": 8,
+      "data": {
+        "text": "Thursday at eight. Yes."
+      }
+    },
+    {
+      "at": 70.8,
+      "kind": "tool",
+      "turn": 8,
+      "data": {
+        "name": "book",
+        "ok": true,
+        "ms": 402,
+        "slot": "Thu 8:00 AM",
+        "patient": "Isabella Hartwell",
+        "already_booked": false
+      }
+    },
+    {
+      "at": 71.2,
+      "kind": "booking",
+      "turn": 8,
+      "data": {
+        "name": "Isabella Hartwell",
+        "slot": "Thu 8:00 AM",
+        "reason": "front teeth coming in crooked - referred by her dentist",
+        "insurance": "Cigna"
+      }
+    },
+    {
+      "at": 71.3,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "Let me get that set up for you."
+      }
+    },
+    {
+      "at": 72.9,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "Perfect — Isabella is booked for Thursday the twenty-third at eight in the morning."
+      }
+    },
+    {
+      "at": 77.1,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "Can I text a confirmation to the number ending in zero, one, three, three?"
+      }
+    },
+    {
+      "at": 81.3,
+      "kind": "turn.caller",
+      "turn": 9,
+      "data": {
+        "text": "Yes, please. Text is great."
+      }
+    },
+    {
+      "at": 83.5,
+      "kind": "turn.bot",
+      "turn": 9,
+      "data": {
+        "text": "Great — I'll send that over when we hang up."
+      }
+    },
+    {
+      "at": 84.7,
+      "kind": "turn.bot",
+      "turn": 9,
+      "data": {
+        "text": "Is there anything else I can help you with?"
+      }
+    },
+    {
+      "at": 87.4,
+      "kind": "turn.caller",
+      "turn": 10,
+      "data": {
+        "text": "No, that's it. Thank you — that was so easy."
+      }
+    },
+    {
+      "at": 90.3,
+      "kind": "turn.bot",
+      "turn": 10,
+      "data": {
+        "text": "Perfect!"
+      }
+    },
+    {
+      "at": 90.8,
+      "kind": "turn.bot",
+      "turn": 10,
+      "data": {
+        "text": "The front desk will confirm with you."
+      }
+    },
+    {
+      "at": 92.8,
+      "kind": "turn.bot",
+      "turn": 10,
+      "data": {
+        "text": "Take care!"
+      }
+    },
+    {
+      "at": 93.2,
+      "kind": "sms.out",
+      "turn": 10,
+      "data": {
+        "caller": "(813) ***-0133",
+        "kind": "confirmation",
+        "chars": 97
+      }
+    },
+    {
+      "at": 93.5,
+      "kind": "sms.in",
+      "turn": 10,
+      "data": {
+        "caller": "(813) ***-0133",
+        "kind": "yes",
+        "chars": 3
+      }
+    },
+    {
+      "at": 93.8,
+      "kind": "call.ended",
+      "turn": 10,
+      "data": {
+        "duration_s": 93.8,
+        "disposition": "phone-booked",
+        "bookings": 1,
+        "notes": 0
+      }
+    }
+  ]
+}

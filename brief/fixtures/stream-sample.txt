@@ -1,0 +1,57 @@
+event: call.started
+data: {"ts": 1791840925.1392791, "call_id": "CA294650154870", "kind": "call.started", "turn": 0, "data": {"caller": "(656) ***-0150"}}
+
+event: greeting
+data: {"ts": 1791840935.5362792, "call_id": "CA294650154870", "kind": "greeting", "turn": 0, "data": {"name": ""}}
+
+event: turn.caller
+data: {"ts": 1791840935.5362792, "call_id": "CA294650154870", "kind": "turn.caller", "turn": 1, "data": {"text": "Hi, um, my daughter has a bracket that came off this morning and I'm looking to get her in as soon as possible."}}
+
+event: turn.bot
+data: {"ts": 1791840935.5362792, "call_id": "CA294650154870", "kind": "turn.bot", "turn": 1, "data": {"text": "Oh no, that's no fun — let me get that taken care of right now.Let me get you the closest appointment we have — unless this is an emergency right now, or you'd rather speak with the clinical team first?"}}
+
+event: turn.caller
+data: {"ts": 1791840948.8712792, "call_id": "CA294650154870", "kind": "turn.caller", "turn": 2, "data": {"text": "No, just the soonest appointment would be great. Thanks."}}
+
+event: tool
+data: {"ts": 1791840948.8712792, "call_id": "CA294650154870", "kind": "tool", "turn": 2, "data": {"name": "message", "ok": true, "ms": 773}}
+
+event: note
+data: {"ts": 1791840948.8712792, "call_id": "CA294650154870", "kind": "note", "turn": 2, "data": {"name": "unknown (booking to follow on this call)", "reason": "URGENT: Daughter's bracket came off this morning, needs to be seen as soon as possible. [NOT an emergency - caller is booking the soonest visit on this call; note is informational]", "urgent": true, "fyi": false}}
+
+event: turn.bot
+data: {"ts": 1791840948.8712792, "call_id": "CA294650154870", "kind": "turn.bot", "turn": 2, "data": {"text": "What's your daughter's name?"}}
+
+event: turn.caller
+data: {"ts": 1791840960.0252793, "call_id": "CA294650154870", "kind": "turn.caller", "turn": 3, "data": {"text": "Marcus Webb."}}
+
+event: turn.bot
+data: {"ts": 1791840960.0252793, "call_id": "CA294650154870", "kind": "turn.bot", "turn": 3, "data": {"text": "So that's Marcus Webb — and what's his date of birth?"}}
+
+event: turn.caller
+data: {"ts": 1791840971.3402793, "call_id": "CA294650154870", "kind": "turn.caller", "turn": 4, "data": {"text": "March 14th, 2012."}}
+
+event: tool
+data: {"ts": 1791840971.3402793, "call_id": "CA294650154870", "kind": "tool", "turn": 4, "data": {"name": "lookup", "ok": true, "ms": 1035, "verified": false}}
+
+event: tool
+data: {"ts": 1791840971.3402793, "call_id": "CA294650154870", "kind": "tool", "turn": 4, "data": {"name": "context", "ok": true, "ms": 898, "open_slots": 0}}
+
+event: tool
+data: {"ts": 1791840971.3402793, "call_id": "CA294650154870", "kind": "tool", "turn": 4, "data": {"name": "message", "ok": true, "ms": 385}}
+
+event: note
+data: {"ts": 1791840971.3402793, "call_id": "CA294650154870", "kind": "note", "turn": 4, "data": {"name": "unknown (name to follow if given)", "reason": "Existing patient Marcus Webb, DOB on file: reschedule of existing appointment — no open slots in the next 7 days, call back with times [has existing appt Wed 3:20 PM] [about patient Marcus Webb]", "urgent": false, "fyi": false}}
+
+event: turn.bot
+data: {"ts": 1791840971.3402793, "call_id": "CA294650154870", "kind": "turn.bot", "turn": 4, "data": {"text": "Let me check the schedule to see what times are available.I don't have any openings in the schedule right now, so I've passed this to the team — Got it — the team will call you back.Is there anything else I can help you with?"}}
+
+event: turn.caller
+data: {"ts": 1791840979.6062794, "call_id": "CA294650154870", "kind": "turn.caller", "turn": 5, "data": {"text": "No, that's perfect. Thank you so much."}}
+
+event: turn.bot
+data: {"ts": 1791840979.6062794, "call_id": "CA294650154870", "kind": "turn.bot", "turn": 5, "data": {"text": "The front desk will confirm with you.Take care!"}}
+
+event: call.ended
+data: {"ts": 1791842740.1550138, "call_id": "CA294650154870", "kind": "call.ended", "turn": 5, "data": {"duration_s": 1815.0, "disposition": "phone-no-booking", "bookings": 0, "notes": 2}}
+

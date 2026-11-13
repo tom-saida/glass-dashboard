@@ -1,0 +1,115 @@
+{
+  "id": "s12",
+  "day": 0,
+  "start": "10:30:00",
+  "duration_s": 40.2,
+  "caller": "(352) ***-0112",
+  "caller_full": "(352) 555-0112",
+  "language": "en",
+  "greeted_as": "",
+  "disposition": "phone-no-booking",
+  "turns": 3,
+  "first_line": "Hi, um, quick question — do you guys do cleanings? And, like, teeth whitening?",
+  "scenario": "not_our_service",
+  "events": [
+    {
+      "at": 0,
+      "kind": "call.started",
+      "turn": 0,
+      "data": {
+        "caller": "(352) ***-0112"
+      }
+    },
+    {
+      "at": 1.2,
+      "kind": "greeting",
+      "turn": 0,
+      "data": {
+        "name": ""
+      }
+    },
+    {
+      "at": 5.6,
+      "kind": "turn.caller",
+      "turn": 1,
+      "data": {
+        "text": "Hi, um, quick question — do you guys do cleanings? And, like, teeth whitening?"
+      }
+    },
+    {
+      "at": 5.6,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "Good question!"
+      }
+    },
+    {
+      "at": 5.6,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "We're an orthodontics office, so we focus on braces and aligners — cleanings and whitening would be with a general dentist."
+      }
+    },
+    {
+      "at": 5.6,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "Want me to leave a message for the team in case they can point you in the right direction?"
+      }
+    },
+    {
+      "at": 22.4,
+      "kind": "turn.caller",
+      "turn": 2,
+      "data": {
+        "text": "Oh, okay. No, that's alright, I'll just call my regular dentist."
+      }
+    },
+    {
+      "at": 22.4,
+      "kind": "turn.bot",
+      "turn": 2,
+      "data": {
+        "text": "Sounds good!"
+      }
+    },
+    {
+      "at": 22.4,
+      "kind": "turn.bot",
+      "turn": 2,
+      "data": {
+        "text": "Is there anything else I can help you with?"
+      }
+    },
+    {
+      "at": 34.6,
+      "kind": "turn.caller",
+      "turn": 3,
+      "data": {
+        "text": "Nope, that's it. Thanks anyway."
+      }
+    },
+    {
+      "at": 34.6,
+      "kind": "turn.bot",
+      "turn": 3,
+      "data": {
+        "text": "Take care!"
+      }
+    },
+    {
+      "at": 40.2,
+      "kind": "call.ended",
+      "turn": 3,
+      "data": {
+        "duration_s": 40.2,
+        "disposition": "phone-no-booking",
+        "bookings": 0,
+        "notes": 0
+      }
+    }
+  ]
+}

@@ -1,0 +1,231 @@
+{
+  "id": "s22",
+  "day": 0,
+  "start": "13:44:00",
+  "duration_s": 64.9,
+  "caller": "(904) ***-0122",
+  "caller_full": "(904) 555-0122",
+  "language": "en",
+  "greeted_as": "",
+  "disposition": "phone-no-booking",
+  "turns": 6,
+  "first_line": "Hi, um, I need to cancel my daughter's appointment on Thursday? Something came up at work and I just can't get her there.",
+  "scenario": "cancel_will_call_back",
+  "events": [
+    {
+      "at": 0,
+      "kind": "call.started",
+      "turn": 0,
+      "data": {
+        "caller": "(904) ***-0122"
+      }
+    },
+    {
+      "at": 1.2,
+      "kind": "greeting",
+      "turn": 0,
+      "data": {
+        "name": ""
+      }
+    },
+    {
+      "at": 10.1,
+      "kind": "turn.caller",
+      "turn": 1,
+      "data": {
+        "text": "Hi, um, I need to cancel my daughter's appointment on Thursday? Something came up at work and I just can't get her there."
+      }
+    },
+    {
+      "at": 10.1,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "No problem — I can help with that."
+      }
+    },
+    {
+      "at": 10.1,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "What's your daughter's name?"
+      }
+    },
+    {
+      "at": 18.3,
+      "kind": "turn.caller",
+      "turn": 2,
+      "data": {
+        "text": "It's Sophie. Sophie Lowry."
+      }
+    },
+    {
+      "at": 18.3,
+      "kind": "turn.bot",
+      "turn": 2,
+      "data": {
+        "text": "So that's Sophie Lowry — and what's her date of birth?"
+      }
+    },
+    {
+      "at": 25.9,
+      "kind": "turn.caller",
+      "turn": 3,
+      "data": {
+        "text": "November ninth, 2013."
+      }
+    },
+    {
+      "at": 25.9,
+      "kind": "tool",
+      "turn": 3,
+      "data": {
+        "name": "lookup",
+        "ok": true,
+        "ms": 655,
+        "verified": true
+      }
+    },
+    {
+      "at": 25.9,
+      "kind": "turn.bot",
+      "turn": 3,
+      "data": {
+        "text": "Thanks — I found Sophie."
+      }
+    },
+    {
+      "at": 25.9,
+      "kind": "turn.bot",
+      "turn": 3,
+      "data": {
+        "text": "I see her appointment on Thursday the twenty-third at two twenty in the afternoon — do you want me to cancel that one?"
+      }
+    },
+    {
+      "at": 38.3,
+      "kind": "turn.caller",
+      "turn": 4,
+      "data": {
+        "text": "Yes, please."
+      }
+    },
+    {
+      "at": 38.3,
+      "kind": "tool",
+      "turn": 4,
+      "data": {
+        "name": "cancel",
+        "ok": true,
+        "ms": 418,
+        "slot": "Thu 2:20 PM"
+      }
+    },
+    {
+      "at": 38.3,
+      "kind": "cancel",
+      "turn": 4,
+      "data": {
+        "name": "Sophie Lowry",
+        "slot": "Thu 2:20 PM"
+      }
+    },
+    {
+      "at": 38.3,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "Okay, that's cancelled."
+      }
+    },
+    {
+      "at": 38.3,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "Would you like to pick a new time now?"
+      }
+    },
+    {
+      "at": 50.4,
+      "kind": "turn.caller",
+      "turn": 5,
+      "data": {
+        "text": "Not right now — I have to look at my schedule first. I'll call back to rebook."
+      }
+    },
+    {
+      "at": 50.4,
+      "kind": "tool",
+      "turn": 5,
+      "data": {
+        "name": "message",
+        "ok": true,
+        "ms": 690
+      }
+    },
+    {
+      "at": 50.4,
+      "kind": "note",
+      "turn": 5,
+      "data": {
+        "urgent": false,
+        "fyi": false,
+        "name": "Sophie Lowry",
+        "reason": "Cancelled Thu 2:20 PM appointment (parent has a work conflict) - parent will call back to rebook. [about patient Sophie Lowry]"
+      }
+    },
+    {
+      "at": 50.4,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "Totally fine!"
+      }
+    },
+    {
+      "at": 50.4,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "I've let the team know you'll call back to rebook."
+      }
+    },
+    {
+      "at": 50.4,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "Is there anything else I can help you with?"
+      }
+    },
+    {
+      "at": 61.3,
+      "kind": "turn.caller",
+      "turn": 6,
+      "data": {
+        "text": "No, that's all. Thanks."
+      }
+    },
+    {
+      "at": 61.3,
+      "kind": "turn.bot",
+      "turn": 6,
+      "data": {
+        "text": "Take care!"
+      }
+    },
+    {
+      "at": 64.9,
+      "kind": "call.ended",
+      "turn": 6,
+      "data": {
+        "duration_s": 64.9,
+        "disposition": "phone-no-booking",
+        "bookings": 0,
+        "notes": 1
+      }
+    }
+  ]
+}

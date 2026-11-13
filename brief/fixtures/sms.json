@@ -1,0 +1,94 @@
+{
+  "sms": [
+    {
+      "id": 275,
+      "ts": 1791842740.1537879,
+      "call_id": "CA860072416005",
+      "direction": "in",
+      "phone": "(813) ***-0173",
+      "kind": "yes",
+      "chars": 3
+    },
+    {
+      "id": 274,
+      "ts": 1791842740.153762,
+      "call_id": "CA860072416005",
+      "direction": "out",
+      "phone": "(813) ***-0173",
+      "kind": "confirmation",
+      "chars": 36
+    },
+    {
+      "id": 228,
+      "ts": 1791842740.151948,
+      "call_id": "CA553763107872",
+      "direction": "in",
+      "phone": "(727) ***-0131",
+      "kind": "yes",
+      "chars": 3
+    },
+    {
+      "id": 227,
+      "ts": 1791842740.151925,
+      "call_id": "CA553763107872",
+      "direction": "out",
+      "phone": "(727) ***-0131",
+      "kind": "confirmation",
+      "chars": 36
+    },
+    {
+      "id": 195,
+      "ts": 1791842740.150451,
+      "call_id": "CA616760583988",
+      "direction": "in",
+      "phone": "(813) ***-0199",
+      "kind": "yes",
+      "chars": 3
+    },
+    {
+      "id": 194,
+      "ts": 1791842740.15042,
+      "call_id": "CA616760583988",
+      "direction": "out",
+      "phone": "(813) ***-0199",
+      "kind": "confirmation",
+      "chars": 36
+    },
+    {
+      "id": 156,
+      "ts": 1791842740.1473138,
+      "call_id": "CA282092447514",
+      "direction": "out",
+      "phone": "(656) ***-0127",
+      "kind": "confirmation",
+      "chars": 36
+    },
+    {
+      "id": 126,
+      "ts": 1791842740.145797,
+      "call_id": "CA631599125074",
+      "direction": "out",
+      "phone": "(813) ***-0162",
+      "kind": "confirmation",
+      "chars": 36
+    },
+    {
+      "id": 38,
+      "ts": 1791842740.141331,
+      "call_id": "CA987474854629",
+      "direction": "in",
+      "phone": "(813) ***-0144",
+      "kind": "yes",
+      "chars": 3
+    },
+    {
+      "id": 37,
+      "ts": 1791842740.141299,
+      "call_id": "CA987474854629",
+      "direction": "out",
+      "phone": "(813) ***-0144",
+      "kind": "confirmation",
+      "chars": 36
+    }
+  ]
+}

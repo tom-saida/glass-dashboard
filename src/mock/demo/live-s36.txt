@@ -1,0 +1,137 @@
+event: call.started
+data: {"ts": 0.0, "call_id": "CA418009612779", "kind": "call.started", "turn": 0, "data": {"caller": "(813) ***-0136"}}
+
+event: greeting
+data: {"ts": 1.2, "call_id": "CA418009612779", "kind": "greeting", "turn": 0, "data": {"name": ""}}
+
+event: turn.caller
+data: {"ts": 5.0, "call_id": "CA418009612779", "kind": "turn.caller", "turn": 1, "data": {"text": "Hi — oh, hi. Sorry, I wasn't sure anyone would pick up this late. I'm calling about braces for my daughter? She's thirteen."}}
+
+event: turn.bot
+data: {"ts": 11.8, "call_id": "CA418009612779", "kind": "turn.bot", "turn": 1, "data": {"text": "I'm so glad you called!"}}
+
+event: turn.bot
+data: {"ts": 13.1, "call_id": "CA418009612779", "kind": "turn.bot", "turn": 1, "data": {"text": "Braces for your daughter — let's get her in!"}}
+
+event: turn.bot
+data: {"ts": 15.3, "call_id": "CA418009612779", "kind": "turn.bot", "turn": 1, "data": {"text": "Has she been to see us before, or would this be her first visit?"}}
+
+event: turn.caller
+data: {"ts": 18.9, "call_id": "CA418009612779", "kind": "turn.caller", "turn": 2, "data": {"text": "First time. Oh, and before we go any further — do you take Delta Dental? That's kind of a deal-breaker for us."}}
+
+event: turn.bot
+data: {"ts": 25.1, "call_id": "CA418009612779", "kind": "turn.bot", "turn": 2, "data": {"text": "Yep, we do take Delta Dental!"}}
+
+event: turn.bot
+data: {"ts": 26.6, "call_id": "CA418009612779", "kind": "turn.bot", "turn": 2, "data": {"text": "What's your daughter's name?"}}
+
+event: turn.caller
+data: {"ts": 28.5, "call_id": "CA418009612779", "kind": "turn.caller", "turn": 3, "data": {"text": "Okay, good. Her name is Ellie. Ellie Navarro."}}
+
+event: turn.bot
+data: {"ts": 31.3, "call_id": "CA418009612779", "kind": "turn.bot", "turn": 3, "data": {"text": "So that's Ellie Navarro — and what's her date of birth?"}}
+
+event: turn.caller
+data: {"ts": 34.5, "call_id": "CA418009612779", "kind": "turn.caller", "turn": 4, "data": {"text": "March ninth, 2013."}}
+
+event: tool
+data: {"ts": 35.9, "call_id": "CA418009612779", "kind": "tool", "turn": 4, "data": {"name": "lookup", "ok": true, "ms": 574, "verified": false}}
+
+event: turn.bot
+data: {"ts": 36.5, "call_id": "CA418009612779", "kind": "turn.bot", "turn": 4, "data": {"text": "I don't see Ellie in our system yet, so this will be her first visit — welcome to Harborline!"}}
+
+event: turn.bot
+data: {"ts": 41.1, "call_id": "CA418009612779", "kind": "turn.bot", "turn": 4, "data": {"text": "What's bringing Ellie in — is there something specific you've noticed?"}}
+
+event: turn.caller
+data: {"ts": 45.0, "call_id": "CA418009612779", "kind": "turn.caller", "turn": 5, "data": {"text": "Um, her top teeth kind of stick out, and her dentist said it's time. She's a little nervous about it, honestly."}}
+
+event: turn.bot
+data: {"ts": 51.2, "call_id": "CA418009612779", "kind": "turn.bot", "turn": 5, "data": {"text": "Totally understandable — the doctor will walk you both through everything at the visit."}}
+
+event: turn.bot
+data: {"ts": 55.5, "call_id": "CA418009612779", "kind": "turn.bot", "turn": 5, "data": {"text": "Is the number you're calling from, ending in zero, one, three, six, the best one to reach you?"}}
+
+event: turn.caller
+data: {"ts": 60.6, "call_id": "CA418009612779", "kind": "turn.caller", "turn": 6, "data": {"text": "Yes, that's my cell."}}
+
+event: turn.bot
+data: {"ts": 62.1, "call_id": "CA418009612779", "kind": "turn.bot", "turn": 6, "data": {"text": "What days work best for Ellie — mornings or afternoons — or should I just grab the soonest opening?"}}
+
+event: turn.caller
+data: {"ts": 67.4, "call_id": "CA418009612779", "kind": "turn.caller", "turn": 7, "data": {"text": "What do you have this week? She doesn't have school Thursday — it's a teacher workday — if that helps."}}
+
+event: tool
+data: {"ts": 73.2, "call_id": "CA418009612779", "kind": "tool", "turn": 7, "data": {"name": "context", "ok": true, "ms": 618, "open_slots": 3}}
+
+event: turn.bot
+data: {"ts": 73.8, "call_id": "CA418009612779", "kind": "turn.bot", "turn": 7, "data": {"text": "Let me check the schedule to see what times are available."}}
+
+event: turn.bot
+data: {"ts": 76.7, "call_id": "CA418009612779", "kind": "turn.bot", "turn": 7, "data": {"text": "I have Thursday the twenty-third at ten in the morning, or Friday the twenty-fourth at eight forty — which works better?"}}
+
+event: turn.caller
+data: {"ts": 83.0, "call_id": "CA418009612779", "kind": "turn.caller", "turn": 8, "data": {"text": "Thursday at ten works. She can sleep in for once."}}
+
+event: tool
+data: {"ts": 86.1, "call_id": "CA418009612779", "kind": "tool", "turn": 8, "data": {"name": "book", "ok": true, "ms": 391, "slot": "Thu 10:00 AM", "patient": "Ellie Navarro", "already_booked": false}}
+
+event: booking
+data: {"ts": 86.5, "call_id": "CA418009612779", "kind": "booking", "turn": 8, "data": {"name": "Ellie Navarro", "slot": "Thu 10:00 AM", "reason": "top teeth stick out - referred by her dentist", "insurance": "Delta Dental"}}
+
+event: turn.bot
+data: {"ts": 86.6, "call_id": "CA418009612779", "kind": "turn.bot", "turn": 8, "data": {"text": "Let me get that set up for you."}}
+
+event: turn.bot
+data: {"ts": 88.2, "call_id": "CA418009612779", "kind": "turn.bot", "turn": 8, "data": {"text": "Perfect — Ellie is booked for Thursday the twenty-third at ten in the morning."}}
+
+event: turn.bot
+data: {"ts": 92.0, "call_id": "CA418009612779", "kind": "turn.bot", "turn": 8, "data": {"text": "And let me make sure I have the name right: Ellie, spelled E, L, L, I, E — then N, A, V, A, R, R, O — is that right?"}}
+
+event: turn.caller
+data: {"ts": 98.2, "call_id": "CA418009612779", "kind": "turn.caller", "turn": 9, "data": {"text": "That's right."}}
+
+event: turn.bot
+data: {"ts": 99.3, "call_id": "CA418009612779", "kind": "turn.bot", "turn": 9, "data": {"text": "Great!"}}
+
+event: turn.bot
+data: {"ts": 99.7, "call_id": "CA418009612779", "kind": "turn.bot", "turn": 9, "data": {"text": "Can I text a confirmation to the number ending in zero, one, three, six?"}}
+
+event: turn.caller
+data: {"ts": 103.7, "call_id": "CA418009612779", "kind": "turn.caller", "turn": 10, "data": {"text": "Yes, please. Text is so much easier for me."}}
+
+event: turn.bot
+data: {"ts": 106.7, "call_id": "CA418009612779", "kind": "turn.bot", "turn": 10, "data": {"text": "Great — I'll send it as soon as we hang up."}}
+
+event: turn.bot
+data: {"ts": 107.9, "call_id": "CA418009612779", "kind": "turn.bot", "turn": 10, "data": {"text": "Just reply yes when it comes in."}}
+
+event: turn.caller
+data: {"ts": 110.3, "call_id": "CA418009612779", "kind": "turn.caller", "turn": 11, "data": {"text": "Oh — okay, got it. Um, should we bring anything? Her insurance card?"}}
+
+event: turn.bot
+data: {"ts": 115.1, "call_id": "CA418009612779", "kind": "turn.bot", "turn": 11, "data": {"text": "Yes — bring Ellie's Delta Dental card, and the team will take care of the rest when you arrive."}}
+
+event: turn.bot
+data: {"ts": 119.7, "call_id": "CA418009612779", "kind": "turn.bot", "turn": 11, "data": {"text": "Is there anything else I can help you with?"}}
+
+event: turn.caller
+data: {"ts": 122.4, "call_id": "CA418009612779", "kind": "turn.caller", "turn": 12, "data": {"text": "No, that's everything. Thank you so much — honestly, this was so easy."}}
+
+event: turn.bot
+data: {"ts": 126.5, "call_id": "CA418009612779", "kind": "turn.bot", "turn": 12, "data": {"text": "I'm so glad!"}}
+
+event: turn.bot
+data: {"ts": 127.2, "call_id": "CA418009612779", "kind": "turn.bot", "turn": 12, "data": {"text": "Ellie's all set for Thursday at ten."}}
+
+event: turn.bot
+data: {"ts": 129.0, "call_id": "CA418009612779", "kind": "turn.bot", "turn": 12, "data": {"text": "Take care!"}}
+
+event: sms.out
+data: {"ts": 129.4, "call_id": "CA418009612779", "kind": "sms.out", "turn": 12, "data": {"caller": "(813) ***-0136", "kind": "confirmation", "chars": 94}}
+
+event: sms.in
+data: {"ts": 129.7, "call_id": "CA418009612779", "kind": "sms.in", "turn": 12, "data": {"caller": "(813) ***-0136", "kind": "yes", "chars": 3}}
+
+event: call.ended
+data: {"ts": 130.0, "call_id": "CA418009612779", "kind": "call.ended", "turn": 12, "data": {"duration_s": 130.0, "disposition": "phone-booked", "bookings": 1, "notes": 0}}

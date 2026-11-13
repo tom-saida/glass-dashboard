@@ -1,0 +1,341 @@
+{
+  "id": "s19",
+  "day": 0,
+  "start": "12:42:00",
+  "duration_s": 116.2,
+  "caller": "(352) ***-0119",
+  "caller_full": "(352) 555-0119",
+  "language": "en",
+  "greeted_as": "",
+  "disposition": "phone-booked",
+  "turns": 11,
+  "first_line": "Hi, um, yeah — I was hoping to set up a consultation for myself? My dentist keeps bugging me about my bite.",
+  "scenario": "new_consult_partial_dob",
+  "events": [
+    {
+      "at": 0,
+      "kind": "call.started",
+      "turn": 0,
+      "data": {
+        "caller": "(352) ***-0119"
+      }
+    },
+    {
+      "at": 1.2,
+      "kind": "greeting",
+      "turn": 0,
+      "data": {
+        "name": ""
+      }
+    },
+    {
+      "at": 9.9,
+      "kind": "turn.caller",
+      "turn": 1,
+      "data": {
+        "text": "Hi, um, yeah — I was hoping to set up a consultation for myself? My dentist keeps bugging me about my bite."
+      }
+    },
+    {
+      "at": 9.9,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "Let's get you in!"
+      }
+    },
+    {
+      "at": 9.9,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "What's your name?"
+      }
+    },
+    {
+      "at": 16.6,
+      "kind": "turn.caller",
+      "turn": 2,
+      "data": {
+        "text": "Sure, it's Dana Whitfield."
+      }
+    },
+    {
+      "at": 16.6,
+      "kind": "turn.bot",
+      "turn": 2,
+      "data": {
+        "text": "So that's Dana Whitfield — and what's your date of birth?"
+      }
+    },
+    {
+      "at": 25.4,
+      "kind": "turn.caller",
+      "turn": 3,
+      "data": {
+        "text": "Uh, it's April of '94. April 1994."
+      }
+    },
+    {
+      "at": 25.4,
+      "kind": "turn.bot",
+      "turn": 3,
+      "data": {
+        "text": "And what day in April was that?"
+      }
+    },
+    {
+      "at": 32.7,
+      "kind": "turn.caller",
+      "turn": 4,
+      "data": {
+        "text": "Oh — the seventeenth. April seventeenth."
+      }
+    },
+    {
+      "at": 32.7,
+      "kind": "tool",
+      "turn": 4,
+      "data": {
+        "name": "lookup",
+        "ok": true,
+        "ms": 584,
+        "verified": false
+      }
+    },
+    {
+      "at": 32.7,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "I don't see Dana in our system yet — is this your first visit with us?"
+      }
+    },
+    {
+      "at": 43,
+      "kind": "turn.caller",
+      "turn": 5,
+      "data": {
+        "text": "Yeah, first time anywhere for this, actually."
+      }
+    },
+    {
+      "at": 43,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "Nice, welcome to Harborline!"
+      }
+    },
+    {
+      "at": 43,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "And do you have dental insurance — who's the provider?"
+      }
+    },
+    {
+      "at": 52.1,
+      "kind": "turn.caller",
+      "turn": 6,
+      "data": {
+        "text": "I've got Cigna, through work."
+      }
+    },
+    {
+      "at": 52.1,
+      "kind": "turn.bot",
+      "turn": 6,
+      "data": {
+        "text": "Is the number you're calling from, ending in zero, one, one, nine, the best one to reach you?"
+      }
+    },
+    {
+      "at": 62.1,
+      "kind": "turn.caller",
+      "turn": 7,
+      "data": {
+        "text": "Yep, that's my cell."
+      }
+    },
+    {
+      "at": 62.1,
+      "kind": "turn.bot",
+      "turn": 7,
+      "data": {
+        "text": "What days work best for you — mornings or afternoons — or should I just grab the soonest opening?"
+      }
+    },
+    {
+      "at": 74.5,
+      "kind": "turn.caller",
+      "turn": 8,
+      "data": {
+        "text": "Afternoons are better, like right after lunch if you have anything."
+      }
+    },
+    {
+      "at": 74.5,
+      "kind": "tool",
+      "turn": 8,
+      "data": {
+        "name": "context",
+        "ok": true,
+        "ms": 612,
+        "open_slots": 3
+      }
+    },
+    {
+      "at": 74.5,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "Let me check the schedule to see what times are available."
+      }
+    },
+    {
+      "at": 74.5,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "I have Wednesday the twenty-second at one twenty in the afternoon — want me to grab it?"
+      }
+    },
+    {
+      "at": 88.4,
+      "kind": "turn.caller",
+      "turn": 9,
+      "data": {
+        "text": "Tomorrow? Oh, perfect, yes, let's do that."
+      }
+    },
+    {
+      "at": 88.4,
+      "kind": "tool",
+      "turn": 9,
+      "data": {
+        "name": "book",
+        "ok": true,
+        "ms": 402,
+        "slot": "Wed 1:20 PM",
+        "patient": "Dana Whitfield",
+        "already_booked": false
+      }
+    },
+    {
+      "at": 88.4,
+      "kind": "booking",
+      "turn": 9,
+      "data": {
+        "name": "Dana Whitfield",
+        "slot": "Wed 1:20 PM",
+        "reason": "consultation, bite concerns (dentist recommended)",
+        "insurance": "Cigna"
+      }
+    },
+    {
+      "at": 88.4,
+      "kind": "turn.bot",
+      "turn": 9,
+      "data": {
+        "text": "Let me get that set up for you."
+      }
+    },
+    {
+      "at": 88.4,
+      "kind": "turn.bot",
+      "turn": 9,
+      "data": {
+        "text": "Perfect — you're booked for Wednesday the twenty-second at one twenty in the afternoon."
+      }
+    },
+    {
+      "at": 88.4,
+      "kind": "turn.bot",
+      "turn": 9,
+      "data": {
+        "text": "Would you like a text confirmation sent to that number?"
+      }
+    },
+    {
+      "at": 102.6,
+      "kind": "turn.caller",
+      "turn": 10,
+      "data": {
+        "text": "Sure, that'd be great."
+      }
+    },
+    {
+      "at": 102.6,
+      "kind": "turn.bot",
+      "turn": 10,
+      "data": {
+        "text": "Is there anything else I can help you with?"
+      }
+    },
+    {
+      "at": 110.2,
+      "kind": "turn.caller",
+      "turn": 11,
+      "data": {
+        "text": "No, that's it. Thank you!"
+      }
+    },
+    {
+      "at": 110.2,
+      "kind": "turn.bot",
+      "turn": 11,
+      "data": {
+        "text": "Perfect!"
+      }
+    },
+    {
+      "at": 110.2,
+      "kind": "turn.bot",
+      "turn": 11,
+      "data": {
+        "text": "The front desk will confirm with you."
+      }
+    },
+    {
+      "at": 110.2,
+      "kind": "turn.bot",
+      "turn": 11,
+      "data": {
+        "text": "Take care!"
+      }
+    },
+    {
+      "at": 116.2,
+      "kind": "sms.out",
+      "turn": 11,
+      "data": {
+        "caller": "(352) ***-0119",
+        "kind": "confirmation",
+        "chars": 36
+      }
+    },
+    {
+      "at": 116.2,
+      "kind": "sms.in",
+      "turn": 11,
+      "data": {
+        "caller": "(352) ***-0119",
+        "kind": "yes",
+        "chars": 3
+      }
+    },
+    {
+      "at": 116.2,
+      "kind": "call.ended",
+      "turn": 11,
+      "data": {
+        "duration_s": 116.2,
+        "disposition": "phone-booked",
+        "bookings": 1,
+        "notes": 0
+      }
+    }
+  ]
+}

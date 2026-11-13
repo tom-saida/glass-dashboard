@@ -1,0 +1,131 @@
+/* DESIGN 6.6: the Calls table. Edge to edge inside the card, 32px header row, --row-height ruled rows,
+   cell padding 0 16 with 20 on the first and last cells. */
+
+/* a11y-04: the outcome filter is a native select, 32 high with 14/20 type like the top bar's
+   range control; tokens only. The chevron is drawn by .filter::after. */
+.filter {
+  position: relative;
+  display: inline-flex;
+  width: 160px;
+}
+
+.select {
+  appearance: none;
+  width: 100%;
+  height: 32px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0 var(--space-32) 0 var(--space-12);
+  border: 1px solid var(--ui-border-color);
+  border-radius: 10px;
+  background: var(--glass-strong);
+  color: var(--primary-text-color);
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 20px;
+  cursor: pointer;
+}
+
+.select:hover {
+  border-color: var(--primary-text-color);
+}
+
+.select:focus {
+  outline: none;
+}
+
+.select:focus-visible {
+  box-shadow: var(--focus-ring);
+}
+
+.filter::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: var(--space-12);
+  width: 6px;
+  height: 6px;
+  margin-top: -5px;
+  border-right: 1.5px solid var(--secondary-text-color);
+  border-bottom: 1.5px solid var(--secondary-text-color);
+  transform: rotate(45deg);
+  pointer-events: none;
+}
+
+.table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--primary-text-color);
+}
+
+.table th,
+.table td {
+  box-sizing: border-box;
+  padding: 0 var(--space-16);
+  text-align: left;
+  vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.table th:first-child,
+.table td:first-child {
+  padding-left: var(--space-20);
+}
+
+.table th:last-child,
+.table td:last-child {
+  padding-right: var(--space-20);
+}
+
+.headRow {
+  height: var(--header-row-height);
+  border-top: 1px solid var(--glass-rule);
+}
+
+.table th {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  color: var(--secondary-text-color);
+}
+
+.row {
+  height: var(--row-height);
+  border-top: 1px solid var(--glass-rule);
+}
+
+/* a11y-05: the row's keyboard link (the time cell's span), its focus ring and hover tone come
+   from lists/ListTable.module.css (useRowOpen), shared with Bookings, Callbacks and Texts. */
+
+/* Stats says the range has no calls: hold the empty state's height (16 + three rows + 20)
+   while the rows confirm it. */
+.skelEmpty {
+  height: calc(var(--space-16) + var(--row-height) * 3 + var(--space-20));
+  box-sizing: border-box;
+  border-top: 1px solid var(--glass-rule);
+}
+
+.table .num {
+  text-align: right;
+}
+
+.reason {
+  max-width: 0;
+}
+
+/* P20: the empty state under the header row (EmptyState pads its own sides and bottom). */
+.emptyWrap {
+  padding-top: var(--space-16);
+  border-top: 1px solid var(--glass-rule);
+}
+
+/* Empty and error lines sit in the table's first row slot, under the same rule. */
+.stateRow {
+  border-top: 1px solid var(--glass-rule);
+}

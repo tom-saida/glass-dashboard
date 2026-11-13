@@ -1,0 +1,128 @@
+{
+  "id": "s21",
+  "day": 0,
+  "start": "13:26:00",
+  "duration_s": 45.2,
+  "caller": "(656) ***-0121",
+  "caller_full": "(656) 555-0121",
+  "language": "en",
+  "greeted_as": "Nadia",
+  "disposition": "phone-no-booking",
+  "turns": 3,
+  "first_line": "Hi, yeah, so I have the one-forty today and I'm stuck on the bridge — I'm gonna be like fifteen minutes late, I'm so sorry.",
+  "scenario": "running_late_fyi",
+  "events": [
+    {
+      "at": 0,
+      "kind": "call.started",
+      "turn": 0,
+      "data": {
+        "caller": "(656) ***-0121"
+      }
+    },
+    {
+      "at": 1.2,
+      "kind": "greeting",
+      "turn": 0,
+      "data": {
+        "name": "Nadia"
+      }
+    },
+    {
+      "at": 16.2,
+      "kind": "turn.caller",
+      "turn": 1,
+      "data": {
+        "text": "Hi, yeah, so I have the one-forty today and I'm stuck on the bridge — I'm gonna be like fifteen minutes late, I'm so sorry."
+      }
+    },
+    {
+      "at": 16.2,
+      "kind": "tool",
+      "turn": 1,
+      "data": {
+        "name": "message",
+        "ok": true,
+        "ms": 512
+      }
+    },
+    {
+      "at": 16.2,
+      "kind": "note",
+      "turn": 1,
+      "data": {
+        "urgent": false,
+        "fyi": true,
+        "name": "Nadia Brooks",
+        "reason": "Running about 15 minutes late for her 1:40 PM appointment today - stuck in traffic. [has existing appt Tue 1:40 PM] [about patient Nadia Brooks]"
+      }
+    },
+    {
+      "at": 16.2,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "No worries, Nadia — thanks for the heads-up!"
+      }
+    },
+    {
+      "at": 16.2,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "I've passed that to the team so they know you're on your way."
+      }
+    },
+    {
+      "at": 28.3,
+      "kind": "turn.caller",
+      "turn": 2,
+      "data": {
+        "text": "Okay, thank you. They'll still see me, right?"
+      }
+    },
+    {
+      "at": 28.3,
+      "kind": "turn.bot",
+      "turn": 2,
+      "data": {
+        "text": "The front desk will let you know when you get here if anything needs to shift."
+      }
+    },
+    {
+      "at": 28.3,
+      "kind": "turn.bot",
+      "turn": 2,
+      "data": {
+        "text": "Is there anything else I can help you with?"
+      }
+    },
+    {
+      "at": 40.4,
+      "kind": "turn.caller",
+      "turn": 3,
+      "data": {
+        "text": "No, that's it. Thanks."
+      }
+    },
+    {
+      "at": 40.4,
+      "kind": "turn.bot",
+      "turn": 3,
+      "data": {
+        "text": "Drive safe — see you soon!"
+      }
+    },
+    {
+      "at": 45.2,
+      "kind": "call.ended",
+      "turn": 3,
+      "data": {
+        "duration_s": 45.2,
+        "disposition": "phone-no-booking",
+        "bookings": 0,
+        "notes": 1
+      }
+    }
+  ]
+}

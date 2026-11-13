@@ -1,0 +1,77 @@
+/* Global base. Every color, radius, shadow and space comes from the Vibe tokens
+   (@vibe/core/tokens, imported once in main.tsx) as redefined by the glass skin
+   (styles/glass.css, loaded after this file). Light theme only. */
+
+:root {
+  /* DESIGN 2.3: copied from Vibe's components; the light theme has no focus token. */
+  --focus-ring: 0 0 0 3px hsla(209, 100%, 50%, 0.5), 0 0 0 1px var(--primary-hover-color) inset;
+  /* Rows, KPI cells and card-filling links: an outer ring would be clipped by the card's
+     overflow and border, so these draw the ring inside (DESIGN 2.3). */
+  --focus-ring-inset: inset 0 0 0 2px var(--primary-color);
+  --katie-height: 96px;
+  --rail-width: 240px;
+  --topbar-height: 56px;
+  --drawer-width: 560px;
+  /* P14: 44px rows read better through a screen share at an effective 1280x720. */
+  --row-height: 44px;
+  --header-row-height: 32px;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: var(--primary-text-color);
+  -webkit-font-smoothing: var(--font-smoothing-webkit);
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+/* Our own focusables; Vibe components keep their own focus styles (this has 0 specificity). */
+:where(a, button, [tabindex], [role='link']):focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+:where(a) {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+:where(a):hover {
+  text-decoration: underline;
+}
+
+/* Visually hidden, still read by screen readers (chart data table, labels). */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+  /* On the scale even when hidden: an h3 would compute 1.17em = 16.38px (fix D8). */
+  font-size: 14px;
+}
+
+/* Times, durations, phones and counts. */
+.tabular {
+  font-variant-numeric: tabular-nums;
+}

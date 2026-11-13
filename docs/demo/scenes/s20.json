@@ -1,0 +1,338 @@
+{
+  "id": "s20",
+  "day": 0,
+  "start": "13:05:00",
+  "duration_s": 116.4,
+  "caller": "(727) ***-0120",
+  "caller_full": "(727) 555-0120",
+  "language": "en",
+  "greeted_as": "",
+  "disposition": "phone-booked",
+  "turns": 9,
+  "first_line": "Hey, yeah, hi — so my son's band on his back tooth, the molar one, it's kind of loose? Like it wiggles when he chews.",
+  "scenario": "loose_band_urgent_same_day",
+  "events": [
+    {
+      "at": 0,
+      "kind": "call.started",
+      "turn": 0,
+      "data": {
+        "caller": "(727) ***-0120"
+      }
+    },
+    {
+      "at": 1.2,
+      "kind": "greeting",
+      "turn": 0,
+      "data": {
+        "name": ""
+      }
+    },
+    {
+      "at": 10.6,
+      "kind": "turn.caller",
+      "turn": 1,
+      "data": {
+        "text": "Hey, yeah, hi — so my son's band on his back tooth, the molar one, it's kind of loose? Like it wiggles when he chews."
+      }
+    },
+    {
+      "at": 10.6,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "Oh no, that's no fun — let me get that taken care of right now."
+      }
+    },
+    {
+      "at": 10.6,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "Let me get you the closest appointment we have — unless this is an emergency right now, or you'd rather speak with the clinical team first?"
+      }
+    },
+    {
+      "at": 31.1,
+      "kind": "turn.caller",
+      "turn": 2,
+      "data": {
+        "text": "No, it's not bleeding or anything. He says it's just a little sore. Soonest is fine."
+      }
+    },
+    {
+      "at": 31.1,
+      "kind": "tool",
+      "turn": 2,
+      "data": {
+        "name": "message",
+        "ok": true,
+        "ms": 731
+      }
+    },
+    {
+      "at": 31.1,
+      "kind": "note",
+      "turn": 2,
+      "data": {
+        "urgent": true,
+        "fyi": false,
+        "name": "unknown (booking to follow on this call)",
+        "reason": "URGENT: Son's band on a back molar is loose, mild discomfort when chewing, no bleeding. [NOT an emergency - caller is booking the soonest visit on this call; note is informational]"
+      }
+    },
+    {
+      "at": 31.1,
+      "kind": "turn.bot",
+      "turn": 2,
+      "data": {
+        "text": "What's your son's name?"
+      }
+    },
+    {
+      "at": 36.6,
+      "kind": "turn.caller",
+      "turn": 3,
+      "data": {
+        "text": "Theo. Theo Albright."
+      }
+    },
+    {
+      "at": 36.6,
+      "kind": "turn.bot",
+      "turn": 3,
+      "data": {
+        "text": "So that's Theo Albright — and what's his date of birth?"
+      }
+    },
+    {
+      "at": 44.2,
+      "kind": "turn.caller",
+      "turn": 4,
+      "data": {
+        "text": "June third, 2011."
+      }
+    },
+    {
+      "at": 44.2,
+      "kind": "tool",
+      "turn": 4,
+      "data": {
+        "name": "lookup",
+        "ok": true,
+        "ms": 688,
+        "verified": true
+      }
+    },
+    {
+      "at": 44.2,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "Thanks — I found Theo."
+      }
+    },
+    {
+      "at": 44.2,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "Is the number you're calling from, ending in zero, one, two, zero, the best one to reach you?"
+      }
+    },
+    {
+      "at": 55.4,
+      "kind": "turn.caller",
+      "turn": 5,
+      "data": {
+        "text": "Yes, that's me."
+      }
+    },
+    {
+      "at": 55.4,
+      "kind": "tool",
+      "turn": 5,
+      "data": {
+        "name": "context",
+        "ok": true,
+        "ms": 540,
+        "open_slots": 2
+      }
+    },
+    {
+      "at": 55.4,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "Let me check the schedule to see what times are available."
+      }
+    },
+    {
+      "at": 55.4,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "The earliest opening I have is today at three forty in the afternoon — want me to grab it?"
+      }
+    },
+    {
+      "at": 72.3,
+      "kind": "turn.caller",
+      "turn": 6,
+      "data": {
+        "text": "Today? Yeah, I can pull him out of school a little early. Let's do it."
+      }
+    },
+    {
+      "at": 72.3,
+      "kind": "tool",
+      "turn": 6,
+      "data": {
+        "name": "book",
+        "ok": true,
+        "ms": 377,
+        "slot": "Tue 3:40 PM",
+        "patient": "Theo Albright",
+        "already_booked": false
+      }
+    },
+    {
+      "at": 72.3,
+      "kind": "booking",
+      "turn": 6,
+      "data": {
+        "name": "Theo Albright",
+        "slot": "Tue 3:40 PM",
+        "reason": "loose band on a molar, mild discomfort",
+        "insurance": ""
+      }
+    },
+    {
+      "at": 72.3,
+      "kind": "turn.bot",
+      "turn": 6,
+      "data": {
+        "text": "Let me get that set up for you."
+      }
+    },
+    {
+      "at": 72.3,
+      "kind": "turn.bot",
+      "turn": 6,
+      "data": {
+        "text": "Perfect — Theo is booked for today at three forty in the afternoon."
+      }
+    },
+    {
+      "at": 72.3,
+      "kind": "turn.bot",
+      "turn": 6,
+      "data": {
+        "text": "Would you like a text confirmation sent to that number?"
+      }
+    },
+    {
+      "at": 85.6,
+      "kind": "turn.caller",
+      "turn": 7,
+      "data": {
+        "text": "Sure, yeah."
+      }
+    },
+    {
+      "at": 85.6,
+      "kind": "turn.bot",
+      "turn": 7,
+      "data": {
+        "text": "Is there anything else I can help you with?"
+      }
+    },
+    {
+      "at": 95.9,
+      "kind": "turn.caller",
+      "turn": 8,
+      "data": {
+        "text": "Um, is there anything he should do until then? He keeps poking at it."
+      }
+    },
+    {
+      "at": 95.9,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "That's a good one for the doctor — I've already flagged Theo's band for the team, and they'll take care of it this afternoon."
+      }
+    },
+    {
+      "at": 95.9,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "Anything else I can do for you?"
+      }
+    },
+    {
+      "at": 110.4,
+      "kind": "turn.caller",
+      "turn": 9,
+      "data": {
+        "text": "No, that's it. Thanks so much."
+      }
+    },
+    {
+      "at": 110.4,
+      "kind": "turn.bot",
+      "turn": 9,
+      "data": {
+        "text": "Perfect!"
+      }
+    },
+    {
+      "at": 110.4,
+      "kind": "turn.bot",
+      "turn": 9,
+      "data": {
+        "text": "The front desk will confirm with you."
+      }
+    },
+    {
+      "at": 110.4,
+      "kind": "turn.bot",
+      "turn": 9,
+      "data": {
+        "text": "Take care!"
+      }
+    },
+    {
+      "at": 116.4,
+      "kind": "sms.out",
+      "turn": 9,
+      "data": {
+        "caller": "(727) ***-0120",
+        "kind": "confirmation",
+        "chars": 36
+      }
+    },
+    {
+      "at": 116.4,
+      "kind": "sms.in",
+      "turn": 9,
+      "data": {
+        "caller": "(727) ***-0120",
+        "kind": "yes",
+        "chars": 3
+      }
+    },
+    {
+      "at": 116.4,
+      "kind": "call.ended",
+      "turn": 9,
+      "data": {
+        "duration_s": 116.4,
+        "disposition": "phone-booked",
+        "bookings": 1,
+        "notes": 1
+      }
+    }
+  ]
+}

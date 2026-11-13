@@ -1,0 +1,383 @@
+<title>Katie Glass Lab</title>
+<meta charset="utf-8">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap">
+<style>
+/* Layout: a quiet document around one live model. The stage is the hero; the controls sit beside it
+   and stack under it on a phone; the findings read below in a measure. */
+:root {
+  --bg: #eef1f6; --fg: #162038; --muted: #5a6681; --line: #d7dde9; --panel: #ffffff;
+  --accent: #2563eb; --accent-ink: #ffffff; --ok: #1a7f4b; --warn: #b4232c;
+  --font-ui: "Figtree", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-read: "Newsreader", Georgia, "Times New Roman", serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0f1522; --fg: #e8edf6; --muted: #9ba7bf; --line: #27314a; --panel: #161d2d;
+  --accent: #5b8cff; --accent-ink: #0b1020; --ok: #4cc47f; --warn: #ff6b74; color-scheme: dark;
+} }
+:root[data-theme="dark"] {
+  --bg: #0f1522; --fg: #e8edf6; --muted: #9ba7bf; --line: #27314a; --panel: #161d2d;
+  --accent: #5b8cff; --accent-ink: #0b1020; --ok: #4cc47f; --warn: #ff6b74; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--font-ui); font-size: 15px; line-height: 1.5;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 28px 64px; }
+.wrap { max-width: 1320px; margin: 0 auto; }
+h1 { font-size: 30px; font-weight: 700; letter-spacing: -0.01em; margin: 0 0 6px; text-wrap: balance; }
+h2 { font-size: 20px; font-weight: 700; margin: 0 0 10px; text-wrap: balance; }
+h3 { font-size: 15px; font-weight: 700; margin: 0 0 6px; }
+p { margin: 0 0 12px; }
+.lede { font-family: var(--font-read); font-size: 19px; line-height: 1.45; max-width: 68ch; color: var(--fg); margin-bottom: 22px; }
+.read { font-family: var(--font-read); font-size: 18px; line-height: 1.5; max-width: 68ch; }
+.read p { margin-bottom: 14px; }
+a { color: var(--accent); }
+.lab { display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; }
+#stagewrap { position: relative; width: 100%; overflow: hidden; border-radius: 18px; background: #0b1020; }
+#stage { position: absolute; top: 0; left: 0; width: 1120px; height: 700px; transform-origin: 0 0; overflow: hidden; font-family: var(--font-ui);
+  -webkit-font-smoothing: var(--smooth, auto); }
+.presets { display: flex; gap: 10px; flex-wrap: wrap; margin: 12px 0 0; }
+.presets button { font: 600 14px/1 var(--font-ui); padding: 11px 16px; border-radius: 10px; border: 1px solid var(--line); background: var(--panel); color: var(--fg); cursor: pointer; }
+.presets button.primary { background: var(--accent); color: var(--accent-ink); border-color: transparent; }
+.presets button:focus-visible, .ctl input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.note-under { color: var(--muted); font-size: 13px; margin-top: 10px; }
+/* controls */
+.controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; }
+.group { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 12px 16px 10px; min-width: 0; }
+.group h3 { display: flex; justify-content: space-between; align-items: baseline; }
+.group h3 small { font-weight: 500; color: var(--muted); font-size: 12px; }
+.ctl { display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; align-items: center; padding: 6px 0; }
+.ctl label { font-size: 14px; font-weight: 600; }
+.ctl .why { grid-column: 1 / -1; color: var(--muted); font-size: 12.5px; line-height: 1.4; }
+.ctl input[type=range] { width: 150px; accent-color: var(--accent); }
+.ctl input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--accent); }
+.ctl output { font-variant-numeric: tabular-nums; font-size: 12px; color: var(--muted); min-width: 44px; text-align: right; }
+.radios { display: flex; flex-wrap: wrap; gap: 6px; padding: 6px 0; }
+.radios label { font-size: 13px; font-weight: 600; padding: 7px 10px; border: 1px solid var(--line); border-radius: 999px; cursor: pointer; background: var(--bg); }
+.radios label:has(input:checked) { background: var(--accent); color: var(--accent-ink); border-color: transparent; }
+.radios input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.radios label:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
+.chrome-only { color: var(--warn); font-weight: 600; }
+/* ------------------------------------------------------------------ the model */
+.bd, .bd > div { position: absolute; inset: 0; }
+.bd > div { display: none; }
+#stage[data-bd="shipped"] .bd-shipped, #stage[data-bd="room"] .bd-room, #stage[data-bd="photo"] .bd-photo, #stage[data-bd="mesh"] .bd-mesh { display: block; }
+.bd-shipped { background:
+  radial-gradient(42% 55% at 90% 4%, rgba(255,255,255,.26), rgba(255,255,255,0) 70%),
+  url("__SCENE_URI__") center / cover no-repeat #8ba5cb; box-shadow: inset 0 0 140px 24px rgba(8,22,60,.12); }
+.bd-room { background: url("__ROOM_URI__") center / cover no-repeat #35507a; }
+.bd-photo { background: url("__PHOTO_URI__") center / cover no-repeat #3a4a66; }
+.bd-mesh { background:
+  radial-gradient(55% 65% at 12% 18%, #c7b5ff 0%, rgba(199,181,255,0) 62%),
+  radial-gradient(50% 60% at 88% 12%, #ffc0d4 0%, rgba(255,192,212,0) 60%),
+  radial-gradient(60% 60% at 82% 88%, #a9dcff 0%, rgba(169,220,255,0) 62%),
+  radial-gradient(45% 50% at 28% 92%, #ffd7ae 0%, rgba(255,215,174,0) 60%),
+  linear-gradient(135deg, #e7e0ff 0%, #dcefff 55%, #ffe6ee 100%); }
+.shape { position: absolute; }
+.sun { width: 170px; height: 170px; border-radius: 50%; left: 120px; top: 48px; background: radial-gradient(circle at 35% 35%, #ffb28c, #ff7a5c 70%); box-shadow: 0 24px 60px rgba(255,122,92,.35); }
+.disc { width: 360px; height: 360px; border-radius: 50%; right: -90px; bottom: -120px; background: radial-gradient(circle at 40% 30%, #9fd3ff, #4e9ff0 75%); }
+.win { right: 150px; top: 36px; width: 300px; height: 210px; transform: rotate(-5deg); border: 4px solid rgba(255,255,255,.9); border-radius: 6px; background:
+  linear-gradient(rgba(255,255,255,.9), rgba(255,255,255,.9)) 50% 0 / 4px 100% no-repeat,
+  linear-gradient(rgba(255,255,255,.9), rgba(255,255,255,.9)) 0 50% / 100% 4px no-repeat,
+  linear-gradient(160deg, rgba(255,255,255,.55), rgba(120,170,255,.35)); }
+.bar { left: -60px; bottom: 90px; width: 420px; height: 46px; border-radius: 23px; transform: rotate(-24deg); background: linear-gradient(90deg, #1b2a5c, #3b5bd9); }
+.leaf { width: 150px; height: 60px; border-radius: 50%; background: linear-gradient(90deg, #1f6b45, #4cc47f); left: 40px; bottom: 150px; }
+.leaf.l2 { transform: rotate(-50deg); left: 25px; bottom: 210px; }
+.leaf.l3 { transform: rotate(40deg); left: 110px; bottom: 112px; }
+/* the pane */
+.pane { position: absolute; inset: var(--margin); border-radius: var(--pr); overflow: hidden; isolation: isolate;
+  background: rgba(var(--pane-rgb), var(--pane-a)); transition: inset .25s, border-radius .25s, background .25s, box-shadow .25s, border-color .25s; }
+.pane > .sheen, .pane > .grain, .pane > .ring { position: absolute; inset: 0; pointer-events: none; border-radius: inherit; }
+.pane > .sheen { z-index: 0; display: none; background:
+  linear-gradient(118deg, rgba(255,255,255,.58) 0%, rgba(255,255,255,.16) 26%, rgba(255,255,255,0) 48%),
+  radial-gradient(60% 40% at 50% 0%, rgba(255,255,255,.35), rgba(255,255,255,0) 70%); }
+#stage.sheen .pane > .sheen { display: block; }
+.pane > .grain { z-index: 3; display: none; opacity: .09; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+#stage.grain .pane > .grain { display: block; }
+.pane > .ring { z-index: 2; display: none; }
+/* shipped edge: the 4 px gradient ring (mask trick) plus the inner band and glow */
+#stage[data-edge="shipped"] .pane > .ring { display: block; box-shadow: inset 0 0 0 6px rgba(255,255,255,.16), inset 0 0 0 7px rgba(37,99,235,.08), inset 0 0 40px rgba(255,255,255,.2), inset 0 1px 0 rgba(255,255,255,.9); }
+#stage[data-edge="shipped"] .pane > .ring::before { content: ""; position: absolute; inset: 0; padding: 4px; border-radius: inherit;
+  background: linear-gradient(135deg, rgba(255,255,255,.98) 0%, rgba(255,255,255,.45) 28%, rgba(255,255,255,.18) 52%, rgba(255,255,255,.75) 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite: exclude; }
+#stage[data-edge="shipped"] .pane { border: 1.5px solid rgba(255,255,255,.88); }
+/* crisp edge: one hairline, lit from the top left */
+#stage[data-edge="crisp"] .pane { border: 1px solid rgba(255,255,255,.62); }
+#stage[data-edge="crisp"][data-tint="dark"] .pane { border-color: rgba(255,255,255,.34); }
+#stage[data-edge="crisp"].light .pane > .ring { display: block; box-shadow: inset 0 1px 0 rgba(255,255,255,.9), inset 1px 0 0 rgba(255,255,255,.45), inset 0 -1px 0 rgba(12,22,56,.12), inset -1px 0 0 rgba(12,22,56,.07); }
+#stage[data-edge="shipped"].light .pane > .ring { box-shadow: inset 0 0 0 6px rgba(255,255,255,.16), inset 0 0 0 7px rgba(37,99,235,.08), inset 0 0 40px rgba(255,255,255,.2), inset 0 1px 0 rgba(255,255,255,.9), inset 0 -1px 0 rgba(12,22,56,.12); }
+/* shadow and glow */
+#stage.shadow .pane { box-shadow: 0 32px 80px rgba(10, 18, 50, .34), 0 4px 12px rgba(10, 18, 50, .12); }
+#stage.glow .pane::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: 2; box-shadow: inset 0 0 60px rgba(255,255,255,.35); }
+/* the dashboard inside */
+.dash { position: absolute; inset: 0; z-index: 1; display: grid; grid-template-columns: 212px 1fr; color: var(--ink); font-size: var(--fs-body); }
+.rail { padding: 18px 14px; border-right: 1px solid rgba(255,255,255,.35); display: flex; flex-direction: column; gap: 4px; }
+.brand { display: flex; align-items: center; gap: 10px; margin: 2px 4px 16px; }
+.brand .av { width: 30px; height: 30px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #ffd6b8, #d98a5a 70%); border: 2px solid rgba(255,255,255,.9); }
+.brand b { display: block; font-size: var(--fs-title); font-weight: 700; line-height: 1.1; }
+.brand span { font-size: var(--fs-small); color: var(--ink-2); }
+.nav { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 10px; font-weight: 600; font-size: var(--fs-body); }
+.nav.on { background: #2563eb; color: #fff; }
+.nav .n { margin-left: auto; font-size: var(--fs-small); font-weight: 600; color: inherit; opacity: .85; }
+.nav i { width: 16px; height: 16px; border-radius: 4px; border: 2px solid currentColor; opacity: .8; display: inline-block; }
+.main { display: grid; grid-template-rows: auto 1fr; min-width: 0; }
+.top { display: flex; align-items: center; gap: 12px; padding: 14px 20px; border-bottom: 1px solid rgba(255,255,255,.35); }
+.top b { font-size: var(--fs-title); font-weight: 700; }
+.top span { color: var(--ink-2); font-size: var(--fs-body); }
+.top .pill { margin-left: auto; font-size: var(--fs-small); font-weight: 600; padding: 7px 12px; border-radius: 999px; background: rgba(var(--card-rgb),var(--card-a)); border: 1px solid rgba(255,255,255,var(--card-edge)); }
+.content { padding: 14px 16px; display: grid; gap: 12px; grid-template-rows: auto 1fr; min-width: 0; }
+.kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.card { background: rgba(var(--card-rgb),var(--card-a)); border: 1px solid rgba(255,255,255,var(--card-edge)); border-radius: var(--card-r); padding: 12px 14px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.85), 0 8px 24px rgba(10,18,50,.07); min-width: 0; }
+#stage.cardblur .card { -webkit-backdrop-filter: blur(14px) saturate(1.3); backdrop-filter: blur(14px) saturate(1.3); }
+.kpi .lab { display: flex; align-items: flex-start; gap: 8px; line-height: 1.2; font-size: var(--fs-small); color: var(--ink-2); font-weight: 500; }
+.kpi .lab i { width: 24px; height: 24px; border-radius: 7px; display: inline-block; flex: none; background: #dbe7ff; border: 1px solid rgba(37,99,235,.25); }
+#stage[data-tint="dark"] .kpi .lab i { background: rgba(120,160,255,.35); border-color: rgba(255,255,255,.35); }
+#stage[data-tint="dark"] .kpi .lab i.g { background: rgba(80,200,140,.35); }
+#stage[data-tint="dark"] .kpi .lab i.o { background: rgba(255,180,90,.35); }
+#stage[data-tint="dark"] .tag { background: rgba(40,180,110,.3); color: #c9ffe0; }
+#stage[data-tint="dark"] .tag.u { background: #e5484d; color: #fff; }
+#stage[data-tint="dark"] .kpi .s em { color: #7de3a8; }
+#stage[data-tint="dark"] .card h4 a { color: #9bbcff; }
+#stage[data-tint="dark"] .row, #stage[data-tint="dark"] .cb { border-top-color: rgba(255,255,255,.12); }
+#stage[data-tint="dark"] .rail, #stage[data-tint="dark"] .top { border-color: rgba(255,255,255,.14); }
+.kpi .lab i.g { background: #e7f6ee; border-color: rgba(26,127,75,.3); }
+.kpi .lab i.o { background: #fff0dc; border-color: rgba(200,120,20,.3); }
+.kpi .v { font-size: var(--fs-kpi); font-weight: var(--fw-kpi); line-height: 1.05; margin: 8px 0 6px; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.kpi .s { font-size: var(--fs-small); color: var(--ink-2); }
+.kpi .s em { font-style: normal; color: #1a7f4b; font-weight: 600; }
+.two { display: grid; grid-template-columns: 1.55fr 1fr; gap: 12px; min-height: 0; }
+.card h4 { margin: 0 0 8px; font-size: var(--fs-title); font-weight: var(--fw-title); display: flex; justify-content: space-between; align-items: baseline; }
+.card h4 a { font-size: var(--fs-small); color: #2563eb; text-decoration: none; font-weight: 600; }
+.rows { display: grid; gap: 0; }
+.row { display: grid; grid-template-columns: 58px 1.05fr 1.45fr auto; gap: 10px; align-items: center; padding: 8px 0; border-top: 1px solid rgba(20,30,70,.08); font-size: var(--fs-body); }
+.row.h { font-size: var(--fs-small); color: var(--ink-2); border-top: 0; padding-top: 0; }
+.row b { display: block; font-weight: 600; }
+.row small { display: block; color: var(--ink-2); font-size: var(--fs-small); }
+.tag { font-size: var(--fs-small); font-weight: 600; padding: 3px 9px; border-radius: 999px; background: #e3f5ea; color: #1a7f4b; }
+.tag.u { background: #d92d20; color: #fff; }
+.dur { font-variant-numeric: tabular-nums; color: var(--ink-2); font-size: var(--fs-small); }
+.cb { padding: 8px 0; border-top: 1px solid rgba(20,30,70,.08); }
+.cb:first-of-type { border-top: 0; padding-top: 0; }
+.cb .w { display: flex; align-items: center; gap: 8px; font-weight: 600; }
+.cb .w time { margin-left: auto; font-weight: 500; color: var(--ink-2); font-size: var(--fs-small); }
+.cb p { margin: 4px 0 0; font-size: var(--fs-body); line-height: 1.35; }
+/* findings */
+.findings { margin-top: 44px; }
+.rank { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 14px; padding: 16px 0; border-top: 1px solid var(--line); }
+.rank:last-child { border-bottom: 1px solid var(--line); }
+.rank .no { font-family: var(--font-read); font-size: 30px; font-weight: 500; color: var(--muted); line-height: 1; padding-top: 2px; }
+.rank h3 { font-size: 17px; margin-bottom: 6px; }
+.rank p { font-family: var(--font-read); font-size: 17px; line-height: 1.5; max-width: 72ch; margin-bottom: 8px; }
+.rank .fix { font-family: var(--font-ui); font-size: 14px; color: var(--fg); background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; max-width: 72ch; }
+.rank .src { font-size: 13px; color: var(--muted); }
+.rank .src a { color: var(--muted); }
+pre { font: 12.5px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; overflow-x: auto; max-width: 100%; }
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
+@media (prefers-reduced-motion: reduce) { .pane, .pane * { transition: none !important; } }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="rimlens" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+    <feImage href="__LENS_URI__" x="0" y="0" width="100%" height="100%" preserveAspectRatio="none" result="map"/>
+    <feDisplacementMap in="SourceGraphic" in2="map" scale="-34" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+
+<div class="wrap">
+  <h1>Katie Glass Lab</h1>
+  <p class="lede">The Overview page, rebuilt as a small live model so each ingredient of glass can be switched on and off by itself. Press <b>As shipped</b> to see what is on the box today, press <b>The recipe</b> to see the research's numbers applied, then flip one switch at a time and watch what it does. The findings and their sources are below the switches.</p>
+
+  <div class="lab">
+    <div>
+      <div id="stagewrap">
+        <div id="stage" data-bd="shipped" data-edge="shipped" class="shadow glow">
+          <div class="bd">
+            <div class="bd-shipped"></div>
+            <div class="bd-room"></div>
+            <div class="bd-photo"></div>
+            <div class="bd-mesh">
+              <div class="shape sun"></div>
+              <div class="shape win"></div>
+              <div class="shape disc"></div>
+              <div class="shape bar"></div>
+              <div class="shape leaf l2"></div>
+              <div class="shape leaf l3"></div>
+              <div class="shape leaf"></div>
+            </div>
+          </div>
+          <div class="pane" id="pane">
+            <div class="sheen"></div>
+            <div class="grain"></div>
+            <div class="ring"></div>
+            <div class="dash">
+              <div class="rail">
+                <div class="brand"><span class="av"></span><div><b>Katie</b><span>Harborline Orthodontics</span></div></div>
+                <div class="nav on"><i></i>Overview</div>
+                <div class="nav"><i></i>Calls</div>
+                <div class="nav"><i></i>Bookings</div>
+                <div class="nav"><i></i>Callbacks<span class="n">12</span></div>
+                <div class="nav"><i></i>Texts</div>
+                <div class="nav"><i></i>Settings</div>
+              </div>
+              <div class="main">
+                <div class="top"><b>Overview</b><span>Today, Monday, November 2</span><span class="pill">Demo</span></div>
+                <div class="content">
+                  <div class="kpis">
+                    <div class="card kpi"><div class="lab"><i></i>Calls answered</div><div class="v">35</div><div class="s">4 in Spanish · <em>+5</em></div></div>
+                    <div class="card kpi"><div class="lab"><i class="g"></i>Appointments booked</div><div class="v">27</div><div class="s">19 confirmed by text</div></div>
+                    <div class="card kpi"><div class="lab"><i class="g"></i>New-patient consults</div><div class="v">17</div><div class="s">6 Invisalign</div></div>
+                    <div class="card kpi"><div class="lab"><i class="o"></i>Callbacks waiting</div><div class="v">12</div><div class="s">1 urgent</div></div>
+                  </div>
+                  <div class="two">
+                    <div class="card">
+                      <h4>Latest calls <a>All calls</a></h4>
+                      <div class="rows">
+                        <div class="row h"><span>Time</span><span>Who</span><span>Reason</span><span>Outcome</span></div>
+                        <div class="row"><span>8:55 PM</span><span><b>Owen Brandt</b><small>(727) ***-0135</small></span><span>Wire poking his cheek</span><span class="tag">Booked</span></div>
+                        <div class="row"><span>7:40 PM</span><span><b>Mariela Quintero</b><small>(656) ***-0134</small></span><span>Reschedule from Friday</span><span class="tag">Booked</span></div>
+                        <div class="row"><span>6:12 PM</span><span><b>Isabella Hartwell</b><small>(813) ***-0133</small></span><span>New-patient consult<small>Cigna</small></span><span class="tag">Booked</span></div>
+                      </div>
+                    </div>
+                    <div class="card">
+                      <h4>Callbacks waiting <a>1 urgent</a></h4>
+                      <div class="cb"><div class="w">Owen Brandt <span class="tag u">Urgent</span><time>8:55 PM</time></div><p>Son's wire is poking the inside of his cheek at the back, can't chew on that side.</p></div>
+                      <div class="cb"><div class="w">Zoe Lindqvist<time>4:56 PM</time></div><p>Parent asks how to handle the loose bracket tonight, please call back before close.</p></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="presets">
+        <button type="button" id="p-shipped">As shipped</button>
+        <button type="button" id="p-recipe" class="primary">The recipe</button>
+        <button type="button" id="p-apple">Apple-style, dark room</button>
+      </div>
+      <p class="note-under" id="fitnote">Real CSS, not a mock-up: the pane blurs whatever is behind it the same way the dashboard does. The names and numbers are the demo day's fictional data.</p>
+    </div>
+
+    <form class="controls" id="controls" onsubmit="return false">
+      <div class="group">
+        <h3>Behind the glass <small>what the blur has to work with</small></h3>
+        <div class="radios">
+          <label><input type="radio" name="bd" value="shipped" id="bd-shipped" checked>As shipped</label>
+          <label><input type="radio" name="bd" value="room" id="bd-room">Same room, ungraded</label>
+          <label><input type="radio" name="bd" value="photo" id="bd-photo">Sharp photo</label>
+          <label><input type="radio" name="bd" value="mesh" id="bd-mesh">Colour field with shapes</label>
+        </div>
+        <div class="ctl"><span class="why">Glass is only visible as the difference between sharp and blurred. The shipped backdrop was blurred and flattened to one blue before the pane blurred it again, so there is no difference left to see.</span></div>
+      </div>
+      <div class="group">
+        <h3>The pane <small>fill, blur, size</small></h3>
+        <div class="radios">
+          <label><input type="radio" name="tint" value="light" id="tint-light" checked>Light glass, dark text</label>
+          <label><input type="radio" name="tint" value="dark" id="tint-dark">Dark glass, white text</label>
+        </div>
+        <div class="ctl"><label for="paneA">Fill opacity</label><span><input type="range" id="paneA" min="0.15" max="0.95" step="0.01" value="0.72"> <output for="paneA">72%</output></span><span class="why">Shipped at 72%, more than any glass the research found (the highest was 60%; most panes run 10 to 30%).</span></div>
+        <div class="ctl"><label for="paneBlur">Blur</label><span><input type="range" id="paneBlur" min="0" max="40" step="1" value="28"> <output for="paneBlur">28 px</output></span><span class="why">18 to 25 px reads as frosted. It only shows if there is something sharp behind the pane.</span></div>
+        <div class="ctl"><label for="sat">Saturate</label><span><input type="range" id="sat" min="1" max="1.9" step="0.05" value="1.25"> <output for="sat">1.25</output></span><span class="why">Boosting colour under the blur is what keeps a frosted pane from going grey.</span></div>
+        <div class="ctl"><label for="margin">Margin</label><span><input type="range" id="margin" min="3" max="12" step="0.5" value="4"> <output for="margin">4%</output></span><span class="why">A pane needs room around it to be seen standing in a space.</span></div>
+        <div class="ctl"><label for="radius">Corner radius</label><span><input type="range" id="radius" min="12" max="52" step="2" value="24"> <output for="radius">24 px</output></span></div>
+      </div>
+      <div class="group">
+        <h3>The edge <small>where glass announces itself</small></h3>
+        <div class="radios">
+          <label><input type="radio" name="edge" value="shipped" id="edge-shipped" checked>Shipped: 4 px soft ring</label>
+          <label><input type="radio" name="edge" value="crisp" id="edge-crisp">One crisp hairline</label>
+        </div>
+        <div class="ctl"><label for="light">Lit from the top left</label><input type="checkbox" id="light"><span class="why">A bright top edge and a shaded bottom edge, one pixel each. This is the single cheapest cue that a surface is a solid.</span></div>
+        <div class="ctl"><label for="sheen">Specular sheen</label><input type="checkbox" id="sheen"><span class="why">A soft diagonal highlight across the surface, the reflection of a light source.</span></div>
+        <div class="ctl"><label for="shadow">Drop shadow</label><input type="checkbox" id="shadow" checked><span class="why">Lifts the pane off the backdrop. Shipped has one.</span></div>
+        <div class="ctl"><label for="glow">Inner glow</label><input type="checkbox" id="glow" checked><span class="why">Shipped has a 40 px white glow inside the edge. It fogs the pane; the recipe drops it.</span></div>
+        <div class="ctl"><label for="grain">Grain</label><input type="checkbox" id="grain"><span class="why">A faint noise texture, the frost itself.</span></div>
+        <div class="ctl"><label for="lens">Refraction at the rim <span class="chrome-only">Chrome only</span></label><input type="checkbox" id="lens"><span class="why">An SVG displacement filter bends the backdrop near the edge the way Apple's Liquid Glass does. Safari and Firefox ignore it.</span></div>
+      </div>
+      <div class="group">
+        <h3>The cards <small>glass on glass</small></h3>
+        <div class="ctl"><label for="cardA">Card fill</label><span><input type="range" id="cardA" min="0.2" max="0.95" step="0.01" value="0.72"> <output for="cardA">72%</output></span><span class="why">Shipped: 72% white cards on a 72% pane. The recipe keeps cards flat at about 60% so the text is easy, and lets the pane be the glass.</span></div>
+        <div class="ctl"><label for="cardEdge">Card hairline</label><input type="checkbox" id="cardEdge"></div>
+        <div class="ctl"><label for="cardblur">Cards blur too</label><input type="checkbox" id="cardblur" checked><span class="why">Does nothing, on purpose: a card inside a blurred pane can only see the pane, never the room (finding 3 below). The shipped cards carry this dead setting.</span></div>
+        <div class="ctl"><label for="cardR">Card radius</label><span><input type="range" id="cardR" min="10" max="30" step="1" value="16"> <output for="cardR">16 px</output></span></div>
+      </div>
+      <div class="group">
+        <h3>The type <small>Figtree, the dashboard's face</small></h3>
+        <div class="radios">
+          <label><input type="radio" name="type" value="shipped" id="type-shipped" checked>Shipped: 14 / 28 regular</label>
+          <label><input type="radio" name="type" value="recipe" id="type-recipe">16 / 18 / 40 semibold</label>
+        </div>
+        <div class="ctl"><label for="smooth">Thin smoothing (as shipped)</label><input type="checkbox" id="smooth" checked><span class="why">The dashboard sets <code>-webkit-font-smoothing: antialiased</code>, which thins every letter. On a 1080p monitor that is most of "the fonts look poor". No visible change on a Retina screen.</span></div>
+      </div>
+    </form>
+  </div>
+
+  <section class="findings" id="research">
+    __RESEARCH_HTML__
+  </section>
+</div>
+
+<script>
+(function () {
+  var stage = document.getElementById('stage'), pane = document.getElementById('pane'), wrap = document.getElementById('stagewrap');
+  var $ = function (id) { return document.getElementById(id); };
+  var ids = ['paneA', 'paneBlur', 'sat', 'margin', 'radius', 'light', 'sheen', 'shadow', 'glow', 'grain', 'lens', 'cardA', 'cardEdge', 'cardblur', 'cardR', 'smooth'];
+  var radios = ['bd', 'edge', 'type', 'tint'];
+  function fmt(id, v) {
+    if (id === 'paneA' || id === 'cardA') return Math.round(v * 100) + '%';
+    if (id === 'paneBlur' || id === 'radius' || id === 'cardR') return v + ' px';
+    if (id === 'margin') return v + '%';
+    return String(v);
+  }
+  function radio(name) { var el = document.querySelector('input[name="' + name + '"]:checked'); return el ? el.value : ''; }
+  function setRadio(name, v) { var el = document.querySelector('input[name="' + name + '"][value="' + v + '"]'); if (el) el.checked = true; }
+  function apply() {
+    var s = stage.style;
+    var bd = radio('bd'), edge = radio('edge'), type = radio('type');
+    stage.setAttribute('data-bd', bd); stage.setAttribute('data-edge', edge);
+    s.setProperty('--pane-a', $('paneA').value);
+    s.setProperty('--margin', $('margin').value + '%');
+    s.setProperty('--pr', $('radius').value + 'px');
+    s.setProperty('--card-a', $('cardA').value);
+    s.setProperty('--card-edge', $('cardEdge').checked ? '0.7' : '0');
+    s.setProperty('--card-r', $('cardR').value + 'px');
+    s.setProperty('--smooth', $('smooth').checked ? 'antialiased' : 'auto');
+    var dark = radio('tint') === 'dark'; stage.setAttribute('data-tint', dark ? 'dark' : 'light');
+    s.setProperty('--pane-rgb', dark ? '14, 20, 46' : '238, 245, 255'); s.setProperty('--card-rgb', dark ? '18, 26, 58' : '255, 255, 255');
+    if (type === 'recipe') {
+      s.setProperty('--fs-body', '15px'); s.setProperty('--fs-small', '13px'); s.setProperty('--fs-title', '18px'); s.setProperty('--fs-kpi', '40px');
+      s.setProperty('--fw-title', '600'); s.setProperty('--fw-kpi', '700');
+    } else {
+      s.setProperty('--fs-body', '14px'); s.setProperty('--fs-small', '12px'); s.setProperty('--fs-title', '16px'); s.setProperty('--fs-kpi', '28px');
+      s.setProperty('--fw-title', '600'); s.setProperty('--fw-kpi', '600');
+    }
+    s.setProperty('--ink', dark ? '#f3f6ff' : '#152140');
+    s.setProperty('--ink-2', dark ? 'rgba(243,246,255,.72)' : '#4a5678');
+    ['light', 'sheen', 'shadow', 'glow', 'grain', 'cardblur'].forEach(function (k) { stage.classList.toggle(k, $(k).checked); });
+    var f = ($('lens').checked ? 'url(#rimlens) ' : '') + 'blur(' + $('paneBlur').value + 'px) saturate(' + $('sat').value + ')';
+    pane.style.webkitBackdropFilter = f; pane.style.backdropFilter = f;
+    ids.forEach(function (id) { var o = document.querySelector('output[for="' + id + '"]'); if (o) o.value = fmt(id, $(id).value); });
+  }
+  function preset(p) {
+    var v = {
+      shipped: { bd: 'shipped', edge: 'shipped', type: 'shipped', tint: 'light', paneA: 0.72, paneBlur: 28, sat: 1.25, margin: 4, radius: 24, light: false, sheen: false, shadow: true, glow: true, grain: false, lens: false, cardA: 0.72, cardEdge: false, cardblur: true, cardR: 16, smooth: true },
+      recipe:  { bd: 'mesh', edge: 'crisp', type: 'recipe', tint: 'light', paneA: 0.26, paneBlur: 18, sat: 1.6, margin: 8, radius: 44, light: true, sheen: true, shadow: true, glow: false, grain: false, lens: false, cardA: 0.6, cardEdge: true, cardblur: false, cardR: 20, smooth: false },
+      apple:   { bd: 'photo', edge: 'crisp', type: 'recipe', tint: 'dark', paneA: 0.24, paneBlur: 18, sat: 1.6, margin: 8, radius: 36, light: true, sheen: false, shadow: true, glow: false, grain: false, lens: true, cardA: 0.36, cardEdge: true, cardblur: false, cardR: 20, smooth: false }
+    }[p];
+    radios.forEach(function (n) { setRadio(n, v[n]); });
+    ids.forEach(function (id) { var el = $(id); if (el.type === 'checkbox') el.checked = !!v[id]; else el.value = v[id]; });
+    apply();
+  }
+  document.getElementById('controls').addEventListener('input', apply);
+  document.getElementById('controls').addEventListener('change', apply);
+  $('p-shipped').addEventListener('click', function () { preset('shipped'); });
+  $('p-recipe').addEventListener('click', function () { preset('recipe'); });
+  $('p-apple').addEventListener('click', function () { preset('apple'); });
+  function fit() { var w = wrap.clientWidth || 1120; var k = Math.min(1, w / 1120); stage.style.transform = 'scale(' + k + ')'; wrap.style.height = Math.round(700 * k) + 'px'; }
+  window.addEventListener('resize', fit);
+  fit(); preset('shipped');
+})();
+</script>

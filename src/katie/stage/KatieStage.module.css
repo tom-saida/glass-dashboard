@@ -1,0 +1,65 @@
+/* Katie's layer (DESIGN.md 7.1, 7.5): fixed over the page, above the slab (1), below the drawer
+   (100). Nothing in it takes pointer events. DESIGN-GLASS 3.7: it covers the slab exactly and
+   clips to its rounded edge, so she walks in from the slab's sides and rises and sinks at its
+   bottom edge, never in the margin around it. No filter, opacity or clip-path here: those would
+   cut the bubble's backdrop-filter off from the slab behind it. */
+.layer {
+  position: fixed;
+  inset: var(--slab-inset-y) var(--slab-inset);
+  z-index: 50;
+  pointer-events: none;
+  overflow: hidden;
+  border-radius: var(--radius-slab);
+}
+
+/* The viewport inside the clip: positions stay viewport px. */
+.space {
+  position: absolute;
+  top: calc(-1 * var(--slab-inset-y));
+  left: calc(-1 * var(--slab-inset));
+  width: 100vw;
+  height: 100vh;
+}
+
+/* Moved only by GSAP x / y transforms (the controller anchors it at the feet centre). */
+.wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  will-change: transform;
+}
+
+/* Positioned by a translate set at commit (and while riding a card); the bubble inside it is
+   the part that fades and rises. */
+.bubbleBox {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.bubble {
+  box-sizing: border-box;
+  width: max-content;
+  /* A ceiling only. The director (fitBubble) sets the width: one line up to 79 characters,
+     otherwise two balanced lines of under 80 characters (7.5). Typical sentences come out 200 to
+     450 px wide; the room above 450 is for wide glyphs (capitals, digits) in a 140-character
+     sentence, which still fit two lines here. */
+  max-width: min(640px, calc(100vw - 32px));
+  padding: var(--space-8) var(--space-12);
+  /* DESIGN-GLASS 3.6: strong glass, blur 16, the white edge, the float shadow. */
+  background: var(--glass-strong);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-edge);
+  border-radius: 12px;
+  box-shadow: var(--glass-shadow-float), var(--glass-highlight);
+  font-family: var(--font-family);
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 400;
+  color: var(--primary-text-color);
+  white-space: normal;
+  overflow-wrap: break-word;
+  visibility: hidden;
+  opacity: 0;
+}

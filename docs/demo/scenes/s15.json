@@ -1,0 +1,333 @@
+{
+  "id": "s15",
+  "day": 0,
+  "start": "11:21:00",
+  "duration_s": 106.1,
+  "caller": "(656) ***-0115",
+  "caller_full": "(656) 555-0115",
+  "language": "en",
+  "greeted_as": "",
+  "disposition": "phone-booked",
+  "turns": 10,
+  "first_line": "Hi there, um, are you guys in network with MetLife? I just switched jobs and I'm trying to figure out where I can go.",
+  "scenario": "insurance_then_book",
+  "events": [
+    {
+      "at": 0,
+      "kind": "call.started",
+      "turn": 0,
+      "data": {
+        "caller": "(656) ***-0115"
+      }
+    },
+    {
+      "at": 1.2,
+      "kind": "greeting",
+      "turn": 0,
+      "data": {
+        "name": ""
+      }
+    },
+    {
+      "at": 5.6,
+      "kind": "turn.caller",
+      "turn": 1,
+      "data": {
+        "text": "Hi there, um, are you guys in network with MetLife? I just switched jobs and I'm trying to figure out where I can go."
+      }
+    },
+    {
+      "at": 5.6,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "Yep, we do take MetLife!"
+      }
+    },
+    {
+      "at": 5.6,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "Is there anything else I can help you with?"
+      }
+    },
+    {
+      "at": 15.4,
+      "kind": "turn.caller",
+      "turn": 2,
+      "data": {
+        "text": "Oh good. Okay, then yeah — I'd like to come in for a consult. I've been thinking about straightening my teeth for, like, years."
+      }
+    },
+    {
+      "at": 15.4,
+      "kind": "turn.bot",
+      "turn": 2,
+      "data": {
+        "text": "Let's get you in!"
+      }
+    },
+    {
+      "at": 15.4,
+      "kind": "turn.bot",
+      "turn": 2,
+      "data": {
+        "text": "What's your name?"
+      }
+    },
+    {
+      "at": 28.5,
+      "kind": "turn.caller",
+      "turn": 3,
+      "data": {
+        "text": "Morgan Ellis."
+      }
+    },
+    {
+      "at": 28.5,
+      "kind": "turn.bot",
+      "turn": 3,
+      "data": {
+        "text": "So that's Morgan Ellis — and what's your date of birth?"
+      }
+    },
+    {
+      "at": 39.2,
+      "kind": "turn.caller",
+      "turn": 4,
+      "data": {
+        "text": "Uh, April twenty-sixth, ninety-one. 1991."
+      }
+    },
+    {
+      "at": 39.2,
+      "kind": "tool",
+      "turn": 4,
+      "data": {
+        "name": "lookup",
+        "ok": true,
+        "ms": 549,
+        "verified": false
+      }
+    },
+    {
+      "at": 39.2,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "I don't see Morgan in our system yet — is this your first visit with us?"
+      }
+    },
+    {
+      "at": 51.1,
+      "kind": "turn.caller",
+      "turn": 5,
+      "data": {
+        "text": "Yeah, totally new."
+      }
+    },
+    {
+      "at": 51.1,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "Nice, welcome to Harborline!"
+      }
+    },
+    {
+      "at": 51.1,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "Is the number you're calling from, ending in zero, one, one, five, the best one to reach you?"
+      }
+    },
+    {
+      "at": 59.7,
+      "kind": "turn.caller",
+      "turn": 6,
+      "data": {
+        "text": "Yes it is."
+      }
+    },
+    {
+      "at": 59.7,
+      "kind": "turn.bot",
+      "turn": 6,
+      "data": {
+        "text": "What days work best for you — mornings or afternoons — or should I just grab the soonest opening?"
+      }
+    },
+    {
+      "at": 70.0,
+      "kind": "turn.caller",
+      "turn": 7,
+      "data": {
+        "text": "Mornings, if you have any."
+      }
+    },
+    {
+      "at": 70.0,
+      "kind": "tool",
+      "turn": 7,
+      "data": {
+        "name": "context",
+        "ok": true,
+        "ms": 631,
+        "open_slots": 3
+      }
+    },
+    {
+      "at": 70.0,
+      "kind": "turn.bot",
+      "turn": 7,
+      "data": {
+        "text": "Let me check the schedule to see what times are available."
+      }
+    },
+    {
+      "at": 70.0,
+      "kind": "turn.bot",
+      "turn": 7,
+      "data": {
+        "text": "The earliest morning I have is tomorrow, Wednesday the twenty-second, at nine forty in the morning — want me to grab it?"
+      }
+    },
+    {
+      "at": 81.8,
+      "kind": "turn.caller",
+      "turn": 8,
+      "data": {
+        "text": "Tomorrow? Wow, okay. Yeah, let's do it."
+      }
+    },
+    {
+      "at": 81.8,
+      "kind": "tool",
+      "turn": 8,
+      "data": {
+        "name": "book",
+        "ok": true,
+        "ms": 366,
+        "slot": "Wed 9:40 AM",
+        "patient": "Morgan Ellis",
+        "already_booked": false
+      }
+    },
+    {
+      "at": 81.8,
+      "kind": "booking",
+      "turn": 8,
+      "data": {
+        "name": "Morgan Ellis",
+        "slot": "Wed 9:40 AM",
+        "reason": "consultation",
+        "insurance": "MetLife"
+      }
+    },
+    {
+      "at": 81.8,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "Let me get that set up for you."
+      }
+    },
+    {
+      "at": 81.8,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "Perfect — you're booked for Wednesday the twenty-second at nine forty in the morning."
+      }
+    },
+    {
+      "at": 81.8,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "Want me to text you a confirmation at that number?"
+      }
+    },
+    {
+      "at": 90.7,
+      "kind": "turn.caller",
+      "turn": 9,
+      "data": {
+        "text": "Sure, that'd be great."
+      }
+    },
+    {
+      "at": 90.7,
+      "kind": "turn.bot",
+      "turn": 9,
+      "data": {
+        "text": "Anything else I can do for you?"
+      }
+    },
+    {
+      "at": 99.9,
+      "kind": "turn.caller",
+      "turn": 10,
+      "data": {
+        "text": "No, that's it. Thanks so much."
+      }
+    },
+    {
+      "at": 99.9,
+      "kind": "turn.bot",
+      "turn": 10,
+      "data": {
+        "text": "Perfect!"
+      }
+    },
+    {
+      "at": 99.9,
+      "kind": "turn.bot",
+      "turn": 10,
+      "data": {
+        "text": "The front desk will confirm with you."
+      }
+    },
+    {
+      "at": 99.9,
+      "kind": "turn.bot",
+      "turn": 10,
+      "data": {
+        "text": "Take care!"
+      }
+    },
+    {
+      "at": 105.5,
+      "kind": "sms.out",
+      "turn": 10,
+      "data": {
+        "caller": "(656) ***-0115",
+        "kind": "confirmation",
+        "chars": 36
+      }
+    },
+    {
+      "at": 105.8,
+      "kind": "sms.in",
+      "turn": 10,
+      "data": {
+        "caller": "(656) ***-0115",
+        "kind": "yes",
+        "chars": 3
+      }
+    },
+    {
+      "at": 106.1,
+      "kind": "call.ended",
+      "turn": 10,
+      "data": {
+        "duration_s": 106.1,
+        "disposition": "phone-booked",
+        "bookings": 1,
+        "notes": 0
+      }
+    }
+  ]
+}

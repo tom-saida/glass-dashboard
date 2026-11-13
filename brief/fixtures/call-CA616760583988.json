@@ -1,0 +1,391 @@
+{
+  "call": {
+    "call_id": "CA616760583988",
+    "started_at": 1791836144.1392791,
+    "ended_at": 1791836306.919279,
+    "duration_s": 162.8,
+    "caller": "(813) ***-0199",
+    "disposition": "phone-booked",
+    "summary": "booked=1 scenario=rl_friend_after_own_story",
+    "bookings": 1,
+    "notes": 0,
+    "language": "en",
+    "greeted_as": "",
+    "turns": 13,
+    "status": "ended"
+  },
+  "events": [
+    {
+      "id": 158,
+      "ts": 1791836144.1392791,
+      "kind": "call.started",
+      "turn": 0,
+      "data": {
+        "caller": "(813) ***-0199"
+      }
+    },
+    {
+      "id": 159,
+      "ts": 1791836155.512279,
+      "kind": "greeting",
+      "turn": 0,
+      "data": {
+        "name": ""
+      }
+    },
+    {
+      "id": 160,
+      "ts": 1791836155.512279,
+      "kind": "turn.caller",
+      "turn": 1,
+      "data": {
+        "text": "So my dentist had mentioned I should get my teeth looked at, but actually I'm calling for my friend Matteo. He needs a consult."
+      }
+    },
+    {
+      "id": 161,
+      "ts": 1791836155.512279,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "A consult for Matteo — let's get him in!"
+      }
+    },
+    {
+      "id": 162,
+      "ts": 1791836155.512279,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "What's Matteo's last name?"
+      }
+    },
+    {
+      "id": 163,
+      "ts": 1791836166.2182791,
+      "kind": "turn.caller",
+      "turn": 2,
+      "data": {
+        "text": "It's Alvarez, A L V R E Z."
+      }
+    },
+    {
+      "id": 164,
+      "ts": 1791836166.2182791,
+      "kind": "turn.bot",
+      "turn": 2,
+      "data": {
+        "text": "So that's Matteo Alvarez — and what's his date of birth?"
+      }
+    },
+    {
+      "id": 165,
+      "ts": 1791836178.627279,
+      "kind": "turn.caller",
+      "turn": 3,
+      "data": {
+        "text": "The 8th of August 1990."
+      }
+    },
+    {
+      "id": 166,
+      "ts": 1791836178.627279,
+      "kind": "tool",
+      "turn": 3,
+      "data": {
+        "name": "lookup",
+        "ok": true,
+        "ms": 1170,
+        "verified": false
+      }
+    },
+    {
+      "id": 167,
+      "ts": 1791836178.627279,
+      "kind": "turn.bot",
+      "turn": 3,
+      "data": {
+        "text": "I don't see Matteo in our system yet — is this his first visit with us?"
+      }
+    },
+    {
+      "id": 168,
+      "ts": 1791836191.3132792,
+      "kind": "turn.caller",
+      "turn": 4,
+      "data": {
+        "text": "Yeah, yeah, first time his dentist just told him he should get checked out, so here we are."
+      }
+    },
+    {
+      "id": 169,
+      "ts": 1791836191.3132792,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "Perfect that his dentist sent him our way — let me note that down.Do you know if Matteo has dental insurance, and who's the provider?"
+      }
+    },
+    {
+      "id": 170,
+      "ts": 1791836206.0392792,
+      "kind": "turn.caller",
+      "turn": 5,
+      "data": {
+        "text": "Um, I'm not totally sure actually. I don't have that info in front of me. Can we maybe just get him booked and he can sort that out when he comes in."
+      }
+    },
+    {
+      "id": 171,
+      "ts": 1791836206.0392792,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "Totally fine, he can sort that out when he comes in!"
+      }
+    },
+    {
+      "id": 172,
+      "ts": 1791836206.0392792,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "Is the number you're calling from, ending in zero, one, eight, eight, the best one to reach you?"
+      }
+    },
+    {
+      "id": 173,
+      "ts": 1791836218.7432792,
+      "kind": "turn.caller",
+      "turn": 6,
+      "data": {
+        "text": "Yeah, that works. You can text that number too if you need to."
+      }
+    },
+    {
+      "id": 174,
+      "ts": 1791836218.7432792,
+      "kind": "turn.bot",
+      "turn": 6,
+      "data": {
+        "text": "What days work best for Matteo — mornings or afternoons — or should I just grab the soonest opening?"
+      }
+    },
+    {
+      "id": 175,
+      "ts": 1791836230.9072793,
+      "kind": "turn.caller",
+      "turn": 7,
+      "data": {
+        "text": "Soonest opening is perfect, honestly, whatever you got available."
+      }
+    },
+    {
+      "id": 176,
+      "ts": 1791836230.9072793,
+      "kind": "tool",
+      "turn": 7,
+      "data": {
+        "name": "context",
+        "ok": true,
+        "ms": 263,
+        "open_slots": 0
+      }
+    },
+    {
+      "id": 177,
+      "ts": 1791836230.9072793,
+      "kind": "turn.bot",
+      "turn": 7,
+      "data": {
+        "text": "Let me check the schedule to see what times are available.The earliest opening I have is Monday the twelfth at three twenty in the afternoon — want me to grab it?"
+      }
+    },
+    {
+      "id": 178,
+      "ts": 1791836243.5282793,
+      "kind": "turn.caller",
+      "turn": 8,
+      "data": {
+        "text": "Yeah, that works great. Monday the 12th at 3:20. Perfect."
+      }
+    },
+    {
+      "id": 179,
+      "ts": 1791836243.5282793,
+      "kind": "tool",
+      "turn": 8,
+      "data": {
+        "name": "book",
+        "ok": true,
+        "ms": 790,
+        "slot": "Mon 3:20 PM",
+        "patient": "Matteo Alvarez",
+        "already_booked": false
+      }
+    },
+    {
+      "id": 180,
+      "ts": 1791836243.5282793,
+      "kind": "booking",
+      "turn": 8,
+      "data": {
+        "name": "Matteo Alvarez",
+        "slot": "Mon 3:20 PM",
+        "reason": "consultation",
+        "insurance": "not provided"
+      }
+    },
+    {
+      "id": 181,
+      "ts": 1791836243.5282793,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "Let me get that set up for you.Perfect — Matteo is booked for Monday the twelfth at three twenty in the afternoon."
+      }
+    },
+    {
+      "id": 182,
+      "ts": 1791836243.5282793,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "And let me make sure I have the name right: Matteo, spelled M, A, T, T, E, O — then A, L, V, A, R, E, Z — is that right?"
+      }
+    },
+    {
+      "id": 183,
+      "ts": 1791836261.1012793,
+      "kind": "turn.caller",
+      "turn": 9,
+      "data": {
+        "text": "Actually, it's just one T, Emma T E O, not two Ts, but yeah, Alvarez is right."
+      }
+    },
+    {
+      "id": 184,
+      "ts": 1791836261.1012793,
+      "kind": "turn.bot",
+      "turn": 9,
+      "data": {
+        "text": "I still have it as Matteo Alvarez, spelled M, A, T, T, E, O — then A, L, V, A, R, E, Z — could you spell the last name once more, slowly?"
+      }
+    },
+    {
+      "id": 185,
+      "ts": 1791836275.4432793,
+      "kind": "turn.caller",
+      "turn": 10,
+      "data": {
+        "text": "Oh wait, no, the first name is Emma, just one T in the middle. Last name is A L V R E Z."
+      }
+    },
+    {
+      "id": 186,
+      "ts": 1791836275.4432793,
+      "kind": "turn.bot",
+      "turn": 10,
+      "data": {
+        "text": "Got it — so the first name is Mateo, one T, and the last name spelled A, L, V, R, E, Z — just to make sure I have that right, is there an A between the V and R?"
+      }
+    },
+    {
+      "id": 187,
+      "ts": 1791836286.9702792,
+      "kind": "turn.caller",
+      "turn": 11,
+      "data": {
+        "text": "Yeah, Y L V R E Z. There's an A in there between the V and the R."
+      }
+    },
+    {
+      "id": 188,
+      "ts": 1791836286.9702792,
+      "kind": "turn.bot",
+      "turn": 11,
+      "data": {
+        "text": "So that's Mateo Alvarez — M, A, T, E, O, then A, L, V, A, R, E, Z?"
+      }
+    },
+    {
+      "id": 189,
+      "ts": 1791836297.205279,
+      "kind": "turn.caller",
+      "turn": 12,
+      "data": {
+        "text": "Yeah, that's Mateo Alvarez. That's got it right."
+      }
+    },
+    {
+      "id": 190,
+      "ts": 1791836297.205279,
+      "kind": "turn.bot",
+      "turn": 12,
+      "data": {
+        "text": "Is there anything else I can help you with?"
+      }
+    },
+    {
+      "id": 191,
+      "ts": 1791836306.919279,
+      "kind": "turn.caller",
+      "turn": 13,
+      "data": {
+        "text": "No, that's all set. Thanks so much for getting him booked."
+      }
+    },
+    {
+      "id": 192,
+      "ts": 1791836306.919279,
+      "kind": "turn.bot",
+      "turn": 13,
+      "data": {
+        "text": "Perfect!"
+      }
+    },
+    {
+      "id": 193,
+      "ts": 1791836306.919279,
+      "kind": "turn.bot",
+      "turn": 13,
+      "data": {
+        "text": "The front desk will confirm with you.Take care!"
+      }
+    },
+    {
+      "id": 194,
+      "ts": 1791842740.15042,
+      "kind": "sms.out",
+      "turn": 13,
+      "data": {
+        "caller": "(813) ***-0199",
+        "kind": "confirmation",
+        "chars": 36
+      }
+    },
+    {
+      "id": 195,
+      "ts": 1791842740.150451,
+      "kind": "sms.in",
+      "turn": 13,
+      "data": {
+        "caller": "(813) ***-0199",
+        "kind": "yes",
+        "chars": 3
+      }
+    },
+    {
+      "id": 196,
+      "ts": 1791842740.150496,
+      "kind": "call.ended",
+      "turn": 13,
+      "data": {
+        "duration_s": 6596.0,
+        "disposition": "phone-booked",
+        "bookings": 1,
+        "notes": 0
+      }
+    }
+  ]
+}

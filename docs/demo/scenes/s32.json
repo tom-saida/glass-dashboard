@@ -1,0 +1,315 @@
+{
+  "id": "s32",
+  "day": 0,
+  "start": "16:55:00",
+  "duration_s": 83.2,
+  "caller": "(904) ***-0132",
+  "caller_full": "(904) 555-0132",
+  "language": "en",
+  "greeted_as": "",
+  "disposition": "phone-booked",
+  "turns": 8,
+  "first_line": "Hi, um, yeah — my daughter's bracket popped off at lunch today. She was eating a granola bar, of course. I wanted to see if somebody could look at it.",
+  "scenario": "bracket_off_book_next_morning",
+  "events": [
+    {
+      "at": 0.0,
+      "kind": "call.started",
+      "turn": 0,
+      "data": {
+        "caller": "(904) ***-0132"
+      }
+    },
+    {
+      "at": 1.2,
+      "kind": "greeting",
+      "turn": 0,
+      "data": {
+        "name": ""
+      }
+    },
+    {
+      "at": 5.0,
+      "kind": "turn.caller",
+      "turn": 1,
+      "data": {
+        "text": "Hi, um, yeah — my daughter's bracket popped off at lunch today. She was eating a granola bar, of course. I wanted to see if somebody could look at it."
+      }
+    },
+    {
+      "at": 13.4,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "Oh no, that's no fun — let me get that taken care of right now."
+      }
+    },
+    {
+      "at": 16.7,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "Let me get you the closest appointment we have — unless this is an emergency right now, or you'd rather speak with the clinical team first?"
+      }
+    },
+    {
+      "at": 24.1,
+      "kind": "turn.caller",
+      "turn": 2,
+      "data": {
+        "text": "No, no, she's not in pain or anything. It's just kind of hanging there on the wire."
+      }
+    },
+    {
+      "at": 29.0,
+      "kind": "tool",
+      "turn": 2,
+      "data": {
+        "name": "message",
+        "ok": true,
+        "ms": 731
+      }
+    },
+    {
+      "at": 29.7,
+      "kind": "note",
+      "turn": 2,
+      "data": {
+        "name": "unknown (booking to follow on this call)",
+        "reason": "URGENT: Daughter's bracket came off at lunch today and is hanging on the wire, no pain. [NOT an emergency - caller is booking the soonest visit on this call; note is informational]",
+        "urgent": true,
+        "fyi": false
+      }
+    },
+    {
+      "at": 29.8,
+      "kind": "turn.bot",
+      "turn": 2,
+      "data": {
+        "text": "What's your daughter's name?"
+      }
+    },
+    {
+      "at": 31.8,
+      "kind": "turn.caller",
+      "turn": 3,
+      "data": {
+        "text": "Zoe Lindqvist."
+      }
+    },
+    {
+      "at": 33.0,
+      "kind": "turn.bot",
+      "turn": 3,
+      "data": {
+        "text": "So that's Zoe Lindqvist — and what's her date of birth?"
+      }
+    },
+    {
+      "at": 36.3,
+      "kind": "turn.caller",
+      "turn": 4,
+      "data": {
+        "text": "August eleventh, 2012."
+      }
+    },
+    {
+      "at": 38.0,
+      "kind": "tool",
+      "turn": 4,
+      "data": {
+        "name": "lookup",
+        "ok": true,
+        "ms": 566,
+        "verified": true
+      }
+    },
+    {
+      "at": 38.5,
+      "kind": "tool",
+      "turn": 4,
+      "data": {
+        "name": "context",
+        "ok": true,
+        "ms": 702,
+        "open_slots": 2
+      }
+    },
+    {
+      "at": 39.2,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "Thanks — I found Zoe."
+      }
+    },
+    {
+      "at": 40.4,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "Let me check the schedule to see what times are available."
+      }
+    },
+    {
+      "at": 43.3,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "The earliest opening I have is tomorrow, Wednesday the twenty-second, at seven forty in the morning — want me to grab it?"
+      }
+    },
+    {
+      "at": 49.9,
+      "kind": "turn.caller",
+      "turn": 5,
+      "data": {
+        "text": "Seven forty, before school. Yes, please."
+      }
+    },
+    {
+      "at": 52.5,
+      "kind": "tool",
+      "turn": 5,
+      "data": {
+        "name": "book",
+        "ok": true,
+        "ms": 367,
+        "slot": "Wed 7:40 AM",
+        "patient": "Zoe Lindqvist",
+        "already_booked": false
+      }
+    },
+    {
+      "at": 52.9,
+      "kind": "booking",
+      "turn": 5,
+      "data": {
+        "name": "Zoe Lindqvist",
+        "slot": "Wed 7:40 AM",
+        "reason": "bracket came off, hanging on the wire",
+        "insurance": ""
+      }
+    },
+    {
+      "at": 53.0,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "Let me get that set up for you."
+      }
+    },
+    {
+      "at": 54.6,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "Perfect — Zoe is booked for Wednesday the twenty-second at seven forty in the morning."
+      }
+    },
+    {
+      "at": 59.0,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "I've flagged it for the team, so they'll know what's going on before she walks in."
+      }
+    },
+    {
+      "at": 63.6,
+      "kind": "turn.caller",
+      "turn": 6,
+      "data": {
+        "text": "Okay. Should she, like, do anything with it tonight? Or just leave it?"
+      }
+    },
+    {
+      "at": 67.8,
+      "kind": "tool",
+      "turn": 6,
+      "data": {
+        "name": "message",
+        "ok": true,
+        "ms": 618
+      }
+    },
+    {
+      "at": 68.4,
+      "kind": "note",
+      "turn": 6,
+      "data": {
+        "name": "Zoe Lindqvist",
+        "reason": "Parent asks how to handle the loose bracket tonight - please call back before close. [about patient Zoe Lindqvist]",
+        "urgent": false,
+        "fyi": false
+      }
+    },
+    {
+      "at": 68.5,
+      "kind": "turn.bot",
+      "turn": 6,
+      "data": {
+        "text": "That's a great question for the clinical team."
+      }
+    },
+    {
+      "at": 70.9,
+      "kind": "turn.bot",
+      "turn": 6,
+      "data": {
+        "text": "I've passed it along — they'll call you back before they close."
+      }
+    },
+    {
+      "at": 74.5,
+      "kind": "turn.caller",
+      "turn": 7,
+      "data": {
+        "text": "Okay, great. Thank you."
+      }
+    },
+    {
+      "at": 76.3,
+      "kind": "turn.bot",
+      "turn": 7,
+      "data": {
+        "text": "Is there anything else I can help you with?"
+      }
+    },
+    {
+      "at": 79.0,
+      "kind": "turn.caller",
+      "turn": 8,
+      "data": {
+        "text": "No, that's all."
+      }
+    },
+    {
+      "at": 80.3,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "The front desk will confirm with you."
+      }
+    },
+    {
+      "at": 82.2,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "Take care!"
+      }
+    },
+    {
+      "at": 83.2,
+      "kind": "call.ended",
+      "turn": 8,
+      "data": {
+        "duration_s": 83.2,
+        "disposition": "phone-booked",
+        "bookings": 1,
+        "notes": 2
+      }
+    }
+  ]
+}

@@ -1,0 +1,355 @@
+{
+  "id": "s16",
+  "day": 0,
+  "start": "11:38:00",
+  "duration_s": 114.5,
+  "caller": "(904) ***-0116",
+  "caller_full": "(904) 555-0116",
+  "language": "en",
+  "greeted_as": "",
+  "disposition": "phone-booked",
+  "turns": 11,
+  "first_line": "Hi, yeah, so I was wondering, um, how much do clear aligners cost? Like, ballpark?",
+  "scenario": "aligner_price_question_then_book",
+  "events": [
+    {
+      "at": 0,
+      "kind": "call.started",
+      "turn": 0,
+      "data": {
+        "caller": "(904) ***-0116"
+      }
+    },
+    {
+      "at": 1.2,
+      "kind": "greeting",
+      "turn": 0,
+      "data": {
+        "name": ""
+      }
+    },
+    {
+      "at": 5.6,
+      "kind": "turn.caller",
+      "turn": 1,
+      "data": {
+        "text": "Hi, yeah, so I was wondering, um, how much do clear aligners cost? Like, ballpark?"
+      }
+    },
+    {
+      "at": 5.6,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "Great question!"
+      }
+    },
+    {
+      "at": 5.6,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "Pricing depends on what your teeth need, so the doctor goes over the options and the cost with you at the consultation."
+      }
+    },
+    {
+      "at": 5.6,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "Want me to get you in for one?"
+      }
+    },
+    {
+      "at": 19.2,
+      "kind": "turn.caller",
+      "turn": 2,
+      "data": {
+        "text": "Okay, that makes sense. Yeah, sure, let's do that."
+      }
+    },
+    {
+      "at": 19.2,
+      "kind": "turn.bot",
+      "turn": 2,
+      "data": {
+        "text": "Let's get you in!"
+      }
+    },
+    {
+      "at": 19.2,
+      "kind": "turn.bot",
+      "turn": 2,
+      "data": {
+        "text": "What's your name?"
+      }
+    },
+    {
+      "at": 29.6,
+      "kind": "turn.caller",
+      "turn": 3,
+      "data": {
+        "text": "It's Tessa — Tessa Moreau. M, O, R, E, A, U."
+      }
+    },
+    {
+      "at": 29.6,
+      "kind": "turn.bot",
+      "turn": 3,
+      "data": {
+        "text": "So that's Tessa Moreau — and what's your date of birth?"
+      }
+    },
+    {
+      "at": 40.8,
+      "kind": "turn.caller",
+      "turn": 4,
+      "data": {
+        "text": "August fourth, 1996."
+      }
+    },
+    {
+      "at": 40.8,
+      "kind": "tool",
+      "turn": 4,
+      "data": {
+        "name": "lookup",
+        "ok": true,
+        "ms": 507,
+        "verified": false
+      }
+    },
+    {
+      "at": 40.8,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "I don't see Tessa in our system yet — is this your first visit with us?"
+      }
+    },
+    {
+      "at": 50.3,
+      "kind": "turn.caller",
+      "turn": 5,
+      "data": {
+        "text": "Yep, first time."
+      }
+    },
+    {
+      "at": 50.3,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "Nice, welcome to Harborline!"
+      }
+    },
+    {
+      "at": 50.3,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "And do you have dental insurance — who's the provider?"
+      }
+    },
+    {
+      "at": 63.0,
+      "kind": "turn.caller",
+      "turn": 6,
+      "data": {
+        "text": "Um, I don't think mine covers orthodontics, honestly. Can I just figure that out when I come in?"
+      }
+    },
+    {
+      "at": 63.0,
+      "kind": "turn.bot",
+      "turn": 6,
+      "data": {
+        "text": "Totally fine, you can sort that out when you come in!"
+      }
+    },
+    {
+      "at": 63.0,
+      "kind": "turn.bot",
+      "turn": 6,
+      "data": {
+        "text": "Is the number you're calling from, ending in zero, one, one, six, the best one to reach you?"
+      }
+    },
+    {
+      "at": 70.9,
+      "kind": "turn.caller",
+      "turn": 7,
+      "data": {
+        "text": "Yeah."
+      }
+    },
+    {
+      "at": 70.9,
+      "kind": "turn.bot",
+      "turn": 7,
+      "data": {
+        "text": "What days work best for you — mornings or afternoons — or should I just grab the soonest opening?"
+      }
+    },
+    {
+      "at": 80.5,
+      "kind": "turn.caller",
+      "turn": 8,
+      "data": {
+        "text": "Fridays are easiest for me, I work from home on Fridays."
+      }
+    },
+    {
+      "at": 80.5,
+      "kind": "tool",
+      "turn": 8,
+      "data": {
+        "name": "context",
+        "ok": true,
+        "ms": 594,
+        "open_slots": 2
+      }
+    },
+    {
+      "at": 80.5,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "Let me check the schedule to see what times are available."
+      }
+    },
+    {
+      "at": 80.5,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "I have Friday the twenty-fourth at ten twenty in the morning — want me to grab it?"
+      }
+    },
+    {
+      "at": 91.9,
+      "kind": "turn.caller",
+      "turn": 9,
+      "data": {
+        "text": "Yes, perfect."
+      }
+    },
+    {
+      "at": 91.9,
+      "kind": "tool",
+      "turn": 9,
+      "data": {
+        "name": "book",
+        "ok": true,
+        "ms": 421,
+        "slot": "Fri 10:20 AM",
+        "patient": "Tessa Moreau",
+        "already_booked": false
+      }
+    },
+    {
+      "at": 91.9,
+      "kind": "booking",
+      "turn": 9,
+      "data": {
+        "name": "Tessa Moreau",
+        "slot": "Fri 10:20 AM",
+        "reason": "clear aligners consultation",
+        "insurance": "not provided"
+      }
+    },
+    {
+      "at": 91.9,
+      "kind": "turn.bot",
+      "turn": 9,
+      "data": {
+        "text": "Let me get that set up for you."
+      }
+    },
+    {
+      "at": 91.9,
+      "kind": "turn.bot",
+      "turn": 9,
+      "data": {
+        "text": "Perfect — you're booked for Friday the twenty-fourth at ten twenty in the morning."
+      }
+    },
+    {
+      "at": 91.9,
+      "kind": "turn.bot",
+      "turn": 9,
+      "data": {
+        "text": "Want me to text you a confirmation at that number?"
+      }
+    },
+    {
+      "at": 99.5,
+      "kind": "turn.caller",
+      "turn": 10,
+      "data": {
+        "text": "Sure."
+      }
+    },
+    {
+      "at": 99.5,
+      "kind": "turn.bot",
+      "turn": 10,
+      "data": {
+        "text": "Is there anything else I can help you with?"
+      }
+    },
+    {
+      "at": 108.3,
+      "kind": "turn.caller",
+      "turn": 11,
+      "data": {
+        "text": "Nope, that's all. Thank you!"
+      }
+    },
+    {
+      "at": 108.3,
+      "kind": "turn.bot",
+      "turn": 11,
+      "data": {
+        "text": "Perfect!"
+      }
+    },
+    {
+      "at": 108.3,
+      "kind": "turn.bot",
+      "turn": 11,
+      "data": {
+        "text": "The front desk will confirm with you."
+      }
+    },
+    {
+      "at": 108.3,
+      "kind": "turn.bot",
+      "turn": 11,
+      "data": {
+        "text": "Take care!"
+      }
+    },
+    {
+      "at": 113.9,
+      "kind": "sms.out",
+      "turn": 11,
+      "data": {
+        "caller": "(904) ***-0116",
+        "kind": "confirmation",
+        "chars": 36
+      }
+    },
+    {
+      "at": 114.5,
+      "kind": "call.ended",
+      "turn": 11,
+      "data": {
+        "duration_s": 114.5,
+        "disposition": "phone-booked",
+        "bookings": 1,
+        "notes": 0
+      }
+    }
+  ]
+}

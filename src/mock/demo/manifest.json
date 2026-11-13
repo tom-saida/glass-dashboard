@@ -1,0 +1,4706 @@
+{
+ "contract": "katie-demo/1",
+ "generated_by": "scripts/demo-data.mjs",
+ "seed": 20261021,
+ "tz": "America/New_York",
+ "now": "0 21:10:00.000",
+ "day0_assumed": {
+  "weekday": "Tue",
+  "day_of_month": 21,
+  "note": "Transcripts speak dates as if day 0 is Tuesday the 21st; see README \"Dates in the transcripts\"."
+ },
+ "live": {
+  "scene": "s36",
+  "call_id": "CA418009612779",
+  "starts_at": "0 21:10:00.000",
+  "duration_s": 130,
+  "events": 46,
+  "stream_file": "live-s36.txt"
+ },
+ "files": {
+  "scenes": "scenes.json",
+  "history": "history.json",
+  "live_stream": "live-s36.txt"
+ },
+ "status": {
+  "ok": true,
+  "events": true,
+  "boot_at": "-6 21:10:00.000",
+  "now": "0 21:10:00.000",
+  "live_calls": 0,
+  "line": "idle",
+  "last_call_at": "0 20:55:00.000",
+  "practice": "Harborline Orthodontics (DEMO practice - fictional)",
+  "model": "claude-sonnet-4-6",
+  "agent": "Katie"
+ },
+ "stats_at_now": {
+  "1": {
+   "range": {
+    "from": "0 00:00:00.000",
+    "to": "0 21:10:00.000",
+    "days": 1,
+    "tz": "America/New_York"
+   },
+   "calls": 35,
+   "booked_calls": 26,
+   "bookings": 27,
+   "callbacks": 16,
+   "urgent": 5,
+   "sms_out": 20,
+   "sms_in": 19,
+   "avg_duration_s": 90.1,
+   "by_hour": [
+    {
+     "hour": 0,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 1,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 2,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 3,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 4,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 5,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 6,
+     "calls": 1,
+     "booked": 1
+    },
+    {
+     "hour": 7,
+     "calls": 1,
+     "booked": 1
+    },
+    {
+     "hour": 8,
+     "calls": 4,
+     "booked": 3
+    },
+    {
+     "hour": 9,
+     "calls": 4,
+     "booked": 3
+    },
+    {
+     "hour": 10,
+     "calls": 3,
+     "booked": 1
+    },
+    {
+     "hour": 11,
+     "calls": 4,
+     "booked": 4
+    },
+    {
+     "hour": 12,
+     "calls": 2,
+     "booked": 1
+    },
+    {
+     "hour": 13,
+     "calls": 3,
+     "booked": 1
+    },
+    {
+     "hour": 14,
+     "calls": 4,
+     "booked": 3
+    },
+    {
+     "hour": 15,
+     "calls": 3,
+     "booked": 3
+    },
+    {
+     "hour": 16,
+     "calls": 3,
+     "booked": 2
+    },
+    {
+     "hour": 17,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 18,
+     "calls": 1,
+     "booked": 1
+    },
+    {
+     "hour": 19,
+     "calls": 1,
+     "booked": 1
+    },
+    {
+     "hour": 20,
+     "calls": 1,
+     "booked": 1
+    },
+    {
+     "hour": 21,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 22,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 23,
+     "calls": 0,
+     "booked": 0
+    }
+   ],
+   "dispositions": {
+    "phone-booked": 26,
+    "phone-no-booking": 9
+   },
+   "languages": {
+    "en": 31,
+    "es": 4
+   }
+  },
+  "2": {
+   "range": {
+    "from": "-1 00:00:00.000",
+    "to": "0 21:10:00.000",
+    "days": 2,
+    "tz": "America/New_York"
+   },
+   "calls": 65,
+   "booked_calls": 50,
+   "bookings": 51,
+   "callbacks": 23,
+   "urgent": 6,
+   "sms_out": 38,
+   "sms_in": 36,
+   "avg_duration_s": 92.4,
+   "by_hour": [
+    {
+     "hour": 0,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 1,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 2,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 3,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 4,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 5,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 6,
+     "calls": 1,
+     "booked": 1
+    },
+    {
+     "hour": 7,
+     "calls": 1,
+     "booked": 1
+    },
+    {
+     "hour": 8,
+     "calls": 9,
+     "booked": 7
+    },
+    {
+     "hour": 9,
+     "calls": 6,
+     "booked": 5
+    },
+    {
+     "hour": 10,
+     "calls": 8,
+     "booked": 5
+    },
+    {
+     "hour": 11,
+     "calls": 4,
+     "booked": 4
+    },
+    {
+     "hour": 12,
+     "calls": 2,
+     "booked": 1
+    },
+    {
+     "hour": 13,
+     "calls": 5,
+     "booked": 3
+    },
+    {
+     "hour": 14,
+     "calls": 8,
+     "booked": 6
+    },
+    {
+     "hour": 15,
+     "calls": 7,
+     "booked": 6
+    },
+    {
+     "hour": 16,
+     "calls": 6,
+     "booked": 5
+    },
+    {
+     "hour": 17,
+     "calls": 2,
+     "booked": 1
+    },
+    {
+     "hour": 18,
+     "calls": 2,
+     "booked": 2
+    },
+    {
+     "hour": 19,
+     "calls": 2,
+     "booked": 1
+    },
+    {
+     "hour": 20,
+     "calls": 2,
+     "booked": 2
+    },
+    {
+     "hour": 21,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 22,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 23,
+     "calls": 0,
+     "booked": 0
+    }
+   ],
+   "dispositions": {
+    "phone-booked": 50,
+    "phone-no-booking": 15
+   },
+   "languages": {
+    "en": 60,
+    "es": 5
+   }
+  },
+  "7": {
+   "range": {
+    "from": "-6 00:00:00.000",
+    "to": "0 21:10:00.000",
+    "days": 7,
+    "tz": "America/New_York"
+   },
+   "calls": 155,
+   "booked_calls": 104,
+   "bookings": 105,
+   "callbacks": 45,
+   "urgent": 10,
+   "sms_out": 86,
+   "sms_in": 79,
+   "avg_duration_s": 83.2,
+   "by_hour": [
+    {
+     "hour": 0,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 1,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 2,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 3,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 4,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 5,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 6,
+     "calls": 2,
+     "booked": 1
+    },
+    {
+     "hour": 7,
+     "calls": 2,
+     "booked": 1
+    },
+    {
+     "hour": 8,
+     "calls": 18,
+     "booked": 11
+    },
+    {
+     "hour": 9,
+     "calls": 13,
+     "booked": 8
+    },
+    {
+     "hour": 10,
+     "calls": 19,
+     "booked": 14
+    },
+    {
+     "hour": 11,
+     "calls": 15,
+     "booked": 10
+    },
+    {
+     "hour": 12,
+     "calls": 6,
+     "booked": 4
+    },
+    {
+     "hour": 13,
+     "calls": 17,
+     "booked": 11
+    },
+    {
+     "hour": 14,
+     "calls": 21,
+     "booked": 13
+    },
+    {
+     "hour": 15,
+     "calls": 13,
+     "booked": 11
+    },
+    {
+     "hour": 16,
+     "calls": 15,
+     "booked": 10
+    },
+    {
+     "hour": 17,
+     "calls": 4,
+     "booked": 2
+    },
+    {
+     "hour": 18,
+     "calls": 3,
+     "booked": 3
+    },
+    {
+     "hour": 19,
+     "calls": 2,
+     "booked": 1
+    },
+    {
+     "hour": 20,
+     "calls": 5,
+     "booked": 4
+    },
+    {
+     "hour": 21,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 22,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 23,
+     "calls": 0,
+     "booked": 0
+    }
+   ],
+   "dispositions": {
+    "phone-booked": 104,
+    "phone-no-booking": 51
+   },
+   "languages": {
+    "en": 142,
+    "es": 13
+   }
+  },
+  "30": {
+   "range": {
+    "from": "-29 00:00:00.000",
+    "to": "0 21:10:00.000",
+    "days": 30,
+    "tz": "America/New_York"
+   },
+   "calls": 666,
+   "booked_calls": 416,
+   "bookings": 425,
+   "callbacks": 170,
+   "urgent": 42,
+   "sms_out": 311,
+   "sms_in": 265,
+   "avg_duration_s": 80.5,
+   "by_hour": [
+    {
+     "hour": 0,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 1,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 2,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 3,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 4,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 5,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 6,
+     "calls": 9,
+     "booked": 5
+    },
+    {
+     "hour": 7,
+     "calls": 17,
+     "booked": 12
+    },
+    {
+     "hour": 8,
+     "calls": 84,
+     "booked": 52
+    },
+    {
+     "hour": 9,
+     "calls": 73,
+     "booked": 50
+    },
+    {
+     "hour": 10,
+     "calls": 97,
+     "booked": 62
+    },
+    {
+     "hour": 11,
+     "calls": 61,
+     "booked": 34
+    },
+    {
+     "hour": 12,
+     "calls": 39,
+     "booked": 23
+    },
+    {
+     "hour": 13,
+     "calls": 50,
+     "booked": 31
+    },
+    {
+     "hour": 14,
+     "calls": 72,
+     "booked": 44
+    },
+    {
+     "hour": 15,
+     "calls": 76,
+     "booked": 49
+    },
+    {
+     "hour": 16,
+     "calls": 51,
+     "booked": 31
+    },
+    {
+     "hour": 17,
+     "calls": 13,
+     "booked": 7
+    },
+    {
+     "hour": 18,
+     "calls": 8,
+     "booked": 7
+    },
+    {
+     "hour": 19,
+     "calls": 10,
+     "booked": 5
+    },
+    {
+     "hour": 20,
+     "calls": 5,
+     "booked": 4
+    },
+    {
+     "hour": 21,
+     "calls": 1,
+     "booked": 0
+    },
+    {
+     "hour": 22,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 23,
+     "calls": 0,
+     "booked": 0
+    }
+   ],
+   "dispositions": {
+    "phone-booked": 416,
+    "phone-no-booking": 250
+   },
+   "languages": {
+    "es": 61,
+    "en": 605
+   }
+  }
+ },
+ "stats_after_live": {
+  "1": {
+   "range": {
+    "from": "0 00:00:00.000",
+    "to": "0 21:12:10.000",
+    "days": 1,
+    "tz": "America/New_York"
+   },
+   "calls": 36,
+   "booked_calls": 27,
+   "bookings": 28,
+   "callbacks": 16,
+   "urgent": 5,
+   "sms_out": 21,
+   "sms_in": 20,
+   "avg_duration_s": 91.2,
+   "by_hour": [
+    {
+     "hour": 0,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 1,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 2,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 3,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 4,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 5,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 6,
+     "calls": 1,
+     "booked": 1
+    },
+    {
+     "hour": 7,
+     "calls": 1,
+     "booked": 1
+    },
+    {
+     "hour": 8,
+     "calls": 4,
+     "booked": 3
+    },
+    {
+     "hour": 9,
+     "calls": 4,
+     "booked": 3
+    },
+    {
+     "hour": 10,
+     "calls": 3,
+     "booked": 1
+    },
+    {
+     "hour": 11,
+     "calls": 4,
+     "booked": 4
+    },
+    {
+     "hour": 12,
+     "calls": 2,
+     "booked": 1
+    },
+    {
+     "hour": 13,
+     "calls": 3,
+     "booked": 1
+    },
+    {
+     "hour": 14,
+     "calls": 4,
+     "booked": 3
+    },
+    {
+     "hour": 15,
+     "calls": 3,
+     "booked": 3
+    },
+    {
+     "hour": 16,
+     "calls": 3,
+     "booked": 2
+    },
+    {
+     "hour": 17,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 18,
+     "calls": 1,
+     "booked": 1
+    },
+    {
+     "hour": 19,
+     "calls": 1,
+     "booked": 1
+    },
+    {
+     "hour": 20,
+     "calls": 1,
+     "booked": 1
+    },
+    {
+     "hour": 21,
+     "calls": 1,
+     "booked": 1
+    },
+    {
+     "hour": 22,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 23,
+     "calls": 0,
+     "booked": 0
+    }
+   ],
+   "dispositions": {
+    "phone-booked": 27,
+    "phone-no-booking": 9
+   },
+   "languages": {
+    "en": 32,
+    "es": 4
+   }
+  },
+  "2": {
+   "range": {
+    "from": "-1 00:00:00.000",
+    "to": "0 21:12:10.000",
+    "days": 2,
+    "tz": "America/New_York"
+   },
+   "calls": 66,
+   "booked_calls": 51,
+   "bookings": 52,
+   "callbacks": 23,
+   "urgent": 6,
+   "sms_out": 39,
+   "sms_in": 37,
+   "avg_duration_s": 93,
+   "by_hour": [
+    {
+     "hour": 0,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 1,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 2,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 3,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 4,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 5,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 6,
+     "calls": 1,
+     "booked": 1
+    },
+    {
+     "hour": 7,
+     "calls": 1,
+     "booked": 1
+    },
+    {
+     "hour": 8,
+     "calls": 9,
+     "booked": 7
+    },
+    {
+     "hour": 9,
+     "calls": 6,
+     "booked": 5
+    },
+    {
+     "hour": 10,
+     "calls": 8,
+     "booked": 5
+    },
+    {
+     "hour": 11,
+     "calls": 4,
+     "booked": 4
+    },
+    {
+     "hour": 12,
+     "calls": 2,
+     "booked": 1
+    },
+    {
+     "hour": 13,
+     "calls": 5,
+     "booked": 3
+    },
+    {
+     "hour": 14,
+     "calls": 8,
+     "booked": 6
+    },
+    {
+     "hour": 15,
+     "calls": 7,
+     "booked": 6
+    },
+    {
+     "hour": 16,
+     "calls": 6,
+     "booked": 5
+    },
+    {
+     "hour": 17,
+     "calls": 2,
+     "booked": 1
+    },
+    {
+     "hour": 18,
+     "calls": 2,
+     "booked": 2
+    },
+    {
+     "hour": 19,
+     "calls": 2,
+     "booked": 1
+    },
+    {
+     "hour": 20,
+     "calls": 2,
+     "booked": 2
+    },
+    {
+     "hour": 21,
+     "calls": 1,
+     "booked": 1
+    },
+    {
+     "hour": 22,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 23,
+     "calls": 0,
+     "booked": 0
+    }
+   ],
+   "dispositions": {
+    "phone-booked": 51,
+    "phone-no-booking": 15
+   },
+   "languages": {
+    "en": 61,
+    "es": 5
+   }
+  },
+  "7": {
+   "range": {
+    "from": "-6 00:00:00.000",
+    "to": "0 21:12:10.000",
+    "days": 7,
+    "tz": "America/New_York"
+   },
+   "calls": 156,
+   "booked_calls": 105,
+   "bookings": 106,
+   "callbacks": 45,
+   "urgent": 10,
+   "sms_out": 87,
+   "sms_in": 80,
+   "avg_duration_s": 83.5,
+   "by_hour": [
+    {
+     "hour": 0,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 1,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 2,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 3,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 4,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 5,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 6,
+     "calls": 2,
+     "booked": 1
+    },
+    {
+     "hour": 7,
+     "calls": 2,
+     "booked": 1
+    },
+    {
+     "hour": 8,
+     "calls": 18,
+     "booked": 11
+    },
+    {
+     "hour": 9,
+     "calls": 13,
+     "booked": 8
+    },
+    {
+     "hour": 10,
+     "calls": 19,
+     "booked": 14
+    },
+    {
+     "hour": 11,
+     "calls": 15,
+     "booked": 10
+    },
+    {
+     "hour": 12,
+     "calls": 6,
+     "booked": 4
+    },
+    {
+     "hour": 13,
+     "calls": 17,
+     "booked": 11
+    },
+    {
+     "hour": 14,
+     "calls": 21,
+     "booked": 13
+    },
+    {
+     "hour": 15,
+     "calls": 13,
+     "booked": 11
+    },
+    {
+     "hour": 16,
+     "calls": 15,
+     "booked": 10
+    },
+    {
+     "hour": 17,
+     "calls": 4,
+     "booked": 2
+    },
+    {
+     "hour": 18,
+     "calls": 3,
+     "booked": 3
+    },
+    {
+     "hour": 19,
+     "calls": 2,
+     "booked": 1
+    },
+    {
+     "hour": 20,
+     "calls": 5,
+     "booked": 4
+    },
+    {
+     "hour": 21,
+     "calls": 1,
+     "booked": 1
+    },
+    {
+     "hour": 22,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 23,
+     "calls": 0,
+     "booked": 0
+    }
+   ],
+   "dispositions": {
+    "phone-booked": 105,
+    "phone-no-booking": 51
+   },
+   "languages": {
+    "en": 143,
+    "es": 13
+   }
+  },
+  "30": {
+   "range": {
+    "from": "-29 00:00:00.000",
+    "to": "0 21:12:10.000",
+    "days": 30,
+    "tz": "America/New_York"
+   },
+   "calls": 667,
+   "booked_calls": 417,
+   "bookings": 426,
+   "callbacks": 170,
+   "urgent": 42,
+   "sms_out": 312,
+   "sms_in": 266,
+   "avg_duration_s": 80.6,
+   "by_hour": [
+    {
+     "hour": 0,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 1,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 2,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 3,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 4,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 5,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 6,
+     "calls": 9,
+     "booked": 5
+    },
+    {
+     "hour": 7,
+     "calls": 17,
+     "booked": 12
+    },
+    {
+     "hour": 8,
+     "calls": 84,
+     "booked": 52
+    },
+    {
+     "hour": 9,
+     "calls": 73,
+     "booked": 50
+    },
+    {
+     "hour": 10,
+     "calls": 97,
+     "booked": 62
+    },
+    {
+     "hour": 11,
+     "calls": 61,
+     "booked": 34
+    },
+    {
+     "hour": 12,
+     "calls": 39,
+     "booked": 23
+    },
+    {
+     "hour": 13,
+     "calls": 50,
+     "booked": 31
+    },
+    {
+     "hour": 14,
+     "calls": 72,
+     "booked": 44
+    },
+    {
+     "hour": 15,
+     "calls": 76,
+     "booked": 49
+    },
+    {
+     "hour": 16,
+     "calls": 51,
+     "booked": 31
+    },
+    {
+     "hour": 17,
+     "calls": 13,
+     "booked": 7
+    },
+    {
+     "hour": 18,
+     "calls": 8,
+     "booked": 7
+    },
+    {
+     "hour": 19,
+     "calls": 10,
+     "booked": 5
+    },
+    {
+     "hour": 20,
+     "calls": 5,
+     "booked": 4
+    },
+    {
+     "hour": 21,
+     "calls": 2,
+     "booked": 1
+    },
+    {
+     "hour": 22,
+     "calls": 0,
+     "booked": 0
+    },
+    {
+     "hour": 23,
+     "calls": 0,
+     "booked": 0
+    }
+   ],
+   "dispositions": {
+    "phone-booked": 417,
+    "phone-no-booking": 250
+   },
+   "languages": {
+    "es": 61,
+    "en": 606
+   }
+  }
+ },
+ "counts_per_day": [
+  {
+   "day": 0,
+   "weekday": "Tue",
+   "calls": 35,
+   "booked_calls": 26,
+   "bookings": 27,
+   "callbacks": 16,
+   "urgent": 5,
+   "sms_out": 20,
+   "sms_in": 19,
+   "after_hours": 4,
+   "spanish": 4
+  },
+  {
+   "day": -1,
+   "weekday": "Mon",
+   "calls": 30,
+   "booked_calls": 24,
+   "bookings": 24,
+   "callbacks": 7,
+   "urgent": 1,
+   "sms_out": 18,
+   "sms_in": 17,
+   "after_hours": 5,
+   "spanish": 1
+  },
+  {
+   "day": -2,
+   "weekday": "Sun",
+   "calls": 4,
+   "booked_calls": 2,
+   "bookings": 2,
+   "callbacks": 2,
+   "urgent": 0,
+   "sms_out": 1,
+   "sms_in": 1,
+   "after_hours": 4,
+   "spanish": 0
+  },
+  {
+   "day": -3,
+   "weekday": "Sat",
+   "calls": 9,
+   "booked_calls": 4,
+   "bookings": 4,
+   "callbacks": 1,
+   "urgent": 0,
+   "sms_out": 2,
+   "sms_in": 2,
+   "after_hours": 9,
+   "spanish": 0
+  },
+  {
+   "day": -4,
+   "weekday": "Fri",
+   "calls": 14,
+   "booked_calls": 6,
+   "bookings": 6,
+   "callbacks": 6,
+   "urgent": 1,
+   "sms_out": 6,
+   "sms_in": 6,
+   "after_hours": 5,
+   "spanish": 0
+  },
+  {
+   "day": -5,
+   "weekday": "Thu",
+   "calls": 30,
+   "booked_calls": 21,
+   "bookings": 21,
+   "callbacks": 5,
+   "urgent": 1,
+   "sms_out": 19,
+   "sms_in": 17,
+   "after_hours": 2,
+   "spanish": 4
+  },
+  {
+   "day": -6,
+   "weekday": "Wed",
+   "calls": 33,
+   "booked_calls": 21,
+   "bookings": 21,
+   "callbacks": 8,
+   "urgent": 2,
+   "sms_out": 20,
+   "sms_in": 17,
+   "after_hours": 1,
+   "spanish": 4
+  },
+  {
+   "day": -7,
+   "weekday": "Tue",
+   "calls": 27,
+   "booked_calls": 17,
+   "bookings": 17,
+   "callbacks": 7,
+   "urgent": 2,
+   "sms_out": 11,
+   "sms_in": 11,
+   "after_hours": 1,
+   "spanish": 1
+  },
+  {
+   "day": -8,
+   "weekday": "Mon",
+   "calls": 32,
+   "booked_calls": 14,
+   "bookings": 14,
+   "callbacks": 7,
+   "urgent": 2,
+   "sms_out": 10,
+   "sms_in": 9,
+   "after_hours": 1,
+   "spanish": 4
+  },
+  {
+   "day": -9,
+   "weekday": "Sun",
+   "calls": 3,
+   "booked_calls": 1,
+   "bookings": 1,
+   "callbacks": 2,
+   "urgent": 0,
+   "sms_out": 1,
+   "sms_in": 1,
+   "after_hours": 3,
+   "spanish": 0
+  },
+  {
+   "day": -10,
+   "weekday": "Sat",
+   "calls": 8,
+   "booked_calls": 5,
+   "bookings": 5,
+   "callbacks": 1,
+   "urgent": 0,
+   "sms_out": 4,
+   "sms_in": 3,
+   "after_hours": 8,
+   "spanish": 2
+  },
+  {
+   "day": -11,
+   "weekday": "Fri",
+   "calls": 17,
+   "booked_calls": 11,
+   "bookings": 11,
+   "callbacks": 5,
+   "urgent": 2,
+   "sms_out": 9,
+   "sms_in": 7,
+   "after_hours": 5,
+   "spanish": 3
+  },
+  {
+   "day": -12,
+   "weekday": "Thu",
+   "calls": 32,
+   "booked_calls": 21,
+   "bookings": 21,
+   "callbacks": 10,
+   "urgent": 2,
+   "sms_out": 13,
+   "sms_in": 11,
+   "after_hours": 2,
+   "spanish": 3
+  },
+  {
+   "day": -13,
+   "weekday": "Wed",
+   "calls": 34,
+   "booked_calls": 24,
+   "bookings": 25,
+   "callbacks": 7,
+   "urgent": 1,
+   "sms_out": 15,
+   "sms_in": 12,
+   "after_hours": 2,
+   "spanish": 2
+  },
+  {
+   "day": -14,
+   "weekday": "Tue",
+   "calls": 26,
+   "booked_calls": 10,
+   "bookings": 11,
+   "callbacks": 3,
+   "urgent": 0,
+   "sms_out": 9,
+   "sms_in": 8,
+   "after_hours": 3,
+   "spanish": 3
+  },
+  {
+   "day": -15,
+   "weekday": "Mon",
+   "calls": 29,
+   "booked_calls": 20,
+   "bookings": 20,
+   "callbacks": 4,
+   "urgent": 1,
+   "sms_out": 13,
+   "sms_in": 12,
+   "after_hours": 2,
+   "spanish": 0
+  },
+  {
+   "day": -16,
+   "weekday": "Sun",
+   "calls": 3,
+   "booked_calls": 1,
+   "bookings": 1,
+   "callbacks": 1,
+   "urgent": 0,
+   "sms_out": 0,
+   "sms_in": 0,
+   "after_hours": 3,
+   "spanish": 0
+  },
+  {
+   "day": -17,
+   "weekday": "Sat",
+   "calls": 7,
+   "booked_calls": 5,
+   "bookings": 5,
+   "callbacks": 0,
+   "urgent": 0,
+   "sms_out": 4,
+   "sms_in": 1,
+   "after_hours": 7,
+   "spanish": 1
+  },
+  {
+   "day": -18,
+   "weekday": "Fri",
+   "calls": 18,
+   "booked_calls": 9,
+   "bookings": 10,
+   "callbacks": 5,
+   "urgent": 0,
+   "sms_out": 7,
+   "sms_in": 4,
+   "after_hours": 6,
+   "spanish": 2
+  },
+  {
+   "day": -19,
+   "weekday": "Thu",
+   "calls": 32,
+   "booked_calls": 21,
+   "bookings": 21,
+   "callbacks": 3,
+   "urgent": 1,
+   "sms_out": 16,
+   "sms_in": 10,
+   "after_hours": 2,
+   "spanish": 5
+  },
+  {
+   "day": -20,
+   "weekday": "Wed",
+   "calls": 28,
+   "booked_calls": 17,
+   "bookings": 17,
+   "callbacks": 6,
+   "urgent": 1,
+   "sms_out": 12,
+   "sms_in": 10,
+   "after_hours": 2,
+   "spanish": 2
+  },
+  {
+   "day": -21,
+   "weekday": "Tue",
+   "calls": 26,
+   "booked_calls": 21,
+   "bookings": 22,
+   "callbacks": 5,
+   "urgent": 1,
+   "sms_out": 14,
+   "sms_in": 13,
+   "after_hours": 1,
+   "spanish": 3
+  },
+  {
+   "day": -22,
+   "weekday": "Mon",
+   "calls": 32,
+   "booked_calls": 18,
+   "bookings": 18,
+   "callbacks": 14,
+   "urgent": 5,
+   "sms_out": 17,
+   "sms_in": 17,
+   "after_hours": 2,
+   "spanish": 0
+  },
+  {
+   "day": -23,
+   "weekday": "Sun",
+   "calls": 5,
+   "booked_calls": 2,
+   "bookings": 2,
+   "callbacks": 1,
+   "urgent": 0,
+   "sms_out": 2,
+   "sms_in": 2,
+   "after_hours": 5,
+   "spanish": 1
+  },
+  {
+   "day": -24,
+   "weekday": "Sat",
+   "calls": 6,
+   "booked_calls": 4,
+   "bookings": 4,
+   "callbacks": 2,
+   "urgent": 1,
+   "sms_out": 4,
+   "sms_in": 4,
+   "after_hours": 6,
+   "spanish": 1
+  },
+  {
+   "day": -25,
+   "weekday": "Fri",
+   "calls": 15,
+   "booked_calls": 10,
+   "bookings": 10,
+   "callbacks": 3,
+   "urgent": 1,
+   "sms_out": 8,
+   "sms_in": 7,
+   "after_hours": 5,
+   "spanish": 1
+  },
+  {
+   "day": -26,
+   "weekday": "Thu",
+   "calls": 34,
+   "booked_calls": 24,
+   "bookings": 25,
+   "callbacks": 9,
+   "urgent": 4,
+   "sms_out": 16,
+   "sms_in": 15,
+   "after_hours": 2,
+   "spanish": 4
+  },
+  {
+   "day": -27,
+   "weekday": "Wed",
+   "calls": 33,
+   "booked_calls": 16,
+   "bookings": 17,
+   "callbacks": 9,
+   "urgent": 2,
+   "sms_out": 10,
+   "sms_in": 9,
+   "after_hours": 2,
+   "spanish": 6
+  },
+  {
+   "day": -28,
+   "weekday": "Tue",
+   "calls": 32,
+   "booked_calls": 22,
+   "bookings": 24,
+   "callbacks": 14,
+   "urgent": 6,
+   "sms_out": 16,
+   "sms_in": 12,
+   "after_hours": 1,
+   "spanish": 3
+  },
+  {
+   "day": -29,
+   "weekday": "Mon",
+   "calls": 32,
+   "booked_calls": 19,
+   "bookings": 19,
+   "callbacks": 7,
+   "urgent": 0,
+   "sms_out": 14,
+   "sms_in": 8,
+   "after_hours": 1,
+   "spanish": 1
+  }
+ ],
+ "daily": [
+  {
+   "day": 0,
+   "weekday": "Tue",
+   "calls": 35,
+   "booked_calls": 26,
+   "bookings": 27,
+   "callbacks": 16,
+   "urgent": 5,
+   "fyi": 1,
+   "sms_out": 20,
+   "sms_in": 19,
+   "duration_sum_s": 3152.6,
+   "after_hours": 4,
+   "spanish": 4,
+   "by_hour": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    4,
+    4,
+    3,
+    4,
+    2,
+    3,
+    4,
+    3,
+    3,
+    0,
+    1,
+    1,
+    1,
+    0,
+    0,
+    0
+   ],
+   "by_hour_booked": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    3,
+    3,
+    1,
+    4,
+    1,
+    1,
+    3,
+    3,
+    2,
+    0,
+    1,
+    1,
+    1,
+    0,
+    0,
+    0
+   ],
+   "dispositions": {
+    "phone-booked": 26,
+    "phone-no-booking": 9
+   },
+   "languages": {
+    "en": 31,
+    "es": 4
+   }
+  },
+  {
+   "day": -1,
+   "weekday": "Mon",
+   "calls": 30,
+   "booked_calls": 24,
+   "bookings": 24,
+   "callbacks": 7,
+   "urgent": 1,
+   "fyi": 2,
+   "sms_out": 18,
+   "sms_in": 17,
+   "duration_sum_s": 2852.4,
+   "after_hours": 5,
+   "spanish": 1,
+   "by_hour": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    5,
+    2,
+    5,
+    0,
+    0,
+    2,
+    4,
+    4,
+    3,
+    2,
+    1,
+    1,
+    1,
+    0,
+    0,
+    0
+   ],
+   "by_hour_booked": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    4,
+    2,
+    4,
+    0,
+    0,
+    2,
+    3,
+    3,
+    3,
+    1,
+    1,
+    0,
+    1,
+    0,
+    0,
+    0
+   ],
+   "dispositions": {
+    "phone-booked": 24,
+    "phone-no-booking": 6
+   },
+   "languages": {
+    "en": 29,
+    "es": 1
+   }
+  },
+  {
+   "day": -2,
+   "weekday": "Sun",
+   "calls": 4,
+   "booked_calls": 2,
+   "bookings": 2,
+   "callbacks": 2,
+   "urgent": 0,
+   "fyi": 0,
+   "sms_out": 1,
+   "sms_in": 1,
+   "duration_sum_s": 296.5,
+   "after_hours": 4,
+   "spanish": 0,
+   "by_hour": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    1,
+    1,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0
+   ],
+   "by_hour_booked": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dispositions": {
+    "phone-booked": 2,
+    "phone-no-booking": 2
+   },
+   "languages": {
+    "en": 4
+   }
+  },
+  {
+   "day": -3,
+   "weekday": "Sat",
+   "calls": 9,
+   "booked_calls": 4,
+   "bookings": 4,
+   "callbacks": 1,
+   "urgent": 0,
+   "fyi": 0,
+   "sms_out": 2,
+   "sms_in": 2,
+   "duration_sum_s": 579.2,
+   "after_hours": 9,
+   "spanish": 0,
+   "by_hour": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    2,
+    0,
+    1,
+    0,
+    3,
+    1,
+    0,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "by_hour_booked": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    1,
+    1,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dispositions": {
+    "phone-no-booking": 5,
+    "phone-booked": 4
+   },
+   "languages": {
+    "en": 9
+   }
+  },
+  {
+   "day": -4,
+   "weekday": "Fri",
+   "calls": 14,
+   "booked_calls": 6,
+   "bookings": 6,
+   "callbacks": 6,
+   "urgent": 1,
+   "fyi": 0,
+   "sms_out": 6,
+   "sms_in": 6,
+   "duration_sum_s": 975.2,
+   "after_hours": 5,
+   "spanish": 0,
+   "by_hour": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    2,
+    0,
+    1,
+    4,
+    2,
+    1,
+    1,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0
+   ],
+   "by_hour_booked": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    2,
+    1,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0
+   ],
+   "dispositions": {
+    "phone-no-booking": 8,
+    "phone-booked": 6
+   },
+   "languages": {
+    "en": 14
+   }
+  },
+  {
+   "day": -5,
+   "weekday": "Thu",
+   "calls": 30,
+   "booked_calls": 21,
+   "bookings": 21,
+   "callbacks": 5,
+   "urgent": 1,
+   "fyi": 2,
+   "sms_out": 19,
+   "sms_in": 17,
+   "duration_sum_s": 2346.2,
+   "after_hours": 2,
+   "spanish": 4,
+   "by_hour": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    3,
+    2,
+    7,
+    2,
+    2,
+    2,
+    5,
+    2,
+    2,
+    0,
+    1,
+    0,
+    1,
+    0,
+    0,
+    0
+   ],
+   "by_hour_booked": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    7,
+    1,
+    2,
+    1,
+    3,
+    2,
+    1,
+    0,
+    1,
+    0,
+    1,
+    0,
+    0,
+    0
+   ],
+   "dispositions": {
+    "phone-no-booking": 9,
+    "phone-booked": 21
+   },
+   "languages": {
+    "en": 26,
+    "es": 4
+   }
+  },
+  {
+   "day": -6,
+   "weekday": "Wed",
+   "calls": 33,
+   "booked_calls": 21,
+   "bookings": 21,
+   "callbacks": 8,
+   "urgent": 2,
+   "fyi": 0,
+   "sms_out": 20,
+   "sms_in": 17,
+   "duration_sum_s": 2699.9,
+   "after_hours": 1,
+   "spanish": 4,
+   "by_hour": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    4,
+    3,
+    3,
+    4,
+    0,
+    5,
+    6,
+    3,
+    4,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "by_hour_booked": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    2,
+    2,
+    2,
+    2,
+    0,
+    5,
+    3,
+    2,
+    2,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dispositions": {
+    "phone-booked": 21,
+    "phone-no-booking": 12
+   },
+   "languages": {
+    "en": 29,
+    "es": 4
+   }
+  },
+  {
+   "day": -7,
+   "weekday": "Tue",
+   "calls": 27,
+   "booked_calls": 17,
+   "bookings": 17,
+   "callbacks": 7,
+   "urgent": 2,
+   "fyi": 1,
+   "sms_out": 11,
+   "sms_in": 11,
+   "duration_sum_s": 2249,
+   "after_hours": 1,
+   "spanish": 1,
+   "by_hour": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    2,
+    2,
+    5,
+    4,
+    2,
+    2,
+    1,
+    4,
+    3,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0
+   ],
+   "by_hour_booked": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    2,
+    2,
+    3,
+    2,
+    1,
+    2,
+    0,
+    2,
+    3,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dispositions": {
+    "phone-no-booking": 10,
+    "phone-booked": 17
+   },
+   "languages": {
+    "en": 26,
+    "es": 1
+   }
+  },
+  {
+   "day": -8,
+   "weekday": "Mon",
+   "calls": 32,
+   "booked_calls": 14,
+   "bookings": 14,
+   "callbacks": 7,
+   "urgent": 2,
+   "fyi": 5,
+   "sms_out": 10,
+   "sms_in": 9,
+   "duration_sum_s": 2098.6,
+   "after_hours": 1,
+   "spanish": 4,
+   "by_hour": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    4,
+    6,
+    4,
+    3,
+    2,
+    2,
+    3,
+    5,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "by_hour_booked": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    3,
+    2,
+    1,
+    1,
+    1,
+    1,
+    3,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dispositions": {
+    "phone-no-booking": 18,
+    "phone-booked": 14
+   },
+   "languages": {
+    "en": 28,
+    "es": 4
+   }
+  },
+  {
+   "day": -9,
+   "weekday": "Sun",
+   "calls": 3,
+   "booked_calls": 1,
+   "bookings": 1,
+   "callbacks": 2,
+   "urgent": 0,
+   "fyi": 0,
+   "sms_out": 1,
+   "sms_in": 1,
+   "duration_sum_s": 252.6,
+   "after_hours": 3,
+   "spanish": 0,
+   "by_hour": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "by_hour_booked": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dispositions": {
+    "phone-booked": 1,
+    "phone-no-booking": 2
+   },
+   "languages": {
+    "en": 3
+   }
+  },
+  {
+   "day": -10,
+   "weekday": "Sat",
+   "calls": 8,
+   "booked_calls": 5,
+   "bookings": 5,
+   "callbacks": 1,
+   "urgent": 0,
+   "fyi": 0,
+   "sms_out": 4,
+   "sms_in": 3,
+   "duration_sum_s": 619,
+   "after_hours": 8,
+   "spanish": 2,
+   "by_hour": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    2,
+    1,
+    0,
+    0,
+    2,
+    2,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "by_hour_booked": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    0,
+    0,
+    1,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dispositions": {
+    "phone-no-booking": 3,
+    "phone-booked": 5
+   },
+   "languages": {
+    "es": 2,
+    "en": 6
+   }
+  },
+  {
+   "day": -11,
+   "weekday": "Fri",
+   "calls": 17,
+   "booked_calls": 11,
+   "bookings": 11,
+   "callbacks": 5,
+   "urgent": 2,
+   "fyi": 0,
+   "sms_out": 9,
+   "sms_in": 7,
+   "duration_sum_s": 1411.5,
+   "after_hours": 5,
+   "spanish": 3,
+   "by_hour": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    3,
+    3,
+    3,
+    2,
+    1,
+    0,
+    1,
+    1,
+    2,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "by_hour_booked": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    2,
+    2,
+    0,
+    1,
+    0,
+    1,
+    1,
+    2,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dispositions": {
+    "phone-booked": 11,
+    "phone-no-booking": 6
+   },
+   "languages": {
+    "en": 14,
+    "es": 3
+   }
+  },
+  {
+   "day": -12,
+   "weekday": "Thu",
+   "calls": 32,
+   "booked_calls": 21,
+   "bookings": 21,
+   "callbacks": 10,
+   "urgent": 2,
+   "fyi": 1,
+   "sms_out": 13,
+   "sms_in": 11,
+   "duration_sum_s": 2680.1,
+   "after_hours": 2,
+   "spanish": 3,
+   "by_hour": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    5,
+    2,
+    7,
+    1,
+    1,
+    5,
+    1,
+    4,
+    3,
+    1,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0
+   ],
+   "by_hour_booked": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    4,
+    2,
+    6,
+    0,
+    1,
+    2,
+    1,
+    2,
+    2,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dispositions": {
+    "phone-no-booking": 11,
+    "phone-booked": 21
+   },
+   "languages": {
+    "en": 29,
+    "es": 3
+   }
+  },
+  {
+   "day": -13,
+   "weekday": "Wed",
+   "calls": 34,
+   "booked_calls": 24,
+   "bookings": 25,
+   "callbacks": 7,
+   "urgent": 1,
+   "fyi": 2,
+   "sms_out": 15,
+   "sms_in": 12,
+   "duration_sum_s": 3011,
+   "after_hours": 2,
+   "spanish": 2,
+   "by_hour": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    5,
+    6,
+    5,
+    4,
+    1,
+    3,
+    4,
+    2,
+    2,
+    0,
+    1,
+    0,
+    0,
+    1,
+    0,
+    0
+   ],
+   "by_hour_booked": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    5,
+    4,
+    4,
+    2,
+    1,
+    2,
+    2,
+    2,
+    1,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dispositions": {
+    "phone-booked": 24,
+    "phone-no-booking": 10
+   },
+   "languages": {
+    "en": 32,
+    "es": 2
+   }
+  },
+  {
+   "day": -14,
+   "weekday": "Tue",
+   "calls": 26,
+   "booked_calls": 10,
+   "bookings": 11,
+   "callbacks": 3,
+   "urgent": 0,
+   "fyi": 2,
+   "sms_out": 9,
+   "sms_in": 8,
+   "duration_sum_s": 1713.2,
+   "after_hours": 3,
+   "spanish": 3,
+   "by_hour": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    2,
+    0,
+    3,
+    4,
+    2,
+    1,
+    2,
+    3,
+    3,
+    3,
+    2,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "by_hour_booked": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    1,
+    0,
+    1,
+    1,
+    2,
+    1,
+    2,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dispositions": {
+    "phone-no-booking": 16,
+    "phone-booked": 10
+   },
+   "languages": {
+    "en": 23,
+    "es": 3
+   }
+  },
+  {
+   "day": -15,
+   "weekday": "Mon",
+   "calls": 29,
+   "booked_calls": 20,
+   "bookings": 20,
+   "callbacks": 4,
+   "urgent": 1,
+   "fyi": 2,
+   "sms_out": 13,
+   "sms_in": 12,
+   "duration_sum_s": 2449.9,
+   "after_hours": 2,
+   "spanish": 0,
+   "by_hour": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    2,
+    5,
+    2,
+    3,
+    3,
+    5,
+    0,
+    2,
+    4,
+    2,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0
+   ],
+   "by_hour_booked": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    2,
+    4,
+    2,
+    2,
+    1,
+    2,
+    0,
+    2,
+    3,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dispositions": {
+    "phone-booked": 20,
+    "phone-no-booking": 9
+   },
+   "languages": {
+    "en": 29
+   }
+  },
+  {
+   "day": -16,
+   "weekday": "Sun",
+   "calls": 3,
+   "booked_calls": 1,
+   "bookings": 1,
+   "callbacks": 1,
+   "urgent": 0,
+   "fyi": 0,
+   "sms_out": 0,
+   "sms_in": 0,
+   "duration_sum_s": 242.4,
+   "after_hours": 3,
+   "spanish": 0,
+   "by_hour": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    2,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "by_hour_booked": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dispositions": {
+    "phone-booked": 1,
+    "phone-no-booking": 2
+   },
+   "languages": {
+    "en": 3
+   }
+  },
+  {
+   "day": -17,
+   "weekday": "Sat",
+   "calls": 7,
+   "booked_calls": 5,
+   "bookings": 5,
+   "callbacks": 0,
+   "urgent": 0,
+   "fyi": 0,
+   "sms_out": 4,
+   "sms_in": 1,
+   "duration_sum_s": 592.6,
+   "after_hours": 7,
+   "spanish": 1,
+   "by_hour": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    2,
+    2,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "by_hour_booked": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    2,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dispositions": {
+    "phone-no-booking": 2,
+    "phone-booked": 5
+   },
+   "languages": {
+    "en": 6,
+    "es": 1
+   }
+  },
+  {
+   "day": -18,
+   "weekday": "Fri",
+   "calls": 18,
+   "booked_calls": 9,
+   "bookings": 10,
+   "callbacks": 5,
+   "urgent": 0,
+   "fyi": 0,
+   "sms_out": 7,
+   "sms_in": 4,
+   "duration_sum_s": 1360.1,
+   "after_hours": 6,
+   "spanish": 2,
+   "by_hour": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    5,
+    2,
+    3,
+    1,
+    1,
+    1,
+    2,
+    1,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0
+   ],
+   "by_hour_booked": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    3,
+    1,
+    1,
+    1,
+    0,
+    1,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dispositions": {
+    "phone-booked": 9,
+    "phone-no-booking": 9
+   },
+   "languages": {
+    "en": 16,
+    "es": 2
+   }
+  },
+  {
+   "day": -19,
+   "weekday": "Thu",
+   "calls": 32,
+   "booked_calls": 21,
+   "bookings": 21,
+   "callbacks": 3,
+   "urgent": 1,
+   "fyi": 1,
+   "sms_out": 16,
+   "sms_in": 10,
+   "duration_sum_s": 2660.7,
+   "after_hours": 2,
+   "spanish": 5,
+   "by_hour": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    5,
+    3,
+    6,
+    2,
+    1,
+    3,
+    3,
+    5,
+    2,
+    0,
+    1,
+    1,
+    0,
+    0,
+    0,
+    0
+   ],
+   "by_hour_booked": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    4,
+    2,
+    3,
+    2,
+    1,
+    2,
+    2,
+    3,
+    0,
+    0,
+    1,
+    1,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dispositions": {
+    "phone-booked": 21,
+    "phone-no-booking": 11
+   },
+   "languages": {
+    "en": 27,
+    "es": 5
+   }
+  },
+  {
+   "day": -20,
+   "weekday": "Wed",
+   "calls": 28,
+   "booked_calls": 17,
+   "bookings": 17,
+   "callbacks": 6,
+   "urgent": 1,
+   "fyi": 5,
+   "sms_out": 12,
+   "sms_in": 10,
+   "duration_sum_s": 2312.8,
+   "after_hours": 2,
+   "spanish": 2,
+   "by_hour": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    3,
+    4,
+    6,
+    2,
+    3,
+    1,
+    1,
+    3,
+    2,
+    2,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "by_hour_booked": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    2,
+    2,
+    4,
+    2,
+    1,
+    1,
+    1,
+    0,
+    2,
+    1,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dispositions": {
+    "phone-booked": 17,
+    "phone-no-booking": 11
+   },
+   "languages": {
+    "en": 26,
+    "es": 2
+   }
+  },
+  {
+   "day": -21,
+   "weekday": "Tue",
+   "calls": 26,
+   "booked_calls": 21,
+   "bookings": 22,
+   "callbacks": 5,
+   "urgent": 1,
+   "fyi": 0,
+   "sms_out": 14,
+   "sms_in": 13,
+   "duration_sum_s": 2356.4,
+   "after_hours": 1,
+   "spanish": 3,
+   "by_hour": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    2,
+    2,
+    3,
+    4,
+    2,
+    2,
+    0,
+    2,
+    7,
+    1,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0
+   ],
+   "by_hour_booked": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    3,
+    3,
+    2,
+    0,
+    0,
+    2,
+    7,
+    1,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dispositions": {
+    "phone-booked": 21,
+    "phone-no-booking": 5
+   },
+   "languages": {
+    "es": 3,
+    "en": 23
+   }
+  },
+  {
+   "day": -22,
+   "weekday": "Mon",
+   "calls": 32,
+   "booked_calls": 18,
+   "bookings": 18,
+   "callbacks": 14,
+   "urgent": 5,
+   "fyi": 1,
+   "sms_out": 17,
+   "sms_in": 17,
+   "duration_sum_s": 2375.3,
+   "after_hours": 2,
+   "spanish": 0,
+   "by_hour": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    6,
+    2,
+    6,
+    3,
+    1,
+    2,
+    3,
+    3,
+    4,
+    0,
+    1,
+    1,
+    0,
+    0,
+    0,
+    0
+   ],
+   "by_hour_booked": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    4,
+    2,
+    2,
+    2,
+    0,
+    1,
+    2,
+    2,
+    1,
+    0,
+    1,
+    1,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dispositions": {
+    "phone-booked": 18,
+    "phone-no-booking": 14
+   },
+   "languages": {
+    "en": 32
+   }
+  },
+  {
+   "day": -23,
+   "weekday": "Sun",
+   "calls": 5,
+   "booked_calls": 2,
+   "bookings": 2,
+   "callbacks": 1,
+   "urgent": 0,
+   "fyi": 0,
+   "sms_out": 2,
+   "sms_in": 2,
+   "duration_sum_s": 391.1,
+   "after_hours": 5,
+   "spanish": 1,
+   "by_hour": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    2,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "by_hour_booked": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dispositions": {
+    "phone-no-booking": 3,
+    "phone-booked": 2
+   },
+   "languages": {
+    "en": 4,
+    "es": 1
+   }
+  },
+  {
+   "day": -24,
+   "weekday": "Sat",
+   "calls": 6,
+   "booked_calls": 4,
+   "bookings": 4,
+   "callbacks": 2,
+   "urgent": 1,
+   "fyi": 0,
+   "sms_out": 4,
+   "sms_in": 4,
+   "duration_sum_s": 490.2,
+   "after_hours": 6,
+   "spanish": 1,
+   "by_hour": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    2,
+    2,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "by_hour_booked": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    2,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dispositions": {
+    "phone-booked": 4,
+    "phone-no-booking": 2
+   },
+   "languages": {
+    "en": 5,
+    "es": 1
+   }
+  },
+  {
+   "day": -25,
+   "weekday": "Fri",
+   "calls": 15,
+   "booked_calls": 10,
+   "bookings": 10,
+   "callbacks": 3,
+   "urgent": 1,
+   "fyi": 0,
+   "sms_out": 8,
+   "sms_in": 7,
+   "duration_sum_s": 1190.8,
+   "after_hours": 5,
+   "spanish": 1,
+   "by_hour": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    2,
+    0,
+    1,
+    1,
+    6,
+    1,
+    1,
+    1,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "by_hour_booked": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    1,
+    1,
+    3,
+    0,
+    1,
+    1,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dispositions": {
+    "phone-no-booking": 5,
+    "phone-booked": 10
+   },
+   "languages": {
+    "en": 14,
+    "es": 1
+   }
+  },
+  {
+   "day": -26,
+   "weekday": "Thu",
+   "calls": 34,
+   "booked_calls": 24,
+   "bookings": 25,
+   "callbacks": 9,
+   "urgent": 4,
+   "fyi": 3,
+   "sms_out": 16,
+   "sms_in": 15,
+   "duration_sum_s": 2857.9,
+   "after_hours": 2,
+   "spanish": 4,
+   "by_hour": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    3,
+    4,
+    5,
+    4,
+    3,
+    3,
+    1,
+    4,
+    5,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "by_hour_booked": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    0,
+    3,
+    3,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dispositions": {
+    "phone-booked": 24,
+    "phone-no-booking": 10
+   },
+   "languages": {
+    "en": 30,
+    "es": 4
+   }
+  },
+  {
+   "day": -27,
+   "weekday": "Wed",
+   "calls": 33,
+   "booked_calls": 16,
+   "bookings": 17,
+   "callbacks": 9,
+   "urgent": 2,
+   "fyi": 2,
+   "sms_out": 10,
+   "sms_in": 9,
+   "duration_sum_s": 2398,
+   "after_hours": 2,
+   "spanish": 6,
+   "by_hour": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    3,
+    2,
+    7,
+    4,
+    4,
+    1,
+    5,
+    3,
+    2,
+    1,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "by_hour_booked": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    2,
+    1,
+    4,
+    1,
+    2,
+    1,
+    2,
+    1,
+    0,
+    1,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dispositions": {
+    "phone-booked": 16,
+    "phone-no-booking": 17
+   },
+   "languages": {
+    "en": 27,
+    "es": 6
+   }
+  },
+  {
+   "day": -28,
+   "weekday": "Tue",
+   "calls": 32,
+   "booked_calls": 22,
+   "bookings": 24,
+   "callbacks": 14,
+   "urgent": 6,
+   "fyi": 1,
+   "sms_out": 16,
+   "sms_in": 12,
+   "duration_sum_s": 2747.7,
+   "after_hours": 1,
+   "spanish": 3,
+   "by_hour": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    2,
+    3,
+    3,
+    2,
+    2,
+    1,
+    3,
+    4,
+    7,
+    4,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0
+   ],
+   "by_hour_booked": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    2,
+    2,
+    3,
+    1,
+    1,
+    0,
+    3,
+    2,
+    4,
+    4,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dispositions": {
+    "phone-booked": 22,
+    "phone-no-booking": 10
+   },
+   "languages": {
+    "en": 29,
+    "es": 3
+   }
+  },
+  {
+   "day": -29,
+   "weekday": "Mon",
+   "calls": 32,
+   "booked_calls": 19,
+   "bookings": 19,
+   "callbacks": 7,
+   "urgent": 0,
+   "fyi": 3,
+   "sms_out": 14,
+   "sms_in": 8,
+   "duration_sum_s": 2271.5,
+   "after_hours": 1,
+   "spanish": 1,
+   "by_hour": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    5,
+    3,
+    4,
+    3,
+    1,
+    3,
+    6,
+    3,
+    3,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "by_hour_booked": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    2,
+    3,
+    1,
+    2,
+    1,
+    1,
+    4,
+    2,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dispositions": {
+    "phone-booked": 19,
+    "phone-no-booking": 13
+   },
+   "languages": {
+    "es": 1,
+    "en": 31
+   }
+  }
+ ],
+ "date_phrases": [
+  {
+   "call_id": "CA661015520345",
+   "event_id": 15382,
+   "phrase": "Thursday the twenty-third",
+   "days_from_day0": 2
+  },
+  {
+   "call_id": "CA661015520345",
+   "event_id": 15382,
+   "phrase": "Friday the twenty-fourth",
+   "days_from_day0": 3
+  },
+  {
+   "call_id": "CA661015520345",
+   "event_id": 15387,
+   "phrase": "Thursday the twenty-third",
+   "days_from_day0": 2
+  },
+  {
+   "call_id": "CA216253965107",
+   "event_id": 15453,
+   "phrase": "miércoles veintidós",
+   "days_from_day0": 1
+  },
+  {
+   "call_id": "CA216253965107",
+   "event_id": 15458,
+   "phrase": "miércoles veintidós",
+   "days_from_day0": 1
+  },
+  {
+   "call_id": "CA772920853202",
+   "event_id": 15490,
+   "phrase": "Friday the twenty-fourth",
+   "days_from_day0": 3
+  },
+  {
+   "call_id": "CA772920853202",
+   "event_id": 15495,
+   "phrase": "Friday the twenty-fourth",
+   "days_from_day0": 3
+  },
+  {
+   "call_id": "CA550539630821",
+   "event_id": 15516,
+   "phrase": "Wednesday the twenty-second",
+   "days_from_day0": 1
+  },
+  {
+   "call_id": "CA550539630821",
+   "event_id": 15522,
+   "phrase": "Thursday the twenty-third",
+   "days_from_day0": 2
+  },
+  {
+   "call_id": "CA550539630821",
+   "event_id": 15529,
+   "phrase": "Thursday the twenty-third",
+   "days_from_day0": 2
+  },
+  {
+   "call_id": "CA105777075583",
+   "event_id": 15580,
+   "phrase": "Wednesday the twenty-second",
+   "days_from_day0": 1
+  },
+  {
+   "call_id": "CA105777075583",
+   "event_id": 15585,
+   "phrase": "Wednesday the twenty-second",
+   "days_from_day0": 1
+  },
+  {
+   "call_id": "CA440063741297",
+   "event_id": 15647,
+   "phrase": "Thursday the twenty-third",
+   "days_from_day0": 2
+  },
+  {
+   "call_id": "CA440063741297",
+   "event_id": 15654,
+   "phrase": "Thursday the twenty-third",
+   "days_from_day0": 2
+  },
+  {
+   "call_id": "CA918586777916",
+   "event_id": 15722,
+   "phrase": "Thursday the twenty-third",
+   "days_from_day0": 2
+  },
+  {
+   "call_id": "CA918586777916",
+   "event_id": 15727,
+   "phrase": "Thursday the twenty-third",
+   "days_from_day0": 2
+  },
+  {
+   "call_id": "CA363348333154",
+   "event_id": 15758,
+   "phrase": "Wednesday the twenty-second",
+   "days_from_day0": 1
+  },
+  {
+   "call_id": "CA585729445059",
+   "event_id": 15775,
+   "phrase": "jueves veintitrés",
+   "days_from_day0": 2
+  },
+  {
+   "call_id": "CA585729445059",
+   "event_id": 15779,
+   "phrase": "viernes veinticuatro",
+   "days_from_day0": 3
+  },
+  {
+   "call_id": "CA585729445059",
+   "event_id": 15786,
+   "phrase": "viernes veinticuatro",
+   "days_from_day0": 3
+  },
+  {
+   "call_id": "CA808110667440",
+   "event_id": 15818,
+   "phrase": "Wednesday the twenty-second",
+   "days_from_day0": 1
+  },
+  {
+   "call_id": "CA808110667440",
+   "event_id": 15823,
+   "phrase": "Wednesday the twenty-second",
+   "days_from_day0": 1
+  },
+  {
+   "call_id": "CA030491000297",
+   "event_id": 15859,
+   "phrase": "Friday the twenty-fourth",
+   "days_from_day0": 3
+  },
+  {
+   "call_id": "CA030491000297",
+   "event_id": 15864,
+   "phrase": "Friday the twenty-fourth",
+   "days_from_day0": 3
+  },
+  {
+   "call_id": "CA252872222678",
+   "event_id": 15890,
+   "phrase": "Thursday the twenty-third",
+   "days_from_day0": 2
+  },
+  {
+   "call_id": "CA252872222678",
+   "event_id": 15895,
+   "phrase": "Thursday the twenty-third",
+   "days_from_day0": 2
+  },
+  {
+   "call_id": "CA697634998868",
+   "event_id": 15946,
+   "phrase": "Wednesday the twenty-second",
+   "days_from_day0": 1
+  },
+  {
+   "call_id": "CA697634998868",
+   "event_id": 15951,
+   "phrase": "Wednesday the twenty-second",
+   "days_from_day0": 1
+  },
+  {
+   "call_id": "CA605200020922",
+   "event_id": 16022,
+   "phrase": "Thursday the twenty-third",
+   "days_from_day0": 2
+  },
+  {
+   "call_id": "CA382819798541",
+   "event_id": 16059,
+   "phrase": "jueves veintitrés",
+   "days_from_day0": 2
+  },
+  {
+   "call_id": "CA382819798541",
+   "event_id": 16066,
+   "phrase": "jueves veintitrés",
+   "days_from_day0": 2
+  },
+  {
+   "call_id": "CA270914355208",
+   "event_id": 16100,
+   "phrase": "Wednesday the twenty-second",
+   "days_from_day0": 1
+  },
+  {
+   "call_id": "CA270914355208",
+   "event_id": 16105,
+   "phrase": "Wednesday the twenty-second",
+   "days_from_day0": 1
+  },
+  {
+   "call_id": "CA048533132827",
+   "event_id": 16143,
+   "phrase": "Friday the twenty-fourth",
+   "days_from_day0": 3
+  },
+  {
+   "call_id": "CA048533132827",
+   "event_id": 16148,
+   "phrase": "Friday the twenty-fourth",
+   "days_from_day0": 3
+  },
+  {
+   "call_id": "CA715676910446",
+   "event_id": 16167,
+   "phrase": "Monday the twenty-seventh",
+   "days_from_day0": 6
+  },
+  {
+   "call_id": "CA493295688065",
+   "event_id": 16202,
+   "phrase": "Thursday the twenty-third",
+   "days_from_day0": 2
+  },
+  {
+   "call_id": "CA493295688065",
+   "event_id": 16207,
+   "phrase": "Thursday the twenty-third",
+   "days_from_day0": 2
+  },
+  {
+   "call_id": "CA381390244732",
+   "event_id": 16239,
+   "phrase": "Wednesday the twenty-second",
+   "days_from_day0": 1
+  },
+  {
+   "call_id": "CA381390244732",
+   "event_id": 16244,
+   "phrase": "Wednesday the twenty-second",
+   "days_from_day0": 1
+  },
+  {
+   "call_id": "CA159009022351",
+   "event_id": 16279,
+   "phrase": "Thursday the twenty-third",
+   "days_from_day0": 2
+  },
+  {
+   "call_id": "CA159009022351",
+   "event_id": 16284,
+   "phrase": "Thursday the twenty-third",
+   "days_from_day0": 2
+  },
+  {
+   "call_id": "CA195628500874",
+   "event_id": 16347,
+   "phrase": "Friday the twenty-fourth",
+   "days_from_day0": 3
+  },
+  {
+   "call_id": "CA195628500874",
+   "event_id": 16354,
+   "phrase": "Friday the twenty-fourth",
+   "days_from_day0": 3
+  },
+  {
+   "call_id": "CA528485723255",
+   "event_id": 16380,
+   "phrase": "Wednesday the twenty-second",
+   "days_from_day0": 1
+  },
+  {
+   "call_id": "CA528485723255",
+   "event_id": 16385,
+   "phrase": "Wednesday the twenty-second",
+   "days_from_day0": 1
+  },
+  {
+   "call_id": "CA750866945636",
+   "event_id": 16419,
+   "phrase": "Thursday the twenty-third",
+   "days_from_day0": 2
+  },
+  {
+   "call_id": "CA750866945636",
+   "event_id": 16424,
+   "phrase": "Thursday the twenty-third",
+   "days_from_day0": 2
+  },
+  {
+   "call_id": "CA862771168017",
+   "event_id": 16446,
+   "phrase": "lunes veintisiete",
+   "days_from_day0": 6
+  },
+  {
+   "call_id": "CA862771168017",
+   "event_id": 16450,
+   "phrase": "martes veintiocho",
+   "days_from_day0": 7
+  },
+  {
+   "call_id": "CA862771168017",
+   "event_id": 16456,
+   "phrase": "martes veintiocho",
+   "days_from_day0": 7
+  },
+  {
+   "call_id": "CA085152390398",
+   "event_id": 16484,
+   "phrase": "Wednesday the twenty-second",
+   "days_from_day0": 1
+  },
+  {
+   "call_id": "CA085152390398",
+   "event_id": 16489,
+   "phrase": "Wednesday the twenty-second",
+   "days_from_day0": 1
+  },
+  {
+   "call_id": "CA481002384716",
+   "event_id": 15130,
+   "phrase": "Thursday the twenty-third",
+   "days_from_day0": 2
+  },
+  {
+   "call_id": "CA481002384716",
+   "event_id": 15135,
+   "phrase": "Thursday the twenty-third",
+   "days_from_day0": 2
+  },
+  {
+   "call_id": "CA703383717573",
+   "event_id": 15164,
+   "phrase": "Tuesday the twenty-first",
+   "days_from_day0": 0
+  },
+  {
+   "call_id": "CA703383717573",
+   "event_id": 15169,
+   "phrase": "Tuesday the twenty-first",
+   "days_from_day0": 0
+  },
+  {
+   "call_id": "CA925764939954",
+   "event_id": 15200,
+   "phrase": "jueves veintitrés",
+   "days_from_day0": 2
+  },
+  {
+   "call_id": "CA925764939954",
+   "event_id": 15204,
+   "phrase": "jueves veintitrés",
+   "days_from_day0": 2
+  },
+  {
+   "call_id": "CA370526274240",
+   "event_id": 15259,
+   "phrase": "Friday the twenty-fourth",
+   "days_from_day0": 3
+  },
+  {
+   "call_id": "CA370526274240",
+   "event_id": 15264,
+   "phrase": "Friday the twenty-fourth",
+   "days_from_day0": 3
+  },
+  {
+   "call_id": "CA592907607097",
+   "event_id": 15285,
+   "phrase": "Wednesday the twenty-second",
+   "days_from_day0": 1
+  },
+  {
+   "call_id": "CA592907607097",
+   "event_id": 15289,
+   "phrase": "Thursday the twenty-third",
+   "days_from_day0": 2
+  },
+  {
+   "call_id": "CA592907607097",
+   "event_id": 15296,
+   "phrase": "Thursday the twenty-third",
+   "days_from_day0": 2
+  },
+  {
+   "call_id": "CA815288829478",
+   "event_id": 15315,
+   "phrase": "Wednesday the twenty-second",
+   "days_from_day0": 1
+  },
+  {
+   "call_id": "CA037669383287",
+   "event_id": 15341,
+   "phrase": "Wednesday the twenty-second",
+   "days_from_day0": 1
+  },
+  {
+   "call_id": "CA037669383287",
+   "event_id": 15346,
+   "phrase": "Wednesday the twenty-second",
+   "days_from_day0": 1
+  },
+  {
+   "call_id": "CA418009612779",
+   "event_id": 16523,
+   "phrase": "Thursday the twenty-third",
+   "days_from_day0": 2
+  },
+  {
+   "call_id": "CA418009612779",
+   "event_id": 16523,
+   "phrase": "Friday the twenty-fourth",
+   "days_from_day0": 3
+  },
+  {
+   "call_id": "CA418009612779",
+   "event_id": 16528,
+   "phrase": "Thursday the twenty-third",
+   "days_from_day0": 2
+  }
+ ],
+ "pools": {
+  "archetypes": {
+   "new_consult": {
+    "weight": 28,
+    "turns": [
+     9,
+     13
+    ],
+    "spanish_share": 0.13,
+    "first_lines_en": 14,
+    "first_lines_es": 7
+   },
+   "insurance_then_book": {
+    "weight": 10,
+    "turns": [
+     9,
+     12
+    ],
+    "spanish_share": 0.1,
+    "first_lines_en": 6,
+    "first_lines_es": 3
+   },
+   "reschedule": {
+    "weight": 10,
+    "turns": [
+     6,
+     9
+    ],
+    "spanish_share": 0.1,
+    "first_lines_en": 7,
+    "first_lines_es": 2
+   },
+   "urgent": {
+    "weight": 6,
+    "turns": [
+     7,
+     10
+    ],
+    "spanish_share": 0.1,
+    "first_lines_en": 6,
+    "first_lines_es": 2
+   },
+   "retainer": {
+    "weight": 4,
+    "turns": [
+     7,
+     9
+    ],
+    "spanish_share": 0,
+    "first_lines_en": 5,
+    "first_lines_es": 0
+   },
+   "sibling": {
+    "weight": 1.5,
+    "turns": [
+     11,
+     14
+    ],
+    "spanish_share": 0,
+    "first_lines_en": 2,
+    "first_lines_es": 0
+   },
+   "confirm": {
+    "weight": 8,
+    "turns": [
+     3,
+     5
+    ],
+    "spanish_share": 0.12,
+    "first_lines_en": 5,
+    "first_lines_es": 2
+   },
+   "question_no_booking": {
+    "weight": 4,
+    "turns": [
+     3,
+     6
+    ],
+    "spanish_share": 0.12,
+    "first_lines_en": 4,
+    "first_lines_es": 1
+   },
+   "running_late": {
+    "weight": 4.5,
+    "turns": [
+     2,
+     4
+    ],
+    "spanish_share": 0.1,
+    "first_lines_en": 4,
+    "first_lines_es": 1
+   },
+   "cancel_callback": {
+    "weight": 4.5,
+    "turns": [
+     5,
+     7
+    ],
+    "spanish_share": 0.1,
+    "first_lines_en": 3,
+    "first_lines_es": 1
+   },
+   "billing": {
+    "weight": 7,
+    "turns": [
+     4,
+     7
+    ],
+    "spanish_share": 0.1,
+    "first_lines_en": 6,
+    "first_lines_es": 1
+   },
+   "not_our_service": {
+    "weight": 2.5,
+    "turns": [
+     2,
+     4
+    ],
+    "spanish_share": 0,
+    "first_lines_en": 4,
+    "first_lines_es": 0
+   },
+   "no_openings": {
+    "weight": 2,
+    "turns": [
+     5,
+     7
+    ],
+    "spanish_share": 0,
+    "first_lines_en": 2,
+    "first_lines_es": 0
+   },
+   "preference": {
+    "weight": 2.5,
+    "turns": [
+     4,
+     6
+    ],
+    "spanish_share": 0,
+    "first_lines_en": 3,
+    "first_lines_es": 0
+   },
+   "hangup": {
+    "weight": 3,
+    "turns": [
+     1,
+     1
+    ],
+    "spanish_share": 0.1,
+    "first_lines_en": 3,
+    "first_lines_es": 1
+   }
+  },
+  "names": {
+   "boys": [
+    "Ethan",
+    "Noah",
+    "Mason",
+    "Eli",
+    "Caleb",
+    "Henry",
+    "Wyatt",
+    "Leo",
+    "Miles",
+    "Jack",
+    "Carter",
+    "Grayson",
+    "Lucas",
+    "Theo",
+    "Owen",
+    "Isaac",
+    "Rowan",
+    "Felix"
+   ],
+   "girls": [
+    "Ava",
+    "Amara",
+    "Isabella",
+    "Zoe",
+    "Brianna",
+    "Luna",
+    "Lily",
+    "Maya",
+    "Avery",
+    "Nora",
+    "Chloe",
+    "Sophie",
+    "Ellie",
+    "Ruby",
+    "Addison",
+    "Hazel",
+    "Stella",
+    "Piper"
+   ],
+   "adults": [
+    "Jordan",
+    "Tessa",
+    "Kevin",
+    "Robert",
+    "Dana",
+    "Renee",
+    "Priya",
+    "Sam",
+    "Marcus",
+    "Nicole",
+    "Lauren",
+    "Derek",
+    "Monica",
+    "Alan",
+    "Kendra",
+    "Trevor",
+    "Jasmine",
+    "Paul",
+    "Erin",
+    "Courtney",
+    "Brandon",
+    "Heather"
+   ],
+   "parents": [
+    "Rachel",
+    "Greg",
+    "Melissa",
+    "Chris",
+    "Angela",
+    "Jason",
+    "Stephanie",
+    "Mike",
+    "Kim",
+    "Dave",
+    "Tanya",
+    "Brian",
+    "Lisa",
+    "Eric"
+   ],
+   "surnames": [
+    "Caldwell",
+    "Nair",
+    "Whitaker",
+    "Castillo",
+    "Whitlock",
+    "Novak",
+    "Mendez",
+    "Moreau",
+    "Dunmore",
+    "Oduya",
+    "Okafor",
+    "Pike",
+    "Halvorsen",
+    "Calloway",
+    "Moreno",
+    "Pruitt",
+    "Hartwell",
+    "Brandt",
+    "Albright",
+    "Ellis",
+    "Kemper",
+    "Lowry",
+    "Brooks",
+    "Sorensen",
+    "Vasquez",
+    "Barros",
+    "Moss",
+    "Fairbanks",
+    "Holt",
+    "Garland",
+    "Petrakis",
+    "Huang",
+    "Abernathy",
+    "Sutton",
+    "Rhodes",
+    "Kowalski",
+    "Bianchi",
+    "Mercer",
+    "Tran",
+    "Osei",
+    "Whitman",
+    "Dalton",
+    "Keane",
+    "Ferris"
+   ],
+   "es_boys": [
+    "Diego",
+    "Santiago",
+    "Mateo",
+    "Emiliano",
+    "Joaquín",
+    "Sebastián",
+    "Andrés"
+   ],
+   "es_girls": [
+    "Camila",
+    "Valentina",
+    "Sofía",
+    "Ximena",
+    "Lucía",
+    "Isabela",
+    "Renata"
+   ],
+   "es_adults": [
+    "Daniela",
+    "Mariela",
+    "Alejandro",
+    "Rosa",
+    "Luis",
+    "Gabriela",
+    "Jorge",
+    "Carmen"
+   ],
+   "es_surnames": [
+    "Ortega",
+    "Fuentes",
+    "Quintero",
+    "Ríos",
+    "Herrera",
+    "Salazar",
+    "Delgado",
+    "Cabrera",
+    "Morales",
+    "Paredes",
+    "Guzmán",
+    "Ibarra"
+   ]
+  },
+  "insurance": [
+   "Delta Dental",
+   "Cigna",
+   "MetLife",
+   "Aetna",
+   "UnitedHealthcare",
+   "Humana",
+   "Medicaid",
+   "not provided",
+   ""
+  ],
+  "hours": {
+   "in_office": {
+    "7": 0.45,
+    "8": 1.3,
+    "9": 1.55,
+    "10": 1.45,
+    "11": 1,
+    "12": 0.5,
+    "13": 0.7,
+    "14": 1.25,
+    "15": 1.35,
+    "16": 1
+   },
+   "weekday_after": {
+    "6": 0.25,
+    "7": 0.15,
+    "17": 0.4,
+    "18": 0.25,
+    "19": 0.15,
+    "20": 0.08,
+    "21": 0.03
+   },
+   "friday_after": {
+    "6": 0.1,
+    "13": 0.3,
+    "14": 0.22,
+    "15": 0.16,
+    "16": 0.12,
+    "17": 0.08,
+    "18": 0.06,
+    "19": 0.04,
+    "20": 0.02
+   },
+   "saturday": {
+    "8": 0.05,
+    "9": 0.12,
+    "10": 0.16,
+    "11": 0.16,
+    "12": 0.13,
+    "13": 0.11,
+    "14": 0.09,
+    "15": 0.07,
+    "16": 0.05,
+    "17": 0.03,
+    "18": 0.02,
+    "19": 0.01
+   },
+   "sunday": {
+    "10": 0.08,
+    "11": 0.12,
+    "12": 0.12,
+    "13": 0.12,
+    "14": 0.12,
+    "15": 0.11,
+    "16": 0.1,
+    "17": 0.09,
+    "18": 0.07,
+    "19": 0.05,
+    "20": 0.02
+   }
+  },
+  "scripted_yesterday": [
+   {
+    "id": "h1",
+    "start": "16:08:00",
+    "scenario": "new_patient_consult_child_after_school"
+   },
+   {
+    "id": "h2",
+    "start": "16:26:00",
+    "scenario": "loose_bracket_picture_day_next_morning"
+   },
+   {
+    "id": "h3",
+    "start": "16:47:00",
+    "scenario": "es_new_patient_consult_child"
+   },
+   {
+    "id": "h4",
+    "start": "17:15:00",
+    "scenario": "after_hours_insurance_preauth_note"
+   },
+   {
+    "id": "h5",
+    "start": "17:52:00",
+    "scenario": "after_hours_adult_aligner_consult"
+   },
+   {
+    "id": "h6",
+    "start": "18:30:00",
+    "scenario": "after_hours_reschedule_existing"
+   },
+   {
+    "id": "h7",
+    "start": "19:44:00",
+    "scenario": "after_hours_confirm_existing_time"
+   },
+   {
+    "id": "h8",
+    "start": "20:38:00",
+    "scenario": "after_hours_chewed_retainer_book_and_callback"
+   }
+  ]
+ }
+}

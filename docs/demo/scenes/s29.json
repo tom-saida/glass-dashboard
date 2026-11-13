@@ -1,0 +1,390 @@
+{
+  "id": "s29",
+  "day": 0,
+  "start": "15:52:00",
+  "duration_s": 103.8,
+  "caller": "(727) ***-0129",
+  "caller_full": "(727) 555-0129",
+  "language": "en",
+  "greeted_as": "",
+  "disposition": "phone-booked",
+  "turns": 12,
+  "first_line": "Yeah, hi, I was, uh — I wanted to ask about Invisalign? I'm an adult, so I don't know if you guys even do adults.",
+  "scenario": "adult_booking_then_name_correction",
+  "events": [
+    {
+      "at": 0.0,
+      "kind": "call.started",
+      "turn": 0,
+      "data": {
+        "caller": "(727) ***-0129"
+      }
+    },
+    {
+      "at": 1.2,
+      "kind": "greeting",
+      "turn": 0,
+      "data": {
+        "name": ""
+      }
+    },
+    {
+      "at": 5.0,
+      "kind": "turn.caller",
+      "turn": 1,
+      "data": {
+        "text": "Yeah, hi, I was, uh — I wanted to ask about Invisalign? I'm an adult, so I don't know if you guys even do adults."
+      }
+    },
+    {
+      "at": 11.5,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "We sure do — lots of adults come see us!"
+      }
+    },
+    {
+      "at": 13.6,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "Want me to book you a consultation so the doctor can take a look?"
+      }
+    },
+    {
+      "at": 17.3,
+      "kind": "turn.caller",
+      "turn": 2,
+      "data": {
+        "text": "Yeah, let's do that."
+      }
+    },
+    {
+      "at": 18.9,
+      "kind": "turn.bot",
+      "turn": 2,
+      "data": {
+        "text": "Let's get you in!"
+      }
+    },
+    {
+      "at": 19.9,
+      "kind": "turn.bot",
+      "turn": 2,
+      "data": {
+        "text": "What's your name?"
+      }
+    },
+    {
+      "at": 21.3,
+      "kind": "turn.caller",
+      "turn": 3,
+      "data": {
+        "text": "Renee Shimanski."
+      }
+    },
+    {
+      "at": 22.6,
+      "kind": "turn.bot",
+      "turn": 3,
+      "data": {
+        "text": "So that's Renee Shimanski — and what's your date of birth?"
+      }
+    },
+    {
+      "at": 26.0,
+      "kind": "turn.caller",
+      "turn": 4,
+      "data": {
+        "text": "November nineteenth, 1987."
+      }
+    },
+    {
+      "at": 27.9,
+      "kind": "tool",
+      "turn": 4,
+      "data": {
+        "name": "lookup",
+        "ok": true,
+        "ms": 541,
+        "verified": false
+      }
+    },
+    {
+      "at": 28.5,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "I don't see Renee in our system yet — is this your first visit with us?"
+      }
+    },
+    {
+      "at": 32.5,
+      "kind": "turn.caller",
+      "turn": 5,
+      "data": {
+        "text": "First time, yep."
+      }
+    },
+    {
+      "at": 33.9,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "Nice, welcome to Harborline!"
+      }
+    },
+    {
+      "at": 35.4,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "And do you have dental insurance — who's the provider?"
+      }
+    },
+    {
+      "at": 38.6,
+      "kind": "turn.caller",
+      "turn": 6,
+      "data": {
+        "text": "MetLife. Through my job."
+      }
+    },
+    {
+      "at": 40.4,
+      "kind": "turn.bot",
+      "turn": 6,
+      "data": {
+        "text": "Got it, MetLife."
+      }
+    },
+    {
+      "at": 41.3,
+      "kind": "turn.bot",
+      "turn": 6,
+      "data": {
+        "text": "Is the number you're calling from, ending in zero, one, two, nine, the best one to reach you?"
+      }
+    },
+    {
+      "at": 46.4,
+      "kind": "turn.caller",
+      "turn": 7,
+      "data": {
+        "text": "Yes, that's me."
+      }
+    },
+    {
+      "at": 47.7,
+      "kind": "turn.bot",
+      "turn": 7,
+      "data": {
+        "text": "What days work best for you — mornings or afternoons — or should I just grab the soonest opening?"
+      }
+    },
+    {
+      "at": 53.1,
+      "kind": "turn.caller",
+      "turn": 8,
+      "data": {
+        "text": "Mornings are better. Like, before work, if you have anything kind of early-ish."
+      }
+    },
+    {
+      "at": 57.8,
+      "kind": "tool",
+      "turn": 8,
+      "data": {
+        "name": "context",
+        "ok": true,
+        "ms": 688,
+        "open_slots": 4
+      }
+    },
+    {
+      "at": 58.5,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "Let me check the schedule to see what times are available."
+      }
+    },
+    {
+      "at": 61.4,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "I have Thursday the twenty-third at nine forty in the morning — want me to grab it?"
+      }
+    },
+    {
+      "at": 66.1,
+      "kind": "turn.caller",
+      "turn": 9,
+      "data": {
+        "text": "Nine forty Thursday. Yeah, I can make that work."
+      }
+    },
+    {
+      "at": 69.1,
+      "kind": "tool",
+      "turn": 9,
+      "data": {
+        "name": "book",
+        "ok": true,
+        "ms": 376,
+        "slot": "Thu 9:40 AM",
+        "patient": "Renee Shimanski",
+        "already_booked": false
+      }
+    },
+    {
+      "at": 69.5,
+      "kind": "booking",
+      "turn": 9,
+      "data": {
+        "name": "Renee Shimanski",
+        "slot": "Thu 9:40 AM",
+        "reason": "Invisalign consultation",
+        "insurance": "MetLife"
+      }
+    },
+    {
+      "at": 69.6,
+      "kind": "turn.bot",
+      "turn": 9,
+      "data": {
+        "text": "Let me get that set up for you."
+      }
+    },
+    {
+      "at": 71.3,
+      "kind": "turn.bot",
+      "turn": 9,
+      "data": {
+        "text": "Perfect — you're booked for Thursday the twenty-third at nine forty in the morning."
+      }
+    },
+    {
+      "at": 75.5,
+      "kind": "turn.bot",
+      "turn": 9,
+      "data": {
+        "text": "And let me make sure I have the name right: Renee, spelled R, E, N, E, E — then S, H, I, M, A, N, S, K, I — is that right?"
+      }
+    },
+    {
+      "at": 82.0,
+      "kind": "turn.caller",
+      "turn": 10,
+      "data": {
+        "text": "Oh — no, sorry, it's spelled weird. S, Z, Y, M, A, N, S, K, I. Everybody gets it wrong, don't worry."
+      }
+    },
+    {
+      "at": 87.8,
+      "kind": "tool",
+      "turn": 10,
+      "data": {
+        "name": "message",
+        "ok": true,
+        "ms": 712
+      }
+    },
+    {
+      "at": 88.6,
+      "kind": "note",
+      "turn": 10,
+      "data": {
+        "name": "Renee Szymanski",
+        "reason": "NAME CORRECTION on a booking made this call (Thu 9:40 AM): booked as 'Renee Shimanski', now 'Renee Szymanski'. Please update the chart.",
+        "urgent": false,
+        "fyi": false
+      }
+    },
+    {
+      "at": 88.7,
+      "kind": "turn.bot",
+      "turn": 10,
+      "data": {
+        "text": "Got it!"
+      }
+    },
+    {
+      "at": 89.1,
+      "kind": "turn.bot",
+      "turn": 10,
+      "data": {
+        "text": "Let me get that written down for you."
+      }
+    },
+    {
+      "at": 91.0,
+      "kind": "turn.bot",
+      "turn": 10,
+      "data": {
+        "text": "That's Szymanski, spelled S, Z, Y, M, A, N, S, K, I — is that right?"
+      }
+    },
+    {
+      "at": 95.0,
+      "kind": "turn.caller",
+      "turn": 11,
+      "data": {
+        "text": "That's it. Thank you."
+      }
+    },
+    {
+      "at": 96.6,
+      "kind": "turn.bot",
+      "turn": 11,
+      "data": {
+        "text": "Anything else I can do for you?"
+      }
+    },
+    {
+      "at": 98.7,
+      "kind": "turn.caller",
+      "turn": 12,
+      "data": {
+        "text": "Nope, that's all. Bye!"
+      }
+    },
+    {
+      "at": 100.3,
+      "kind": "turn.bot",
+      "turn": 12,
+      "data": {
+        "text": "Perfect!"
+      }
+    },
+    {
+      "at": 100.9,
+      "kind": "turn.bot",
+      "turn": 12,
+      "data": {
+        "text": "The front desk will confirm with you."
+      }
+    },
+    {
+      "at": 102.8,
+      "kind": "turn.bot",
+      "turn": 12,
+      "data": {
+        "text": "Take care!"
+      }
+    },
+    {
+      "at": 103.8,
+      "kind": "call.ended",
+      "turn": 12,
+      "data": {
+        "duration_s": 103.8,
+        "disposition": "phone-booked",
+        "bookings": 1,
+        "notes": 1
+      }
+    }
+  ]
+}

@@ -1,0 +1,282 @@
+{
+  "id": "s02",
+  "day": 0,
+  "start": "07:35:00",
+  "duration_s": 66.1,
+  "caller": "(727) ***-0102",
+  "caller_full": "(727) 555-0102",
+  "language": "en",
+  "greeted_as": "Priya",
+  "disposition": "phone-booked",
+  "turns": 6,
+  "first_line": "Hi, yeah, hi. So one of my wires is like — it's poking into my cheek, on the back left? And it's really starting to hurt.",
+  "scenario": "urgent_wire_same_day",
+  "events": [
+    {
+      "at": 0,
+      "kind": "call.started",
+      "turn": 0,
+      "data": {
+        "caller": "(727) ***-0102"
+      }
+    },
+    {
+      "at": 1.2,
+      "kind": "greeting",
+      "turn": 0,
+      "data": {
+        "name": "Priya"
+      }
+    },
+    {
+      "at": 4,
+      "kind": "turn.caller",
+      "turn": 1,
+      "data": {
+        "text": "Hi, yeah, hi. So one of my wires is like — it's poking into my cheek, on the back left? And it's really starting to hurt."
+      }
+    },
+    {
+      "at": 4,
+      "kind": "tool",
+      "turn": 1,
+      "data": {
+        "name": "lookup",
+        "ok": true,
+        "ms": 604,
+        "verified": true
+      }
+    },
+    {
+      "at": 4,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "Oh no, that sounds uncomfortable — let's get that taken care of."
+      }
+    },
+    {
+      "at": 4,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "Let me get you the closest appointment we have — unless this is an emergency right now, or you'd rather speak with the clinical team first?"
+      }
+    },
+    {
+      "at": 20,
+      "kind": "turn.caller",
+      "turn": 2,
+      "data": {
+        "text": "No, it's not an emergency, I just want it fixed today if I can. It's rubbing every time I talk."
+      }
+    },
+    {
+      "at": 20,
+      "kind": "tool",
+      "turn": 2,
+      "data": {
+        "name": "message",
+        "ok": true,
+        "ms": 721
+      }
+    },
+    {
+      "at": 20,
+      "kind": "note",
+      "turn": 2,
+      "data": {
+        "name": "Priya Nair",
+        "reason": "URGENT: Wire poking into back left cheek, rubbing when she talks, wants it fixed today. [NOT an emergency - caller is booking the soonest visit on this call; note is informational]",
+        "urgent": true,
+        "fyi": false
+      }
+    },
+    {
+      "at": 20,
+      "kind": "turn.bot",
+      "turn": 2,
+      "data": {
+        "text": "I've let the team know."
+      }
+    },
+    {
+      "at": 20,
+      "kind": "turn.bot",
+      "turn": 2,
+      "data": {
+        "text": "Just to confirm — this is for you, Priya Nair?"
+      }
+    },
+    {
+      "at": 28.5,
+      "kind": "turn.caller",
+      "turn": 3,
+      "data": {
+        "text": "Yes, that's me."
+      }
+    },
+    {
+      "at": 28.5,
+      "kind": "tool",
+      "turn": 3,
+      "data": {
+        "name": "context",
+        "ok": true,
+        "ms": 497,
+        "open_slots": 2
+      }
+    },
+    {
+      "at": 28.5,
+      "kind": "turn.bot",
+      "turn": 3,
+      "data": {
+        "text": "Let me check the schedule to see what times are available."
+      }
+    },
+    {
+      "at": 28.5,
+      "kind": "turn.bot",
+      "turn": 3,
+      "data": {
+        "text": "I can see you today at eleven twenty in the morning — want me to grab it?"
+      }
+    },
+    {
+      "at": 40.9,
+      "kind": "turn.caller",
+      "turn": 4,
+      "data": {
+        "text": "Today at eleven twenty? Oh, yes. Yes, please."
+      }
+    },
+    {
+      "at": 40.9,
+      "kind": "tool",
+      "turn": 4,
+      "data": {
+        "name": "book",
+        "ok": true,
+        "ms": 366,
+        "slot": "Tue 11:20 AM",
+        "patient": "Priya Nair",
+        "already_booked": false
+      }
+    },
+    {
+      "at": 40.9,
+      "kind": "booking",
+      "turn": 4,
+      "data": {
+        "name": "Priya Nair",
+        "slot": "Tue 11:20 AM",
+        "reason": "wire poking cheek - comfort visit",
+        "insurance": ""
+      }
+    },
+    {
+      "at": 40.9,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "Let me get that set up for you."
+      }
+    },
+    {
+      "at": 40.9,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "Perfect — you're booked for today at eleven twenty in the morning."
+      }
+    },
+    {
+      "at": 40.9,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "Want me to text you a confirmation at the number ending in zero, one, zero, two?"
+      }
+    },
+    {
+      "at": 54.2,
+      "kind": "turn.caller",
+      "turn": 5,
+      "data": {
+        "text": "Sure, yeah, go ahead."
+      }
+    },
+    {
+      "at": 54.2,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "You got it."
+      }
+    },
+    {
+      "at": 54.2,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "Is there anything else I can help you with?"
+      }
+    },
+    {
+      "at": 62.7,
+      "kind": "turn.caller",
+      "turn": 6,
+      "data": {
+        "text": "No, that's everything. Thank you, seriously."
+      }
+    },
+    {
+      "at": 62.7,
+      "kind": "turn.bot",
+      "turn": 6,
+      "data": {
+        "text": "Perfect!"
+      }
+    },
+    {
+      "at": 62.7,
+      "kind": "turn.bot",
+      "turn": 6,
+      "data": {
+        "text": "The front desk will confirm with you. Take care!"
+      }
+    },
+    {
+      "at": 65.1,
+      "kind": "sms.out",
+      "turn": 6,
+      "data": {
+        "caller": "(727) ***-0102",
+        "kind": "confirmation",
+        "chars": 36
+      }
+    },
+    {
+      "at": 65.6,
+      "kind": "sms.in",
+      "turn": 6,
+      "data": {
+        "caller": "(727) ***-0102",
+        "kind": "yes",
+        "chars": 3
+      }
+    },
+    {
+      "at": 66.1,
+      "kind": "call.ended",
+      "turn": 6,
+      "data": {
+        "duration_s": 66.1,
+        "disposition": "phone-booked",
+        "bookings": 1,
+        "notes": 1
+      }
+    }
+  ]
+}

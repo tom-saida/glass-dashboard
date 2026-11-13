@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Katie sign-in mock</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+  :root{--ink:#323338;--ink2:#676879;--blue:#0073ea;--blue2:#0060b9;--line:rgba(50,51,56,.12);--card:rgba(255,255,255,.62)}
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;font-family:Figtree,system-ui,-apple-system,sans-serif;color:var(--ink);-webkit-font-smoothing:auto}
+  body{width:1280px;height:800px;overflow:hidden;position:relative;background:#eef3fb}
+  .env{position:absolute;inset:0;background:
+    radial-gradient(60% 55% at 12% 18%, #ffd9c4 0%, rgba(255,217,196,0) 70%),
+    radial-gradient(55% 60% at 88% 20%, #cfe3ff 0%, rgba(207,227,255,0) 70%),
+    radial-gradient(60% 55% at 70% 90%, #e5d8ff 0%, rgba(229,216,255,0) 70%),
+    radial-gradient(45% 45% at 25% 85%, #d6f2ea 0%, rgba(214,242,234,0) 70%),
+    linear-gradient(180deg,#f4f7fd,#e9eef8)}
+  .env .shape{position:absolute;border-radius:50%;filter:blur(2px)}
+  .env .s1{width:420px;height:420px;left:-120px;top:-140px;background:rgba(255,255,255,.55)}
+  .env .s2{width:260px;height:260px;right:80px;bottom:-60px;background:rgba(255,255,255,.5)}
+  .env .s3{width:160px;height:160px;right:360px;top:70px;background:rgba(0,115,234,.10)}
+  .pane{position:absolute;backdrop-filter:blur(14px) saturate(1.6);-webkit-backdrop-filter:blur(14px) saturate(1.6);
+    background:rgba(255,255,255,.26);border-radius:44px;
+    box-shadow:0 30px 60px rgba(30,40,70,.12), inset 0 0 0 1px rgba(255,255,255,.75), inset 18px 18px 40px -20px rgba(255,255,255,.9), inset -18px -18px 40px -24px rgba(90,110,160,.18)}
+  .pane::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+    background:linear-gradient(135deg,rgba(255,255,255,.55) 0%,rgba(255,255,255,0) 28%,rgba(255,255,255,0) 72%,rgba(255,255,255,.35) 100%)}
+  /* sign-in screens */
+  .signin{left:420px;top:150px;width:440px;height:500px;padding:40px 40px 32px;display:flex;flex-direction:column;align-items:center;text-align:center}
+  .signin .avatar{width:60px;height:60px;border-radius:50%;overflow:hidden;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+  .signin .avatar img{width:60px;height:60px;display:block}
+  .signin h1{font-size:28px;font-weight:700;margin:16px 0 4px;letter-spacing:-.01em}
+  .signin .sub{color:var(--ink2);font-size:15px;margin:0 0 26px}
+  .field{width:100%;text-align:left;margin-bottom:14px}
+  .field label{display:block;font-size:13px;font-weight:600;color:var(--ink2);margin-bottom:6px}
+  .field .in{height:44px;border-radius:12px;background:rgba(255,255,255,.85);box-shadow:inset 0 0 0 1px var(--line);padding:0 14px;display:flex;align-items:center;font-size:15px;color:var(--ink)}
+  .field .in.ph{color:#9a9bab}
+  .btn{width:100%;height:46px;border-radius:999px;background:var(--blue);color:#fff;font-weight:600;font-size:15px;display:flex;align-items:center;justify-content:center;margin-top:8px;box-shadow:0 8px 18px rgba(0,115,234,.25)}
+  .link{color:var(--blue);font-size:14px;margin-top:16px;font-weight:500}
+  .foot{margin-top:auto;font-size:12px;color:var(--ink2)}
+  .code{display:flex;gap:10px;justify-content:center;margin:6px 0 18px}
+  .code span{width:48px;height:56px;border-radius:12px;background:rgba(255,255,255,.85);box-shadow:inset 0 0 0 1px var(--line);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:600}
+  .code span.cur{box-shadow:inset 0 0 0 2px var(--blue)}
+  .check{display:flex;gap:10px;align-items:center;font-size:14px;color:var(--ink);width:100%;text-align:left;margin:4px 0 10px}
+  .check i{width:18px;height:18px;border-radius:5px;background:var(--blue);display:inline-flex;align-items:center;justify-content:center;color:#fff;font-style:normal;font-size:12px}
+  /* settings screen */
+  .app{left:16px;top:16px;width:1248px;height:768px;overflow:hidden}
+  .rail{position:absolute;left:0;top:0;bottom:0;width:72px;display:flex;flex-direction:column;align-items:center;padding-top:28px;gap:18px}
+  .rail .ic{width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.5)}
+  .rail .ic.on{background:var(--blue)}
+  .rail .av{margin-top:auto;margin-bottom:24px;width:40px;height:40px;border-radius:50%;overflow:hidden;background:#fff}
+  .rail .av img{width:40px;height:40px;display:block}
+  .top{position:absolute;left:72px;right:0;top:0;height:72px;display:flex;align-items:center;padding:0 40px;gap:14px}
+  .top h2{font-size:22px;font-weight:700;margin:0}
+  .top .who{margin-left:auto;font-size:14px;color:var(--ink2);display:flex;align-items:center;gap:10px}
+  .top .who b{color:var(--ink);font-weight:600}
+  .top .pill{height:32px;padding:0 14px;border-radius:999px;background:rgba(255,255,255,.7);box-shadow:inset 0 0 0 1px var(--line);display:flex;align-items:center;font-size:13px;font-weight:600}
+  .content{position:absolute;left:72px;right:0;top:72px;bottom:0;padding:24px 40px 40px;overflow:hidden}
+  .tabs{display:flex;gap:8px;margin-bottom:22px}
+  .tab{height:34px;padding:0 16px;border-radius:999px;display:flex;align-items:center;font-size:14px;font-weight:600;background:rgba(255,255,255,.55);color:var(--ink2)}
+  .tab.on{background:var(--blue);color:#fff}
+  .card{background:var(--card);border-radius:20px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.8),0 1px 2px rgba(30,40,70,.04);padding:22px 26px 10px;width:100%;max-width:1120px;font-size:15px}
+  .card h3{margin:0 0 4px;font-size:18px;font-weight:700}
+  .card .lead{color:var(--ink2);font-size:14px;margin:0 0 16px}
+  table{width:100%;border-collapse:collapse}
+  th{font-size:12px;font-weight:600;color:var(--ink2);text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);letter-spacing:.02em;text-transform:uppercase}
+  td{padding:14px 12px;border-bottom:1px solid var(--line);vertical-align:middle}
+  tr:last-child td{border-bottom:0}
+  .name b{font-weight:600}
+  .name small{display:block;color:var(--ink2);font-size:13px;margin-top:2px}
+  .chip{display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:999px;font-size:13px;font-weight:600}
+  .chip.owner{background:#e5f1ff;color:#0060b9}.chip.staff{background:#eef0f4;color:#4b4e5c}.chip.saida{background:#fff1e0;color:#9a5a00}
+  .chip.ok{background:#e3f5ea;color:#1d7a3f}.chip.ok::before{content:"";width:8px;height:8px;border-radius:50%;background:#2bb673;margin-right:7px}
+  .chip.wait{background:#fff5d6;color:#8a6500}
+  .act{display:flex;gap:8px;justify-content:flex-end}
+  .act span{height:32px;padding:0 14px;border-radius:999px;display:inline-flex;align-items:center;font-size:13px;font-weight:600;background:rgba(255,255,255,.75);box-shadow:inset 0 0 0 1px var(--line);color:var(--ink)}
+  .act span.danger{color:#c0392b}
+  .addrow{display:flex;align-items:center;gap:14px;padding:14px 12px 10px;color:var(--ink2);font-size:14px}
+  .addrow .btn2{height:36px;padding:0 18px;border-radius:999px;background:var(--blue);color:#fff;font-weight:600;font-size:14px;display:inline-flex;align-items:center}
+  .note{font-size:13px;color:var(--ink2);margin:14px 0 8px;max-width:760px;line-height:1.5}
+  /* dialog */
+  .dim{position:absolute;inset:0;background:rgba(40,48,70,.28);backdrop-filter:blur(2px)}
+  .dlg{position:absolute;left:400px;top:230px;width:480px;background:#fff;border-radius:22px;padding:28px 30px 24px;box-shadow:0 30px 80px rgba(20,30,60,.3)}
+  .dlg h4{margin:0 0 10px;font-size:20px;font-weight:700}
+  .dlg p{margin:0 0 10px;font-size:15px;line-height:1.5;color:var(--ink)}
+  .dlg .row{display:flex;justify-content:flex-end;gap:10px;margin-top:20px}
+  .dlg .row span{height:40px;padding:0 18px;border-radius:999px;display:inline-flex;align-items:center;font-weight:600;font-size:14px}
+  .dlg .row .cancel{background:#eef0f4;color:var(--ink)}
+  .dlg .row .go{background:#d83a2c;color:#fff}
+  .hide{display:none}
+</style></head>
+<body>
+<div class="env"><div class="shape s1"></div><div class="shape s2"></div><div class="shape s3"></div></div>
+
+<!-- screen 1: sign in -->
+<div id="s1" class="pane signin">
+  <div class="avatar"><img src="katie-avatar-60.png" alt=""></div>
+  <h1>Katie</h1>
+  <p class="sub">Harborline Orthodontics</p>
+  <div class="field"><label>Work email</label><div class="in">marisol@harborlineortho.com</div></div>
+  <div class="field"><label>Password</label><div class="in">••••••••••••</div></div>
+  <div class="btn">Sign in</div>
+  <div class="link">Forgot your password?</div>
+  <div class="foot">Katie by SAIDA · Only people this practice added can sign in</div>
+</div>
+
+<!-- screen 2: the code -->
+<div id="s2" class="pane signin hide">
+  <div class="avatar"><img src="katie-avatar-60.png" alt=""></div>
+  <h1>One more step</h1>
+  <p class="sub">Enter the 6-digit code from your authenticator app</p>
+  <div class="code"><span>4</span><span>8</span><span>2</span><span>7</span><span class="cur"></span><span></span></div>
+  <div class="check"><i>✓</i> Remember this computer for 30 days</div>
+  <div class="btn">Continue</div>
+  <div class="link">Use a code texted to (813) ••• ••42 instead</div>
+  <div class="foot">Katie by SAIDA · Signed in as marisol@harborlineortho.com</div>
+</div>
+
+<!-- screen 3: Settings > People -->
+<div id="s3" class="pane app hide">
+  <div class="rail"><div class="ic"></div><div class="ic"></div><div class="ic"></div><div class="ic"></div><div class="ic"></div><div class="ic on"></div><div class="av"><img src="katie-avatar-60.png" alt=""></div></div>
+  <div class="top"><h2>Settings</h2><div class="who">Signed in as <b>Dr. Priya Raman</b> <span class="pill">Sign out</span></div></div>
+  <div class="content">
+    <div class="tabs"><span class="tab">Katie</span><span class="tab">Show numbers</span><span class="tab">The glass</span><span class="tab on">People</span></div>
+    <div class="card">
+      <h3>People who can sign in</h3>
+      <p class="lead">Each person has their own login and their own code. Remove someone and they are signed out everywhere at once.</p>
+      <table>
+        <tr><th>Person</th><th>Role</th><th>Sign-in code</th><th>Last signed in</th><th></th></tr>
+        <tr><td class="name"><b>Dr. Priya Raman</b><small>priya@harborlineortho.com</small></td><td><span class="chip owner">Owner</span></td><td><span class="chip ok">Authenticator app</span></td><td>Today, 7:48 AM</td><td class="act"><span>Reset code</span></td></tr>
+        <tr><td class="name"><b>Marisol Vega</b><small>marisol@harborlineortho.com</small></td><td><span class="chip staff">Office manager</span></td><td><span class="chip ok">Authenticator app</span></td><td>Today, 8:02 AM</td><td class="act"><span>Reset code</span><span class="danger">Remove</span></td></tr>
+        <tr><td class="name"><b>Jessica Lane</b><small>jessica@harborlineortho.com</small></td><td><span class="chip staff">Front desk</span></td><td><span class="chip ok">Text message</span></td><td>Yesterday, 4:51 PM</td><td class="act"><span>Reset code</span><span class="danger">Remove</span></td></tr>
+        <tr><td class="name"><b>Devon Okafor</b><small>devon@harborlineortho.com</small></td><td><span class="chip staff">Front desk</span></td><td><span class="chip wait">Invited, not set up yet</span></td><td>Never</td><td class="act"><span>Send invite again</span><span class="danger">Remove</span></td></tr>
+        <tr><td class="name"><b>SAIDA support</b><small>Tom Martorana · only when you ask</small></td><td><span class="chip saida">Support</span></td><td><span class="chip ok">Authenticator app</span></td><td>Oct 29, 2:10 PM</td><td class="act"><span>Turn off access</span></td></tr>
+      </table>
+      <div class="addrow"><span class="btn2">Add a person</span> They get an email with a link to choose a password and set up their code.</div>
+      <p class="note">Who viewed what is kept for the practice's records: every sign-in and every opened call is logged with the person's name.</p>
+    </div>
+  </div>
+  <div id="dlg" class="dim hide"><div class="dlg">
+    <h4>Remove Jessica Lane?</h4>
+    <p>She is signed out of Katie on every computer and phone right now and cannot sign in again, including with a remembered computer.</p>
+    <p>Her name stays on the calls she viewed, for the practice's records.</p>
+    <div class="row"><span class="cancel">Cancel</span><span class="go">Remove Jessica</span></div>
+  </div></div>
+</div>
+<script>
+  const q=new URLSearchParams(location.search).get('s')||'1';
+  for(const id of ['s1','s2','s3']) document.getElementById(id).classList.toggle('hide', id!=='s'+(q==='4'?'3':q));
+  if(q==='4') document.getElementById('dlg').classList.remove('hide');
+</script>
+</body></html>

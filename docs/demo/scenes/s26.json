@@ -1,0 +1,222 @@
+{
+  "id": "s26",
+  "day": 0,
+  "start": "14:58:00",
+  "duration_s": 70.1,
+  "caller": "(727) ***-0126",
+  "caller_full": "(727) 555-0126",
+  "language": "en",
+  "greeted_as": "",
+  "disposition": "phone-no-booking",
+  "turns": 6,
+  "first_line": "Hi, yeah, um — I've got an adjustment on Monday and I need to move it. A work trip just came up.",
+  "scenario": "reschedule_no_openings",
+  "events": [
+    {
+      "at": 0,
+      "kind": "call.started",
+      "turn": 0,
+      "data": {
+        "caller": "(727) ***-0126"
+      }
+    },
+    {
+      "at": 1.2,
+      "kind": "greeting",
+      "turn": 0,
+      "data": {
+        "name": ""
+      }
+    },
+    {
+      "at": 9.9,
+      "kind": "turn.caller",
+      "turn": 1,
+      "data": {
+        "text": "Hi, yeah, um — I've got an adjustment on Monday and I need to move it. A work trip just came up."
+      }
+    },
+    {
+      "at": 9.9,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "No problem — I can help with that."
+      }
+    },
+    {
+      "at": 9.9,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "What's your name?"
+      }
+    },
+    {
+      "at": 17.2,
+      "kind": "turn.caller",
+      "turn": 2,
+      "data": {
+        "text": "Jordan Pike."
+      }
+    },
+    {
+      "at": 17.2,
+      "kind": "turn.bot",
+      "turn": 2,
+      "data": {
+        "text": "So that's Jordan Pike — and what's your date of birth?"
+      }
+    },
+    {
+      "at": 24.8,
+      "kind": "turn.caller",
+      "turn": 3,
+      "data": {
+        "text": "Eight, fourteen, ninety-six."
+      }
+    },
+    {
+      "at": 24.8,
+      "kind": "tool",
+      "turn": 3,
+      "data": {
+        "name": "lookup",
+        "ok": true,
+        "ms": 702,
+        "verified": true
+      }
+    },
+    {
+      "at": 24.8,
+      "kind": "turn.bot",
+      "turn": 3,
+      "data": {
+        "text": "Thanks — I found you, Jordan."
+      }
+    },
+    {
+      "at": 24.8,
+      "kind": "turn.bot",
+      "turn": 3,
+      "data": {
+        "text": "I see your appointment on Monday the twenty-seventh at ten in the morning."
+      }
+    },
+    {
+      "at": 24.8,
+      "kind": "turn.bot",
+      "turn": 3,
+      "data": {
+        "text": "What days would work better for you?"
+      }
+    },
+    {
+      "at": 39.6,
+      "kind": "turn.caller",
+      "turn": 4,
+      "data": {
+        "text": "Honestly anything later this week, or, like, Tuesday or Wednesday next week."
+      }
+    },
+    {
+      "at": 39.6,
+      "kind": "tool",
+      "turn": 4,
+      "data": {
+        "name": "context",
+        "ok": true,
+        "ms": 861,
+        "open_slots": 0
+      }
+    },
+    {
+      "at": 39.6,
+      "kind": "tool",
+      "turn": 4,
+      "data": {
+        "name": "message",
+        "ok": true,
+        "ms": 455
+      }
+    },
+    {
+      "at": 39.6,
+      "kind": "note",
+      "turn": 4,
+      "data": {
+        "urgent": false,
+        "fyi": false,
+        "name": "Jordan Pike",
+        "reason": "Existing patient Jordan Pike, DOB on file: reschedule of existing appointment (work trip) - no open slots in the next 7 days, call back with times; prefers later this week or Tue/Wed next week [has existing appt Mon 10:00 AM] [about patient Jordan Pike]"
+      }
+    },
+    {
+      "at": 39.6,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "Let me check the schedule to see what times are available."
+      }
+    },
+    {
+      "at": 39.6,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "I don't have any openings in the schedule right now, so I've passed this to the team — they'll call you back with times."
+      }
+    },
+    {
+      "at": 39.6,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "Is there anything else I can help you with?"
+      }
+    },
+    {
+      "at": 57.7,
+      "kind": "turn.caller",
+      "turn": 5,
+      "data": {
+        "text": "Okay. They'll call this number?"
+      }
+    },
+    {
+      "at": 57.7,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "Yep — they'll reach you at the number ending in zero, one, two, six."
+      }
+    },
+    {
+      "at": 66.5,
+      "kind": "turn.caller",
+      "turn": 6,
+      "data": {
+        "text": "Cool. That's it, thanks."
+      }
+    },
+    {
+      "at": 66.5,
+      "kind": "turn.bot",
+      "turn": 6,
+      "data": {
+        "text": "Take care!"
+      }
+    },
+    {
+      "at": 70.1,
+      "kind": "call.ended",
+      "turn": 6,
+      "data": {
+        "duration_s": 70.1,
+        "disposition": "phone-no-booking",
+        "bookings": 0,
+        "notes": 1
+      }
+    }
+  ]
+}

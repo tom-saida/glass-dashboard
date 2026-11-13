@@ -1,0 +1,142 @@
+{
+  "id": "s13",
+  "day": 0,
+  "start": "10:47:00",
+  "duration_s": 49.9,
+  "caller": "(941) ***-0113",
+  "caller_full": "(941) 555-0113",
+  "language": "en",
+  "greeted_as": "Marcus",
+  "disposition": "phone-no-booking",
+  "turns": 4,
+  "first_line": "Oh hey, yeah — um, I just wanted to double-check what time I'm coming in tomorrow. I wrote it on a sticky note and, uh, lost the sticky note.",
+  "scenario": "confirm_existing_time",
+  "events": [
+    {
+      "at": 0,
+      "kind": "call.started",
+      "turn": 0,
+      "data": {
+        "caller": "(941) ***-0113"
+      }
+    },
+    {
+      "at": 1.2,
+      "kind": "greeting",
+      "turn": 0,
+      "data": {
+        "name": "Marcus"
+      }
+    },
+    {
+      "at": 6.4,
+      "kind": "turn.caller",
+      "turn": 1,
+      "data": {
+        "text": "Oh hey, yeah — um, I just wanted to double-check what time I'm coming in tomorrow. I wrote it on a sticky note and, uh, lost the sticky note."
+      }
+    },
+    {
+      "at": 6.4,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "Happy to check for you!"
+      }
+    },
+    {
+      "at": 6.4,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "Can I get your date of birth just to confirm it's you?"
+      }
+    },
+    {
+      "at": 20.5,
+      "kind": "turn.caller",
+      "turn": 2,
+      "data": {
+        "text": "Sure, February ninth, 1994."
+      }
+    },
+    {
+      "at": 20.5,
+      "kind": "tool",
+      "turn": 2,
+      "data": {
+        "name": "lookup",
+        "ok": true,
+        "ms": 472,
+        "verified": true
+      }
+    },
+    {
+      "at": 20.5,
+      "kind": "turn.bot",
+      "turn": 2,
+      "data": {
+        "text": "Thanks, Marcus."
+      }
+    },
+    {
+      "at": 20.5,
+      "kind": "turn.bot",
+      "turn": 2,
+      "data": {
+        "text": "You're booked for tomorrow, Wednesday the twenty-second, at ten forty in the morning."
+      }
+    },
+    {
+      "at": 33.1,
+      "kind": "turn.caller",
+      "turn": 3,
+      "data": {
+        "text": "Ten forty. Okay, great, that's what I thought."
+      }
+    },
+    {
+      "at": 33.1,
+      "kind": "turn.bot",
+      "turn": 3,
+      "data": {
+        "text": "Is there anything else I can help you with?"
+      }
+    },
+    {
+      "at": 43.9,
+      "kind": "turn.caller",
+      "turn": 4,
+      "data": {
+        "text": "No, I'm good. Thanks."
+      }
+    },
+    {
+      "at": 43.9,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "Perfect!"
+      }
+    },
+    {
+      "at": 43.9,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "See you tomorrow — take care!"
+      }
+    },
+    {
+      "at": 49.9,
+      "kind": "call.ended",
+      "turn": 4,
+      "data": {
+        "duration_s": 49.9,
+        "disposition": "phone-no-booking",
+        "bookings": 0,
+        "notes": 0
+      }
+    }
+  ]
+}

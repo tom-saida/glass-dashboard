@@ -1,0 +1,220 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Katie art proof</title>
+<style>
+  body{margin:0;padding:32px;background:#fff;font:13px/1.4 -apple-system,Helvetica,Arial,sans-serif;color:#323338;width:1860px}
+  h1{font-size:20px;margin:0 0 4px} h2{font-size:15px;margin:28px 0 10px}
+  p{margin:0 0 8px;color:#676879;max-width:900px}
+  .row{display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap}
+  figure{margin:0} figcaption{color:#676879;margin-top:4px}
+  .checker{background:conic-gradient(#e6e9ef 25%,#fff 0 50%,#e6e9ef 0 75%,#fff 0) 0 0/16px 16px;border:1px solid #d0d4e4}
+  svg .j{fill:#e2445c;stroke:#fff;stroke-width:2} svg .j2{fill:#0073ea;stroke:#fff;stroke-width:1.5}
+  svg .guide{stroke:#0073ea;stroke-width:1.5;stroke-dasharray:8 6} svg .ground{stroke:#323338;stroke-width:3}
+  svg .tick{stroke:#323338;stroke-width:3} svg .tl{font:22px Helvetica,Arial;fill:#0073ea}
+  svg .lm{fill:none;stroke:#0073ea;stroke-width:1.5} svg .eye{fill:rgba(0,200,117,.25);stroke:#00c875;stroke-width:1.5}
+  svg .trace{fill:none;stroke:#ff158a;stroke-width:1.5;stroke-dasharray:4 3} svg .trace2{fill:none;stroke:#fdab3d;stroke-width:2}
+  svg .seam{stroke:#e2445c;stroke-width:2} svg .bones line{stroke:#e2445c;stroke-width:3;stroke-dasharray:10 8}
+  .sw{display:flex;align-items:center;gap:8px;width:290px;margin:0 0 6px} .sw span{width:40px;height:24px;border:1px solid #c3c6d4;border-radius:4px}
+  .sw b{font-family:Menlo,monospace;font-weight:500;width:70px} .sw i{font-style:normal;color:#676879}
+  .sws{display:flex;flex-wrap:wrap;width:920px}
+  .layers figure svg{width:326px;height:336px}
+</style></head><body>
+<h1>Katie art proof</h1>
+<p>Raster layers from scripts/katie-assets.mjs (lossless WebP, opaque pixels byte-identical to the cutout). Coordinates are source pixels; the rig viewBox is 0 0 652 1544 with the feet on y = 1544. Drawn parts here are grey-box stand-ins built from rig.json to check proportions, not the final drawing.</p>
+<h2>1. Layers on a checkerboard</h2>
+<div class="row layers">
+  <figure><svg viewBox="0 0 652 673" class="checker"><image href="../../src/katie/assets/katie-torso.webp" x="147" y="333" width="362" height="338" /></svg><figcaption>torso 362x338 at (147, 333); sleeves and arms erased</figcaption></figure>
+  <figure><svg viewBox="0 0 652 673" class="checker"><image href="../../src/katie/assets/katie-head.webp" x="199" y="8" width="288" height="361" /></svg><figcaption>head 288x361 at (199, 8)</figcaption></figure>
+  <figure><svg viewBox="0 0 652 673" class="checker"><image href="../../src/katie/assets/katie-torso.webp" x="147" y="333" width="362" height="338" /><image href="../../src/katie/assets/katie-head.webp" x="199" y="8" width="288" height="361" /></svg><figcaption>head over torso at rest</figcaption></figure>
+  <figure><div class="row" style="gap:12px;align-items:flex-end">
+    <img src="../../src/katie/assets/katie-avatar-60.png" width="60" height="60" class="checker">
+    <img src="../../src/katie/assets/katie-avatar-40.png" width="40" height="40" class="checker">
+    <img src="../../src/katie/assets/katie-avatar-20.png" width="20" height="20" class="checker">
+    <img src="../../src/katie/assets/katie-avatar-60.png" width="20" height="20" style="border-radius:50%;background:#f6f7fb">
+    <img src="../../src/katie/assets/katie-avatar-60.png" width="120" height="120" style="image-rendering:pixelated" class="checker">
+  </div><figcaption>avatar 60 / 40 / 20, 20 px in a circle, 60 px enlarged</figcaption></figure>
+</div>
+<h2>2. Head/torso seam under motion (neck region, 1.5x)</h2>
+<div class="row"><figure><svg viewBox="236 296 250 100" width="375" height="150" class="checker"><image href="../../src/katie/assets/katie-torso.webp" x="147" y="333" width="362" height="338" /><g transform=""><image href="../../src/katie/assets/katie-head.webp" x="199" y="8" width="288" height="361" /></g></svg><figcaption>rest (identical to source)</figcaption></figure><figure><svg viewBox="236 296 250 100" width="375" height="150" class="checker"><image href="../../src/katie/assets/katie-torso.webp" x="147" y="333" width="362" height="338" /><g transform="translate(0 -3)"><image href="../../src/katie/assets/katie-head.webp" x="199" y="8" width="288" height="361" /></g></svg><figcaption>head 3 px up (body bob)</figcaption></figure><figure><svg viewBox="236 296 250 100" width="375" height="150" class="checker"><image href="../../src/katie/assets/katie-torso.webp" x="147" y="333" width="362" height="338" /><g transform="translate(0 3)"><image href="../../src/katie/assets/katie-head.webp" x="199" y="8" width="288" height="361" /></g></svg><figcaption>head 3 px down</figcaption></figure><figure><svg viewBox="236 296 250 100" width="375" height="150" class="checker"><image href="../../src/katie/assets/katie-torso.webp" x="147" y="333" width="362" height="338" /><g transform="rotate(-4 322 352)"><image href="../../src/katie/assets/katie-head.webp" x="199" y="8" width="288" height="361" /></g></svg><figcaption>nod -4 deg</figcaption></figure><figure><svg viewBox="236 296 250 100" width="375" height="150" class="checker"><image href="../../src/katie/assets/katie-torso.webp" x="147" y="333" width="362" height="338" /><g transform="rotate(4 322 352)"><image href="../../src/katie/assets/katie-head.webp" x="199" y="8" width="288" height="361" /></g></svg><figcaption>nod +4 deg</figcaption></figure></div>
+<h2>3. Landmarks (blue boxes: lenses, ears, mouth, pocket; green: eye boxes for lids; pink dashed: collar, sleeve traces; orange: torso side lines; red: pivots)</h2>
+<div class="row"><svg viewBox="0 0 652 673" width="652" height="673" class="checker">
+  <image href="../../src/katie/assets/katie-torso.webp" x="147" y="333" width="362" height="338" /><image href="../../src/katie/assets/katie-head.webp" x="199" y="8" width="288" height="361" />
+  <line x1="0" x2="652" y1="22" y2="22" class="guide"/><line x1="0" x2="652" y1="326" y2="326" class="guide"/><line x1="0" x2="652" y1="600" y2="600" class="guide"/><line x1="0" x2="652" y1="22" y2="22" class="guide"/>
+  <line x1="262" x2="388" y1="352" y2="352" class="seam"/>
+  <rect x="232" y="180" width="60" height="33" class="eye"/><rect x="335" y="180" width="61" height="33" class="eye"/><rect x="222" y="168" width="78" height="66" class="lm"/><rect x="330" y="168" width="82" height="66" class="lm"/>
+  <rect x="201" y="182" width="27" height="63" class="lm"/><rect x="405" y="180" width="26" height="64" class="lm"/><rect x="330" y="509" width="102" height="110" class="lm"/><rect x="270" y="256" width="85" height="34" class="lm"/>
+  <polyline points="243,362 288,506 408,362" class="trace"/><polyline points="266,355 290,462 368,352" class="trace"/>
+  <polyline points="154,390 158,400 158,410 158,420 159,430 160,440 161,450 163,460 165,470 166,480 168,490 166,500 163,510 162,520 160,530 160,540 160,550 161,560 163,570 165,580 169,590 171,600 175,610 177,620 177,630 180,640 181,650 181,660 182,670" class="trace2"/><polyline points="501,390 486,400 481,410 475,420 470,430 467,440 465,450 461,460 457,470 455,480 454,490 452,500 451,510 451,520 450,530 450,540 451,550 452,560 454,570 454,580 452,590 450,600 448,610 445,620 443,630 441,640 439,650 437,660 437,670" class="trace2"/>
+  <polygon points="156,389 147,400 137,420 130,440 124,460 117,480 110,500 102,520 94,540 89,552 88,558 96,567 100,570 110,576 120,584 130,588 140,592 150,596 160,599 171,600 169,590 165,580 163,570 161,560 160,540 162,520 166,500 168,490 166,480 163,460 160,440 158,420 158,400" class="trace"/><polygon points="498,388 509,400 518,420 525,440 532,460 538,480 545,500 553,520 561,540 566,552 567,558 562,566 550,573 540,578 530,583 520,588 510,592 500,596 490,599 480,601 470,603 452,603 452,590 454,580 454,570 452,560 450,540 451,520 452,500 455,480 461,460 467,440 475,420 486,400" class="trace"/>
+  <polyline points="98,546 110,554 120,561 130,567 140,572 150,576 160,580 168,583" class="trace"/><polyline points="553,546 540,555 530,561 520,566 510,571 500,575 490,579 480,581 470,584 463,585" class="trace"/>
+  <circle cx="376" cy="8" r="6" class="j2"/><circle cx="311" cy="22" r="6" class="j2"/><circle cx="322" cy="326" r="6" class="j2"/><circle cx="267" cy="200" r="6" class="j2"/><circle cx="360" cy="199" r="6" class="j2"/>
+  <circle cx="156" cy="389" r="6" class="j2"/><circle cx="498" cy="388" r="6" class="j2"/><circle cx="170" cy="440" r="6" class="j"/><circle cx="482" cy="440" r="6" class="j"/><circle cx="322" cy="352" r="6" class="j"/>
+  <circle cx="171" cy="600" r="6" class="j2"/><circle cx="452" cy="603" r="6" class="j2"/>
+  <text x="6" y="18" class="tl">crown 22</text><text x="6" y="322" class="tl">chin 326</text>
+  <text x="6" y="596" class="tl">armpit line 600</text><text x="392" y="346" class="tl">seam 352</text>
+</svg>
+  <div><h2 style="margin-top:0">Palette (sampled from the cutout's bytes; "proposed" = not in the art)</h2><div class="sws"><div class="sw"><span style="background:#1b1b1e"></span><b>#1b1b1e</b><i>outline</i></div><div class="sw"><span style="background:#668bc1"></span><b>#668bc1</b><i>scrubLit</i></div><div class="sw"><span style="background:#46699d"></span><b>#46699d</b><i>scrubShade</i></div><div class="sw"><span style="background:#8db3dc"></span><b>#8db3dc</b><i>scrubHighlight</i></div><div class="sw"><span style="background:#1b1b1e"></span><b>#1b1b1e</b><i>scrubSeamLine</i></div><div class="sw"><span style="background:#fbaf85"></span><b>#fbaf85</b><i>skinLit</i></div><div class="sw"><span style="background:#d78064"></span><b>#d78064</b><i>skinShade</i></div><div class="sw"><span style="background:#f39b7b"></span><b>#f39b7b</b><i>skinBlush</i></div><div class="sw"><span style="background:#f5c8b3"></span><b>#f5c8b3</b><i>skinThroughLens</i></div><div class="sw"><span style="background:#e1b068"></span><b>#e1b068</b><i>hairLit</i></div><div class="sw"><span style="background:#f9cf83"></span><b>#f9cf83</b><i>hairHighlight</i></div><div class="sw"><span style="background:#b27c43"></span><b>#b27c43</b><i>hairShade</i></div><div class="sw"><span style="background:#906b43"></span><b>#906b43</b><i>hairDeepShade</i></div><div class="sw"><span style="background:#5f311f"></span><b>#5f311f</b><i>brow</i></div><div class="sw"><span style="background:#2d2b2b"></span><b>#2d2b2b</b><i>glassesFrame</i></div><div class="sw"><span style="background:#4f4e51"></span><b>#4f4e51</b><i>glassesFrameHighlight</i></div><div class="sw"><span style="background:#fefefd"></span><b>#fefefd</b><i>eyeWhite</i></div><div class="sw"><span style="background:#4e4f54"></span><b>#4e4f54</b><i>upperLash</i></div><div class="sw"><span style="background:#b28d6f"></span><b>#b28d6f</b><i>iris</i></div><div class="sw"><span style="background:#5b5c5f"></span><b>#5b5c5f</b><i>pupil</i></div><div class="sw"><span style="background:#ea6b5e"></span><b>#ea6b5e</b><i>lipUpper</i></div><div class="sw"><span style="background:#ec7060"></span><b>#ec7060</b><i>lipLower</i></div><div class="sw"><span style="background:#fba287"></span><b>#fba287</b><i>lipHighlight</i></div><div class="sw"><span style="background:#fdfdfd"></span><b>#fdfdfd</b><i>teeth</i></div><div class="sw"><span style="background:#fdfdfd"></span><b>#fdfdfd</b><i>proposedShoeUpper</i></div><div class="sw"><span style="background:#d9dee6"></span><b>#d9dee6</b><i>proposedShoeShade</i></div><div class="sw"><span style="background:#eef0f4"></span><b>#eef0f4</b><i>proposedShoeSole</i></div></div></div>
+</div>
+<h2>4. Five heads tall: rest, walk contact (hip +-25, knee 20, arms +-15), listen (sR shoulder -120, elbow -128)</h2>
+<div class="row"><figure><svg viewBox="-170 -10 992 1564" width="380" height="599">
+    <line x1="-150" x2="-110" y1="22" y2="22" class="tick"/><text x="-150" y="14" class="tl">0H</text><line x1="-150" x2="-110" y1="326.4" y2="326.4" class="tick"/><text x="-150" y="318.4" class="tl">1H</text><line x1="-150" x2="-110" y1="630.8" y2="630.8" class="tick"/><text x="-150" y="622.8" class="tl">2H</text><line x1="-150" x2="-110" y1="935.2" y2="935.2" class="tick"/><text x="-150" y="927.2" class="tl">3H</text><line x1="-150" x2="-110" y1="1239.6" y2="1239.6" class="tick"/><text x="-150" y="1231.6" class="tl">4H</text><line x1="-150" x2="-110" y1="1544" y2="1544" class="tick"/><text x="-150" y="1536" class="tl">5H</text>
+    <line x1="-170" x2="822" y1="1544" y2="1544" class="ground"/>
+    <g transform="rotate(0 370 800)">
+    <path d="M308.0,800.0 L320.0,1150.0 A50,50 0 0 0 420.0,1150.0 L432.0,800.0 A62,62 0 0 0 308.0,800.0 Z" fill="#668bc1" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+    <g transform="rotate(0 370 1150)">
+      <g transform="rotate(0 370 1478)"><path d="M330,1544 L460,1544 Q486,1544 486,1520 Q480,1498 404,1494 L388,1472 L338,1472 Q330,1502 330,1544 Z" fill="#fdfdfd" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+  <path d="M333,1528 L480,1528" stroke="#1b1b1e" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M376,1490 l26,10 M372,1504 l30,10" stroke="#d9dee6" stroke-width="6" stroke-linecap="round"/></g>
+      <path d="M322.0,1150.0 L324.0,1470.0 A46,46 0 0 0 416.0,1470.0 L418.0,1150.0 A48,48 0 0 0 322.0,1150.0 Z" fill="#668bc1" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+    </g>
+  </g>
+    <g transform="rotate(0 250 800)">
+    <path d="M188.0,800.0 L200.0,1150.0 A50,50 0 0 0 300.0,1150.0 L312.0,800.0 A62,62 0 0 0 188.0,800.0 Z" fill="#668bc1" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+    <g transform="rotate(0 250 1150)">
+      <g transform="rotate(0 250 1478)"><path d="M210,1544 L340,1544 Q366,1544 366,1520 Q360,1498 284,1494 L268,1472 L218,1472 Q210,1502 210,1544 Z" fill="#fdfdfd" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+  <path d="M213,1528 L360,1528" stroke="#1b1b1e" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M256,1490 l26,10 M252,1504 l30,10" stroke="#d9dee6" stroke-width="6" stroke-linecap="round"/></g>
+      <path d="M202.0,1150.0 L204.0,1470.0 A46,46 0 0 0 296.0,1470.0 L298.0,1150.0 A48,48 0 0 0 202.0,1150.0 Z" fill="#668bc1" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+    </g>
+  </g>
+    <path d="M186,740 L434,740 L440,842 Q310,868 180,842 Z" fill="#668bc1" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+    <path d="M182,640 L437,640 L442,772 Q310,780 178,772 Z" fill="#46699d" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+    <path d="M180,754 Q310,762 440,754" fill="none" stroke="#1b1b1e" stroke-width="3"/>
+    <image href="../../src/katie/assets/katie-torso.webp" x="147" y="333" width="362" height="338" />
+    <g transform="rotate(0 170 440)">
+    <path d="M141.2,436.4 L117.2,651.8 A26,26 0 0 0 168.8,658.2 L198.8,443.6 A29,29 0 0 0 141.2,436.4 Z" fill="#fbaf85" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+    <g transform="rotate(0 143 655)">
+      <path d="M117.0,656.0 L130.0,845.7 A20,20 0 0 0 170.0,844.3 L169.0,654.0 A26,26 0 0 0 117.0,656.0 Z" fill="#fbaf85" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+      <path d="M127.0,845.0 L131.6,955.0 A18.400000000000002,18.400000000000002 0 0 0 168.4,955.0 L173.0,845.0 A23,23 0 0 0 127.0,845.0 Z" fill="#fbaf85" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+      <circle cx="150" cy="845" r="7" class="j"/>
+      <circle cx="150" cy="955" r="5" class="j2"/>
+    </g>
+    <polygon points="156,389 147,400 137,420 130,440 124,460 117,480 110,500 102,520 94,540 89,552 88,558 96,567 100,570 110,576 120,584 130,588 140,592 150,596 160,599 171,600 169,590 165,580 163,570 161,560 160,540 162,520 166,500 168,490 166,480 163,460 160,440 158,420 158,400" fill="#668bc1" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+    <polyline points="98,546 110,554 120,561 130,567 140,572 150,576 160,580 168,583" fill="none" stroke="#1b1b1e" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="143" cy="655" r="7" class="j"/>
+  </g>
+    <g transform="rotate(0 482 440)">
+    <path d="M449.2,443.7 L477.2,658.2 A29,29 0 0 0 534.8,651.8 L514.8,436.3 A33,33 0 0 0 449.2,443.7 Z" fill="#fbaf85" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+    <g transform="rotate(0 506 655)">
+      <path d="M478.0,654.1 L478.0,844.3 A22,22 0 0 0 522.0,845.7 L534.0,655.9 A28,28 0 0 0 478.0,654.1 Z" fill="#fbaf85" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+      <path d="M475.0,845.0 L480.0,955.0 A20,20 0 0 0 520.0,955.0 L525.0,845.0 A25,25 0 0 0 475.0,845.0 Z" fill="#fbaf85" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+      <circle cx="500" cy="845" r="7" class="j"/>
+      <circle cx="500" cy="955" r="5" class="j2"/>
+    </g>
+    <polygon points="498,388 509,400 518,420 525,440 532,460 538,480 545,500 553,520 561,540 566,552 567,558 562,566 550,573 540,578 530,583 520,588 510,592 500,596 490,599 480,601 470,603 452,603 452,590 454,580 454,570 452,560 450,540 451,520 452,500 455,480 461,460 467,440 475,420 486,400" fill="#668bc1" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+    <polyline points="553,546 540,555 530,561 520,566 510,571 500,575 490,579 480,581 470,584 463,585" fill="none" stroke="#1b1b1e" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="506" cy="655" r="7" class="j"/>
+  </g>
+    <g transform="rotate(0 322 352)"><image href="../../src/katie/assets/katie-head.webp" x="199" y="8" width="288" height="361" /></g>
+    <g class="bones"><line x1="322" y1="352" x2="322" y2="800"/><line x1="170" y1="440" x2="482" y2="440"/><line x1="250" y1="800" x2="370" y2="800"/></g>
+    <circle cx="322" cy="352" r="8" class="j"/><circle cx="170" cy="440" r="8" class="j"/><circle cx="482" cy="440" r="8" class="j"/><circle cx="250" cy="800" r="8" class="j"/><circle cx="370" cy="800" r="8" class="j"/>
+    <g transform="rotate(0 250 800)"><circle cx="250" cy="1150" r="8" class="j"/><g transform="rotate(0 250 1150)"><circle cx="250" cy="1478" r="8" class="j"/></g></g><g transform="rotate(0 370 800)"><circle cx="370" cy="1150" r="8" class="j"/><g transform="rotate(0 370 1150)"><circle cx="370" cy="1478" r="8" class="j"/></g></g>
+    <line x1="-170" x2="822" y1="800" y2="800" class="guide"/>
+  </svg><figcaption>rest</figcaption></figure><figure><svg viewBox="-170 -10 992 1564" width="380" height="599">
+    <line x1="-150" x2="-110" y1="22" y2="22" class="tick"/><text x="-150" y="14" class="tl">0H</text><line x1="-150" x2="-110" y1="326.4" y2="326.4" class="tick"/><text x="-150" y="318.4" class="tl">1H</text><line x1="-150" x2="-110" y1="630.8" y2="630.8" class="tick"/><text x="-150" y="622.8" class="tl">2H</text><line x1="-150" x2="-110" y1="935.2" y2="935.2" class="tick"/><text x="-150" y="927.2" class="tl">3H</text><line x1="-150" x2="-110" y1="1239.6" y2="1239.6" class="tick"/><text x="-150" y="1231.6" class="tl">4H</text><line x1="-150" x2="-110" y1="1544" y2="1544" class="tick"/><text x="-150" y="1536" class="tl">5H</text>
+    <line x1="-170" x2="822" y1="1544" y2="1544" class="ground"/>
+    <g transform="rotate(25 370 800)">
+    <path d="M308.0,800.0 L320.0,1150.0 A50,50 0 0 0 420.0,1150.0 L432.0,800.0 A62,62 0 0 0 308.0,800.0 Z" fill="#668bc1" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+    <g transform="rotate(20 370 1150)">
+      <g transform="rotate(0 370 1478)"><path d="M330,1544 L460,1544 Q486,1544 486,1520 Q480,1498 404,1494 L388,1472 L338,1472 Q330,1502 330,1544 Z" fill="#fdfdfd" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+  <path d="M333,1528 L480,1528" stroke="#1b1b1e" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M376,1490 l26,10 M372,1504 l30,10" stroke="#d9dee6" stroke-width="6" stroke-linecap="round"/></g>
+      <path d="M322.0,1150.0 L324.0,1470.0 A46,46 0 0 0 416.0,1470.0 L418.0,1150.0 A48,48 0 0 0 322.0,1150.0 Z" fill="#668bc1" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+    </g>
+  </g>
+    <g transform="rotate(-25 250 800)">
+    <path d="M188.0,800.0 L200.0,1150.0 A50,50 0 0 0 300.0,1150.0 L312.0,800.0 A62,62 0 0 0 188.0,800.0 Z" fill="#668bc1" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+    <g transform="rotate(0 250 1150)">
+      <g transform="rotate(0 250 1478)"><path d="M210,1544 L340,1544 Q366,1544 366,1520 Q360,1498 284,1494 L268,1472 L218,1472 Q210,1502 210,1544 Z" fill="#fdfdfd" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+  <path d="M213,1528 L360,1528" stroke="#1b1b1e" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M256,1490 l26,10 M252,1504 l30,10" stroke="#d9dee6" stroke-width="6" stroke-linecap="round"/></g>
+      <path d="M202.0,1150.0 L204.0,1470.0 A46,46 0 0 0 296.0,1470.0 L298.0,1150.0 A48,48 0 0 0 202.0,1150.0 Z" fill="#668bc1" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+    </g>
+  </g>
+    <path d="M186,740 L434,740 L440,842 Q310,868 180,842 Z" fill="#668bc1" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+    <path d="M182,640 L437,640 L442,772 Q310,780 178,772 Z" fill="#46699d" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+    <path d="M180,754 Q310,762 440,754" fill="none" stroke="#1b1b1e" stroke-width="3"/>
+    <image href="../../src/katie/assets/katie-torso.webp" x="147" y="333" width="362" height="338" />
+    <g transform="rotate(15 170 440)">
+    <path d="M141.2,436.4 L117.2,651.8 A26,26 0 0 0 168.8,658.2 L198.8,443.6 A29,29 0 0 0 141.2,436.4 Z" fill="#fbaf85" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+    <g transform="rotate(-10 143 655)">
+      <path d="M117.0,656.0 L130.0,845.7 A20,20 0 0 0 170.0,844.3 L169.0,654.0 A26,26 0 0 0 117.0,656.0 Z" fill="#fbaf85" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+      <path d="M127.0,845.0 L131.6,955.0 A18.400000000000002,18.400000000000002 0 0 0 168.4,955.0 L173.0,845.0 A23,23 0 0 0 127.0,845.0 Z" fill="#fbaf85" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+      <circle cx="150" cy="845" r="7" class="j"/>
+      <circle cx="150" cy="955" r="5" class="j2"/>
+    </g>
+    <polygon points="156,389 147,400 137,420 130,440 124,460 117,480 110,500 102,520 94,540 89,552 88,558 96,567 100,570 110,576 120,584 130,588 140,592 150,596 160,599 171,600 169,590 165,580 163,570 161,560 160,540 162,520 166,500 168,490 166,480 163,460 160,440 158,420 158,400" fill="#668bc1" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+    <polyline points="98,546 110,554 120,561 130,567 140,572 150,576 160,580 168,583" fill="none" stroke="#1b1b1e" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="143" cy="655" r="7" class="j"/>
+  </g>
+    <g transform="rotate(-15 482 440)">
+    <path d="M449.2,443.7 L477.2,658.2 A29,29 0 0 0 534.8,651.8 L514.8,436.3 A33,33 0 0 0 449.2,443.7 Z" fill="#fbaf85" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+    <g transform="rotate(-10 506 655)">
+      <path d="M478.0,654.1 L478.0,844.3 A22,22 0 0 0 522.0,845.7 L534.0,655.9 A28,28 0 0 0 478.0,654.1 Z" fill="#fbaf85" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+      <path d="M475.0,845.0 L480.0,955.0 A20,20 0 0 0 520.0,955.0 L525.0,845.0 A25,25 0 0 0 475.0,845.0 Z" fill="#fbaf85" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+      <circle cx="500" cy="845" r="7" class="j"/>
+      <circle cx="500" cy="955" r="5" class="j2"/>
+    </g>
+    <polygon points="498,388 509,400 518,420 525,440 532,460 538,480 545,500 553,520 561,540 566,552 567,558 562,566 550,573 540,578 530,583 520,588 510,592 500,596 490,599 480,601 470,603 452,603 452,590 454,580 454,570 452,560 450,540 451,520 452,500 455,480 461,460 467,440 475,420 486,400" fill="#668bc1" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+    <polyline points="553,546 540,555 530,561 520,566 510,571 500,575 490,579 480,581 470,584 463,585" fill="none" stroke="#1b1b1e" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="506" cy="655" r="7" class="j"/>
+  </g>
+    <g transform="rotate(0 322 352)"><image href="../../src/katie/assets/katie-head.webp" x="199" y="8" width="288" height="361" /></g>
+    <g class="bones"><line x1="322" y1="352" x2="322" y2="800"/><line x1="170" y1="440" x2="482" y2="440"/><line x1="250" y1="800" x2="370" y2="800"/></g>
+    <circle cx="322" cy="352" r="8" class="j"/><circle cx="170" cy="440" r="8" class="j"/><circle cx="482" cy="440" r="8" class="j"/><circle cx="250" cy="800" r="8" class="j"/><circle cx="370" cy="800" r="8" class="j"/>
+    <g transform="rotate(-25 250 800)"><circle cx="250" cy="1150" r="8" class="j"/><g transform="rotate(0 250 1150)"><circle cx="250" cy="1478" r="8" class="j"/></g></g><g transform="rotate(25 370 800)"><circle cx="370" cy="1150" r="8" class="j"/><g transform="rotate(20 370 1150)"><circle cx="370" cy="1478" r="8" class="j"/></g></g>
+    <line x1="-170" x2="822" y1="800" y2="800" class="guide"/>
+  </svg><figcaption>walk contact</figcaption></figure><figure><svg viewBox="-170 -10 992 1564" width="380" height="599">
+    <line x1="-150" x2="-110" y1="22" y2="22" class="tick"/><text x="-150" y="14" class="tl">0H</text><line x1="-150" x2="-110" y1="326.4" y2="326.4" class="tick"/><text x="-150" y="318.4" class="tl">1H</text><line x1="-150" x2="-110" y1="630.8" y2="630.8" class="tick"/><text x="-150" y="622.8" class="tl">2H</text><line x1="-150" x2="-110" y1="935.2" y2="935.2" class="tick"/><text x="-150" y="927.2" class="tl">3H</text><line x1="-150" x2="-110" y1="1239.6" y2="1239.6" class="tick"/><text x="-150" y="1231.6" class="tl">4H</text><line x1="-150" x2="-110" y1="1544" y2="1544" class="tick"/><text x="-150" y="1536" class="tl">5H</text>
+    <line x1="-170" x2="822" y1="1544" y2="1544" class="ground"/>
+    <g transform="rotate(0 370 800)">
+    <path d="M308.0,800.0 L320.0,1150.0 A50,50 0 0 0 420.0,1150.0 L432.0,800.0 A62,62 0 0 0 308.0,800.0 Z" fill="#668bc1" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+    <g transform="rotate(0 370 1150)">
+      <g transform="rotate(0 370 1478)"><path d="M330,1544 L460,1544 Q486,1544 486,1520 Q480,1498 404,1494 L388,1472 L338,1472 Q330,1502 330,1544 Z" fill="#fdfdfd" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+  <path d="M333,1528 L480,1528" stroke="#1b1b1e" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M376,1490 l26,10 M372,1504 l30,10" stroke="#d9dee6" stroke-width="6" stroke-linecap="round"/></g>
+      <path d="M322.0,1150.0 L324.0,1470.0 A46,46 0 0 0 416.0,1470.0 L418.0,1150.0 A48,48 0 0 0 322.0,1150.0 Z" fill="#668bc1" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+    </g>
+  </g>
+    <g transform="rotate(0 250 800)">
+    <path d="M188.0,800.0 L200.0,1150.0 A50,50 0 0 0 300.0,1150.0 L312.0,800.0 A62,62 0 0 0 188.0,800.0 Z" fill="#668bc1" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+    <g transform="rotate(0 250 1150)">
+      <g transform="rotate(0 250 1478)"><path d="M210,1544 L340,1544 Q366,1544 366,1520 Q360,1498 284,1494 L268,1472 L218,1472 Q210,1502 210,1544 Z" fill="#fdfdfd" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+  <path d="M213,1528 L360,1528" stroke="#1b1b1e" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M256,1490 l26,10 M252,1504 l30,10" stroke="#d9dee6" stroke-width="6" stroke-linecap="round"/></g>
+      <path d="M202.0,1150.0 L204.0,1470.0 A46,46 0 0 0 296.0,1470.0 L298.0,1150.0 A48,48 0 0 0 202.0,1150.0 Z" fill="#668bc1" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+    </g>
+  </g>
+    <path d="M186,740 L434,740 L440,842 Q310,868 180,842 Z" fill="#668bc1" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+    <path d="M182,640 L437,640 L442,772 Q310,780 178,772 Z" fill="#46699d" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+    <path d="M180,754 Q310,762 440,754" fill="none" stroke="#1b1b1e" stroke-width="3"/>
+    <image href="../../src/katie/assets/katie-torso.webp" x="147" y="333" width="362" height="338" />
+    <g transform="rotate(0 170 440)">
+    <path d="M141.2,436.4 L117.2,651.8 A26,26 0 0 0 168.8,658.2 L198.8,443.6 A29,29 0 0 0 141.2,436.4 Z" fill="#fbaf85" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+    <g transform="rotate(0 143 655)">
+      <path d="M117.0,656.0 L130.0,845.7 A20,20 0 0 0 170.0,844.3 L169.0,654.0 A26,26 0 0 0 117.0,656.0 Z" fill="#fbaf85" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+      <path d="M127.0,845.0 L131.6,955.0 A18.400000000000002,18.400000000000002 0 0 0 168.4,955.0 L173.0,845.0 A23,23 0 0 0 127.0,845.0 Z" fill="#fbaf85" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+      <circle cx="150" cy="845" r="7" class="j"/>
+      <circle cx="150" cy="955" r="5" class="j2"/>
+    </g>
+    <polygon points="156,389 147,400 137,420 130,440 124,460 117,480 110,500 102,520 94,540 89,552 88,558 96,567 100,570 110,576 120,584 130,588 140,592 150,596 160,599 171,600 169,590 165,580 163,570 161,560 160,540 162,520 166,500 168,490 166,480 163,460 160,440 158,420 158,400" fill="#668bc1" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+    <polyline points="98,546 110,554 120,561 130,567 140,572 150,576 160,580 168,583" fill="none" stroke="#1b1b1e" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="143" cy="655" r="7" class="j"/>
+  </g>
+    <g transform="rotate(-120 482 440)">
+    <path d="M449.2,443.7 L477.2,658.2 A29,29 0 0 0 534.8,651.8 L514.8,436.3 A33,33 0 0 0 449.2,443.7 Z" fill="#fbaf85" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+    <g transform="rotate(-128 506 655)">
+      <path d="M478.0,654.1 L478.0,844.3 A22,22 0 0 0 522.0,845.7 L534.0,655.9 A28,28 0 0 0 478.0,654.1 Z" fill="#fbaf85" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+      <path d="M475.0,845.0 L480.0,955.0 A20,20 0 0 0 520.0,955.0 L525.0,845.0 A25,25 0 0 0 475.0,845.0 Z" fill="#fbaf85" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+      <circle cx="500" cy="845" r="7" class="j"/>
+      <circle cx="500" cy="955" r="5" class="j2"/>
+    </g>
+    <polygon points="498,388 509,400 518,420 525,440 532,460 538,480 545,500 553,520 561,540 566,552 567,558 562,566 550,573 540,578 530,583 520,588 510,592 500,596 490,599 480,601 470,603 452,603 452,590 454,580 454,570 452,560 450,540 451,520 452,500 455,480 461,460 467,440 475,420 486,400" fill="#668bc1" stroke="#1b1b1e" stroke-width="4.5" stroke-linejoin="round"/>
+    <polyline points="553,546 540,555 530,561 520,566 510,571 500,575 490,579 480,581 470,584 463,585" fill="none" stroke="#1b1b1e" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="506" cy="655" r="7" class="j"/>
+  </g>
+    <g transform="rotate(0 322 352)"><image href="../../src/katie/assets/katie-head.webp" x="199" y="8" width="288" height="361" /></g>
+    <g class="bones"><line x1="322" y1="352" x2="322" y2="800"/><line x1="170" y1="440" x2="482" y2="440"/><line x1="250" y1="800" x2="370" y2="800"/></g>
+    <circle cx="322" cy="352" r="8" class="j"/><circle cx="170" cy="440" r="8" class="j"/><circle cx="482" cy="440" r="8" class="j"/><circle cx="250" cy="800" r="8" class="j"/><circle cx="370" cy="800" r="8" class="j"/>
+    <g transform="rotate(0 250 800)"><circle cx="250" cy="1150" r="8" class="j"/><g transform="rotate(0 250 1150)"><circle cx="250" cy="1478" r="8" class="j"/></g></g><g transform="rotate(0 370 800)"><circle cx="370" cy="1150" r="8" class="j"/><g transform="rotate(0 370 1150)"><circle cx="370" cy="1478" r="8" class="j"/></g></g>
+    <line x1="-170" x2="822" y1="800" y2="800" class="guide"/>
+  </svg><figcaption>listen: hand to ear</figcaption></figure></div>
+</body></html>

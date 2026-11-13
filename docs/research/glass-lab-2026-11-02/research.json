@@ -1,0 +1,1011 @@
+{
+ "synthesis": {
+  "summary": "Tom, you are right, and it is not one mistake but several that stack. (1) The pane is 72% white. That is more opaque than any glass I found in any source (the highest was 60%; ordinary glass panes run 10-30%), so it hides the room instead of showing it. (2) The room behind it is already blurred and almost a single blue, so there is nothing sharp for the glass to soften: the pane's 28px blur changes the photo by about 5 brightness levels out of 255, and after the 72% fill only about 1.5 of those survive. (3) The cards inside the pane carry their own glass setting, and it does nothing. A browser rule says anything inside an element that has backdrop-filter cannot see the page behind it, so the cards are just more white paper. I reproduced that in Chromium. (4) The pane covers 82% of the window and has a thick white frame, so it reads as an app window with a pale skin, not a slab of glass standing in a room. Glass reads as real when you can see something sharp and colourful cross its edge and turn soft, when the pane is mostly see-through (fill roughly 10-30%), and when the edge catches light from one side like a thin bevel. Apple's name for the part we are missing is lensing, light bending at the edge. Plain CSS cannot do lensing. Chrome can fake it with an SVG filter, and Safari cannot as of today (the WebKit fix is still unmerged on 2026-11-02). So the honest target is convincing frosted glass in every browser, with true edge refraction as a Chrome-only extra on the corner objects. The fonts are a separate cause: the page sets -webkit-font-smoothing: antialiased (it comes from the Vibe component library), which makes Chrome on a Mac draw text about 12% lighter, and the text is mostly 12-14px. Both are fixable below, but nobody has yet rendered the fix on Tom's own 1080p screen, so treat the numbers as a tested starting point, not a finished design.",
+  "diagnosis": [
+   {
+    "rank": 1,
+    "title": "The pane is 72% white, so it hides the room instead of showing it",
+    "why": "A fill of rgba(238,245,255,.72) lets only 28% of what is behind it through. Measured at the left edge of the pane on a 1920x1080 screen, the visible edge is made by the fill (brightness jumps 59-101 levels) and not by the blur (0-9 levels), so the eye reads a pale card laid on a photo. The highest fill I found in any source is 60% (Comeau's thicker-glass demo, kube.io's music player). Ordinary glass panes run 10-30%: Malewicz's generator 15%, Setproduct 12%, web.dev and NN/g 30%, KeyShot 10%, and liquid-glass-react uses no tint at all. The tint is also pre-blued (238,245,255), so the little that gets through is pushed toward the same pale blue. Apple does make glass more opaque for text-heavy parts, which is why text belongs on cards and not on bare glass.",
+    "fix": "Pane fill = diagonal white gradient .34 to .14 to .26 (average about .24), neutral white, with blur(18px) saturate(1.6) brightness(1.04). Put all text on flat cards at .58-.62 white so legibility does not depend on the pane. Full numbers in recipe_css.",
+    "sources": [
+     "https://web.dev/articles/backdrop-filter",
+     "https://www.nngroup.com/articles/glassmorphism/",
+     "https://www.joshwcomeau.com/css/backdrop-filter/",
+     "https://hype4.academy/tools/glassmorphism-generator",
+     "https://www.setproduct.com/blog/liquid-glass-vs-glassmorphism",
+     "https://kube.io/blog/liquid-glass-css-svg/",
+     "https://github.com/rdev/liquid-glass-react",
+     "https://www.keyshot.com/wp-content/themes/keyshot-unified/liquid-glass/liquid-glass.css",
+     "https://developer.apple.com/design/human-interface-guidelines/materials",
+     "src/styles/glass.css"
+    ]
+   },
+   {
+    "rank": 2,
+    "title": "The room behind the glass has nothing in it to blur or bend",
+    "why": "scene.webp is 1664x1024 (so it is also upscaled on a 1920 screen), already Gaussian-blurred, and squeezed into one hue band (201-220 degrees) and one narrow brightness range. Re-measured: blur(28px) removes about 5 of 255 brightness levels from it, and after the 72% fill only about 1.5 remain, which is invisible. Malewicz, whose article started the style, says the backdrop 'can't be too simple or dull, or the effect won't be visible' and needs clear tonal differences. Apple's guidance limits the clear, see-through variant to visually rich backgrounds. Fairness note: this is a partner to cause 1, not the only cause. Over the same photo a thin-fill pane already shows windows and light shapes, and Tom's own reel sits on a soft blue office, so fix both. In my renders, either fix alone looked more like glass than the shipped build, and both together looked clearly best.",
+    "fix": "Stop pre-blurring and pre-grading. Use a sharp backdrop with at least three hue families, a dark area and a bright area, and 3-5 hard-edged shapes that cross the pane's edge with 40-60% of each shape under the pane. See the backdrop field for the build.",
+    "sources": [
+     "https://hype4.academy/articles/design/glassmorphism-in-user-interfaces",
+     "https://developer.apple.com/design/human-interface-guidelines/materials",
+     "https://www.nngroup.com/articles/glassmorphism/",
+     "https://www.joshwcomeau.com/css/backdrop-filter/",
+     "src/assets/scene.webp"
+    ]
+   },
+   {
+    "rank": 3,
+    "title": "The cards' own glass is dead code, and the entrance animation fades the pane's glass",
+    "why": "By the CSS Filter Effects spec, an element with backdrop-filter becomes a 'backdrop root', and any backdrop-filter inside it can only see what is painted inside it. Card.module.css puts blur(16px) on cards that sit inside the pane, which has its own blur. In headless Chromium 153 and 156 a child's blur under a backdrop-filter parent stayed pixel-sharp, and with the child's filter present the card ended up whiter, not more glassy. Counting the fills, only .28 x .28 = 7.8% of the room can reach a card. The variable --glass-card-blur is used, but it has no effect. The same rule bites in a second place: an ancestor with opacity below 1 removed all the blur in my test (opacity .97), and the pane's 900ms entrance runs opacity .5 to 1, so the glass is faint while it plays. A WebKit engineer confirmed the same rule for Safari. Apple also says never to put glass on glass.",
+    "fix": "Delete backdrop-filter from .card. Give cards a flat fill (.58-.62 white). Put the pane's backdrop-filter on its own empty layer that is a sibling of the content, with no ancestor that has opacity below 1, filter, mask, clip-path, mix-blend-mode or will-change. Animate the entrance with transform only and end at transform: none.",
+    "sources": [
+     "https://drafts.csswg.org/filter-effects-2/",
+     "https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter",
+     "https://bugs.webkit.org/show_bug.cgi?id=289149",
+     "https://meta.discourse.org/t/backdrop-filter-blur-has-no-effect-on-menu-panel-even-though-background-transparency-works/413534",
+     "https://developer.apple.com/videos/play/wwdc2025/219/",
+     "src/components/Card.module.css"
+    ]
+   },
+   {
+    "rank": 4,
+    "title": "The pane fills the window, so it reads as an app window, not a glass object in a room",
+    "why": "At 1920x1080 the pane is 1792x952, which is 82% of the screen; the room shows in 17.7% of the area. In the audit's measurement the cards cover about 85% of the pane, so the glass itself shows only in the margin strip and the gaps. Apple's guidance is that glass is a floating layer for controls and navigation above content, not the content layer, and Microsoft says not to put acrylic on large background surfaces. Both are about this exact pattern. That is what Tom means by 'it just sits in the browser'.",
+    "fix": "Inset 88px at 1920x1080 (pane becomes 76% of the screen, with room visible all round), corner radius 44px (Tom's second reference is about 48px), 24px gutters between cards so the glass shows between them, and concentric card radius = pane radius minus padding (20px). Keep it ONE pane: Setproduct says two stacked glass panels usually look worse, and Microsoft warns that side-by-side panes leave a visible seam. The rail gets a flat fill, not its own glass.",
+    "sources": [
+     "https://developer.apple.com/design/human-interface-guidelines/materials",
+     "https://learn.microsoft.com/en-us/windows/apps/design/style/acrylic",
+     "https://www.setproduct.com/blog/liquid-glass-vs-glassmorphism",
+     "https://hype4.academy/articles/design/glassmorphism-in-user-interfaces",
+     "https://30secondsofcode.org/css/s/nested-border-radius",
+     "src/styles/glass.css"
+    ]
+   },
+   {
+    "rank": 5,
+    "title": "The edge is a thick white frame with no thickness cues, and true lensing is missing",
+    "why": "Apple says lensing is the primary way Liquid Glass defines itself, and that bigger glass is simulated as thicker material with deeper shadows and stronger bending. Ours stacks a 1.5px .88-white border, a 4px gradient ring that never fades out on the unlit sides (it is already directional, so 'uniform' was wrong, but it is 4px thick), a 6px band, a 7px blue line and a 40px inner glow that sits over real content. That reads as a picture frame. The outer drop shadow (0 40px 90px, .45) is present and heavy, so shadow is not the problem. The implementations that look right use a 1-1.5px lit edge that fades to nothing on the dark side: liquid-glass-react uses a 1.5px ring, KeyShot a 1px border plus a small offset inset highlight. Comeau adds a 4-6px edge strip with its own blur and brightness to fake thickness. Lensing itself needs an SVG feDisplacementMap used as backdrop-filter: url(), which only Chromium draws. WebKit bug 245510 is still open and its three fix pull requests were unmerged on 2026-11-02, so Safari and Firefox get no lensing.",
+    "fix": "Replace the ring stack with: 1px border at .35, one 1.5px masked ring that is bright top-left and fades to zero (the recipe has it), KeyShot-style small inset highlights, one soft inner shade at the bottom, and a layered shadow tinted to the backdrop. Delete the 40px inner glow. Add real lensing only on the corner objects, Chrome and Edge only, with a plain-blur fallback.",
+    "sources": [
+     "https://developer.apple.com/videos/play/wwdc2025/219/",
+     "https://github.com/rdev/liquid-glass-react",
+     "https://www.keyshot.com/wp-content/themes/keyshot-unified/liquid-glass/liquid-glass.css",
+     "https://www.joshwcomeau.com/css/backdrop-filter/",
+     "https://kube.io/blog/liquid-glass-css-svg/",
+     "https://github.com/archisvaze/liquid-glass",
+     "https://bugs.webkit.org/show_bug.cgi?id=245510"
+    ]
+   },
+   {
+    "rank": 6,
+    "title": "The three corner objects read as app-icon tiles, not glass",
+    "why": "They are filled 40-66% white, their blur(12px) works on an already-blurred room so it does nothing, and at 89-131px they are small. Refraction is the cue that tells the eye an object is glass, and it is cheapest and most visible on small objects. Figma's own Glass effect lists refraction at the edges, depth and dispersion as its controls, which is the same ingredient list as Apple's.",
+    "fix": "Fill .10-.30 white, 160-220px (19vmin), radius 28%, each one straddling the pane's corner so half is sharp in the room and half is blurred under the pane, with a sharp coloured shape behind it. Then, in Chrome and Edge only, give them the SVG lens filter described in recipe_css.",
+    "sources": [
+     "https://designcompass.org/en/2025/07/18/figma-glass-effect/",
+     "https://kube.io/blog/liquid-glass-css-svg/",
+     "https://github.com/rdev/liquid-glass-react",
+     "src/styles/glass.css"
+    ]
+   },
+   {
+    "rank": 7,
+    "title": "Fonts: macOS is told to draw the thinnest text, and the type is small and regular weight",
+    "why": "The body sets -webkit-font-smoothing: antialiased through Vibe's own token. In Chromium on a Mac that value switches off font smoothing and hinting, and Skia's comments say smoothed text is drawn from outlines that CoreGraphics thickens while unsmoothed text is not. On Tom's Mac (macOS 26.6.2, a Philips 221V8LB at about 102 ppi, which macOS treats as 1x) I re-ran a probe: smoothing on draws 13-23% more ink, with no colour fringing. Measured with Figtree in Chrome, antialiased 400 has 0.88 of the ink of default 400, antialiased 500 is about default 400, and default 500 is 1.13x. The CSS has 35 declarations at 14px and 32 at 12px, only 5 at 16px and 1 at 28px, and Figtree's x-height is just 0.500 em (7px at 14px, 6px at 12px). Apple says to avoid light weights and to go larger with thin type. Honest limit: this was measured in headless Chrome on synthetic specimens, nobody has compared the real dashboard with the flag removed, and the glass layer itself did not thin text in my tests.",
+    "fix": "Remove antialiased, and override the Vibe token on :root, because Vibe applies it in 62 places. Body 15px/500, titles 18px/600, KPI numbers 40px/700, nothing below 13px except uppercase labels. Ink #0f172a and #1e293b. Details in type_scale.",
+    "sources": [
+     "https://chromium.googlesource.com/chromium/src/+/main/third_party/blink/renderer/platform/fonts/mac/font_platform_data_mac.mm",
+     "https://raw.githubusercontent.com/google/skia/main/src/ports/SkTypeface_mac_ct.cpp",
+     "https://lists.w3.org/Archives/Public/www-style/2012Oct/0109.html",
+     "https://mjtsai.com/blog/?p=22090",
+     "https://developer.apple.com/design/human-interface-guidelines/typography.md",
+     "https://cdn.jsdelivr.net/npm/@capsizecss/metrics@4.4.0/entireMetricsCollection/figtree/index.mjs",
+     "https://www.startech.com.bd/philips-221v8lb-monitor"
+    ]
+   }
+  ],
+  "recipe_css": "/* ===== GLASS PANE + CARD + CORNER OBJECTS (Chrome, Edge, Safari 15.4+, Firefox 103+) =====\n   Numbers come from the sources in the diagnosis list and from renders in headless Chromium 153/156.\n   They are a tested starting point. Screenshot at 1920x1080 in Tom's Chrome and tune by eye.\n\n   THE ONE STRUCTURAL RULE: the element that has backdrop-filter is EMPTY (no children) and has no ancestor with\n   opacity<1, filter, mask, clip-path, mix-blend-mode or will-change. Cards are SIBLINGS of it, never inside it.\n\n   HTML\n   <div class=\"env\"> ...sharp backdrop, shapes and .gobj objects (see 'backdrop') ... </div>\n   <div class=\"stage\">\n     <div class=\"pane-glass\"></div>    only backdrop-filter element, empty\n     <div class=\"pane-edge\"></div>     rim + sheen, pointer-events:none\n     <div class=\"pane-content\"> <aside class=\"rail\"/> <main> <section class=\"card\"/> ... </main> </div>\n   </div>\n*/\n:root{\n  --inset: 88px;                               /* 1920x1080. Use 72px at 1440x900 and 32px under 1100px wide */\n  --pad: 24px;                                 /* pane padding and gap between cards */\n  --r-pane: 44px;\n  --r-card: calc(var(--r-pane) - var(--pad));  /* concentric = 20px */\n  --ink: #0f172a;  --ink-2: #1e293b;\n}\n@media (max-width:1500px){ :root{ --inset:72px; } }\n@media (max-width:1100px){ :root{ --inset:32px; --r-pane:32px; --pad:16px; } }\n\n.env{ position:fixed; inset:0; z-index:0; overflow:hidden; }   /* no filter, no opacity, nothing else */\n\n.stage{\n  position:fixed; inset:var(--inset); z-index:1; border-radius:var(--r-pane);\n  animation: pane-in .5s cubic-bezier(.2,.7,.2,1) backwards;   /* transform ONLY. No opacity fade on this element or any ancestor */\n}\n@keyframes pane-in{\n  from{ transform: perspective(1600px) rotateX(4deg) translateY(14px) scale(.985); }\n  to  { transform: none; }                                     /* end at none; leave no will-change behind */\n}\n\n/* PANE: mostly see-through, saturated, lit from the top left */\n.pane-glass{\n  position:absolute; inset:0; z-index:0; border-radius:inherit;\n  background: linear-gradient(135deg, rgba(255,255,255,.34), rgba(255,255,255,.14) 55%, rgba(255,255,255,.26));\n  -webkit-backdrop-filter: blur(18px) saturate(1.6) brightness(1.04);   /* literal numbers: no var() inside backdrop-filter (WebKit bug 297620) */\n          backdrop-filter: blur(18px) saturate(1.6) brightness(1.04);   /* do NOT put pointer-events:none on this layer: Safari mobile can drop it */\n  box-shadow:                                                           /* layered, one light source, tinted to the backdrop hue */\n    0 1px 1px   rgba(30,40,110,.06),\n    0 4px 4px   rgba(30,40,110,.06),\n    0 12px 16px rgba(30,40,110,.08),\n    0 28px 48px rgba(30,40,110,.14),\n    0 56px 90px rgba(30,40,110,.18);\n}\n\n/* EDGE: thin, lit from one side, fading to nothing on the dark side. Replaces the 4px ring, 6px band, 7px line and 40px glow */\n.pane-edge{\n  position:absolute; inset:0; z-index:1; border-radius:inherit; pointer-events:none;\n  border:1px solid rgba(255,255,255,.35);\n  box-shadow:\n    inset 1.5px 2px 1px -1px rgba(255,255,255,.65),     /* top-left highlight (KeyShot) */\n    inset -1px -1px 1px 0   rgba(255,255,255,.35),      /* faint counter-reflection */\n    inset 0 -10px 25px      rgba(30,40,110,.10);        /* soft shade along the bottom = thickness */\n}\n.pane-edge::before{                                      /* directional ring, 1.5px, as in liquid-glass-react */\n  content:\"\"; position:absolute; inset:-1px; border-radius:inherit; padding:1.5px;\n  background: linear-gradient(135deg,\n    rgba(255,255,255,.95) 0%, rgba(255,255,255,.35) 22%, rgba(255,255,255,0) 45%,\n    rgba(255,255,255,0) 62%, rgba(255,255,255,.45) 86%, rgba(255,255,255,.85) 100%);\n  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);\n  -webkit-mask-composite: xor;                            /* Chrome and Safari */\n          mask-composite: exclude;                        /* standard */\n}\n\n/* CONTENT: flat fills, NO backdrop-filter anywhere in here */\n.pane-content{ position:relative; z-index:2; height:100%; display:grid; grid-template-columns:240px 1fr; gap:var(--pad); padding:var(--pad); }\n.rail{ background:rgba(255,255,255,.62); border-radius:var(--r-card); }   /* Microsoft: vertical panes get a solid fill */\n.card{\n  background: rgba(255,255,255,.60);\n  border: 1px solid rgba(255,255,255,.85);\n  border-radius: var(--r-card);\n  box-shadow: 0 1px 1px rgba(30,40,110,.05), 0 8px 24px rgba(30,40,110,.10), inset 0 1.5px 0 rgba(255,255,255,.95);\n  color: var(--ink);\n}\n\n/* CORNER OBJECTS: live in .env, so the pane blurs the half that is under it */\n.gobj{\n  position:absolute; width:19vmin; aspect-ratio:1; border-radius:28%;\n  background: linear-gradient(145deg, rgba(255,255,255,.30), rgba(255,255,255,.10) 55%, rgba(255,255,255,.22));\n  -webkit-backdrop-filter: blur(10px) saturate(1.8);\n          backdrop-filter: blur(10px) saturate(1.8);\n  border: 1px solid rgba(255,255,255,.45);\n  box-shadow: inset 3px 3px 0 rgba(255,255,255,.9), inset -3px -4px 8px rgba(80,100,210,.35), 0 30px 60px rgba(30,40,110,.30);\n}\n.gobj-a{ top:calc(var(--inset) - 9vmin);    right:calc(var(--inset) - 9vmin); }   /* about 50% over the pane corner */\n.gobj-b{ bottom:calc(var(--inset) - 9vmin); right:calc(var(--inset) - 9vmin); }\n.gobj-c{ bottom:calc(var(--inset) - 9vmin); left:calc(var(--inset) - 9vmin); }\n\n/* FALLBACKS: no backdrop-filter, or the viewer asked for reduced transparency */\n@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))){\n  .pane-glass{ background:rgba(244,248,255,.92); }\n  .gobj{ background:rgba(244,248,255,.85); }\n}\n@media (prefers-reduced-transparency: reduce){\n  .pane-glass{ -webkit-backdrop-filter:none; backdrop-filter:none; background:rgba(244,248,255,.94); }\n  .gobj{ -webkit-backdrop-filter:none; backdrop-filter:none; background:rgba(244,248,255,.90); }\n  .card{ background:rgba(255,255,255,.92); }\n}\n/* prefers-reduced-transparency has limited browser support (MDN), so keep the @supports rule above and offer a settings toggle that adds a class doing the same. */\n\n/* ===== CHROMIUM-ONLY TIER (Chrome, Edge): real edge refraction on the corner objects =====\n   Gate with a user-agent check, NOT @supports: Safari parses url() inside backdrop-filter and then draws nothing.\n   JS:  const ok = !!navigator.userAgentData?.brands?.some(b => /Chromium/.test(b.brand));\n        document.documentElement.classList.toggle('lens-ok', ok);\n   CSS: .lens-ok .gobj{ -webkit-backdrop-filter:none; backdrop-filter: url(#lens) blur(1px) saturate(1.6); }\n   SVG: <svg width=\"0\" height=\"0\" style=\"position:absolute\"><filter id=\"lens\" x=\"0\" y=\"0\" width=\"100%\" height=\"100%\"\n          color-interpolation-filters=\"sRGB\">\n          <feImage href=\"DATA-URL-OF-DISPLACEMENT-MAP\" x=\"0\" y=\"0\" width=\"205\" height=\"205\" result=\"map\"/>\n          <feDisplacementMap in=\"SourceGraphic\" in2=\"map\" scale=\"48\" xChannelSelector=\"R\" yChannelSelector=\"G\"/>\n        </filter></svg>\n   The map is a PNG generated by a small script, one per object size (rebuild on resize):\n     - size = the object's exact pixel size; 128 = no shift; red = x shift, green = y shift\n     - lens band (bezel) at most corner radius minus 1px (56px radius at 205px gives up to 55px)\n     - edge profile: convex squircle, height = (1 - (1 - x)^4)^(1/4); bend the ray with Snell's law, refractive index 1.5\n     - displacement scale 40-70 (kube.io and liquid-glass-react use 55-70; my untuned test used 46)\n     - to fade the lens in or out, animate the feDisplacementMap 'scale' value; no map rebuild needed\n   Working examples: github.com/archisvaze/liquid-glass (MIT) and kube.io/blog/liquid-glass-css-svg.\n\n   ===== WHAT IS CSS-ONLY, WHAT NEEDS SVG, WHAT CANNOT BE DONE ON THE WEB TODAY =====\n   CSS-only (works everywhere above): see-through tint, blur + saturate + brightness, the directional 1.5px rim,\n     inset highlights, layered tinted shadow, thickness strip along an edge (Comeau: 4-6px strip with its own blur(8-12px)\n     and brightness), the concentric radii, the opaque fallbacks. Optional small JS: move the rim angle with the pointer.\n   SVG-filter-only (Chrome and Edge only; Safari and Firefox ignore it): bending of the backdrop at the edge (lensing),\n     colour fringing at the edge (three displacement passes, as liquid-glass-react does), a per-pixel specular rim.\n   Cannot be done with a live backdrop in Safari or Firefox today: lensing (WebKit bug 245510 open, PRs unmerged\n     2026-11-02). Workarounds exist (WebGL on a page snapshot, e.g. liquidGL; Aave's method of filtering real content;\n     or baking the refraction into an image offline), each with costs.\n   Impossible on the web at all: Apple's per-frame adaptive shadow and tint, and colour spilling from neighbours.\n     Fake the spill with coloured radial glows in the backdrop. Do NOT use -apple-visual-effect: it is a private\n     WebKit property that does nothing for web pages. */",
+  "backdrop": "What must be behind the glass: something sharp, colourful and varied, because glass is only visible by what it does to something. Targets, measured against today's photo. Hue spread: at least 100 degrees across three families (today one band, 201-220 degrees). Brightness: from a dark area around 25% lightness (a navy shape) to a bright area around 95% (today a narrow pale band, roughly 40-95% of range). Detail: hard edges and shapes between 4 and 40px across, so an 18px blur has something to soften. Shapes: three to five, 220-420px at 1080p, with 40-60% of each shape under the pane and the rest sharp outside it, so the eye sees sharp turn to soft across the same edge. Source resolution at least 2560px wide if it is a photo (today 1664). Do not blur, bloom or grade it in advance; the pane does the softening.\n\nOption A, built in code (my recommendation for the light, pastel look of Tom's second reference and for the reel's bright feel). It costs no download, stays sharp at any resolution, and is the version I rendered and saw working (the audit's strongest result). On .env use: linear-gradient(120deg, #6b7dff 0%, #b48cff 45%, #ff9ec4 75%, #7cd4ff 100%) as the base, plus four radial-gradient blobs on top (pink #ffb3d9 near the top left, sky #8fd3ff near the top right, violet #b9a2ff near the bottom right, mint #7ee8d0 near the bottom left, each about 55-60% wide fading to transparent at 60%). Then add hard-edged shapes as absolutely positioned divs sized in vmin so they scale: a white ring about 30vmin across at the top left corner, a navy (#1b2a6b) rounded square about 26vmin on the right edge, a yellow (#ffd45e) capsule about 34vmin by 13vmin rotated -18 degrees at the lower left, a coral (#ff6e64) circle about 24vmin at the bottom right corner, and a green (#3ddc97) bar about 40vmin by 7vmin tilted 8 degrees along the top edge. Put a small inner highlight on each (a radial-gradient white at 35%) so the blurred part under the pane still reads as volume. Place the three .gobj glass objects on top of the shapes at the pane's corners. With the pane inset at 88px, the pane edges sit at x=88 and x=1832, y=88 and y=992, so shapes must cross those lines.\n\nOption B, a photo (for the dark, warm look of Tom's first reference: lamp light, window, bokeh). It must be sharp: a real photo of a living room with warm lamp points and a cool window, or one generated in FLUX.2 klein through Draw Things at 2560x1440 with the steps raised to 10-12 so the edges are crisp. Do not run it through blur, bloom or a single-colour grade. Export WebP at about quality 85 and keep it under about 400KB. With a dark photo, switch the pane to a dark fill: background rgba(12,14,20,.34), backdrop-filter blur(20px) saturate(1.6), border 1px rgba(255,255,255,.16), white text; bright points under the pane bloom into soft discs, which is what sells it. Warning from LogRocket: dark glass over a too-dark photo is invisible, so the photo needs bright points.\n\nHow to check it worked (my own heuristics, not from a source): turn the pane's fill to zero and compare brightness just outside and just inside its edge; the average difference should be at least 8 levels (today 0-13). And (1 minus fill) times the detail the blur removes should come to about 5 levels or more (today 0.28 x 5 = 1.5).",
+  "type_scale": "Smoothing (do this first, it is the single biggest text change): delete -webkit-font-smoothing: antialiased. Set  :root{ --font-smoothing-webkit:auto; --font-smoothing-moz:auto; }  and  body{ -webkit-font-smoothing:auto; -moz-osx-font-smoothing:auto; }  because Vibe applies its token in 62 places, so removing it from body alone is not enough. Do not use text-rendering: geometricPrecision; Blink turns hinting off for it too. Quick proof before committing: in Chrome DevTools add that :root override and compare the page at 1920x1080 with it on and off. If antialiased must stay for some reason, add 100 to every weight and 1px to every size, because antialiased 500 only matches default 400. Note that Josh Comeau's widely copied reset keeps antialiased on purpose; that is a Retina-era choice and this monitor is not Retina.\n\nSizes and weights for Figtree on a 1920x1080 non-Retina screen (about 102 ppi):\n- Page title: 28-32px, weight 700, line-height 1.15, letter-spacing -0.02em. (Tom's first reference uses a 56px headline on a hero; a dashboard needs less.)\n- KPI numbers: 40px, weight 700, line-height 1.1, letter-spacing -0.02em, proportional figures. Use tabular-nums only inside tables, because Figtree's tabular '1' leaves a wide gap (a '1111' measures 66px proportional but 100px tabular at 40px).\n- Card titles: 18px, weight 600, line-height 24px (second reference: 18-20px semibold).\n- Body and table rows: 15px, weight 500, line-height 22px, colour #0f172a.\n- Secondary text: 13px, weight 500, line-height 18px, colour #1e293b, no added letter-spacing (Apple's table tightens slightly at 13pt, it does not open). Floor of 13px for anything meant to be read.\n- Uppercase labels only: 12px, weight 600, letter-spacing +0.06em, colour #1e293b.\n- Never 12px/400 slate text, which is what a lot of the page is today.\n\nColours: fully opaque ink only, no rgba text. #0f172a for primary, #1e293b for secondary. I replaced #334155 because over a thin pane the audit measured it dropping to 3.7-4.8:1 in the worst spots. Contrast I computed for the recipe (pane about .24 white plus card .60 over the darkest backdrop spot, a navy shape): #0f172a about 9.3:1, #1e293b about 7.7:1. Accent colours do not survive small: over that same dark spot #1d4ed8 gives about 3.5:1 and #15803d about 2.6:1, so use accents only as chip fills, dots or numerals of 24px and up, with dark text beside them. Never put text straight on the bare pane; text lives on .card or .rail.\n\nFont loading: Google Fonts serves one variable Figtree file for 400/500/600/700, so those cost nothing extra. To use in-between weights such as 450 or 550, change the request to family=Figtree:wght@300..900. Optional: Inter 500 for body-size text (x-height .546 against Figtree's .500, so it reads larger at 14-15px) and keep Figtree for titles and numbers.\n\nKeep the text sharp: no will-change: transform on any element that holds text (Drawer.module.css line 26, KatieStage.module.css and MotionStage.module.css all set it, so check the open drawer), end every entrance animation at transform: none, use whole-pixel insets (88px, not percentages), no opacity below 1 on text containers at rest. Check the result on the real 1080p monitor, not a Retina laptop.",
+  "risks": "1. Nothing here has been rendered on Tom's own screen. My renders were in headless Chromium 153/156 with software compositing, the GPU path was never tested, and nobody has compared the real dashboard with the font flag removed. Apply the structure fix, take a 1920x1080 screenshot in Tom's Chrome, and tune the fill (.14-.34) and card (.58-.62) numbers by eye.\n2. Expect frosted glass, not Apple's Liquid Glass. Real lensing is Chromium-only, WebKit bug 245510 is open and its fix pull requests (68614, 68613, 69566) were still unmerged on 2026-11-02, so any Safari, iPad or iPhone viewer sees the CSS-only version. Make sure that version looks good on its own, because practice owners and reps will not all use Chrome. I could not verify what browser Tom uses; a 1080p monitor says nothing about it.\n3. A WebKit bug (297620, status NEW) stops backdrop-filter from working at all when it uses var() on macOS 14 Safari. The recipe uses literal numbers for that reason. Tom's Mac (macOS 26) is not affected, but other viewers could be.\n4. Text on a thinner pane has less contrast. The recipe protects it by putting all text on cards at .58-.62 white, and I computed 7.7:1 or better for #1e293b over the darkest spot, but I only computed it for a few sample backdrop colours, not the final art. Re-measure against the real backdrop. Apple's own guidance is to avoid content crossing glass in steady states, and NN/g recommends simple backdrops for legibility; the shapes-crossing-the-edge look comes from the references, not from a rule.\n5. I could not open either Dribbble shot or the Instagram reel. Every figure about them (about a third opaque, 40% white pane, 50-60% cards, 48px radius, 40px numbers, 56px headline) comes from Tom's description, unverified. A skeptic who looked at the reel's saved frames in the repo (docs/research/glassy-reference/ and docs/screenshots/glass-v2/reel-vs-ours-1440.png) read it as a thick, tilted slab with a lit side wall, refractive cubes and a floor reflection on a soft blue office, with near-opaque pale cards. That is a visual read, not a confirmed fact, and the reel's tooling is unknown. If Tom wants that exact look, thickness (side wall, tilt, reflection) may matter more than anything in the recipe, and that is a separate piece of work from this one.\n6. SVG refraction maps must match the element size exactly and be rebuilt when it changes; they cost most when the backdrop changes (ours is static); and sharp map edges can look jagged (a low-confidence claim, the source page would not open). Use it on three small objects only. Do not animate blur radius.\n7. Keep blurred elements few: one big pane plus three small objects is fine. Do not add glass back to cards. If cards ever need to show the room, that requires a second sibling glass layer, and Apple advises against glass on glass.\n8. The 'dark glass' variant (Tom's first reference) can vanish over a dark photo (LogRocket); it needs bright points in the photo.\n9. The entrance animation changes from a 900ms opacity-plus-tilt to a 500ms transform-only tilt. If Tom wants a fade, fade .pane-content (cards and text), never .stage or .env.",
+  "disputed": [
+   "'Every glass recipe uses a fill of .05-.30' is contradicted by the same sources: Comeau's header uses .5 and .6, web.dev .3 and .5, kube.io's music player .60, LogRocket .45. What holds is that 72% is above every number found.",
+   "'The pane has no outer shadow' is contradicted (glass.css has 0 40px 90px rgba(6,20,60,.45)). 'The rim is a uniform 4px ring' is also wrong: it is a directional 135-degree gradient, 4px thick, that never fades to zero.",
+   "'--glass-card-blur is defined but never used' is false: Card.module.css lines 8-9 use it. It is used but has no effect.",
+   "'A crisp colourful backdrop is the single biggest fix, and every praised demo sits on one' is contradicted: Tom's own reel sits on a soft blue office, and NN/g tells designers to use simple backdrops when they control them. The backdrop is a co-cause with the 72% fill.",
+   "'Our fix reads as glass only over a detailed backdrop' is contradicted by the researcher's own compare render: the thin-fill recipe already reads as tinted glass over a pre-blurred backdrop. That render changed six variables at once, so it ranks nothing; the audit's V0-V3 renders are the cleaner test.",
+   "'Every source says glass needs a fill of about .10-.45' is overstated. That band is a synthesis of tutorials; Apple and Microsoft give no number, and Comeau's production header is .5. 'The point where it stops being glass is .60' is unsupported; Comeau offers .6 as a fix for busy backdrops and never says that.",
+   "All figures about Tom's two Dribbble references (about one-third-opaque dark cards, 40% white pane, 50-60% white cards, 48px radius, 18-20px titles, 40px numbers, 56px headline) are unverified: no agent could open them, so they rest on Tom's description.",
+   "'A 1920x1080 non-Retina monitor means Chrome on a Mac, so the SVG tier works for him' is unsupported. Resolution says nothing about the browser.",
+   "'Antialiased is the main cause of the thin fonts' is an inference from synthetic specimens and ink ratios in headless Chrome. No one compared the real dashboard with the flag removed.",
+   "'The dashboard's own CSS has no will-change' is false: Drawer.module.css:26, KatieStage.module.css:29 and MotionStage.module.css:79 set will-change: transform. Tilt-in does end at transform: none.",
+   "'The glass layer does not thin text' was confirmed only in software-composited headless Chromium; the GPU-on and GPU-off bitmaps were byte-identical, so no real GPU path was tested.",
+   "'Antialiased text also loses Skia's contrast boost' is contradicted: contrast is 0.0 on Mac in both paths, so there is nothing to lose.",
+   "'Google Fonts serves a separate file per weight' is contradicted: one variable woff2 serves all four weights.",
+   "'Apple opens tracking below 13pt' is contradicted: Apple's macOS table tightens to -0.006em at 13pt. 'Text-heavy cards stay at least 72% white, per Apple' is unsupported; Apple gives no opacity figure. 'Milky by design' is not in the HIG.",
+   "'Most of the type is 14px/400 and 12px/400' is overstated: the CSS also has 22 declarations at weight 500, 15 at 600 and 3 at 700. The 14px and 12px sizes are the majority; the weights are not.",
+   "'Vibe was designed for Retina' is an inference; the Vibe docs never mention pixel density.",
+   "'Every recipe uses only a 1px border plus a faint highlight, so our rim is over-built' is contradicted: Malewicz's own generator ships an inset 0 0 20px 10px white glow at alpha 1.0, and LogRocket ships 4px inset embossing. 'Drop the 40px inner glow, it flattens' is a judgement from one audit render, not a sourced finding.",
+   "'Malewicz's Dribbble warning (mockups cheat because full-screen apps have no visible backdrop) applies to our desktop pane' overreaches: he scopes it to phone apps and says a desktop web interface could use glass for its backgrounds.",
+   "'Eidos Design and Setproduct agree on a cheapness failure' is unsupported; Eidos says nothing about it.",
+   "Microsoft says vertical panes get opaque fills, which conflicts with a glass rail; the recipe resolves it with a flat fill on the rail. NN/g (more blur, simple backdrops) and Axess Lab (avoid blur(20px) and above) disagree with each other and with Malewicz's own 20px default, so the 18px blur is a judgement call.",
+   "'Larger glass should have a perspective tilt, side wall, refractive cubes and floor reflection, as in the reel' is a skeptic's visual read of saved frames. The reel's tooling is unknown, and I could not open the reel.",
+   "Tier 3 (baking the refraction into a pane-sized image offline) is a proposal with no source describing it. The claim that SVG displacement maps do not super-sample and look jagged is source-unreachable (the Medium page returned 403).",
+   "Technique 6 in the dev.to survey (-apple-visual-effect: -apple-system-glass-material) is a private WebKit property and does not work for web pages. Aave's 'a copy of the content' is wrong in general. liquidGL v3.0.0 was only checked by its README and licence, not its demos."
+  ]
+ },
+ "audit": {
+  "summary": "Tom is right, and the cause is not the blur setting. The glass has nothing to refract and is too opaque to show it. Real glass reads as glass when four things hold. (1) Something sharp, high-contrast and multi-hue sits behind the pane, and you see it crisp outside the pane and soft inside it, across the same edge. (2) The fill is thin, about 10-45% white, so that thing dominates the pane's colour (web.dev's frosted pane is 30%, NN/g's example is 30% with 25px blur). (3) saturate/brightness lifts the colour so the blur does not go muddy. (4) The edge is lit from one direction, bright on the top-left and shaded on the bottom-right, with a sheen and a soft shadow. Apple describes the real thing as bending and concentrating light, not just scattering it (WWDC25 session 219, https://developer.apple.com/videos/play/wwdc2025/219/). We fail (1) and (2) badly, (3) and (4) partly, and a bug makes the cards worse than a plain fill.\n\nRanked by how much each explains the verdict:\n- Backdrop with nothing in it: the room is pre-blurred, one blue hue, and squeezed into a narrow tonal range.\n- Slab and card fills at .72, with the card fill sitting on the slab fill.\n- Card backdrop-filter inside the slab's backdrop root, which blurs nothing and whitens the cards.\n- A 64px frame of room around a pane that covers 82% of the window.\n- A directionless edge.\n- Corner objects that read as app-icon tiles.\n- Type: `-webkit-font-smoothing: antialiased` plus light, small, 12-14px text with no display tier. This one explains the fonts half of the verdict only.\n\nI rendered the old recipe and a fixed recipe side by side in headless Chromium 153 on this Mac, in the scratchpad only. No SAIDA files were touched.\n- Scratchpad folder: scratch/glass-audit/\n- V0_currentCss_sceneWebp.png is the current CSS replica, V1_currentCss_sharpRoom.png is the current CSS over a sharp vivid room, V2_fix_sharpRoom.png is the fix over that room, and V3_fix_sceneWebp.png is the fix over the existing scene.webp.\n- The V1 vs V0 comparison isolates the room. The V3 vs V0 comparison isolates the glass recipe.\n- Both V1 and V3 look more like glass than shipped. V2, where both change, is clearly the strongest.\n- The V0 replica omits the rim and the corner objects, so it is close to the shipped build but not identical.\n- I could not open either Dribbble shot: curl returned 0 bytes and WebFetch returned empty. Every reference number for them comes from Tom's description in the task, not from me.\n\nOne thing the audit must not hide: the fix makes text sit on a thinner, busier surface. Worst-case contrast in my prototype was 6.79:1 (vivid room) and 5.27:1 (scene.webp) for #1e293b, but only 4.8 and 3.73 for the current secondary ink #334155. The fix therefore has to darken secondary ink.",
+  "right": [
+   "Nothing blocks the slab's own backdrop-filter. html, body, #root, .shell and .env carry no filter, opacity, contain, will-change or transform. The 900 ms entrance (glass.css:342-359) uses opacity .5 and a transform only while it runs, and ends at `none`. `.env` and `.slab` are siblings, so the slab really does sample the room. Verified by grep and by my V0/V1 renders.",
+   "A crisp light edge does exist: pixel profile at y=500 on overview-1920-demo.png is margin (99,143,181), then a 1px antialias step, then a 2px line at (239,246,253), then slab (205,225,248). The 1.5px border at glass.css:178 is real, not only a soft halo. It is just directionless and nearly white-on-white (see the edge issue).",
+   "The see-through idea (objects A and B behind the slab, sharp in the corner gaps and blurred under the pane) is the right proof of glass. It is too small and too pale to land.",
+   "Contrast on the current build is fine (secondary ink 6.35-7.36:1 per docs/DESIGN-GLASS.md 8.12/8.13). The poor-fonts complaint is not a contrast failure.",
+   "Figtree loads (index.html:14, weights 400/500/600/700), the opaque fallbacks for no backdrop-filter and prefers-reduced-transparency exist (glass.css:109-129), and the outer drop shadow (glass.css:179) is present.",
+   "The slab blur radius (28px) is in the normal range. NN/g's example uses 25px at 30% fill. The problem is what is behind the blur and how opaque the fill is, not the radius."
+  ],
+  "wrong": [
+   {
+    "issue": "The room has nothing to blur or refract: the scene is pre-blurred, single-hue and tonally squeezed, so blur(28px) is a no-op and nothing crosses the pane edge from sharp to soft.",
+    "evidence": "glass.css:159-161 paints src/assets/scene.webp. docs/DESIGN-GLASS.md 8.1 and 8.13 say it was Gaussian-6 blurred, then every channel mapped into rgb(78,96,138)..rgb(240,246,254). I measured the file: hue std about 6.5 degrees (one blue); mean absolute difference from its own 3px blur is 0.28/255, so no edges are left. In a Chromium render over it, removing the slab's `blur(28px) saturate(1.25)` (glass.css:176-177) changes the pane by a mean 2.7/255 (max 13): an invisible filter. In the shipped 1920 screenshot the empty rail area has colour std 2.6/4.2/4.2, which is flat (docs/screenshots/glass-v2/overview-1920-demo.png, region x 90-290, y 470-940). Glass needs structure behind it to blur and a sharp copy outside the pane for contrast (web.dev https://web.dev/articles/backdrop-filter, NN/g https://www.nngroup.com/articles/glassmorphism/, Comeau https://www.joshwcomeau.com/css/backdrop-filter/). Ours has three small corner tiles. The V1 render (current CSS over a sharp multi-hue room) already reads as glass; V0 does not.",
+    "impact": "high",
+    "fix": "Replace the .env backdrop (glass.css:159-161). Do not pre-blur or pre-grade it, and let the CSS blur do all the softening. Use an un-blurred photo at 2560x1440, or CSS/SVG art like my V2: 4 radial blobs plus a linear-gradient(120deg,#6b7dff,#b48cff 45%,#ff9ec4 75%,#7cd4ff), plus 4-5 hard-edged shapes of 220-420px (white ring, navy rounded square, yellow capsule, coral circle, green bar). Targets: hue spread at least 100 degrees (now 6.5), tonal range about L 25-95 (now 98-246 luma), at least 3 hard-edged shapes crossing the pane boundary with 40-60% of each under the pane. Keep the 140px vignette off or at .06. If a photo is wanted for a dental/office feel, use a sharp one with window mullions, lamps and a plant."
+   },
+   {
+    "issue": "The fills are too opaque and stack: the slab is .72 near-white, the cards are .72 white on top of it, so the cards are effectively paper.",
+    "evidence": "glass.css:37 `--glass-slab: rgba(238, 245, 255, 0.72)` means only 28% of the backdrop reaches the eye; simulated slab range is R 193-238. glass.css:39 `--glass-card: rgba(255, 255, 255, 0.72)` on top leaves 0.28 x 0.28 = 7.8% of the room (effective alpha 92%), a swing of 9-13 levels out of 255. Measured on overview-1920-demo.png: card interiors are flat (248,251,254) std 1.0, and the slab's empty rail is (198,219,237) std 2.6-4.2. Reference 2 (per Tom) is about 40% white pane and 50-60% cards; web.dev's frosted pane is rgba(255,255,255,.3) with a 10px blur. The tint (238,245,255) is also pre-blued, so even the 28% that shows is pushed toward the same light blue. V1 vs V2 shows the difference: with the same room, the fill change lifts empty-pane colour std from 15.6/11.3/13.2 to 41.9/30.3/33.9.",
+    "impact": "high",
+    "fix": "glass.css:37 -> `--glass-slab: linear-gradient(135deg, rgba(255,255,255,.46), rgba(255,255,255,.16) 55%, rgba(255,255,255,.30))`. Check for consumers that need a plain color first, including the opaque fallbacks at :112 and :121. glass.css:39 -> `rgba(255,255,255,.58)` (range .55-.62). Neutral white, not (238,245,255). `backdrop-filter: blur(26px) saturate(1.8) brightness(1.04)` on the slab (from blur 28 / saturate 1.25; web.dev uses saturate(150%), Comeau 140%). Set secondary text to #1e293b, not #334155: over the translucent fix, #334155 fell to 4.8:1 (vivid room) and 3.73:1 (scene.webp)."
+   },
+   {
+    "issue": "The cards' backdrop-filter is dead code and actively makes them whiter, because the cards sit inside the slab and the slab is a Backdrop Root.",
+    "evidence": "src/components/Card.module.css:8-9 puts `backdrop-filter: blur(var(--glass-card-blur)) saturate(1.1)` on cards that are descendants of `.slab`, which has its own backdrop-filter (glass.css:176-177). The spec makes any element with backdrop-filter other than none a Backdrop Root, so a descendant's backdrop image starts at that root and excludes the room (https://drafts.csswg.org/filter-effects-2/ section 3; nested behaviour is discussed in https://github.com/w3c/fxtf-drafts/issues/500). I tested it in Chromium 153 (scratchpad n2-A..E png): 100px black/white stripes behind a parent with blur(4px) and a .72 tint, with a child .72 white card. Child with blur(24px): the stripes stay crisp (row reads 247,250,253 across about 10px, so no 24px smoothing) and the card's mean luminance is 249.9. Child with no filter: 242.9, and stripe contrast is 20 levels against 6 with the filter. So the filter blurs nothing and lifts the card's effective opacity from about .72 to about .92. Control: with no parent filter, the same child blur(24px) smooths the stripes as expected. Shell.module.css:228-229 already admits this for the pills.",
+    "impact": "high",
+    "fix": "Delete Card.module.css:8-9 (both prefixed lines) and the reduced-transparency override at :17-21, and rely on fill: `background: rgba(255,255,255,.58); border: 1px solid rgba(255,255,255,.85); border-radius: 24px; box-shadow: 0 12px 32px rgba(40,50,120,.14), inset 0 1.5px 0 rgba(255,255,255,.95)`. Also drop `--glass-card-blur` from glass.css:40. If you want cards that truly blur the room, move the slab's backdrop-filter to a new filter-free sibling `.slab-glass` (fixed, same inset, z-index 1) and make `.slab` a transparent z-index 2 container with no filter, opacity or mask, so cards sample room plus glass."
+   },
+   {
+    "issue": "The pane fills the window, so it reads as an app window with a translucent skin, not a glass object standing in a room.",
+    "evidence": "glass.css:78 and :91-107: inset 28/40/48/64 px. At 1920x1080 the slab is 1792x952, which is 82% of the viewport area and 93% of the width; the room is visible in 17.7% of the area (overview-1920-demo.png). Slab radius is 24 (glass.css:49) and card radius 16 (:50). Reference 2 per Tom has a wide margin of backdrop and roughly 48px radius with a 2px border; reference 1 has a full photographic room. Because the frame is so thin and the room so pale, the viewer sees one big pale-blue rectangle with a border.",
+    "impact": "high",
+    "fix": "glass.css:97-101: use `--slab-inset: 88px` at min-width 1920 and min-height 1080 (tested in V2), and 72px at 1440x900. Set `--radius-slab: 44px` (range 40-48) and `--radius-card: 24px`. That costs about 48px of height, roughly one table row, which Tom has already accepted once (DESIGN-GLASS 8.7). Enlarge the corner objects to 160-240px and make at least two overlap the pane corner by 40-50%."
+   },
+   {
+    "issue": "Type: macOS font smoothing is forced to the thin path, and the text is small, light and slate-coloured with no display tier.",
+    "evidence": "global.css:33 sets `-webkit-font-smoothing: var(--font-smoothing-webkit)`, and the Vibe token resolves to antialiased (dist/assets/index-BTcggUzw.css, `--font-smoothing-webkit:antialiased`, applied at body). Measured in headless Chromium 153 on this Mac at DPR 1, identical 14px Figtree 400 line: total ink 214,991 with antialiased against 244,698 with auto, 12% lighter (scratchpad smooth-1.png). MDN says subpixel-antialiased gives the sharpest text on most non-retina displays and antialiased looks lighter (https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-font-smoothing). Mojave and later already thin non-Retina text (https://www.howtogeek.com/358596/how-to-fix-blurry-fonts-on-macos-mojave-with-subpixel-antialiasing). Headless cannot show Tom's actual panel, so the 12% is a measured floor, not his exact experience. Sizes and weights: body 14/400 (global.css:29-31), 12px/400 slate labels (Card.module.css:57, overview.module.css:269, Shell.module.css:148 'Made by SAIDA'), card titles 16/600, KPI numbers 28/700 (overview.module.css:257), page title 20/700 (Shell.module.css:183). The two Dribbble refs, per Tom, use 18-20px semibold titles, 40px numbers and a 56px headline. In my render, Figtree 500/15px/#1e293b has about 1.5x the ink of 400/14px/#334155 (scratchpad fonts.png). Figtree is requested at 400;500;600;700 only (index.html:14), so 450 is not available.",
+    "impact": "high (this is the poor-fonts half of Tom's verdict; it explains none of the not-glass half)",
+    "fix": "global.css:33 -> `-webkit-font-smoothing: auto; -moz-osx-font-smoothing: auto;` and add `--font-smoothing-webkit: auto; --font-smoothing-moz: auto;` to :root in glass.css so Vibe components stop re-applying it. Body 15px/22px weight 500 (or 450 with index.html:14 changed to `family=Figtree:wght@400..700`). Secondary and label text: minimum 13px (never 12), weight 500, colour #1e293b. KPI numbers 40px/44px 700 with `letter-spacing: -0.02em` (overview.module.css:257). Card titles 18-20px/600 (Card.module.css:title). Page title 28px/700 (Shell.module.css:183). Optionally use Inter 500 for all body-size text and keep Figtree for display sizes: it rendered with equal ink to Figtree 500 and a taller x-height at 14px."
+   },
+   {
+    "issue": "The edge is a directionless white line on a near-white pane, not a lit bevel: no shade side, no inner refraction band, no specular sheen, no noise.",
+    "evidence": "glass.css:178 `border: 1.5px solid rgba(255,255,255,.88)`; :179-183 box-shadow includes `inset 0 -1px 0 rgba(255,255,255,.4)`, which paints white on the bottom edge where a shade belongs; :197-202 `.rim` bands (.16 white, .08 blue) and :211-217 4px ring (.98/.45/.18/.75). Measured pixel profiles (overview-1920-demo.png): left edge margin (99,143,181), then a 2px line (239,246,253), then slab (205,225,248); top edge (246,248,255) over (198,212,239). So the line is only about 34-48 levels brighter than the pane and is the same on all four sides, which reads as a window border. Apple describes highlights that follow geometry and shadows that adapt to what is behind (https://developer.apple.com/videos/play/wwdc2025/219/). Comeau builds the glassy edge as a separate 4-6px masked element with brightness 110-120% (https://www.joshwcomeau.com/css/backdrop-filter/). There is a wrong constraint in the code: glass.css:167-168 and DESIGN-GLASS 8.2 refuse pseudo-elements and a sheen because a pseudo would become a grid item. Absolutely positioned pseudo-elements of a grid container are out of flow; my prototype V2 uses `::before` and `::after` on a `display:grid; position:fixed` slab and the rail/main layout is intact. The `.rim` at z-index 2 also veils the outer 40px of real content with a .2 white inner glow (:200).",
+    "impact": "medium",
+    "fix": "slab `border: 1px solid rgba(255,255,255,.55)`. Slab box-shadow: `0 40px 90px rgba(30,40,110,.32), 0 8px 20px rgba(30,40,110,.12), inset 2px 2px 0 rgba(255,255,255,.95), inset -1.5px -1.5px 0 rgba(90,110,210,.35), inset 0 0 70px rgba(255,255,255,.20)`. Add `.slab::before` (absolute, inset 0, border-radius inherit, pointer-events none): `linear-gradient(115deg, rgba(255,255,255,.38) 0%, rgba(255,255,255,0) 26%, rgba(255,255,255,0) 72%, rgba(255,255,255,.16) 100%)`. Add `.slab::after` noise: an SVG feTurbulence baseFrequency .9, opacity .07, mix-blend-mode overlay (inside the slab it does not touch the text). Give the rail and main `position: relative; z-index: 1`. Retire `.rim` or reduce it to the ring only. A dark-edge cost: keep the inner glow under content, not over it."
+   },
+   {
+    "issue": "The three corner objects read as app-icon tiles, not glass cubes.",
+    "evidence": "glass.css:56 fill is `linear-gradient(145deg, rgba(255,255,255,.66), rgba(219,234,254,.4) 55%, rgba(255,255,255,.55))`, a milky 40-66% white. Their backdrop-filter blur(12px) (:57, :245) is blurring an already-blurred room, so it does nothing. docs/screenshots/glass-v2/objects-topright-2x.png shows a flat pale-blue rounded square with a thin icon and a double white border where the slab overlaps it: no refraction, no inner depth. Sizes are 89-131px (glass.css:277-292), small next to the reel's cubes. The reel (reel-vs-ours-1440.png, docs/research/glassy-reference/02-dashboard-crop.jpg) shows thick cubes whose interiors visibly bend what is behind them.",
+    "impact": "medium",
+    "fix": "Fill: `linear-gradient(145deg, rgba(255,255,255,.30), rgba(255,255,255,.10) 55%, rgba(255,255,255,.22))` with `backdrop-filter: blur(10px) saturate(1.8)`. Shadows: `inset 3px 3px 0 rgba(255,255,255,.9), inset -3px -4px 8px rgba(80,100,210,.35), 0 30px 60px rgba(30,40,110,.30)`. Add a second copy of the glyph offset 6px down-right at 35% opacity and blurred 2px to fake the refraction. Optional, Chromium-only polish: `backdrop-filter: url(#lens)` with a displacement map (https://kube.io/blog/liquid-glass-css-svg/), only with a plain-blur fallback for Safari and Firefox. Size 160-240px. They only pay off once the room behind them is sharp and multi-hue (issue 1)."
+   }
+  ]
+ },
+ "verified": [
+  {
+   "summary": "Citations hold up: I re-opened every source and almost all of them say what the researcher says they say. The two reachable-by-me exceptions are the original Malewicz URL (uxdesign.cc and Medium both return HTTP 403 for me too, so \"identical text\" on hype4.academy cannot be checked) and the Discourse thread (the researcher did not open it; I did, and it confirms the claim). I also re-measured scene.webp with ffmpeg and a small script, and my numbers match theirs within rounding. Hue is 201-220 degrees at p5-p95 with median saturation 0.38. A 28px Gaussian removes a mean 5.3 luma levels, which falls to about 1.5 after the 0.28 pass-through of the 0.72 fill. The luma jump at the slab edge is 62-102 levels with the fill and about 0-13 without it. The slab covers about 82 percent of a 1920x1080 viewport.\n\nThe problems are in the synthesis, not the quotes.\n1. \"Every source says\" three things together is overstated. NN/g tells you to choose a simple or single-colour backdrop when you control it. Apple and Microsoft give no fill band at all. The 0.10-0.45 band is the researcher's own synthesis of tutorial recipes.\n2. The researcher left out the canonical generator's strongest edge cue, an inset 20px glow with 10px spread at alpha 1.0. That undercuts \"every recipe uses only a faint highlight, so our rim is over-built\".\n3. Comeau's production code uses a 0.5 header fill, not the 0.1 from his demo. His own fix for busy content is 0.6, and he never says that point stops being glass.\n4. Three parts of the recipe contradict sources the researcher cites. A glass rail contradicts Microsoft's rule that vertical panes get opaque fills. \"Keep the room visible\" at blur 16-20px cuts against NN/g's more-blur-is-better stance. Using Malewicz's Dribbble warning against a desktop slab ignores that he scopes it to phone apps and says a desktop web interface could use glass for its backgrounds.\n5. The details about Tom's reference images (amber lamp against blue window, 48px radius, 40px numerals, 50-60 percent white cards) carry no citation, and I cannot verify them.\n6. The code path is src/shell/Shell.tsx, not src/components/Shell.tsx.\n\nOne possible cause the research never examined: WebKit bug 297620 (still open) breaks any var() inside backdrop-filter on macOS 14 Safari, and glass.css puts var() in every slab, card and object blur. It does not affect Tom's own Mac (Darwin 25.6, macOS 26), so I flag it as a candidate for other viewers, not as the cause.\n\nI did not use any browser tools or edit any files under ~/Desktop/SAIDA. I only read glass.css, Card.module.css, Shell.tsx, Shell.module.css and scene.webp. Scratch files are in the scratchpad.",
+   "kept": [
+    {
+     "claim": "Malewicz names four traits: background-blur transparency, multi-layered floating objects, vivid colours, subtle light border",
+     "verdict": "confirmed",
+     "note": "Exact list is in the page. A plain fetch shows only the intro, because the body sits in an embedded JSON blob in the HTML, which I parsed. The uxdesign.cc and Medium originals return 403 for me too, so 'identical to the original' is unverified.",
+     "source_url": "https://hype4.academy/articles/design/glassmorphism-in-user-interfaces"
+    },
+    {
+     "claim": "Malewicz: backgrounds can't be too simple or dull, can't be over-detailed, need tonal difference; Big Sur wallpaper is the example",
+     "verdict": "confirmed",
+     "note": "Quote: 'They can't be too simple or dull, or the effect won't be visible.' Also: 'make sure it has enough tonal difference.'",
+     "source_url": "https://hype4.academy/articles/design/glassmorphism-in-user-interfaces"
+    },
+    {
+     "claim": "Malewicz: most prominent with at least two translucency levels on a busy colourful background; only the fill should be transparent, not the whole object",
+     "verdict": "confirmed",
+     "note": "Exact. The same passage also says the style 'can only use one transparent layer, or multiple', so one pane is legitimate. He also says closer objects are 'a bit more transparent', which matches the researcher's note.",
+     "source_url": "https://hype4.academy/articles/design/glassmorphism-in-user-interfaces"
+    },
+    {
+     "claim": "Malewicz: 1px semi-transparent inner border simulates the glass edge (with/without comparison); his Dribbble critique says mockups cheat because full-screen apps have no visible backdrop",
+     "verdict": "confirmed",
+     "note": "Both are in the text (he typos '1p'). But the Dribbble critique is scoped to phone apps ('apps on phones are all full-screen'). He also writes that 'you could imagine a desktop web interface using a similar level of transparency for just its backgrounds' and that the style shines when used on just one element. The researcher's 'reality check' applied to a desktop dashboard slab overreaches.",
+     "source_url": "https://hype4.academy/articles/design/glassmorphism-in-user-interfaces"
+    },
+    {
+     "claim": "Malewicz accessibility rules and 2021 update: not for buttons/toggles, fine for card backgrounds, contents must work without glass; real products moved to lower transparency, larger blur, higher text contrast; dark-mode variant has better contrast",
+     "verdict": "confirmed",
+     "note": "All present. 'Lower transparency' means more opaque, which pushes against a very low fill, and the researcher never says so. Tying this to 'Tom's dark-glass reference' is the researcher's inference.",
+     "source_url": "https://hype4.academy/articles/design/glassmorphism-in-user-interfaces"
+    },
+    {
+     "claim": "Malewicz generator defaults: white 0.15, blur 20px, 1px border 0.3, shadow 0 8px 32px 0.1, inset top 0.5 and bottom 0.1, 1px top and left gradient lines peaking at 0.8",
+     "verdict": "confirmed",
+     "note": "Every listed value is correct. The researcher omitted a line in the same box-shadow: inset 0 0 20px 10px rgba(255,255,255,1), a fully white inner glow. The top line fades transparent to 0.8 to transparent horizontally; the left line runs 0.8 to transparent to 0.3 vertically. 'Top-left light source' is an inference, and the page does not say it.",
+     "source_url": "https://hype4.academy/tools/glassmorphism-generator"
+    },
+    {
+     "claim": "NN/g definition: opacity plus blur; white 30% with 25px blur keeps edges somewhat distinguishable, 100px blends everything; strokes and gradients add depth especially on simple or one-colour backgrounds",
+     "verdict": "confirmed",
+     "note": "Matches the article. NN/g also says glass stands out in front of gradients or complex backgrounds, consistent with the researcher.",
+     "source_url": "https://www.nngroup.com/articles/glassmorphism/"
+    },
+    {
+     "claim": "NN/g best practices: more blur than designers expect; Dribbble/Behance shots try too hard to keep backgrounds distinguishable; simple or single-colour backdrop acceptable if you control it; meet contrast, let users reduce transparency, use sparingly",
+     "verdict": "confirmed",
+     "note": "Source says 'More background blur is better' and criticises designs that 'try too hard to keep background elements distinguishable'; 'than designers expect' is the researcher's gloss. On backdrops the source is stronger than 'acceptable': 'if you have control of what appears behind a translucent component, opt for simple or single-color backgrounds.' That cuts against the recipe's 'keep the room visible' direction.",
+     "source_url": "https://www.nngroup.com/articles/glassmorphism/"
+    },
+    {
+     "claim": "NN/g Liquid Glass critique: 'Transparency = Hard to See', text over text is illegible",
+     "verdict": "confirmed",
+     "note": "Section title and the line 'anything placed on top of something else becomes harder to see' are present, along with the caption 'Text on top of text creates an illegible mess.'",
+     "source_url": "https://www.nngroup.com/articles/liquid-glass/"
+    },
+    {
+     "claim": "Axess Lab: bright backgrounds listed as a requirement; WCAG 4.5:1 and 3:1; never rely on blur alone; honour prefers-reduced-transparency; avoid blur(20px) and above",
+     "verdict": "confirmed",
+     "note": "All present. Bright backgrounds are listed as 'works best', not as a requirement. The article also lists Minimalism as an element. The 'avoid 20px+' advice is as the researcher says, and it conflicts with Malewicz's own 20px default.",
+     "source_url": "https://axesslab.com/?p=5111"
+    },
+    {
+     "claim": "Setproduct (June 2026): depth comes from what you partially see through; recipe fill 0.12, blur 16, border 0.25, radius 16; easy to produce, premium only on a controlled gradient, contrast fails on the next screen",
+     "verdict": "confirmed",
+     "note": "Published June 9, 2026. Recipe values and the quotes are exact.",
+     "source_url": "https://www.setproduct.com/blog/liquid-glass-vs-glassmorphism"
+    },
+    {
+     "claim": "Apple WWDC25 219: lensing is the primary way glass defines itself; edge highlights, colour spill, shadows; larger glass simulates thicker material; Apple did not try to recreate a physical frosted material",
+     "verdict": "confirmed",
+     "note": "Transcript says 'The primary way Liquid Glass visually defines itself is through ... Lensing', describes the highlights layer, light spilling from colourful content, and thicker, deeper-shadowed material at larger sizes. It also says 'rather than trying to simply recreate a material from the physical world'. The word 'frosted' is not used.",
+     "source_url": "https://developer.apple.com/videos/play/wwdc2025/219/"
+    },
+    {
+     "claim": "Apple HIG Materials: Liquid Glass is a functional layer for controls and navigation above content; not in the content layer; sparingly; regular variant for text-heavy components; clear only over visually rich backgrounds; 35% dimming layer; thicker materials more opaque",
+     "verdict": "confirmed",
+     "note": "Every point is in Apple's JSON for the page. Apple says the regular variant 'blurs and adjusts the luminosity' of background content, which a static fill cannot do (see missed list).",
+     "source_url": "https://developer.apple.com/design/human-interface-guidelines/materials"
+    },
+    {
+     "claim": "Microsoft acrylic: background, blur, exclusion blend, tint, noise; do not layer multiple acrylic surfaces; not on large background surfaces; opaque for vertical panes; no accent-coloured text",
+     "verdict": "confirmed",
+     "note": "Recipe and don'ts are correct. Two limits the researcher dropped: 'avoid layering' refers to multiple layers of background acrylic, and side-by-side panes are warned against because they leave a visible seam. The 'opaque for vertical panes' rule contradicts the researcher's own recipe, which makes the rail a glass pane.",
+     "source_url": "https://learn.microsoft.com/en-us/windows/apps/design/style/acrylic"
+    },
+    {
+     "claim": "Filter Effects Level 2: backdrop-filter, filter, opacity<1, mask, clip-path, non-normal mix-blend-mode make a Backdrop Root; backdrop-filter elements must form one themselves; effect invisible unless semi-transparent; opacity applies to the filtered backdrop",
+     "verdict": "confirmed",
+     "note": "All present, including that the Backdrop Root Image is content painted between the nearest ancestor Backdrop Root and the element. The spec also states it 'does not yet have Working Group consensus, specifically on the definition of Backdrop Root', which the researcher omitted. The effect on a card inside the slab is inferred, not tested in a browser.",
+     "source_url": "https://drafts.csswg.org/filter-effects-2/"
+    },
+    {
+     "claim": "MDN: backdrop-root list; a parent with opacity<1 makes a child's backdrop-filter blur only content between parent and child; frosted example white 30% blur(10px)",
+     "verdict": "confirmed",
+     "note": "The pitfall sentence is quoted nearly word for word. The example is rgb(255 255 255 / 30%) with blur(10px); MDN does not label it 'frosted'.",
+     "source_url": "https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter"
+    },
+    {
+     "claim": "Discourse thread corroborates that a backdrop-filtered ancestor blinds backdrop-filtered descendants (Chrome, Edge, Safari), fix via ::before or siblings",
+     "verdict": "confirmed",
+     "note": "The researcher had not opened it; I did. A Discourse staffer states that an element with backdrop-filter 'becomes the root for the effect' and descendants 'can only blur what's inside that root', and gives the working fix: a ::before with the filter plus isolation:isolate. The thread tested iOS Safari and desktop Chrome; Edge is not mentioned. The thread is dated Sept 2026.",
+     "source_url": "https://meta.discourse.org/t/backdrop-filter-blur-has-no-effect-on-menu-panel-even-though-background-transparency-works/413534"
+    },
+    {
+     "claim": "Comeau: only pixels directly behind are used; extend the filtered layer; 3-6px edge slice with blur 8px and brightness(120%); base fill white 0.1 blur 16px; fix busy text with blur 12px or fill 0.6",
+     "verdict": "confirmed",
+     "note": "All appear in the demos. But Comeau's own final production code uses a 0.5 header fill plus a 95%-lightness fading gradient, and its edge strip is blur(12px) brightness(0.96) at 4px. He presents 0.6 as a legitimate glass fix, so the researcher's 'point where it stops being glass' is the researcher's editorial, not his. Page updated Oct 2026; Chrome 142 fixed overflow:hidden for the extended-backdrop trick.",
+     "source_url": "https://www.joshwcomeau.com/css/backdrop-filter/"
+    },
+    {
+     "claim": "LogRocket: plain backgrounds hide the effect; Figma recipe white 0.45, border 0.25, blur 15; embossed inset option; the article contradicts itself on layer order",
+     "verdict": "confirmed",
+     "note": "All present. The self-contradiction is exact: the Hierarchy section says the nearest object is more opaque with higher blur; the Stacking section says the nearest has less opacity and less blur.",
+     "source_url": "https://blog.logrocket.com/implement-glassmorphism-css/"
+    },
+    {
+     "claim": "UX Misfit: shadow, differentiated blur, active layer more opaque, dim lower content, about 20% white stroke; deliberately gives no exact values",
+     "verdict": "confirmed",
+     "note": "All four steps and the 20% stroke are there, and so is the no-values disclaimer. It also says to avoid glass 'as the large parts of the UI', which supports the researcher's slab criticism and was not cited.",
+     "source_url": "https://uxmisfit.com/2021/02/03/glassmorphism-guide-to-visual-hierarchy/"
+    },
+    {
+     "claim": "IxDF: muted pastel palettes work best, neutral text and icons; contradicts Malewicz and Axess on vivid backgrounds",
+     "verdict": "confirmed",
+     "note": "Pastel and neutral-text claims are present, as is the iOS 7 darkened-backdrop example. The 'contradiction' is overstated: the same page says the three key traits are 'transparency, light borders, and vivid or pastel colors' and requires tonal differentiation.",
+     "source_url": "https://ixdf.org/literature/topics/glassmorphism"
+    },
+    {
+     "claim": "WCAG 1.4.3: 4.5:1 normal, 3:1 large; 18pt/14pt bold is about 24px/18.5px; test the worst-case backdrop region",
+     "verdict": "confirmed",
+     "note": "Thresholds and the px conversion are exact. The 'UI components 3:1' rule is SC 1.4.11, not this page. The worst-case advice is not in NN/g or Axess as attributed: NN/g only notes contrast may hold 'over certain areas'. The explicit worst-case phrasing is in the buildmvpfast article.",
+     "source_url": "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html"
+    },
+    {
+     "claim": "New Target (2025): thin fonts dissolve on frosted backdrops, bolder hold; 20-30% dark overlay under text; '85-90 percent' figure unclear",
+     "verdict": "confirmed",
+     "note": "Matches, including the ambiguous '85-90%' wording ('modest level of opacity reduction (such as 85-90%)'). Dated Aug 21, 2025.",
+     "source_url": "https://www.newtarget.com/?p=80650"
+    },
+    {
+     "claim": "Eidos Design and Setproduct agree on a 'cheapness' failure: beauty over clarity, and the effect breaks once real content replaces a controlled mockup gradient",
+     "verdict": "unsupported",
+     "note": "Eidos supports 'beauty over clarity' and 'a returning trend isn't innovation', and nothing about cheapness or mockup gradients. The 'controlled gradient' point is Setproduct's alone.",
+     "source_url": "https://eidosdesign.substack.com/p/glassmorphism-at-apple-new-old-trend"
+    },
+    {
+     "claim": "MEASURED: scene.webp is 1664x1024, 18,078 bytes, hue 201-220 (p5-p95), median saturation 0.38; Gaussian 6 removes 1.2 luma levels, blur 28 removes 4.9 (p99 24.6), only 1.4 (p99 6.9) after the 0.72 fill",
+     "verdict": "confirmed",
+     "note": "Re-run with ffmpeg gblur on a 1920x1080 cover crop. Dimensions, byte size, hue and saturation are exact. Gaussian 6 gives 1.19, blur 28 gives 5.27 (p99 28.3), after fill 1.48 (p99 7.9). Small differences come from resampling. Method caveat as the researcher says: gblur is a stand-in for CSS blur(), and I did not apply saturate(1.25), the bloom or the vignette.",
+     "source_url": "src/assets/scene.webp"
+    },
+    {
+     "claim": "MEASURED edge: left slab edge at 64px inset, luma outside 103-161, inside with fill 205-221 (jump 59-101), blur alone changes 0-9",
+     "verdict": "confirmed",
+     "note": "Reproduced at heights 200/400/540/700/900: outside 103/140/158/138/112, inside 205/215/220/214/211, jump 62-102, blur-only change 1-13. The sample rows differ from theirs, but the pattern (fill creates the visible edge, not the blur) holds. Composite inside the slab spans luma 204-244, std 12.9; the room spans 97-245, std 48.8.",
+     "source_url": "src/styles/glass.css"
+    },
+    {
+     "claim": "CODE FACT: Card.module.css gives .card backdrop-filter blur(16px) saturate(1.1) and a 0.72 fill; cards render inside the backdrop-filtered .slab, so the slab is their Backdrop Root and only 0.28 x 0.28 = 7.8% of the room reaches a card",
+     "verdict": "confirmed",
+     "note": "Code facts are correct, and the arithmetic is right. Path correction: the shell is src/shell/Shell.tsx, not src/components/Shell.tsx; the tree is .slab > Rail + main > content > inner > children. 'Cards cannot see the room' is imprecise: per the spec the Backdrop Root Image includes the slab's own painting. Either way a 16px blur over an already 28px-blurred area is a visual no-op. Untested in a browser; an open question the researcher also flagged.",
+     "source_url": "src/components/Card.module.css"
+    },
+    {
+     "claim": "CODE FACT: the rim stacks a 1.5px 0.88 border, 4px gradient ring, 6px inner band, 7px blue line and 40px inner glow; every cited recipe uses only a 1px 0.25-0.3 border plus a faint top highlight, so ours reads as a bezel",
+     "verdict": "contradicted",
+     "note": "The stack of values is accurately described, but the faint 6px (0.16), 7px (0.08) and 40px (0.2) layers are low-alpha. The 'every recipe is 1px plus faint highlight' comparison fails: Malewicz's generator ships an inset 0 0 20px 10px at alpha 1.0, LogRocket ships 4px inset embossing, Comeau adds a 3-6px thickness slice, and Apple names edge highlights as a defining cue. 'Over-built' is a judgement, not a source finding.",
+     "source_url": "https://hype4.academy/tools/glassmorphism-generator"
+    },
+    {
+     "claim": "Summary: every source says glass reads from three things together: a visibly different backdrop, a mostly see-through pane with fill about 0.10-0.45, and an edge that behaves like a physical edge",
+     "verdict": "unsupported",
+     "note": "Overstated. NN/g recommends simple or single-colour backdrops when you control them. Apple and Microsoft state no fill band. 0.10-0.45 is a synthesis of tutorial recipes, with 0.45 being only LogRocket's. Comeau's production header is 0.5. Malewicz's 2021 update says real products moved to lower transparency.",
+     "source_url": "https://www.nngroup.com/articles/glassmorphism/"
+    },
+    {
+     "claim": "Recipe: 0.60 (Comeau's busy-text fix) is the point where it stops being glass and becomes a card",
+     "verdict": "unsupported",
+     "note": "Comeau offers 0.6 as one of two ways to calm a busy backdrop under frosted glass; he never says it stops being glass.",
+     "source_url": "https://www.joshwcomeau.com/css/backdrop-filter/"
+    },
+    {
+     "claim": "Recipe details attributed to Tom's references: warm lamp amber against cool window blue, lavender to pink to sky, cards 50-60% white with 1px borders, radius about 48px, titles 18-20px, numerals 40px, body 15-16px",
+     "verdict": "unsupported",
+     "note": "No URL or source is cited and the rules forbid opening Instagram or Dribbble images, so none of this can be checked. Treat it as the researcher's description, not a finding.",
+     "source_url": ""
+    },
+    {
+     "claim": "Recipe: backdrop-filter saturate 140-150% (web.dev example uses saturate 150 percent)",
+     "verdict": "confirmed",
+     "note": "web.dev (last updated 2019-07-26) shows backdrop-filter: brightness(150%) saturate(150%) blur(1rem) as a filter-combination example, not as a recommendation. Its frosted-glass single-filter example is white 0.3 with blur(.5rem). web.dev is not cited by URL in the findings.",
+     "source_url": "https://web.dev/articles/backdrop-filter"
+    },
+    {
+     "claim": "Our own probe reports 7.36:1 worst case, so contrast is not the failure; over-opacity is",
+     "verdict": "confirmed",
+     "note": "The glass.css comment says 7.36:1 is the worst case for 'Made by SAIDA' on the slab at 1440x900 in the day room, measured by scripts/contrast-probe.mjs. That is one string at one viewport, not a global worst case. The inference that over-opacity is the cause is the researcher's.",
+     "source_url": "src/styles/glass.css"
+    }
+   ],
+   "missed": [
+    "WebKit bug 297620 (status NEW, last modified 2026-02-12): backdrop-filter does not apply whenever the filter uses var() on macOS 14 Sonoma with Safari 18.6, and it still reproduces with Safari 26.1 on macOS 14.8.2. It works on macOS 15.6 and macOS 26. glass.css puts var() inside every slab, card and glass-object backdrop-filter (blur(var(--glass-slab-blur)) and so on), so those viewers would get no blur at all, only a flat translucent fill. Tom's Mac (Darwin 25.6) is macOS 26 and is not affected. https://bugs.webkit.org/show_bug.cgi?id=297620",
+    "WebKit bug 289149 (RESOLVED INVALID) corroborates the Backdrop Root rule in Safari from a WebKit engineer. An ancestor with will-change: opacity created a backdrop root, so the child's blur could not reach content outside it, which he called 'working as expected and specified'. This is stronger evidence than the Discourse search snippets. https://bugs.webkit.org/show_bug.cgi?id=289149",
+    "Discourse staff give the working fix for nested backdrop-filter: put the filter on a ::before pseudo-element of the container, add position:relative and isolation:isolate, and keep the panels as separate elements. The researcher only saw this as a search-result summary. https://meta.discourse.org/t/backdrop-filter-blur-has-no-effect-on-menu-panel-even-though-background-transparency-works/413534",
+    "Malewicz's own generator default includes inset 0 0 20px 10px rgba(255,255,255,1), a fully white inner glow, alongside the 1px border and the 0.8 top and left gradient lines. The researcher quoted the faint pieces and skipped this one. https://hype4.academy/tools/glassmorphism-generator",
+    "LogRocket's accessibility notes: do not put backdrop-filter on the base background layer, because it can make the filters on glass objects useless in Chrome (the nested-filter problem, in a source the researcher already cited). Dark-mode glass is invisible if the background is too dark, and the article suggests a highly opaque white tint instead of a black shade. This pushes back on the recipe's dark rgba(10,14,24,0.30-0.45) variant. https://blog.logrocket.com/implement-glassmorphism-css/",
+    "NN/g says more blur is better, criticises designs that 'try too hard to keep background elements distinguishable', and recommends a simple or single-colour backdrop when you control it. That conflicts with the recipe's 'keep the room visible, blur 16-20px, fill 0.15-0.30' direction. The researcher cited the same article but did not flag the conflict. https://www.nngroup.com/articles/glassmorphism/",
+    "Microsoft: for vertical panes that section off content, use an opaque background instead of acrylic. Do not put multiple acrylic panes next to each other (visible seam). Both conflict with the recipe's 'rail, top bar and KPI strip each as a glass sibling'. https://learn.microsoft.com/en-us/windows/apps/design/style/acrylic",
+    "Setproduct's actual guidance for dashboards: content people read for more than a few seconds belongs on a solid surface, 'mostly none on the content itself' for a SaaS dashboard, and two stacked glass panels usually look worse and run slower than one. https://www.setproduct.com/blog/liquid-glass-vs-glassmorphism",
+    "Malewicz says glass shines when used on just one element and imagines a desktop web interface using it for just its backgrounds. That partly supports Tom's single-slab concept and weakens the researcher's 'Dribbble reality check' against it. https://hype4.academy/articles/design/glassmorphism-in-user-interfaces",
+    "Filter Effects Level 2 section 2.1: blur() inside backdrop-filter is applied with edgeMode=\"mirror\" at the element's border box. Nothing outside the pane bleeds into the blur at its edge. That is the spec-level reason panes look cut out and why Comeau's extend-and-mask trick matters. https://drafts.csswg.org/filter-effects-2/",
+    "The build already has glass objects A, B and C (glass.css section 3) straddling the slab's top-right, bottom-right and bottom-left corners, sharp outside and blurred behind the slab. They show only at 1024px wide or more. The research treats 'recognisable shapes straddling the edge' as a missing fix without noting these exist. They are tiles, not room objects, so their effect is small. src/styles/glass.css",
+    "Apple's regular Liquid Glass 'blurs and adjusts the luminosity of background content', and scroll-edge effects blur and reduce the opacity of content behind it. Apple's material adapts to what is behind it, which a static 0.72 white fill cannot do. Thinner materials keep context; thicker ones are more opaque. https://developer.apple.com/design/human-interface-guidelines/materials",
+    "A secondary but current source (buildmvpfast, Aug 2026, sponsored): the edge sells the effect (brighter top border plus inset highlight), saturate 140-200%, cap blur under about 20px on large surfaces, 3-4 glass layers per viewport at most, and SVG-displacement refraction via backdrop-filter: url() renders only in Chromium. It also says Safari lacks prefers-reduced-transparency, while MDN only labels it 'Limited availability'. glass.css depends on that media query for its opaque fallback. https://www.buildmvpfast.com/blog/liquid-glass-css-backdrop-filter-recipes-2026 and https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/prefers-reduced-transparency"
+   ]
+  },
+  {
+   "summary": "Most of the cited web claims hold up. I re-opened all 28 sources, and the numbers for Josh Comeau, rdev, shuding, lucasromerodb, KeyShot, kube.io, Hyalite, the Filter Effects Level 2 spec, ui-skills and the dev.to posts match what the researcher reported. The strongest finding survives: a backdrop-filter element becomes a Backdrop Root, so the Card.module.css cards nested inside the .slab get no blur (spec section 3, plus the researcher's own nested.png, fix.png and fix2.png). The arithmetic also checks out, and I measured the scene.webp range myself (R 78-240, G 98-246, B 139-255 against the claimed 78-240, 96-246, 138-254).\n\nThe headline diagnosis is weaker than it reads, in six places.\n1. \"Alpha about 0.05-0.30 in every stack I read\" is contradicted by the researcher's own sources. Josh Comeau's header fill is 0.5, with 0.6 in his thicker-glass demo. web.dev uses 0.3 and 0.5, kube.io's music player uses 0.60, and NN/g's example is 30%.\n2. The claim that the backdrop is the \"biggest single fix\" and that every praised demo needs a crisp, colourful backdrop ignores Tom's actual reference. The code.xr reel cover saved in the repo sits on a pre-blurred, near-monochrome blue office, the same kind of backdrop as scene.webp. Its dashboard cards are near-opaque pale panels, not thin glass. What makes the reel read as glass is slab thickness (a lit side wall and bevel), a perspective tilt, refractive cubes and a floor reflection. None of that is in the recipe's top three.\n3. The researcher's own compare.png contradicts the claim that the recipe reads as glass \"only over the detailed backdrop.\" The RECIPE-on-pre-blurred cell (bottom-left) already reads as tinted glass with a lit rim and a glowing object. Fill, edge and shadow did the work, and the render changes six variables at once, so it ranks nothing. The \"OURS\" pane is also a reconstruction that omits the 1.5px .88 border and the gradient rim.\n4. \"Flat 4px ring\" is wrong. .rim::before is a 135deg gradient ring (.98 / .45 / .18 / .75), plus a 6px inner band, a 1px blue line and a 40px glow. A lopsided specular already exists.\n5. \"--glass-card-blur is defined but never used\" is false. Card.module.css lines 8-9 use it. The accurate statement is that it is used but dead, because the card sits inside the .slab.\n6. The font explanation misses the direct macOS cause. Body sets -webkit-font-smoothing: antialiased through the Vibe token, and MDN says that value is macOS-only and renders text lighter. The Chrome layer-antialiasing criteria cited in its place are from 2013 and concern LCD subpixel rendering, which macOS has not had since Mojave.\n\nAlso unreliable: ui-skills says nested blur \"re-blurs the blur\", but the spec says a nested backdrop-filter sees nothing. I did not open Instagram or Dribbble. I read the repo's own saved screenshots of the reel cover, and I cannot verify the \"Dribbble 1\" and \"Dribbble 2\" looks the recipe leans on.",
+   "kept": [
+    {
+     "claim": "Josh Comeau: backdrop-filter only samples pixels directly behind the element; fix is a backdrop child 200% tall trimmed by mask-image (or overflow:hidden, which he says works in Chrome 142+)",
+     "verdict": "confirmed",
+     "source_url": "https://www.joshwcomeau.com/css/backdrop-filter/",
+     "note": "Text and code match. The Chrome 142 claim is Josh's own and I found no independent corroboration (a web search turned up nothing)."
+    },
+    {
+     "claim": "Josh Comeau's values: blur(16px) backdrop, 0.5 white header fill, 4-6px glassy edge with blur 8-12px and brightness 1.2/0.96 and 0.1 fill, cupcake demo blur(8px) brightness(90%) saturate(140%)",
+     "verdict": "confirmed",
+     "source_url": "https://www.joshwcomeau.com/css/backdrop-filter/",
+     "note": "All values found, plus 'more art than science', the SVG-mask rx workaround and the 0.95 opaque fallback. His header fill of 0.5 and the 0.6 'thicker glass' demo undercut the summary's 'every stack is 0.05-0.30'."
+    },
+    {
+     "claim": "Filter Effects Level 2 defines Backdrop Root; filter, opacity<1, mask/clip-path, backdrop-filter, mix-blend-mode and will-change on those create one; transforms, z-index, fixed and sticky do not",
+     "verdict": "confirmed",
+     "source_url": "https://drafts.csswg.org/filter-effects-2/",
+     "note": "Section 3 and 3.2 match. The spec also says nested backdrop-filter forms a root, which is why the nested card sees nothing. The draft itself says it lacks Working Group consensus."
+    },
+    {
+     "claim": "Spec requires blur edgeMode=mirror at the border box; effect invisible unless part of the element is semi-transparent; element opacity also fades the filtered backdrop",
+     "verdict": "confirmed",
+     "source_url": "https://drafts.csswg.org/filter-effects-2/",
+     "note": "Section 2.1 text matches, including the note about background-color: transparent."
+    },
+    {
+     "claim": "Nested backdrop-filter does nothing in Chromium 156, nor does any backdrop-filter under an ancestor with opacity .97; sibling layer fixes it",
+     "verdict": "confirmed",
+     "source_url": "scratch/glasstest/fix2.png",
+     "note": "I re-read nested.html, fix.html and fix2.html and viewed the PNGs. Nested cards stay sharp, siblings blur, and opacity .97 removes all blur. This matches the spec. I could not confirm the browser version from the files. The dashboard's Card sits inside .slab, so it is affected."
+    },
+    {
+     "claim": "Side-by-side render shows ours is milky on both backdrops while the recipe reads as glass only over the detailed backdrop",
+     "verdict": "contradicted",
+     "source_url": "scratch/glasstest/compare.png",
+     "note": "The render exists, but the RECIPE-on-pre-blurred cell already reads as glass: a tinted pane, a lit rim, and the orange object turning to a glow. OURS on the vivid backdrop shows coloured glows too, so it is paler, not opaque. It changes fill, blur, saturate, border, shadow and backdrop together, so it cannot show the backdrop is the main cause. OURS also omits the real 1.5px .88 border and the gradient rim."
+    },
+    {
+     "claim": "Arithmetic: .72 fill over backdrop rgb(78,96,138)-(240,246,254) gives rgb(193,203,222)-(239,245,255), a 45/42/32 span; a .72 card on top lets about 7.8% through",
+     "verdict": "confirmed",
+     "source_url": "scratch/glasstest/compare.html",
+     "note": "I recomputed it (193.2/203.3/222.2 to 238.6/245.3/254.7) and measured scene.webp myself. The backdrop endpoints are within 2 levels. Caveat: the demo build's scene (dist-demo) has a lifted floor of about R144 G172 B212, so the through-pane span there is even smaller, about 28 levels."
+    },
+    {
+     "claim": "scene.webp is a monochrome blue, already out-of-focus office photo; glass.css slab has a 1.5px .88 border; --glass-card-blur is defined but never used",
+     "verdict": "contradicted",
+     "source_url": "src/styles/glass.css",
+     "note": "Pre-blurred and mostly blue is right (viewed it). It is not strictly monochrome, because a teal-green plant sits lower left. The border is right. 'Never used' is false: components/Card.module.css lines 8-9 use var(--glass-card-blur). The accurate statement is that it is used but neutralised by the nesting inside .slab."
+    },
+    {
+     "claim": "liquid-glass-react (about 6.6k stars): no fill tint, blur 4+blurAmount*32 = 6px at defaults, saturate 140%, two 1.5px mask-composite:exclude rings (screen at opacity .2, and overlay) with stops .12-.32 at 33% and .4-.6 at 66%, inset/outer shadows, 0 12px 40px black .25",
+     "verdict": "confirmed",
+     "source_url": "https://github.com/rdev/liquid-glass-react",
+     "note": "src/index.tsx matches exactly (135deg gradient, displacementScale 70, saturation 140, aberration 2, radius 999). README confirms Safari and Firefox lose the displacement. The GitHub API now shows 6,585 stars, not about 6.6k to the digit but close."
+    },
+    {
+     "claim": "shuding/liquid-glass (about 1.2k stars): box-shadow 0 4px 8px .25 plus 0 -10px 25px inset .15; backdrop-filter url() blur(.25px) contrast(1.2) brightness(1.05) saturate(1.1); displacement map from a rounded-rect distance field with smoothStep(.8, 0, distance)",
+     "verdict": "confirmed",
+     "source_url": "https://raw.githubusercontent.com/shuding/liquid-glass/main/liquid-glass.js",
+     "note": "Matches. Minor: the code is smoothStep(0.8, 0, distanceToEdge - 0.15), not plain distance. Radius 150px confirmed. Stars 1,221."
+    },
+    {
+     "claim": "lucasromerodb/liquid-glass-effect-macos (about 830 stars): blur(3px) + filter:url(#glass-distortion), .25 tint, inset shadows .5, outer .2 and .1 shadows, scrolling 500px seamless floral wallpaper",
+     "verdict": "confirmed",
+     "source_url": "https://github.com/lucasromerodb/liquid-glass-effect-macos",
+     "note": "styles.css matches line for line, including the moveBackground animation and the background-size: 500px. Stars 827."
+    },
+    {
+     "claim": "KeyShot liquid-glass.css: tint .10, fallback blur(12px) saturate(1.5) brightness(1.05), refraction defaults blur 2 / saturate 1.8 / brightness 1.06, 1px border .18, shadows, shine insets, radii, bezel 30, index 1.5, specular .45, sibling layer structure",
+     "verdict": "confirmed",
+     "source_url": "https://www.keyshot.com/wp-content/themes/keyshot-unified/liquid-glass/liquid-glass.css",
+     "note": "All values found, including the Safari pointer-events comment. Slight mislabel: the 20px radius is the base .liquid-glass default, card is 24px and section is 32px. The URL returns 403 with a Mozilla user agent and works with plain curl."
+    },
+    {
+     "claim": "Common glass generator defaults: blur 12-16px with saturate 160-180%, 1px border .12-.3, shadow 0 8px 32px at .12-.25, radius 16; saturate restores colour drained by blur",
+     "verdict": "confirmed",
+     "source_url": "https://dev.to/devyatov/liquid-glass-on-the-web-6-ways-to-build-it-with-css-and-svg-3m07",
+     "note": "The page's plain card is blur(16px) saturate(180%), fill .08, border .12, shadow 0 8px 32px .2, radius 16, and it says saturate at 100% 'dies'. The wider ranges (160, .3) are a synthesis and do not come from this page. The page also says the effect is 'nearly invisible over flat gray'."
+    },
+    {
+     "claim": "ui-skills glassmorphism recipe: tiers blur 8-12 / alpha .08-.14 and blur 24-40 / alpha .10-.18, border .25, top highlight .35, bottom shade .12, grain at opacity <=.06, needs a busy backdrop, never nest, avoid >40px on large areas",
+     "verdict": "confirmed",
+     "source_url": "https://www.ui-skills.com/skills/iart-ai/glassmorphism",
+     "note": "All numbers found. Its reason for 'never nest' (the blur re-blurs the blur, quadratic cost) is mechanically wrong per the spec, where a nested backdrop-filter sees nothing, so this page is a weak authority."
+    },
+    {
+     "claim": "NN/g: more blur is better on intricate backgrounds (25px keeps edges distinguishable at 30% white, 100px blends them); low-opacity stroke gives an illusion of thickness; gradient strokes and fills add depth on single-colour backgrounds; text must be contrast-checked",
+     "verdict": "confirmed",
+     "source_url": "https://www.nngroup.com/articles/glassmorphism/",
+     "note": "All cited points found. The same article says Dribbble/Behance designs try too hard to keep backgrounds distinguishable, and says to choose simple or single-colour backgrounds when you control what sits behind the glass. That cuts against the 'crisp busy backdrop' thesis, and the researcher left it out."
+    },
+    {
+     "claim": "Josh Comeau shadows: layered 1/2/4/8/16px shadows at .075, one light source, hue-matched lower-saturation tint (hsl(220 60% 50%) on hsl(220 100% 80%)); grey is 'too grey'",
+     "verdict": "confirmed",
+     "source_url": "https://www.joshwcomeau.com/css/designing-shadows/",
+     "note": "Matches. The layered example itself uses black at .075. The tint is a separate step on that page."
+    },
+    {
+     "claim": "kube.io: feImage displacement map (R=x, G=y, neutral 128), scale = max displacement, convex squircle, Snell n=1.5, specular -60deg; backdrop-filter:url() Chromium-only; music player glass background opacity .60",
+     "verdict": "confirmed",
+     "source_url": "https://kube.io/blog/liquid-glass-css-svg/",
+     "note": "All found. 'Chrome only' is stated, but the page does not say Safari and Firefox 'get' a fallback, only that you could fake a softer one with layered blur. The .60 background opacity contradicts the 'always thin fill' framing."
+    },
+    {
+     "claim": "Hyalite computes a bevelled slab refraction: bevel 37, thickness 59, squircle, blur 1, dispersion 1.6, shade .46, rim 1.76, light -140deg; Chromium only, others fall back",
+     "verdict": "confirmed",
+     "source_url": "https://github.com/VII-Cae/hyalite--liquid-glass/wiki",
+     "note": "The default table matches exactly. The wiki says everything outside Chromium falls back to a plain blur."
+    },
+    {
+     "claim": "CSS-only layered 'liquid' stack (backdrop-filter:blur(0) + filter:url with feTurbulence .008, 2 octaves, feGaussianBlur 2, feDisplacementMap 70, tint .25, specular insets .75)",
+     "verdict": "confirmed",
+     "source_url": "https://dev.to/fabiosleal/how-to-create-the-apple-liquid-glass-effect-with-css-and-svg-2o06",
+     "note": "Code matches. It is SVG-plus-CSS, not CSS-only, and the post claims broad browser support. The 'destroys the rounded clip' result comes from the researcher's own test, which I could not re-run."
+    },
+    {
+     "claim": "Untuned edge-only displacement prototype shows a visible lens band at the rim in Chromium 156",
+     "verdict": "confirmed",
+     "source_url": "scratch/glasstest/bezel.png",
+     "note": "A rim band is visible, but so are artefacts: a hard clipped band at the bottom edge and a crisp yellow circle inside the pane's top-right. It proves the mechanism only, as the researcher admitted."
+    },
+    {
+     "claim": "Apple WWDC25 framing: older materials scatter light, Liquid Glass bends and concentrates it; specular highlights follow geometry; shadows adapt to what is behind; glass belongs on the navigation layer; avoid glass on glass",
+     "verdict": "confirmed",
+     "source_url": "https://nonstrict.eu/wwdcindex/wwdc2025/219/",
+     "note": "Every point is in the page. It is the full session transcript, not a summary. The same text says large glass gets thicker, deeper shadows and more pronounced lensing, and that elements on top of glass should use fills rather than a second glass layer."
+    },
+    {
+     "claim": "Browser support: Chrome 76, Edge 79, Firefox 103, Safari 18 unprefixed; non-none value creates a stacking context and containing block; Google warns of performance cost",
+     "verdict": "confirmed",
+     "source_url": "https://web.dev/articles/backdrop-filter",
+     "note": "76/79/103/18 and the stacking-context text are on the page, along with the performance caution. The 'unprefixed' and older-Safari-prefix note is not on this page. Its examples use .3 and .5 white fills."
+    },
+    {
+     "claim": "Chrome renders text on non-root composited layers with grayscale antialiasing unless the layer is opaque, identity or integral transform, opacity 1; border-radius counts as non-opaque",
+     "verdict": "confirmed",
+     "source_url": "https://web.dev/articles/antialiasing-101",
+     "note": "Criteria match. The page is dated 2013-06-28 and is about LCD subpixel antialiasing, which macOS has not had since Mojave. On Tom's Mac the advice to end the slab animation at transform:none is mostly irrelevant to the thin-font complaint."
+    },
+    {
+     "claim": "macOS 10.14+ dropped subpixel antialiasing; text looks thinner on non-Retina displays; consistent with Tom's 1080p monitor and 14px/400",
+     "verdict": "confirmed",
+     "source_url": "https://mjtsai.com/blog/?p=22090",
+     "note": "Removal confirmed. 'Looks thinner' rests on one commenter and a Steve Sande note. Peter Ammon prefers the new rendering. The post says nothing about Figtree or weights. Whether the monitor is 1080p I cannot verify."
+    },
+    {
+     "claim": "backdrop-filter is expensive: Mozilla bug notes large render targets and that it stops fixed elements being cached separately; keep count and area small, do not animate blur radius; anecdotal reports that replacing 12 blurs with 2 removed jank",
+     "verdict": "unsupported",
+     "source_url": "https://bugzilla.mozilla.org/show_bug.cgi?id=1828248",
+     "note": "The bug (Firefox on Android, Adreno) does say large render targets and no separate cache slice for fixed items. 'Do not animate blur radius' comes from ui-skills, not this bug. The '12 blurs replaced with 2' anecdote has no cited source anywhere. The dashboard's .slab is position:fixed with a backdrop-filter, so the first point is relevant, but only on that engine."
+    },
+    {
+     "claim": "Grain via feTurbulence: fractalNoise baseFrequency about .65-.97, numOctaves 2-4; lowering overlay opacity lowers the anti-banding benefit, so Ana Tudor prefers a displacement map",
+     "verdict": "confirmed",
+     "source_url": "https://blog.master.dev/grainy-gradients/",
+     "note": "Found: .9713, 4 octaves, scale 150, and the overlay-opacity trade-off. The .65 lower bound and '2-4 octaves' are not from this page. She says she rarely uses numOctaves. The overlay opacities .03-.06 come from the weaker aggregators, as the researcher said."
+    },
+    {
+     "claim": "Nested corner radii: inner = outer minus padding",
+     "verdict": "confirmed",
+     "source_url": "https://30secondsofcode.org/css/s/nested-border-radius",
+     "note": "R1 + D = R2 with the calc() variable form is on the page. The claim that it 'matches Tom's second reference's 48px outer radius' cannot be checked, because that reference was off-limits."
+    },
+    {
+     "claim": "Summary: alpha is about 0.05-0.30 in every stack I read",
+     "verdict": "contradicted",
+     "source_url": "https://www.joshwcomeau.com/css/backdrop-filter/",
+     "note": "Josh Comeau uses 0.5 (header) and 0.6 (thicker glass). web.dev uses 0.3 and 0.5 (https://web.dev/articles/backdrop-filter). kube.io's music player uses 0.60. NN/g's example is 30%. The recipe's own 'up to .40 for vivid backdrops' also contradicts 'every'."
+    },
+    {
+     "claim": "Summary: ours is a flat 4px ring plus a 1.5px .88 border that reads as a white picture frame",
+     "verdict": "contradicted",
+     "source_url": "src/styles/glass.css",
+     "note": "The border is correct. The ring is not flat: .rim::before is a 135deg gradient ring (.98 / .45 / .18 / .75), plus a 6px inner band, a 1px blue line and a 40px inner glow. A lopsided bright-corner specular already exists, so adding one repeats it."
+    },
+    {
+     "claim": "Summary: every praised demo sits on a busy wallpaper or vivid photo, so a crisp colourful backdrop is the single biggest fix",
+     "verdict": "contradicted",
+     "source_url": "docs/research/glassy-reference/01-cover-full.jpg",
+     "note": "Tom's own reference (code.xr reel, saved cover frames, SOURCE.md) is on a pre-blurred, near-monochrome blue office, like scene.webp. Its cards are near-opaque pale panels. Nothing in the research isolates the backdrop as the main cause."
+    }
+   ],
+   "missed": [
+    "What the reference actually does (the biggest gap): in the repo's saved frames of Tom's reel, the glass reads as a thick physical slab. It has a bright lit side wall and bevel visible on the right and bottom edges, a perspective tilt, big refractive glass cubes (not small flat squares clipped by the viewport corners), a floor reflection, and near-opaque pale cards with soft shadows on a blue-lavender slab. The dashboard is a flat rectangle with a 1.5px border and 20-28px of margin. A side-by-side is already at docs/screenshots/glass-v2/reel-vs-ours-1440.png and the frames are in docs/research/glassy-reference/ (local files, not a web URL). The reel's own link, https://www.instagram.com/reels/De9XFBQTG0D/, is in SOURCE.md and I did not open it.",
+    "Font smoothing: the body sets -webkit-font-smoothing: antialiased (src/styles/global.css:33, with the Vibe token --font-smoothing-webkit:antialiased in node_modules/@vibe/core/dist/tokens/tokens.css). MDN says this value works only on macOS and renders text lighter. On a non-Retina Mac that is a direct, checkable cause of thin text, and the researcher missed it. https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-font-smoothing",
+    "Apple's own materials guidance (opened via its data endpoint, https://developer.apple.com/tutorials/data/design/human-interface-guidelines/materials.json, the page behind https://developer.apple.com/design/human-interface-guidelines/materials): Liquid Glass is for the controls-and-navigation layer, and the HIG says not to use it in the content layer. Standard materials such as blur and vibrancy structure the content, and the 'regular' variant adjusts luminosity for legibility. Making the whole app frame a slab with glass cards inside it is the pattern the guidance warns against. The researcher said they could not open the HIG.",
+    "Large glass is supposed to look thicker: Apple's session says bigger glass gets deeper, richer shadows, more pronounced lensing and softer light scatter, and that colourful nearby content spills light onto large surfaces. The dashboard's slab is the largest glass element yet has the same flat treatment as a small control. https://nonstrict.eu/wwdcindex/wwdc2025/219/",
+    "Counter-evidence on the backdrop: NN/g says to opt for simple or single-colour backgrounds when you control what is behind the glass, and criticises Dribbble/Behance glass for keeping the background too distinguishable. The recipe presents the opposite as settled. https://www.nngroup.com/articles/glassmorphism/",
+    "Where the glass is actually visible: in the live 1920 screenshot the cards cover roughly 85% of the slab, so slab fill and blur show only in the margin strip, the rim and the sidebar. Dropping the slab alpha to .2 would change little in the middle of the page unless the cards also change. docs/screenshots/glass-v2/overview-1920-demo.png (local file).",
+    "Two scene files ship with different floors: dist/assets/scene-BLhSE0cN.webp is byte-identical to src (darkest pixels about R78 G98 B139), but dist-demo/assets/scene-YPy8GKiY.webp has a lifted floor of about R144 G172 B212. That matches the glass.css comment about a 'floor lifted to rgb(140,162,202)', which does not match src. The researcher measured only the src version, so which build Tom views changes the span numbers (local files under ).",
+    "Missing control: no single-variable test was run. Rendering the real dashboard (real scene.webp, real nesting) with only the card nesting fixed, then only the slab alpha dropped, then only the rim changed, would rank the causes. The current compare.html changes six things at once and uses an invented backdrop, so the diagnosis ranking is untested. The spec, which backs the nesting finding, is at https://drafts.csswg.org/filter-effects-2/ and Josh Comeau's article gives the sibling-layer pattern at https://www.joshwcomeau.com/css/backdrop-filter/"
+   ]
+  },
+  {
+   "summary": "Verdict: the researcher's citations hold up. I re-opened 25 of 26 sources (the 26th, the ekino Medium page, returned 403). Every number and quote I checked is real, with a few embellishments. The core diagnosis is also right, and I confirmed it by experiment, which I explain below. But the result is not \"all fact\" yet, because it gets four things wrong about Tom's actual build, and it misses several points.\n\nWhat I tested myself (headless Chromium 153 via the katie-dashboard Playwright, file:// pages, scratchpad only, nothing in the repo touched). Output images are in scratch/exp/.\n1. Nested backdrop-filter. Over striped stripes, a child with blur(10px) inside a parent that also has backdrop-filter shows no blur at all. The same child under a plain parent blurs correctly. This confirms the researcher's \"cards inside the slab do nothing\" claim (nested.png).\n2. The remedy, which the researcher did not give: put the slab's backdrop-filter on a ::before/sibling layer instead of the slab itself, and the child's blur works again (nested2.png). A parent opacity of .99 does not change anything.\n3. The actual photo. On Tom's real src/assets/scene.webp, his slab recipe (rgba(238,245,255,.72) + blur 28 + saturate 1.25) renders as a flat pale lavender card with the photo invisible. A clear recipe (white .14, blur 10, saturate 1.6, brightness 1.05, thin rim, outer shadow) over the same photo reads as real frosted glass with the windows visible. The archisvaze SVG refraction at IOR 1.5 also works in this Chromium and adds visible edge bending and a rim, though subtly on such a soft photo (refract.png). This partly contradicts the researcher's point 1 \"nothing to show\". The photo does have structure. Opacity plus the 28px blur is what hides it.\n\nErrors about Tom's build, checked against src/styles/glass.css and docs/DESIGN-GLASS.md section 8:\n- \"No outer shadow\" is wrong. The slab has 0 40px 90px rgba(6,20,60,.45), which is much heavier than the 0 12px 40px .25 the web recreations use.\n- \"Uniform 4px ring\" is wrong in kind. It is a 135deg gradient (.98, .45, .18, .75 white), so it is directional. Its real faults are that it is 4px thick and never fades to 0.\n- The researcher's numbers for the slab fill, the 28px blur, the 16px card blur, the 900ms entrance, and the photo grade (Gaussian 6, 78..240) are all correct.\n- The R-channel arithmetic (193..238) is correct, but it ignores the blur.\n\nOther soft spots. \"Milky by design\" is not in the HIG; Apple's WWDC talk says Reduced Transparency is what makes glass \"frostier\". The \"conflict\" the researcher noted between BuildMVPFast and WebKit bug 297770 is not a conflict; both say Firefox does not render SVG backdrop filters. \"1920x1080 non-Retina means probably Chrome on a Mac\" is an unsupported inference. \"Tom's refs pass 60-67%\" and the Dribbble/Instagram tooling I could not verify. The Aave parenthetical \"a copy of the content\" is wrong for the general case.\n\nFreshness. The three WebKit PRs (68614, 68613, 69566) are still open and unmerged as of today, 2026-11-02, via the GitHub API. The researcher only had 2026-09-05. So Safari has nothing that renders backdrop-filter: url().\n\nDo not let the dev.to \"6 ways\" article's technique 6 (-apple-visual-effect: -apple-system-glass-material) into the plan. It is a private WebKit property that is not enabled by default for web pages.",
+   "kept": [
+    {
+     "claim": "Apple: lensing is the primary visual signature; prior materials scattered light, Liquid Glass bends and concentrates it in real time; objects materialize by modulating lensing, not fading",
+     "verdict": "confirmed",
+     "note": "Transcript says 'the primary way Liquid Glass visually defines itself is through ... Lensing' and 'Instead of fading, Liquid Glass objects materialize ... by gradually modulating the light bending and lensing'.",
+     "source_url": "https://developer.apple.com/videos/play/wwdc2025/219/"
+    },
+    {
+     "claim": "Highlights are light-source driven and move with interaction (sometimes device motion); shadows are content-aware (stronger over text, weaker over solid light backgrounds); interaction makes the glass glow from within",
+     "verdict": "confirmed",
+     "note": "All three are in Bruno's section of the transcript, nearly word for word.",
+     "source_url": "https://developer.apple.com/videos/play/wwdc2025/219/"
+    },
+    {
+     "claim": "Larger glass simulates thicker material: deeper shadows, more pronounced lensing/refraction, softer scattering; tint and dynamic range adapt continuously",
+     "verdict": "confirmed",
+     "note": "Shubham's section: 'casts deeper, richer shadows, has more pronounced lensing and refraction effects, and a softer scattering of light'.",
+     "source_url": "https://developer.apple.com/videos/play/wwdc2025/219/"
+    },
+    {
+     "claim": "Never stack glass on glass; content on glass should use fills, transparency, vibrancy; glass is for the navigation/control layer; a table view should not be glass",
+     "verdict": "confirmed",
+     "note": "Confirmed verbatim in substance ('always avoid glass on glass', 'use fills, transparency, and vibrancy', tableview example).",
+     "source_url": "https://developer.apple.com/videos/play/wwdc2025/219/"
+    },
+    {
+     "claim": "HIG: regular variant blurs and adjusts luminosity (milky by design, for text-heavy sidebars/alerts); clear variant is highly translucent, only over visually rich backgrounds, with a 35% dark dimming layer over bright content",
+     "verdict": "confirmed",
+     "note": "Everything except the gloss 'milky by design', which is the researcher's wording, not Apple's. The HIG also says thicker/more opaque materials give better contrast for fine text and thinner ones keep context, so opacity is a per-layer trade-off, not a flaw.",
+     "source_url": "https://developer.apple.com/design/human-interface-guidelines/materials"
+    },
+    {
+     "claim": "HIG: don't use Liquid Glass in the content layer; use it sparingly; clear variant only over visually rich backgrounds",
+     "verdict": "confirmed",
+     "note": "Three headings appear verbatim in the materials page data. Also confirmed: 'Help ensure legibility by using vibrant colors on top of materials'.",
+     "source_url": "https://developer.apple.com/design/human-interface-guidelines/materials"
+    },
+    {
+     "claim": "SwiftUI doc: material blurs content behind, reflects color and light of surroundings, reacts to touch and pointer; share one container for rendering performance",
+     "verdict": "confirmed",
+     "note": "First paragraph and the GlassEffectContainer paragraph both say this.",
+     "source_url": "https://developer.apple.com/documentation/swiftui/applying-liquid-glass-to-custom-views"
+    },
+    {
+     "claim": "kube.io: Snell's law over a convex surface profile baked into an 8-bit displacement map (128 neutral, R=X, G=Y, B/alpha ignored), a separate rim-light specular map blended on top, Chrome-only SVG backdrop-filter, any size/shape change forces a full map rebuild",
+     "verdict": "confirmed",
+     "note": "All present. Extra points the researcher left out: kube says you can animate the filter 'scale' to fade lensing in and out with no map rebuild, and its Apple-Music-style demo runs a 'Glass Background Opacity 0.60'.",
+     "source_url": "https://kube.io/blog/liquid-glass-css-svg/"
+    },
+    {
+     "claim": "archisvaze/liquid-glass (MIT) defaults: 300x200, radius 60, thickness 80, bezel 60, convex squircle, blur 0.3, specular .5/sat 4, inner glow white 20px/-5px, tint 6%, outer shadow 0 4px 24px .18; SVG engine Chromium-only plus Three.js WebGL engine",
+     "verdict": "confirmed",
+     "note": "Every default matches index.html and README. IOR default really is 3.0. Not mentioned by the researcher: the bezel is clamped to radius-1 (so a 24px radius gives at most 23px), and the specular ring is effectively ~2px wide.",
+     "source_url": "https://github.com/archisvaze/liquid-glass"
+    },
+    {
+     "claim": "liquid-glass-react: filter:url + backdrop-filter blur(4+0.0625*32=6px) saturate(140%), outer shadow 0 12px 40px .25, two 1.5px masked ring layers (135deg gradient, screen at .2 opacity and overlay) that shift with the pointer; README admits no displacement in Safari/Firefox",
+     "verdict": "confirmed",
+     "note": "All values found in src/index.tsx. Nuance: the displacement is `filter: url()` on an element that also has backdrop-filter, not `backdrop-filter: url()`. The library also has an overLight mode the researcher missed (see missed list).",
+     "source_url": "https://github.com/rdev/liquid-glass-react"
+    },
+    {
+     "claim": "WebKit bug 245510 (backdrop-filter:url(#svg) with feDisplacementMap works in Chromium, not Safari) was still NEW at 2026-09-05 with unmerged community PRs",
+     "verdict": "confirmed",
+     "note": "Status NEW, modified 2026-09-05, PRs 68613/68614/69566. I also checked GitHub today: all three are still open and unmerged. Comment 13 adds that the testcase crash-loops the GPU process on trunk (68613 fixes that).",
+     "source_url": "https://bugs.webkit.org/show_bug.cgi?id=245510"
+    },
+    {
+     "claim": "WebKit engineer says accelerated filters incl. backdrop-filter can't use SVG filters; reporter notes Gecko also doesn't support SVG in backdrop-filter but allows filter:url() on an element that also has backdrop-filter",
+     "verdict": "confirmed",
+     "note": "Simon Fraser comment 1 and reporter comment 6. Bug is REOPENED (it was closed as a duplicate of 245510, then reopened as not strictly one).",
+     "source_url": "https://bugs.webkit.org/show_bug.cgi?id=297770"
+    },
+    {
+     "claim": "SVG foreignObject + feDisplacementMap on HTML content works in Chrome and Firefox but fails only in Safari (open bug, May 2026)",
+     "verdict": "confirmed",
+     "note": "Bug 313914, reported 2026-05-02, status NEW, with per-browser screenshots.",
+     "source_url": "https://bugs.webkit.org/show_bug.cgi?id=313914"
+    },
+    {
+     "claim": "Aave's production approach is cross-browser because it filters real rendered content (a lens carved out of a copy of the content), not the backdrop; costs: Safari caches filter output by ID, input-size ceiling, won't filter live video, quarter-map symmetry",
+     "verdict": "confirmed",
+     "note": "All the costs and the cross-browser table are in the article. The parenthetical is wrong for the general case: the article says it works on real rendered content 'rather than a copy of it'; only the switch/slider/toggle pass a copy as refractionTarget. Also, the technique needs the thing being refracted to live inside the Glass wrapper, so it does not drop onto a page background as is.",
+     "source_url": "https://aave.com/design/building-glass-for-the-web"
+    },
+    {
+     "claim": "CSS Filter Effects 2: an element with backdrop-filter is itself a Backdrop Root, so descendant backdrop-filters see only content painted inside it; filter, opacity<1, mask/clip-path, mix-blend-mode, will-change on an ancestor also create roots; reference filters allowed in backdrop-filter",
+     "verdict": "confirmed",
+     "note": "Section 3 lists all triggers including 'an element with a backdrop-filter value other than none'. The draft says it lacks WG consensus, but I verified the behaviour in Chromium 153 (child blur dead under a backdrop-filter parent), and a Chrome engineer's fxtf-drafts issue 53 comment says Chrome respects isolation. Also in the spec: an element's own opacity multiplies into its filtered backdrop.",
+     "source_url": "https://drafts.csswg.org/filter-effects-2/"
+    },
+    {
+     "claim": "MDN BCD: backdrop-filter is Chrome 76+, Firefox 103+, Safari 18 unprefixed (9 prefixed); none of the built-in functions displace pixels",
+     "verdict": "confirmed",
+     "note": "Versions match the JSON. 'None displace pixels' is the researcher's reasoning, and it is correct (also stated in dev.to and BuildMVPFast).",
+     "source_url": "https://github.com/mdn/browser-compat-data/blob/main/css/properties/backdrop-filter.json"
+    },
+    {
+     "claim": "dev.to six-technique survey: plain glass blur 16 saturate 180 alpha .08 border .12 is CSS-only with no refraction; masks fade the backdrop filter; SVG-in-backdrop is Chromium-only and re-filters whenever the backdrop changes; WebGL refract() is for a hero element, not a nav bar",
+     "verdict": "confirmed",
+     "note": "All present (I read the raw page, 30fps cap included). Caution: technique 6 in the same article (-apple-visual-effect: -apple-system-glass-material as 'the OS material') is NOT usable on the web; it is a private WebKit property, off by default.",
+     "source_url": "https://dev.to/devyatov/liquid-glass-on-the-web-6-ways-to-build-it-with-css-and-svg-3m07"
+    },
+    {
+     "claim": "LogRocket button recipe: blur 1, 300x56 map, displacement scale 55, saturate 50, blurred rim mask via feComposite in, feBlend, applied with backdrop-filter plus brightness(150%); warns about GPU cost and few elements",
+     "verdict": "confirmed",
+     "note": "All numbers are in the code (stdDeviation 1, scale 55, saturate values 50, brightness 150%) and the performance section.",
+     "source_url": "https://blog.logrocket.com/how-create-liquid-glass-effects-css-and-svg/"
+    },
+    {
+     "claim": "'Pure CSS Liquid Glass' is glassmorphism with a brighter rim (blur 2px saturate 180 alpha .15 border .8 radius 2rem shadow 31,38,135,.2 + inset glow); comments say blur alone lacks background distortion and the author agrees only SVG filters can distort",
+     "verdict": "confirmed",
+     "note": "CSS values match. The 'you lack the main ingredient - background distortion' line is from a commenter (daftplug), and the author (Kevin Ramirez) replies that distortion is not possible with CSS alone.",
+     "source_url": "https://dev.to/kevinbism/recreating-apples-liquid-glass-effect-with-pure-css-3gpl"
+    },
+    {
+     "claim": "BuildMVPFast 2026 guide: without refraction web glass is 'frosted, not liquid'; glass needs a colorful/textured backdrop; fallback ladder because @supports lies about url(); glass should be chrome, not data-dense",
+     "verdict": "confirmed",
+     "note": "All four points are present. It is a page marked Sponsored. The researcher's claimed 'conflict' with WebKit 297770 is not real: both say Firefox does not render SVG backdrop filters. Its rule 'if a screen exists so users can read values, flatten it' bears directly on a numbers dashboard.",
+     "source_url": "https://www.buildmvpfast.com/blog/liquid-glass-css-backdrop-filter-recipes-2026"
+    },
+    {
+     "claim": "Figma Glass effect (beta July 2025) exposes light angle/intensity, refraction, depth, dispersion, background blur; does not reflect surrounding colors; probably behind many Dribbble shots",
+     "verdict": "confirmed",
+     "note": "Article lists the five parameters and the missing color-reflection limitation. 'Probably behind Dribbble shots' is the researcher's guess and is flagged as such; I could not confirm the tool behind Tom's reel.",
+     "source_url": "https://designcompass.org/en/2025/07/18/figma-glass-effect/"
+    },
+    {
+     "claim": "Cross-browser WebGL route: html2canvas-pro snapshot to texture then Snell's-law GLSL; Aave uses WebGL only where there is no live DOM",
+     "verdict": "confirmed",
+     "note": "Both halves present (author also says SVG backdrop refraction is effectively Chromium-only). The article is a short showcase post, not a method write-up.",
+     "source_url": "https://dev.to/hlaaung/photorealistic-liquid-glass-4ikg"
+    },
+    {
+     "claim": "SVG displacement maps don't super-sample, so sharp map edges give jagged refraction; mitigation is blurring/antialiasing the map or moving to canvas/WebGL",
+     "verdict": "source-unreachable",
+     "note": "The ekino Medium page returned 403 to both curl and WebFetch, and a search snippet did not show this claim. The nearby eleqtriq demo (opened) does show jagged displaced edges and a blur+sharpen fake antialias, but it never says 'no supersampling'. Treat as plausible, not sourced.",
+     "source_url": "https://medium.com/ekino-france/liquid-glass-in-css-and-svg-839985fcb88d"
+    },
+    {
+     "claim": "About Tom's build: slab rgba(238,245,255,.72) with blur(28px), cards blur(16px) inside the slab, 4px rim, 900ms tilt-in, photo Gaussian 6 and graded 78..240",
+     "verdict": "confirmed",
+     "note": "Matches glass.css and DESIGN-GLASS.md 8.1-8.5 exactly. R arithmetic 193..238 is right but ignores the blur.",
+     "source_url": "src/styles/glass.css"
+    },
+    {
+     "claim": "About Tom's build: no outer shadow (all listed shadows are inset)",
+     "verdict": "contradicted",
+     "note": "The slab has box-shadow 0 40px 90px rgba(6,20,60,.45) plus a 0 0 0 1px ring (glass.css lines 169-184). It is heavier than the 0 12px 40px .25 the researcher recommends, so diagnosis 6 should be dropped or reversed.",
+     "source_url": "src/styles/glass.css"
+    },
+    {
+     "claim": "About Tom's build: rim is a uniform 4px ring",
+     "verdict": "contradicted",
+     "note": ".rim::before is a 135deg gradient (.98, .45, .18, .75 white) masked to a 4px ring, so it is already directional. The real differences from working recreations are the thickness (4px vs 1.5px) and that it never fades to 0 on the unlit sides.",
+     "source_url": "src/styles/glass.css"
+    },
+    {
+     "claim": "About Tom's build: the cards' own blur is dead because the slab is their Backdrop Root",
+     "verdict": "confirmed",
+     "note": "Reproduced in headless Chromium 153: a child blur(10px) under a parent with backdrop-filter shows no blur; with the parent's filter moved to a ::before layer the child blur works.",
+     "source_url": "https://meta.discourse.org/t/backdrop-filter-blur-has-no-effect-on-menu-panel-even-though-background-transparency-works/413534?tl=en"
+    },
+    {
+     "claim": "About Tom's build: nothing behind the glass to show (photo already blurred and one hue band)",
+     "verdict": "contradicted",
+     "note": "Partly. Rendered over the real scene.webp, a clear pane (white .14, blur 10, saturate 1.6) shows the windows and light shapes clearly. The photo is soft but usable; the 72% fill plus 28px blur is what erases it. Needs a more contrasty photo only if Tom wants lensing to be obvious.",
+     "source_url": "scratch/exp/refract.png"
+    },
+    {
+     "claim": "Tom's reference panes pass about 60-67 percent of the backdrop (ref 1 about a third opaque, ref 2 40% white)",
+     "verdict": "unsupported",
+     "note": "I could not verify this. I looked at the reel cover frame in docs/research/glassy-reference/02-dashboard-crop.jpg but it has no unfiltered backdrop to measure against. Ref 2 is not on disk.",
+     "source_url": "docs/research/glassy-reference/02-dashboard-crop.jpg"
+    },
+    {
+     "claim": "1920x1080 non-Retina monitor means likely Chrome on a Mac, so the SVG tier would work for him",
+     "verdict": "unsupported",
+     "note": "A resolution says nothing about the browser. The SVG tier works in Chromium 153 (I rendered it), but practice owners and reps may view on Safari or iPad, so the Tier 1 baseline matters more than the researcher implies.",
+     "source_url": "https://bugs.webkit.org/show_bug.cgi?id=245510"
+    }
+   ],
+   "missed": [
+    "Apple's own vocabulary names Tom's current look: 'Reduced Transparency makes Liquid Glass frostier and obscures more of the content behind it'. A .72 white fill with a 28px blur is the accessibility fallback, not the default. Apple has since added a Clear/Tinted setting (iOS 26.1) and a transparency slider in iOS 27, which replaced those two options (June 2026), so a more opaque pane is legitimate when text needs it; the target should be set by measuring the references, not by a rule. https://developer.apple.com/videos/play/wwdc2025/219/ and https://9to5mac.com/2026/06/15/ios-27-adds-new-liquid-glass-slider-on-iphone-heres-what-it-lets-you-do/",
+    "A tested fix for the glass-on-glass cards the research only diagnosed: keep the slab's backdrop-filter on a ::before/sibling layer (z-index -1, isolation: isolate on the container) so the slab is not a Backdrop Root; the cards' own blur then works. I reproduced both failure and fix in Chromium 153. Community confirmation: a Discourse thread explains the root rule and recommends a pseudo-element, and a Chromium-side issue shows devs moving every backdrop-filter to pseudo-elements. Apple still says not to stack glass on glass. https://meta.discourse.org/t/backdrop-filter-blur-has-no-effect-on-menu-panel-even-though-background-transparency-works/413534?tl=en and https://github.com/w3c/fxtf-drafts/issues/53",
+    "liquid-glass-react has an overLight mode for light backgrounds that the research ignores: it adds a black layer at 20% opacity plus a black overlay-blend layer, raises the base blur to 12px and uses a 0 16px 70px rgba(0,0,0,.75) shadow. Tom's backdrop is pale, and the researcher's white rim/inner glow recipe will wash out there (overlay of white on a near-white pane is almost invisible). https://github.com/rdev/liquid-glass-react (src/index.tsx)",
+    "Apple's materialize-by-lensing entrance has a cheap web equivalent: kube.io says to animate the feDisplacementMap scale to fade the effect in/out without rebuilding the map. That replaces Tom's opacity .5 to 1 tilt-in for the SVG tier. kube's Apple-Music-style demo also uses 'Glass Background Opacity 0.60', so physics-based demos keep a sizeable fill and the fill number alone is not the cause. https://kube.io/blog/liquid-glass-css-svg/",
+    "Do not use technique 6 of the cited dev.to survey. -apple-visual-effect: -apple-system-glass-material is a private WebKit property that is not enabled by default in Safari or WKWebView, so it does nothing for web pages. Sources: Alastair Coote's write-up as summarised at https://news.hada.io/topic?id=23108 and the WebKit-contributor thread at https://lists.w3.org/Archives/Public/public-css-archive/2025Jun/0485.html",
+    "Safari status is unchanged today. WebKit PRs 68614 (backdrop-filter url() reference filters), 68613 and 69566 are all still open and unmerged on 2026-11-02 per the GitHub API, and bug 245510 comment 13 says the testcase crash-loops the GPU process on trunk. So any Safari or iPad viewer of the dashboard gets only Tier 1 or a baked image. https://github.com/WebKit/WebKit/pull/68614 and https://bugs.webkit.org/show_bug.cgi?id=245510",
+    "archisvaze's implementation caps the lens band at the corner radius: bezel is clamped to radius-1 (index.html line ~375), and the specular ring is only about 2px wide because the edge term uses pixel distance. With Tom's 24px slab radius the refraction band is at most 23px; the researcher's 'bezel 24-60px' needs a bigger corner radius, or lensing only on the corner objects. The structure to copy is the filter on a ::after at z-index -1, tint/inner glow on ::before. https://github.com/archisvaze/liquid-glass",
+    "A ready-made cross-browser alternative to hand-building SVG: liquidGL v3.0.0 (MIT code, assets excluded; WebGPU with WebGL fallback; pushed 2026-10-01). It refracts any fixed or sticky element using a page snapshot, with bevel, frost, specular, tint and chromatic aberration options, and Tom's slab is position: fixed. It does not refract CSS animations live. I only read its README and license, not its demos. https://github.com/naughtyduk/liquidGL",
+    "The reference reel Tom is matching is a tilted 3D plate: its slab shows a thick bevelled side edge in perspective, a bright refractive edge band and heavily refracting glass cubes at the corners, while ours is front-on with a thin ring and only the 900ms entrance shows any perspective. The thickness cue is bigger than the rim line, and it is missing from the research. My visual read of the cover frame; the reel's tooling is unknown. Local files: docs/research/glassy-reference/02-dashboard-crop.jpg and docs/screenshots/glass-v2/reel-vs-ours-1440.png",
+    "Tension in Apple's guidance that the recipe skips: WWDC says that in steady states you should avoid intersections between content and Liquid Glass, and clear glass needs a dimming layer over bright content. The researcher's 'three recognisable shapes crossing under the pane edge' is a look from the references, not an Apple rule, so say which one is being followed. https://developer.apple.com/videos/play/wwdc2025/219/"
+   ]
+  },
+  {
+   "summary": "The core mechanism holds up. Blink maps -webkit-font-smoothing: antialiased to grayscale AA with hinting off, and CoreGraphics only dilates (fake-bolds) text in the non-antialiased path. I re-ran the Swift probe on this Mac (macOS 26.6.2, no AppleFontSmoothing set globally or for Chrome): smoothing ON draws 13-23% more ink, with no colour fringes. I also recomputed the Figtree ink ratios from the saved Chrome bitmap fs/out6.bmp: antialiased 400 is 0.87-0.88 of default 400, antialiased 500 is about 1.00, default 500 is 1.13, and each +50 of weight adds 6-6.6%. Independent sources agree (Chromium/Skia source and comments, Ben Wagner, a Mozilla engineer's bug comment), so that part is solid. Several things the owner should NOT take as fact. (1) \"Main cause\" is asserted, not shown: nobody A/B-tested the real dashboard with antialiased removed; the evidence is synthetic specimens and ink ratios. (2) \"The dashboard's own CSS has no will-change\" is false: Drawer.module.css:26 (the 560px text drawer), KatieStage.module.css:29 and MotionStage.module.css:79 all set it; the researcher only grepped glass.css and global.css. (3) The \"glass layer doesn't thin text\" tests ran in software-composited headless Chromium only; the GPU-on and GPU-off bitmaps are byte-identical, so no GPU path was tested. (4) \"Mostly 14px/400 and 12px/400\" is overstated: the dashboard CSS has 22 font-weight 500, 15 at 600 and 3 at 700 declarations, and about 30-37% of the 14px and 12px rule blocks already set 500/600; the \"BEFORE\" specimen is a hypothetical all-400 card, not what ships. (5) 12% less ink is about two 50-unit steps, not one, and by the researcher's own table antialiased 400 reads like default weight ~305-310, not ~350. (6) The Skia \"loses the contrast boost\" inference is wrong: contrast is 0.0 on Mac in every path, so only the gamma pre-blend is skipped. (7) Google Fonts serves one variable woff2 for all four weights, not separate files. (8) The contrast numbers assumed a #f8fafe card; on the actual shipped photo under the 72% white card, ink #0f172a and slate #334155 still pass comfortably (median 14.3:1 and 8.3:1), but accent blue #2563eb is about 4.1:1 and green #16a34a about 2.6:1. (9) The recipe's \"+0.005em tracking at 13px\" and \"72% white (Apple)\" have no Apple support: the HIG macOS tracking table is -0.006em at 13 pt, and Apple gives no opacity figure.",
+   "kept": [
+    {
+     "claim": "Blink on macOS maps -webkit-font-smoothing: antialiased to no smoothing and turns hinting off.",
+     "verdict": "confirmed",
+     "note": "CreateSkFont: kAntialiased sets should_smooth_fonts=false (edging kAntiAlias, grayscale); hinting set to kNone for antialiased or geometricPrecision (crbug 152304). 'Lightest possible' is interpretation; kNoSmoothing is aliased, not lighter by ink.",
+     "source_url": "https://chromium.googlesource.com/chromium/src/+/main/third_party/blink/renderer/platform/fonts/mac/font_platform_data_mac.mm"
+    },
+    {
+     "claim": "Skia CoreText backend: hinting-none avoids CG outline dilation; smoothed text is drawn from auto-dilated outlines, regular AA from un-dilated ones.",
+     "verdict": "confirmed",
+     "note": "Comments near lines 910-929 say exactly this, and line 984 says 'CoreGraphics dialates smoothed text to provide contrast'. Comments are old but my probe reproduces the effect on macOS 26.6.2.",
+     "source_url": "https://raw.githubusercontent.com/google/skia/main/src/ports/SkTypeface_mac_ct.cpp"
+    },
+    {
+     "claim": "Chromium Mac builds SK_GAMMA_CONTRAST=0.0 without SK_GAMMA_APPLY_TO_A8, so antialiased text also loses the contrast boost; Windows uses 1.0.",
+     "verdict": "contradicted",
+     "note": "Facts check out (BUILD.gn is_mac: SK_GAMMA_SRGB + CONTRAST=0.0; is_win CONTRAST=1.0; ignorePreBlend() for unhinted A8; APPLY_TO_A8 only defined for Android), but the conclusion fails: contrast is 0.0 on Mac in both paths (the smoothed path also calls setContrast(0)), so there is no contrast boost to lose. Only the luminance/gamma pre-blend is skipped, and no source says whether that thins or thickens. The Skia code even carries a 'Do we want contrast boost?' TODO.",
+     "source_url": "https://chromium.googlesource.com/chromium/src/+/main/skia/BUILD.gn"
+    },
+    {
+     "claim": "Ben Wagner: CoreGraphics dilates smoothed outlines by a percentage set by AppleFontSmoothing; antialiased is how web developers avoid it; dilation 'should have been reduced as the font size increased'.",
+     "verdict": "confirmed",
+     "note": "All three points are in the 2012 message. It also says Chromium builds A8 from LCD so transparent or animated text stays dilated, and that AppleFontSmoothing 0 takes the regular path.",
+     "source_url": "https://lists.w3.org/Archives/Public/www-style/2012Oct/0109.html"
+    },
+    {
+     "claim": "Subpixel AA is gone since Mojave and Apple says why (foreground/background colors needed at render time, awkward for GPU compositing).",
+     "verdict": "confirmed",
+     "note": "Peter Ammon quote matches, but it is one person's comment relayed by Michael Tsai; the post does not identify his employer or call it an Apple statement. He also notes he uses an external 1x display.",
+     "source_url": "https://mjtsai.com/blog/?p=22090"
+    },
+    {
+     "claim": "Skia was patched in 2018 because Mojave text came out too thin, and now probes CoreGraphics for none/some/subpixel; modern macOS gives 'some', so Chrome on Mac never draws LCD text.",
+     "verdict": "confirmed",
+     "note": "Patch description says 'font rendering weight was too thin compared to other fonts present on MacOS Mojave' and adds the three-way SmoothBehavior probe. The 'modern macOS gives some / never LCD' step is not in this source; it rests on the local probe, which I re-ran (no colour fringe in any row).",
+     "source_url": "https://ayakael.net/mirrors/electron/commit/532ee2dadf5a01b3f62da9b05a71a2140d68ea89"
+    },
+    {
+     "claim": "Local CoreGraphics probe on Tom's Mac: smoothing ON draws 13-23% more ink than OFF, no colour fringes; Avenir Next Regular 14px gains 22.6%, about two thirds of the jump to Medium.",
+     "verdict": "confirmed",
+     "note": "Re-ran scratchpad/smooth_probe: ratios 1.134-1.226, colorFringe=no everywhere; AvenirNext-Regular 14px 870.75 to 1067.25 = +22.6%, Regular to Medium (smoothing off) +33.7%, so 0.67. macOS 26.6.2; AppleFontSmoothing absent in NSGlobalDomain and com.google.Chrome.",
+     "source_url": "scratch/smooth_probe.swift"
+    },
+    {
+     "claim": "Chrome headless, real Figtree, 1x: antialiased 400 has 0.88 of default 400's ink; +50 weight is about 6.5-7%; antialiased 500 is about default 400; default 500 is 1.13x; so 400+antialiased reads like a weight around 350.",
+     "verdict": "confirmed",
+     "note": "Numbers reproduce from out6.bmp (row mapping verified by text extents): aa400 0.866-0.880, aa500 0.996-1.013, au500 1.127-1.130, au600 1.275-1.280, step 6.0-6.6%. Corrections: by this very table 0.88 equals default weight ~305-310, not ~350; 12% is about two 50-unit steps (one 100-step), not 'one weight step' as the summary phrases it; this is headless software-composited Chromium, not Tom's headed Chrome.",
+     "source_url": "scratch/fs/t6.html"
+    },
+    {
+     "claim": "The dashboard sets antialiased on body via Vibe's own token; font-size declarations are 35x14px, 32x12px, 5x16px, 3x20px, 1x28px; body weight 400.",
+     "verdict": "confirmed",
+     "note": "global.css:33 uses var(--font-smoothing-webkit); Vibe typography.scss:8 defines antialiased. Counts match (omits 2x13px). Vibe's compiled CSS applies the token in 62 places across 33 files, so overriding the :root token is needed, as the recipe says. Caveat: the weights are not 'mostly 400': 22x500, 15x600, 3x700 declarations; pairing rule blocks, 14px = 24 inherit/7x500/3x600/1x400, 12px = 19 inherit/9x500/3x600/1x400.",
+     "source_url": "https://raw.githubusercontent.com/mondaycom/vibe/master/packages/style/src/typography.scss"
+    },
+    {
+     "claim": "Vibe scale: text2 14/20 at 400, text1 16/22, text3 12/16; 'bold' weight token 500; headings use Poppins at 32/24/18; accessibility before aesthetics.",
+     "verdict": "confirmed",
+     "note": "Matches typography.scss and typography.mdx:14. Vibe also defines medium (600) and bold (700) text tokens; 500 is only the generic --font-weight-bold.",
+     "source_url": "https://raw.githubusercontent.com/mondaycom/vibe/master/packages/docs/src/pages/foundations/typography/typography.mdx"
+    },
+    {
+     "claim": "Vibe was designed for Retina with antialiased, so not a glass-ready scale for a 1x monitor.",
+     "verdict": "unsupported",
+     "note": "The Vibe docs never mention Retina or pixel density; this is the researcher's inference.",
+     "source_url": "https://raw.githubusercontent.com/mondaycom/vibe/master/packages/docs/src/pages/foundations/typography/typography.mdx"
+    },
+    {
+     "claim": "Figtree x-height 0.500 em, cap height 0.700, average width 0.449; Inter 0.546, Roboto 0.528, Poppins 0.548; 7 px x-height at 14px, 6 px at 12px.",
+     "verdict": "confirmed",
+     "note": "Capsize v4.4.0 gives 500/700/449; Inter 1118/2048, Roboto 1082/2048, Poppins 548. I also read Google Fonts' Figtree[wght].ttf OS/2: sxHeight 500, sCapHeight 700, upm 1000.",
+     "source_url": "https://cdn.jsdelivr.net/npm/@capsizecss/metrics@4.4.0/entireMetricsCollection/figtree/index.mjs"
+    },
+    {
+     "claim": "A page on fontalternatives.com claims Figtree's x-height is 0.546, which is Inter's number.",
+     "verdict": "unsupported",
+     "note": "The Figtree page lists no x-height; the figtree-vs-inter compare page shows Figtree 'N/A' and Inter 0.546, so no page I opened claims 0.546 for Figtree.",
+     "source_url": "https://fontalternatives.com/compare/figtree-vs-inter/"
+    },
+    {
+     "claim": "Third-party Figtree notes: 400 body and 600-700 headings; lowercase 'a' called uneven at small sizes.",
+     "verdict": "unsupported",
+     "note": "fontalternatives does say use 400 for body and 600-700 for headings, and says its open letterforms 'maintain clarity at small sizes'. Pimp My Type says the 'a' is too dark and dense at the bowl/stem join and leans left, not 'uneven at small sizes'; it also says Figtree has sturdier strokes than Proxima Nova and lists UI text as a best use.",
+     "source_url": "https://pimpmytype.com/font/figtree"
+    },
+    {
+     "claim": "Figtree supports tabular figures; at 40px '1111' is 66.14 px and '8888' 98.28 px proportional, both 99.73 px tabular.",
+     "verdict": "confirmed",
+     "note": "tnum and pnum feature tags exist in the Google Fonts Figtree TTF. I did not re-render, so the three pixel widths are unverified by me.",
+     "source_url": "https://raw.githubusercontent.com/google/fonts/main/ofl/figtree/Figtree%5Bwght%5D.ttf"
+    },
+    {
+     "claim": "Google Fonts serves discrete weights as separate font files.",
+     "verdict": "contradicted",
+     "note": "The dashboard's own request (wght@400;500;600;700) returns four @font-face blocks per subset that all point at the SAME variable woff2; the range URL (300..900) returns one 'font-weight: 300 900' face. 450/550 need the range URL, which the recipe already says.",
+     "source_url": "https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap"
+    },
+    {
+     "claim": "Apple HIG Typography: avoid light weights; go larger with a thin custom font; macOS 13 pt default, 10 pt minimum; Body Regular 13, Headline Bold 13; emphasized styles semibold or heavier; macOS tracking +12/0/-6/-11 per 1000 em at 10/12/13/14 pt.",
+     "verdict": "confirmed",
+     "note": "All quotes and numbers match. Minor: Caption 1's emphasized weight is Medium, so 'semibold or heavier' is not universal. The tracking table is SF Pro's, for mockups.",
+     "source_url": "https://developer.apple.com/design/human-interface-guidelines/typography.md"
+    },
+    {
+     "claim": "Recipe: 13px secondary text gets +0.005em to +0.01em tracking because 'Apple opens tracking below 13pt'.",
+     "verdict": "contradicted",
+     "note": "HIG macOS table: 12 pt = 0, 13 pt = -0.006 em, 14 pt = -0.011 em; Apple tightens at 13, and the table is SF Pro's, not a rule for Figtree.",
+     "source_url": "https://developer.apple.com/design/human-interface-guidelines/typography.md"
+    },
+    {
+     "claim": "Apple HIG Materials: thicker, more opaque materials suit text and fine features; regular Liquid Glass for components with a lot of text; 35% dark dimming layer for clear glass over bright content; vibrant labels, not the lowest-contrast level on thin materials.",
+     "verdict": "confirmed",
+     "note": "All four are in the page (lines ~34, 50, 61, 77, 106).",
+     "source_url": "https://developer.apple.com/design/human-interface-guidelines/materials.md"
+    },
+    {
+     "claim": "Recipe: text-heavy cards stay at least 72% white, per Apple (bigger glass is more opaque, thicker material for fine text).",
+     "verdict": "unsupported",
+     "note": "Apple gives no opacity number; 72% is the dashboard's current --glass-card value, not an Apple figure.",
+     "source_url": "https://developer.apple.com/design/human-interface-guidelines/materials.md"
+    },
+    {
+     "claim": "Apple HIG Color: Liquid Glass appears more opaque in larger elements for legibility; text on glass follows a monochrome scheme that darkens over light content; color on glass sparingly.",
+     "verdict": "confirmed",
+     "note": "Scope note: the monochrome scheme is stated for smaller elements like toolbars and tab bars, not all glass.",
+     "source_url": "https://developer.apple.com/design/human-interface-guidelines/color.md"
+    },
+    {
+     "claim": "WWDC25 session 356: typography 'bolder and left-aligned'; elements on glass 'require clear separation from content to maintain legibility'.",
+     "verdict": "confirmed",
+     "note": "Both phrases are in the transcript. 'Bolder' is scoped to 'key moments like alerts and onboarding', so the summary's 'iOS 26 moved to bolder type' overgeneralizes.",
+     "source_url": "https://developer.apple.com/videos/play/wwdc2025/356/"
+    },
+    {
+     "claim": "Microsoft acrylic recipe is blur + exclusion blend + tint + noise, exclusion added for contrast and legibility; no accent-colored text or hyperlinks over acrylic at 14px.",
+     "verdict": "confirmed",
+     "note": "Doc says accent text is 'likely to not pass' contrast at 14px (softer than 'fail'); the hyperlink advice has no stated reason.",
+     "source_url": "https://learn.microsoft.com/windows/uwp/style/acrylic"
+    },
+    {
+     "claim": "NN/g and Axess Lab agree on WCAG contrast (4.5:1 body, 3:1 large/UI), sampling real colors behind glass, semi-opaque fills; they disagree on blur.",
+     "verdict": "confirmed",
+     "note": "NN/g: 'More Blur Is Better' and the WillowTree sampling plugin; Axess: 4.5/3, semi-opaque fills, avoid blur(20px) and higher. Real disagreement. Note the dashboard slab and drawer use blur(28px).",
+     "source_url": "https://www.nngroup.com/articles/glassmorphism/"
+    },
+    {
+     "claim": "Contrast is not the problem: #0f172a about 17:1, #334155 about 9.9:1, #64748b 4.55:1, green 3.15:1, amber 2.06:1 against about #f8fafe.",
+     "verdict": "confirmed",
+     "note": "Ratios recompute exactly, but #f8fafe was assumed. I sampled the shipped scene.webp under the real 72% white card: bg luminance median 0.79; #0f172a median 14.3 (worst 11.9), #334155 median 8.3 (worst 6.9), accent #2563eb median 4.1 (below 4.5 on much of it), #16a34a median 2.6. #64748b is not a dashboard token, and glass.css already uses #15803d for green text. The dashboard's own docs/perf/contrast.json (2026-10-27) reports pass=true. Conclusion holds for ink/secondary text only.",
+     "source_url": "https://axesslab.com/glassmorphism-meets-accessibility-can-frosted-glass-be-inclusive/"
+    },
+    {
+     "claim": "Chromium disables LCD text for will-change: transform, transform animations, filters, non-integral translation, non-opaque background; a backdrop-filter with more than one operation disables LCD text for layers behind it.",
+     "verdict": "confirmed",
+     "note": "ComputeLCDTextDisallowedReason lists all of these; FilterOperations::AllowsLCDText returns false for >1 op (and for saturate >1); draw_property_utils.cc UpdateRenderTarget propagates it to earlier effect nodes. Moot on Mac.",
+     "source_url": "https://chromium.googlesource.com/chromium/src/+/main/cc/layers/picture_layer_impl.cc"
+    },
+    {
+     "claim": "In Chrome tests, backdrop-filter, plain transforms, opacity .99, translateZ(0) and perspective rotateX did not change text sharpness; only will-change with fractional translate and rotation blurred it (dark pixels 1022 to 681, edge/ink 0.914 to 0.635); the glass layer is not what thins the text.",
+     "verdict": "confirmed",
+     "note": "Recomputed from out2/out3 bitmaps: only the will-change + .5px + rotate row degrades (edge/ink 0.973 to 0.694, -29%); antialiased plain 1016 dark px vs backdrop row 993. Big limit: out3_gpu_on.bmp and out3_gpu_off.bmp are byte-identical (cmp), so no GPU compositing path was tested; the conclusion holds only for software-composited headless Chromium.",
+     "source_url": "scratch/fs/t3.html"
+    },
+    {
+     "claim": "will-change: transform rasterizes once into a fixed bitmap; use only for 60fps animation and remove afterward.",
+     "verdict": "confirmed",
+     "note": "Chrome blog says exactly this.",
+     "source_url": "https://developer.chrome.com/blog/re-rastering-composite"
+    },
+    {
+     "claim": "The dashboard's own CSS has no will-change, and the tilt entrance ends at transform:none.",
+     "verdict": "contradicted",
+     "note": "Tilt end state is right (glass.css keyframes 'to { transform: none }', fill backwards). But will-change: transform is declared in Drawer.module.css:26 (the 560px text drawer, with backdrop-filter), KatieStage.module.css:29 and MotionStage.module.css:79; only glass.css and global.css were grepped. The drawer's open transform is translateX(0), integer, so blur is unlikely, but it was not tested.",
+     "source_url": "src/components/Drawer.module.css"
+    },
+    {
+     "claim": "Apple fits glyphs to the pixel grid less than Windows, so it stays truer to the typeface but looks fuzzier; on a 1x monitor this shows soft thin stems.",
+     "verdict": "confirmed",
+     "note": "The 2007 essay says Apple preserves the typeface 'even at the cost of a little bit of blurriness'. But Joel argues Apple's rendering keeps text darker and truer to print than Microsoft's thinner snapped stems, which cuts against 'thin stems'; it also predates Mojave, so 'mechanism still applies' is the researcher's inference.",
+     "source_url": "https://www.joelonsoftware.com/2007/06/12/font-smoothing-anti-aliasing-and-sub-pixel-rendering/"
+    },
+    {
+     "claim": "Tom's display is a Philips 221V8LB: 21.5 inch, 1920x1080, about 102.46 ppi, VA, 250 cd/m2; macOS sees 1x.",
+     "verdict": "confirmed",
+     "note": "Star Tech spec table lists 21.5\", 1920x1080, VA, 102.46 PPI, 250 cd/m2. system_profiler here shows PHL 221V8LB, 'UI Looks like 1920 x 1080 @ 100 Hz'. 'Half the density Apple assumes' is arithmetic inference (about 102 vs about 218 ppi).",
+     "source_url": "https://www.startech.com.bd/philips-221v8lb-monitor"
+    },
+    {
+     "claim": "Before/after Figtree card: BEFORE 14/400 antialiased, 12/400, KPI 28/600; AFTER 15/500 default, 13/500, KPI 40/700; AFTER body has about 47% more ink per line.",
+     "verdict": "confirmed",
+     "note": "Image exists and matches. 47% is arithmetic (1.13 x (15/14)^2 / 0.88 = 1.47), not a pixel count. BEFORE is a hypothetical all-400 card, not what ships (many rows already use 500/600).",
+     "source_url": "scratch/fs/out4.png"
+    }
+   ],
+   "missed": [
+    "Independent corroboration on post-Mojave macOS: Mozilla engineer Jonathan Kew (bug 1802795, comment 10) says removing -webkit-font-smoothing: antialiased 'makes the text look significantly heavier'. https://bugzilla.mozilla.org/show_bug.cgi?id=1802795",
+    "Zach Leatherman: grayscale anti-aliasing 'makes things appear lighter and thinner', and the safe approach is to leave smoothing at platform defaults and override only as a last resort. Easy secondary support for the fix. https://www.zachleat.com/web/font-smooth/",
+    "Counter-position the owner should know: Josh Comeau's widely copied CSS reset ships -webkit-font-smoothing: antialiased on purpose (Retina-era reasoning) and says Chrome and Safari 'still use subpixel antialiasing' on macOS by default. That wording conflicts with the researcher's probe (no colour fringe on macOS 26.6.2), but the practical effect is the dilation. The recipe is a trade-off aimed at a 1x monitor, not a universal fix. https://www.joshwcomeau.com/css/custom-css-reset/",
+    "No A/B on the real dashboard was shown: nobody rendered katie-dashboard with antialiased removed and compared it with the current build, so 'main cause' is an inference from synthetic specimens. The dashboard also already measures real-pixel contrast (pass=true): docs/perf/contrast.json",
+    "Three will-change: transform declarations exist in the dashboard (the text Drawer, KatieStage, MotionStage) and the Drawer was never tested for text blur at its open and mid-transition states. src/components/Drawer.module.css",
+    "The dashboard's real font request returns one variable Figtree file for all four weights, so intermediate weights (450/550) need wght@300..900 in index.html, and the researcher's 'separate files' statement is wrong. https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap",
+    "Apple's own Liquid Glass drew heavy legibility criticism (text over busy backgrounds, low contrast), which supports raising card opacity and weight rather than treating thin text as a Chrome quirk. https://www.nngroup.com/articles/liquid-glass/",
+    "Vibe's compiled CSS applies -webkit-font-smoothing: var(--font-smoothing-webkit) in 62 places across 33 files (and 'inherit'/'auto' in a few), confirming that removing it from body alone will not change Vibe components; the :root token override is required. node_modules/@vibe/core/dist/tokens/tokens.css"
+   ]
+  }
+ ]
+}

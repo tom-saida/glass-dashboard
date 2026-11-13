@@ -1,0 +1,370 @@
+{
+  "id": "s23",
+  "day": 0,
+  "start": "14:03:00",
+  "duration_s": 123,
+  "caller": "(813) ***-0123",
+  "caller_full": "(813) 555-0123",
+  "language": "es",
+  "greeted_as": "",
+  "disposition": "phone-booked",
+  "turns": 10,
+  "first_line": "Hola, eh, buenas tardes. Quería hacer una cita para mi hijo, tiene once años. ¿Ustedes aceptan Medicaid?",
+  "scenario": "es_medicaid_new_child",
+  "events": [
+    {
+      "at": 0,
+      "kind": "call.started",
+      "turn": 0,
+      "data": {
+        "caller": "(813) ***-0123"
+      }
+    },
+    {
+      "at": 1.2,
+      "kind": "greeting",
+      "turn": 0,
+      "data": {
+        "name": ""
+      }
+    },
+    {
+      "at": 8.7,
+      "kind": "turn.caller",
+      "turn": 1,
+      "data": {
+        "text": "Hola, eh, buenas tardes. Quería hacer una cita para mi hijo, tiene once años. ¿Ustedes aceptan Medicaid?"
+      }
+    },
+    {
+      "at": 8.7,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "¡Hola! Con gusto le ayudo."
+      }
+    },
+    {
+      "at": 8.7,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "El equipo confirma la cobertura de Medicaid directamente — les dejo una nota para que lo revisen y le llamen."
+      }
+    },
+    {
+      "at": 8.7,
+      "kind": "turn.bot",
+      "turn": 1,
+      "data": {
+        "text": "Mientras tanto, ¿quiere que le haga la cita a su hijo?"
+      }
+    },
+    {
+      "at": 24.1,
+      "kind": "turn.caller",
+      "turn": 2,
+      "data": {
+        "text": "Sí, sí, por favor."
+      }
+    },
+    {
+      "at": 24.1,
+      "kind": "turn.bot",
+      "turn": 2,
+      "data": {
+        "text": "¡Perfecto!"
+      }
+    },
+    {
+      "at": 24.1,
+      "kind": "turn.bot",
+      "turn": 2,
+      "data": {
+        "text": "¿Cómo se llama su hijo?"
+      }
+    },
+    {
+      "at": 30.8,
+      "kind": "turn.caller",
+      "turn": 3,
+      "data": {
+        "text": "Se llama Diego. Diego Fuentes."
+      }
+    },
+    {
+      "at": 30.8,
+      "kind": "turn.bot",
+      "turn": 3,
+      "data": {
+        "text": "Entonces es Diego Fuentes — ¿y cuál es su fecha de nacimiento?"
+      }
+    },
+    {
+      "at": 39.6,
+      "kind": "turn.caller",
+      "turn": 4,
+      "data": {
+        "text": "El cinco de febrero del 2015."
+      }
+    },
+    {
+      "at": 39.6,
+      "kind": "tool",
+      "turn": 4,
+      "data": {
+        "name": "lookup",
+        "ok": true,
+        "ms": 701,
+        "verified": false
+      }
+    },
+    {
+      "at": 39.6,
+      "kind": "turn.bot",
+      "turn": 4,
+      "data": {
+        "text": "No encuentro a Diego en nuestro sistema todavía — ¿es su primera visita con nosotros?"
+      }
+    },
+    {
+      "at": 53.8,
+      "kind": "turn.caller",
+      "turn": 5,
+      "data": {
+        "text": "Sí, es la primera vez. El dentista nos dijo que lo trajéramos porque los dientes de arriba le están saliendo chuecos."
+      }
+    },
+    {
+      "at": 53.8,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "Qué bueno que se lo recomendaron."
+      }
+    },
+    {
+      "at": 53.8,
+      "kind": "turn.bot",
+      "turn": 5,
+      "data": {
+        "text": "¿El número del que llama, que termina en cero, uno, dos, tres, es el mejor para comunicarnos con usted?"
+      }
+    },
+    {
+      "at": 66.2,
+      "kind": "turn.caller",
+      "turn": 6,
+      "data": {
+        "text": "Sí, ese es mi celular."
+      }
+    },
+    {
+      "at": 66.2,
+      "kind": "turn.bot",
+      "turn": 6,
+      "data": {
+        "text": "¿Qué días le quedan mejor — mañanas o tardes — o le busco la primera cita disponible?"
+      }
+    },
+    {
+      "at": 78,
+      "kind": "turn.caller",
+      "turn": 7,
+      "data": {
+        "text": "Eh... en la mañana, si se puede. Mejor en la mañana."
+      }
+    },
+    {
+      "at": 78,
+      "kind": "tool",
+      "turn": 7,
+      "data": {
+        "name": "context",
+        "ok": true,
+        "ms": 574,
+        "open_slots": 4
+      }
+    },
+    {
+      "at": 78,
+      "kind": "turn.bot",
+      "turn": 7,
+      "data": {
+        "text": "Déjeme revisar el horario para ver qué hay disponible."
+      }
+    },
+    {
+      "at": 78,
+      "kind": "turn.bot",
+      "turn": 7,
+      "data": {
+        "text": "Tengo el jueves veintitrés a las once de la mañana — ¿se lo aparto?"
+      }
+    },
+    {
+      "at": 90.7,
+      "kind": "turn.caller",
+      "turn": 8,
+      "data": {
+        "text": "Sí, está bien. El jueves a las once."
+      }
+    },
+    {
+      "at": 90.7,
+      "kind": "tool",
+      "turn": 8,
+      "data": {
+        "name": "book",
+        "ok": true,
+        "ms": 395,
+        "slot": "Thu 11:00 AM",
+        "patient": "Diego Fuentes",
+        "already_booked": false
+      }
+    },
+    {
+      "at": 90.7,
+      "kind": "booking",
+      "turn": 8,
+      "data": {
+        "name": "Diego Fuentes",
+        "slot": "Thu 11:00 AM",
+        "reason": "consultation, upper teeth coming in crooked (dentist referral)",
+        "insurance": "Medicaid"
+      }
+    },
+    {
+      "at": 90.7,
+      "kind": "tool",
+      "turn": 8,
+      "data": {
+        "name": "message",
+        "ok": true,
+        "ms": 722
+      }
+    },
+    {
+      "at": 90.7,
+      "kind": "note",
+      "turn": 8,
+      "data": {
+        "urgent": false,
+        "fyi": false,
+        "name": "Diego Fuentes",
+        "reason": "New patient booked Thu 11:00 AM - parent asked whether we accept Medicaid. Please verify Medicaid coverage and call the parent back (Spanish-speaking caller). [about patient Diego Fuentes]"
+      }
+    },
+    {
+      "at": 90.7,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "Déjeme apuntarlo."
+      }
+    },
+    {
+      "at": 90.7,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "Perfecto — Diego tiene cita el jueves veintitrés a las once de la mañana."
+      }
+    },
+    {
+      "at": 90.7,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "Ya le dejé la nota al equipo para que verifiquen la cobertura de Medicaid y le llamen."
+      }
+    },
+    {
+      "at": 90.7,
+      "kind": "turn.bot",
+      "turn": 8,
+      "data": {
+        "text": "¿Quiere que le mande un mensaje de texto con la confirmación?"
+      }
+    },
+    {
+      "at": 108.2,
+      "kind": "turn.caller",
+      "turn": 9,
+      "data": {
+        "text": "Sí, por favor."
+      }
+    },
+    {
+      "at": 108.2,
+      "kind": "turn.bot",
+      "turn": 9,
+      "data": {
+        "text": "¿Hay algo más en que le pueda ayudar?"
+      }
+    },
+    {
+      "at": 116.4,
+      "kind": "turn.caller",
+      "turn": 10,
+      "data": {
+        "text": "No, eso es todo. Muchas gracias, muy amable."
+      }
+    },
+    {
+      "at": 116.4,
+      "kind": "turn.bot",
+      "turn": 10,
+      "data": {
+        "text": "¡Con mucho gusto!"
+      }
+    },
+    {
+      "at": 116.4,
+      "kind": "turn.bot",
+      "turn": 10,
+      "data": {
+        "text": "La recepción se comunicará con usted para confirmar."
+      }
+    },
+    {
+      "at": 116.4,
+      "kind": "turn.bot",
+      "turn": 10,
+      "data": {
+        "text": "¡Cuídese!"
+      }
+    },
+    {
+      "at": 123,
+      "kind": "sms.out",
+      "turn": 10,
+      "data": {
+        "caller": "(813) ***-0123",
+        "kind": "confirmation",
+        "chars": 36
+      }
+    },
+    {
+      "at": 123,
+      "kind": "sms.in",
+      "turn": 10,
+      "data": {
+        "caller": "(813) ***-0123",
+        "kind": "yes",
+        "chars": 3
+      }
+    },
+    {
+      "at": 123,
+      "kind": "call.ended",
+      "turn": 10,
+      "data": {
+        "duration_s": 123,
+        "disposition": "phone-booked",
+        "bookings": 1,
+        "notes": 1
+      }
+    }
+  ]
+}

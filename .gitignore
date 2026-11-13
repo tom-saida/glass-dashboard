@@ -1,0 +1,11 @@
+node_modules/
+dist/
+dist-demo/
+.env.local
+.env.*.local
+*.log
+.DS_Store
+docs/screenshots/*.webm.tmp
+playwright-report/
+test-results/
+.lighthouseci/

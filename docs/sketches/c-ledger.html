@@ -1,0 +1,297 @@
+<!doctype html>
+<!-- Decision (2026-10-12, docs/DESIGN.md s.1): NOT chosen. The single sheet removes per-widget top edges for Katie. Grafted: solid chips, Line sentence, bar count labels and the Now rule, 'Yesterday N' sub-lines, urgent-then-newest order. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Katie — sketch C, Ledger</title>
+<link rel="stylesheet" href="../../node_modules/@vibe/core/dist/tokens/tokens.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&display=swap">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    font-family: var(--font-family);
+    font-size: 14px; line-height: 20px;
+    color: var(--primary-text-color);
+    background: var(--allgrey-background-color);
+    -webkit-font-smoothing: antialiased;
+  }
+  .num { font-variant-numeric: tabular-nums; }
+
+  /* shell */
+  .rail {
+    position: fixed; inset: 0 auto 0 0; width: 240px;
+    background: var(--primary-background-color);
+    border-right: 1px solid var(--layout-border-color);
+    padding: var(--space-16) var(--space-12);
+  }
+  .wordmark { font-size: 20px; line-height: 24px; font-weight: 600; padding: var(--space-4) var(--space-12) 0; }
+  .practice { font-size: 12px; line-height: 16px; color: var(--secondary-text-color); padding: 0 var(--space-12); margin-bottom: var(--space-24); }
+  .nav a {
+    display: block; padding: var(--space-8) var(--space-12); margin-bottom: var(--space-2);
+    border-radius: var(--border-radius-small);
+    color: var(--primary-text-color); text-decoration: none;
+  }
+  .nav a[aria-current] { background: var(--primary-selected-color); font-weight: 500; }
+  .nav a .count { float: right; color: var(--secondary-text-color); }
+
+  .top {
+    position: fixed; left: 240px; right: 0; top: 0; height: 56px;
+    background: var(--primary-background-color);
+    border-bottom: 1px solid var(--layout-border-color);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 var(--space-24); z-index: 2;
+  }
+  .top h1 { margin: 0; font-size: 20px; line-height: 24px; font-weight: 600; }
+  .top .right { display: flex; align-items: center; gap: var(--space-16); color: var(--secondary-text-color); }
+  .seg { display: inline-flex; border: 1px solid var(--ui-border-color); border-radius: var(--border-radius-small); overflow: hidden; }
+  .seg button {
+    font: inherit; border: 0; background: var(--primary-background-color);
+    color: var(--primary-text-color); padding: var(--space-4) var(--space-12); cursor: pointer;
+  }
+  .seg button + button { border-left: 1px solid var(--ui-border-color); }
+  .seg button[aria-pressed="true"] { background: var(--primary-selected-color); font-weight: 500; }
+
+  main { margin-left: 240px; padding: calc(56px + var(--space-24)) var(--space-24) var(--space-24); }
+  .sheet {
+    background: var(--primary-background-color);
+    border: 1px solid var(--ui-border-color);
+    border-radius: var(--border-radius-medium);
+    position: relative;
+  }
+
+  /* ledger: 24 columns shared by the strip and the hour axis */
+  .ledger { padding: 0 var(--space-24); }
+  .cols { display: grid; grid-template-columns: repeat(24, minmax(0, 1fr)); }
+  .strip { padding: var(--space-20) 0; border-bottom: 1px solid var(--layout-border-color); }
+  .cell { padding-right: var(--space-16); }
+  .cell + .cell { border-left: 1px solid var(--layout-border-color); padding-left: var(--space-16); }
+  .cell.line { grid-column: span 8; }
+  .cell.k { grid-column: span 4; }
+  .label { color: var(--secondary-text-color); }
+  .big { font-size: 32px; line-height: 40px; font-weight: 600; margin: var(--space-4) 0 var(--space-2); }
+  .sub { font-size: 12px; line-height: 16px; color: var(--secondary-text-color); }
+  .linestate { font-size: 20px; line-height: 24px; font-weight: 600; margin: var(--space-12) 0 var(--space-8); display: flex; align-items: center; gap: var(--space-8); }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ui-border-color); display: inline-block; }
+
+  .hours { padding: var(--space-16) 0 var(--space-12); }
+  .hours-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: var(--space-8); }
+  .hours-head h2 { font-size: 16px; line-height: 24px; font-weight: 600; margin: 0; }
+  .legend { display: flex; gap: var(--space-16); font-size: 12px; color: var(--secondary-text-color); align-items: center; }
+  .sw { width: 10px; height: 10px; display: inline-block; vertical-align: -1px; margin-right: var(--space-4); border-radius: 2px; }
+  .sw.f { background: var(--primary-color); }
+  .sw.o { border: 1px solid var(--primary-color); }
+  #chart { display: block; width: 100%; height: 120px; overflow: visible; }
+  #chart .tick { font: 12px var(--font-family); fill: var(--secondary-text-color); }
+
+  /* bottom: two plain lists */
+  .bottom { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: var(--space-24); margin-top: var(--space-24); }
+  .list-head { display: flex; align-items: baseline; justify-content: space-between; padding: var(--space-16) var(--space-24) var(--space-8); }
+  .list-head h2 { font-size: 16px; line-height: 24px; font-weight: 600; margin: 0; }
+  .list-head a { color: var(--primary-color); text-decoration: none; }
+  table { width: 100%; border-collapse: collapse; }
+  th { text-align: left; font-weight: 400; color: var(--secondary-text-color); font-size: 12px; padding: var(--space-4) var(--space-8); border-bottom: 1px solid var(--layout-border-color); }
+  td { padding: var(--space-8); border-bottom: 1px solid var(--layout-border-color); white-space: nowrap; vertical-align: middle; height: 40px; }
+  tr:last-child td { border-bottom: 0; }
+  th:first-child, td:first-child { padding-left: var(--space-24); }
+  th:last-child, td:last-child { padding-right: var(--space-24); text-align: right; }
+  td.first { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 0; width: 100%; color: var(--secondary-text-color); }
+  tbody tr { cursor: pointer; }
+  tbody tr:hover { background: var(--primary-background-hover-color); }
+
+  .chip { display: inline-block; font-size: 12px; line-height: 20px; padding: 0 var(--space-8); border-radius: var(--border-radius-small); color: var(--text-color-on-primary); font-weight: 500; }
+  .chip.booked { background: var(--positive-color); }
+  .chip.nobook { background: var(--ui-background-color); color: var(--primary-text-color); }
+  .chip.urgent { background: var(--negative-color); }
+  .chip.callback { background: var(--primary-color); }
+
+  .cb { list-style: none; margin: 0; padding: 0; }
+  .cb li { padding: var(--space-8) var(--space-24) var(--space-12); border-top: 1px solid var(--layout-border-color); }
+  .cb .row1 { display: flex; justify-content: space-between; align-items: center; gap: var(--space-8); }
+  .cb .who { font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .cb .who.unknown { font-weight: 400; color: var(--secondary-text-color); }
+  .cb .meta { margin-top: var(--space-2); font-size: 12px; color: var(--secondary-text-color); white-space: nowrap; }
+  .cb .reason { margin-top: var(--space-2); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+  /* Katie stand-ins (128px full body; real rig replaces these) */
+  .katie { width: 56px; height: 128px; pointer-events: none; z-index: 5; }
+  .katie img { display: block; width: 52px; height: 54px; margin: 0 auto; }
+  .katie svg { display: block; margin: -2px auto 0; }
+  .katie.home { position: fixed; right: var(--space-24); bottom: 0; }
+  .katie.on-card { position: absolute; right: var(--space-16); bottom: 100%; }
+  .bubble {
+    position: absolute; right: calc(100% + var(--space-8)); top: 0; width: 220px;
+    background: var(--primary-background-color); border: 1px solid var(--ui-border-color);
+    border-radius: var(--border-radius-medium); box-shadow: var(--box-shadow-small);
+    padding: var(--space-8) var(--space-12); font-size: 13px; line-height: 18px;
+  }
+</style>
+</head>
+<body>
+
+<nav class="rail" aria-label="Main">
+  <div class="wordmark">Katie</div>
+  <div class="practice">Harborline Orthodontics</div>
+  <div class="nav">
+    <a href="#" aria-current="page">Overview</a>
+    <a href="#">Calls</a>
+    <a href="#">Bookings</a>
+    <a href="#">Callbacks <span class="count num" id="navcb"></span></a>
+    <a href="#">Texts</a>
+    <a href="#">Settings</a>
+  </div>
+</nav>
+
+<header class="top">
+  <h1>Overview</h1>
+  <div class="right">
+    <span id="today"></span>
+    <div class="seg" role="group" aria-label="Date range">
+      <button aria-pressed="true">Today</button><button aria-pressed="false">7 days</button><button aria-pressed="false">30 days</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="sheet ledger" aria-label="Today">
+    <div class="cols strip">
+      <div class="cell line">
+        <div class="label">Line</div>
+        <div class="linestate"><span class="dot" aria-hidden="true"></span><span id="linestate"></span></div>
+        <div class="sub" id="lastcall"></div>
+      </div>
+      <div class="cell k"><div class="label">Calls</div><div class="big num" id="k-calls"></div><div class="sub num" id="y-calls"></div></div>
+      <div class="cell k"><div class="label">Booked</div><div class="big num" id="k-booked"></div><div class="sub num" id="y-booked"></div></div>
+      <div class="cell k"><div class="label">Callbacks waiting</div><div class="big num" id="k-cb"></div><div class="sub num" id="y-cb"></div></div>
+      <div class="cell k"><div class="label">Texts sent</div><div class="big num" id="k-sms"></div><div class="sub num" id="y-sms"></div></div>
+    </div>
+    <div class="hours">
+      <div class="hours-head">
+        <h2>Calls by hour</h2>
+        <div class="legend"><span><i class="sw f"></i>Booked</span><span><i class="sw o"></i>No booking</span></div>
+      </div>
+      <svg id="chart" role="img" aria-label="Calls by hour, today"></svg>
+    </div>
+  </section>
+
+  <div class="bottom">
+    <section class="sheet" aria-label="Latest calls">
+      <div class="list-head"><h2>Latest calls</h2><a href="#">All calls</a></div>
+      <table>
+        <thead><tr><th>Time</th><th>Caller</th><th>First line</th><th>Outcome</th><th>Duration</th></tr></thead>
+        <tbody id="calls"></tbody>
+      </table>
+    </section>
+    <section class="sheet" aria-label="Callbacks waiting" id="cbsheet">
+      <div class="list-head"><h2>Callbacks waiting</h2><span class="label num" id="cbcount"></span></div>
+      <ul class="cb" id="cblist"></ul>
+      <div class="katie on-card" aria-hidden="true">
+        <div class="bubble" id="bubble"></div>
+        <img src="../../brief/assets/katie/katie-cutout.png" alt="">
+        <svg width="40" height="74" viewBox="0 0 40 74"><path d="M6 0h28l2 16H4z" fill="#4f78b8" stroke="#1c1c22" stroke-width="1.5"/><path d="M5 16h14l-1 48H8zM21 16h14l-3 48h-10z" fill="#3f68a8" stroke="#1c1c22" stroke-width="1.5"/><path d="M4 64h15v8H2zM21 64h15l2 8H21z" fill="#fff" stroke="#1c1c22" stroke-width="1.5"/></svg>
+      </div>
+    </section>
+  </div>
+</main>
+
+<div class="katie home" aria-hidden="true">
+  <img src="../../brief/assets/katie/katie-cutout.png" alt="">
+  <svg width="40" height="74" viewBox="0 0 40 74"><path d="M6 0h28l2 16H4z" fill="#4f78b8" stroke="#1c1c22" stroke-width="1.5"/><path d="M5 16h14l-1 48H8zM21 16h14l-3 48h-10z" fill="#3f68a8" stroke="#1c1c22" stroke-width="1.5"/><path d="M4 64h15v8H2zM21 64h15l2 8H21z" fill="#fff" stroke="#1c1c22" stroke-width="1.5"/></svg>
+</div>
+
+<script>
+// Fixture data, inlined from brief/fixtures (file:// cannot fetch JSON).
+const status = {line:"idle", live_calls:0, last_call_at:1791840925.1392791, now:1791842740.155051, practice:"Harborline Orthodontics (DEMO practice - fictional)"};
+const stats = {range:{from:1791777600,tz:"America/New_York"}, calls:8, booked_calls:6, bookings:7, callbacks:7, urgent:3, sms_out:6, sms_in:4,
+  by_hour:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,3,2,2,0,0,0,0,0,0].map((c,h)=>({hour:h,calls:c,booked:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,2,1,0,0,0,0,0,0][h]}))};
+const stats7 = {calls:8, booked_calls:6, callbacks:7, sms_out:6};
+const calls = [
+ {call_id:"CA294650154870",started_at:1791840925.1392791,duration_s:54.5,caller:"(656) ***-0150",disposition:"phone-no-booking",first_line:"Hi, um, my daughter has a bracket that came off this morning and I'm looking to get her in as soon as possible."},
+ {call_id:"CA860072416005",started_at:1791839604.1392791,duration_s:142.4,caller:"(813) ***-0173",disposition:"phone-booked",first_line:"Um yeah, do you take Edna?"},
+ {call_id:"CA553763107872",started_at:1791838190.1392791,duration_s:134.6,caller:"(727) ***-0131",disposition:"phone-booked",first_line:"Hi, yes, I'd like to schedule a first appointment for my granddaughter Luna."},
+ {call_id:"CA616760583988",started_at:1791836144.1392791,duration_s:162.8,caller:"(813) ***-0199",disposition:"phone-booked",first_line:"So my dentist had mentioned I should get my teeth looked at, but actually I'm calling for my friend Matteo. He needs a consult."},
+ {call_id:"CA282092447514",started_at:1791835114.1392791,duration_s:107.8,caller:"(656) ***-0127",disposition:"phone-booked",first_line:"Yeah. Hi, I'd like to schedule a first consultation appointment, please."},
+ {call_id:"CA631599125074",started_at:1791833652.1392791,duration_s:130.4,caller:"(813) ***-0162",disposition:"phone-booked",first_line:"Hi, um, my daughter Marcus has a bracket that came off this morning and we'd like to get her in as soon as possible."},
+ {call_id:"CA416354869074",started_at:1791831692.1392791,duration_s:146.9,caller:"(727) ***-0188",disposition:"phone-no-booking",first_line:"My daughter's bracket came off. How much does an emergency visit cost?"},
+ {call_id:"CA987474854629",started_at:1791830409.1392791,duration_s:104.5,caller:"(813) ***-0144",disposition:"phone-booked",first_line:"Hi, yeah I'd like to schedule a the first appointment, like a consultation, please."}
+];
+const notes = [
+ {id:291,ts:1791840971.3402793,call_id:"CA294650154870",caller:"(656) ***-0150",name:"unknown (name to follow if given)",reason:"Existing patient Marcus Webb, DOB on file: reschedule of existing appointment — no open slots in the next 7 days, call back with times [has existing appt Wed 3:20 PM] [about patient Marcus Webb]",urgent:false},
+ {id:283,ts:1791840948.8712792,call_id:"CA294650154870",caller:"(656) ***-0150",name:"unknown (booking to follow on this call)",reason:"URGENT: Daughter's bracket came off this morning, needs to be seen as soon as possible. [NOT an emergency - caller is booking the soonest visit on this call; note is informational]",urgent:true},
+ {id:265,ts:1791839727.289279,call_id:"CA860072416005",caller:"(813) ***-0173",name:"Max Delgado",reason:"NAME CORRECTION on a booking made this call (Mon 3:20 PM): booked as 'Max De Lagado', now 'Max Delgado'. Please update the chart.",urgent:false},
+ {id:90,ts:1791833674.2242792,call_id:"CA631599125074",caller:"(813) ***-0162",name:"unknown (booking to follow on this call)",reason:"URGENT: Daughter's bracket came off this morning and they need to be seen as soon as possible. [NOT an emergency - caller is booking the soonest visit on this call; note is informational]",urgent:true},
+ {id:78,ts:1791831833.3742793,call_id:"CA416354869074",caller:"(727) ***-0188",name:"unknown (name to follow if given)",reason:"Verified caller (Danny Whitlock's father) wants to reschedule Tommy's Tuesday October 13th at 4:00 PM appointment to Monday October 12th at 3:20 PM for a bracket repair visit. System was unable to complete the reschedule — please call back the number on file ending in 1006 to confirm. [PRE-FILED before name — caller reachable on caller ID]",urgent:false},
+ {id:47,ts:1791831720.0962791,call_id:"CA416354869074",caller:"(727) ***-0188",name:"unknown (booking to follow on this call)",reason:"URGENT: Daughter's bracket came off. [NOT an emergency - caller is booking the soonest visit on this call; note is informational]",urgent:true},
+ {id:29,ts:1791830504.6412792,call_id:"CA987474854629",caller:"(813) ***-0144",name:"Eli Morgan",reason:"Caller wants to speak directly with Dr. Reyes. [ASKED FOR A PERSON]",urgent:false}
+];
+
+const TZ = stats.range.tz;
+const t = s => new Date(s*1000).toLocaleTimeString('en-US',{timeZone:TZ,hour:'numeric',minute:'2-digit'});
+const dur = s => { s = Math.round(s); return Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); };
+const clean = r => r.replace(/\s*\[[^\]]*\]/g,'').replace(/^URGENT:\s*/,'').trim();
+const nameOf = n => /^unknown/i.test(n) ? null : n;
+const $ = id => document.getElementById(id);
+const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+$('today').textContent = new Date(status.now*1000).toLocaleDateString('en-US',{timeZone:TZ,weekday:'short',month:'short',day:'numeric'});
+$('linestate').textContent = status.line === 'on-call' ? 'On a call' : 'Open, no call right now';
+$('lastcall').textContent = 'Last call ' + t(status.last_call_at);
+
+// yesterday: 7-day total minus today is 0 here, so yesterday is exactly 0
+const y = (k7, k1) => (stats7[k7] - k1 === 0) ? 'Yesterday 0' : '';
+$('k-calls').textContent = stats.calls;          $('y-calls').textContent = y('calls', stats.calls);
+$('k-booked').textContent = stats.booked_calls;  $('y-booked').textContent = y('booked_calls', stats.booked_calls);
+$('k-cb').textContent = notes.length;            $('y-cb').textContent = notes.filter(n=>n.urgent).length + ' urgent';
+$('k-sms').textContent = stats.sms_out;          $('y-sms').textContent = y('sms_out', stats.sms_out);
+$('navcb').textContent = notes.length;
+
+const out = {"phone-booked":["booked","Booked"],"phone-no-booking":["nobook","No booking"],"live":["callback","Live"],"unknown-crash":["nobook","Dropped"]};
+$('calls').innerHTML = calls.slice(0,10).map(c => {
+  const [cls,lab] = out[c.disposition];
+  return `<tr><td class="num">${t(c.started_at)}</td><td class="num">${c.caller}</td><td class="first">${esc(c.first_line)}</td><td><span class="chip ${cls}">${lab}</span></td><td class="num">${dur(c.duration_s)}</td></tr>`;
+}).join('');
+
+const cbs = [...notes].sort((a,b)=> (b.urgent-a.urgent) || (b.ts-a.ts));
+$('cbcount').textContent = `${cbs.filter(n=>n.urgent).length} urgent`;
+$('cblist').innerHTML = cbs.map(n => {
+  const nm = nameOf(n.name);
+  return `<li><div class="row1"><span class="who ${nm?'':'unknown'}">${nm?esc(nm):'Name not given'}</span>
+    <span class="chip ${n.urgent?'urgent':'callback'}">${n.urgent?'Urgent':'Callback'}</span></div>
+    <div class="reason">${esc(clean(n.reason))}</div><div class="meta num">${n.caller} · ${t(n.ts)}</div></li>`;
+}).join('');
+$('bubble').textContent = `${cbs.length} people are waiting on a callback, ${cbs.filter(n=>n.urgent).length} of them urgent.`;
+
+// Calls by hour: 24 columns, same grid as the strip above
+function drawChart(){
+  const svg = $('chart'), W = svg.clientWidth, H = 120, base = 96, top = 8;
+  const max = Math.max(3, ...stats.by_hour.map(h=>h.calls));
+  const cw = W/24, bw = Math.min(28, cw*0.56);
+  const nowH = +new Date(status.now*1000).toLocaleString('en-US',{timeZone:TZ,hour:'numeric',hour12:false});
+  let s = '';
+  for (let v=1; v<=max; v++){ const y = base - (base-top)*v/max;
+    s += `<line x1="0" x2="${W}" y1="${y}" y2="${y}" stroke="var(--layout-border-color)" stroke-dasharray="2 4"/>`; }
+  s += `<line x1="0" x2="${W}" y1="${base}" y2="${base}" stroke="var(--ui-border-color)"/>`;
+  stats.by_hour.forEach(h => {
+    const x = h.hour*cw + (cw-bw)/2, unit = (base-top)/max;
+    if (h.calls){
+      const hb = h.booked*unit, hn = (h.calls-h.booked)*unit;
+      if (hn) s += `<rect x="${x+0.5}" y="${base-hb-hn+0.5}" width="${bw-1}" height="${hn-1}" rx="2" fill="var(--primary-background-color)" stroke="var(--primary-color)"/>`;
+      if (hb) s += `<rect x="${x}" y="${base-hb}" width="${bw}" height="${hb}" rx="2" fill="var(--primary-color)"/>`;
+      s += `<text class="tick num" x="${x+bw/2}" y="${base-hb-hn-6}" text-anchor="middle" fill="var(--primary-text-color)">${h.calls}</text>`;
+    }
+    if (h.hour % 3 === 0){
+      const lab = h.hour===0?'12 AM':h.hour===12?'12 PM':(h.hour%12)+(h.hour<12?' AM':' PM');
+      s += `<text class="tick" x="${h.hour*cw}" y="${base+18}">${lab}</text>`;
+    }
+  });
+  const nx = nowH*cw + cw*(+new Date(status.now*1000).toLocaleString('en-US',{timeZone:TZ,minute:'numeric'})/60);
+  s += `<line x1="${nx}" x2="${nx}" y1="${top}" y2="${base}" stroke="var(--secondary-text-color)"/>`;
+  s += `<text class="tick" x="${nx+4}" y="${top+10}">Now ${t(status.now)}</text>`;
+  svg.innerHTML = s;
+}
+drawChart(); addEventListener('resize', drawChart);
+</script>
+</body>
+</html>

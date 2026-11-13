@@ -1,0 +1,60 @@
+/* DESIGN-GLASS 4: pastel pills, darker same-hue text. Urgent alone stays solid, so it is the
+   only loud chip on any screen. 12/600, height 22, radius 999, padding 0 10, width from the text.
+   Contrast (WCAG, text on its own background):
+     Booked    --positive-color-hover (#15803d) on --chip-positive-bg (#dcfce7)   4.57:1
+     Callback  --primary-hover-color (#1d4ed8) on --chip-primary-bg (#dbeafe)     5.49:1
+     Live      --chip-live-ink (#c2410c) on --chip-live-bg (#ffedd5)              4.52:1
+     Urgent    white on --negative-color (#dc2626)                                4.83:1
+     Neutral   --chip-neutral-ink (#475569) on --chip-neutral-bg (#f1f5f9)        6.92:1
+               (No booking, FYI and Dropped)
+     Missed    --chip-negative-ink (#b91c1c) on --chip-negative-bg (#fee2e2)      5.30:1
+               (Leads: a missed consult; pastel, so Urgent stays the only solid chip) */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  height: 22px;
+  min-width: auto;
+  padding: 0 10px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  line-height: 22px;
+  font-weight: 600;
+  white-space: nowrap;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* The inks fall back to the accent tokens; the dark tint (glass.css) sets the chip-* inks. */
+.booked {
+  background: var(--chip-positive-bg);
+  color: var(--chip-positive-ink, var(--positive-color-hover));
+}
+
+.neutral,
+.fyi,
+.dropped {
+  background: var(--chip-neutral-bg);
+  color: var(--chip-neutral-ink);
+}
+
+.live {
+  background: var(--chip-live-bg);
+  color: var(--chip-live-ink);
+}
+
+.callback {
+  background: var(--chip-primary-bg);
+  color: var(--chip-primary-ink, var(--primary-hover-color));
+}
+
+.urgent {
+  background: var(--negative-color);
+  color: var(--text-color-on-primary);
+}
+
+.missed {
+  background: var(--chip-negative-bg);
+  color: var(--chip-negative-ink);
+}

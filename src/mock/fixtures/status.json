@@ -1,0 +1,13 @@
+{
+  "ok": true,
+  "events": true,
+  "boot_at": 1791842740.1373491,
+  "now": 1791842740.155051,
+  "live_calls": 0,
+  "line": "idle",
+  "last_call_at": 1791840925.1392791,
+  "db_path": "/var/folders/mj/rnggpbks2x13gwf5ybv_l_m80000gn/T/dash-fix-tys8trof/e.sqlite",
+  "practice": "Harborline Orthodontics (DEMO practice - fictional)",
+  "model": "claude-sonnet-4-6",
+  "agent": "Katie"
+}
